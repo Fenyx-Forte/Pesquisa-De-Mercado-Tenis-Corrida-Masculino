@@ -1,0 +1,64 @@
+[tool.poetry]
+name = "analise-de-dados"
+version = "0.1.0"
+description = ""
+authors = ["Fenyx Forte <fenyx.studies@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dados.dependencies]
+polars = {version = ">=1.4.0", extras = ["pyarrow"]}
+fastexcel = ">=0.11.5"
+pandera = {version = ">=0.20.3", extras = ["polars"]}
+duckdb = ">=1.0.0"
+
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = ">=1.6.0"
+mkdocstrings = {version = ">=0.25.2", extras = ["python"]}
+mkdocs-material = ">=9.5.30"
+
+
+[tool.poetry.group.jupyter.dependencies]
+ipykernel = "^6.29.5"
+
+
+[tool.poetry.group.segredos.dependencies]
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = ">=3.8.0"
+ruff = ">=0.5.5"
+bandit = ">=1.7.9"
+
+
+[tool.poetry.group.testes.dependencies]
+pytest = ">=8.3.2"
+
+
+[tool.poetry.group.logging.dependencies]
+loguru = ">=0.7.2"
+
+
+[tool.ruff]
+line-length = 80
+target-version = "py312"
+include = ["pyproject.toml", "app/**/*.py", "tests/**/*.py", "app/*.py", "tests/*.py"]
+
+[tool.ruff.lint]
+ignore = ["D203", "E111", "E203", "F401"]
+
+[tool.bandit]
+skips = ["B101"]
+
+[tool.pytest.ini_options]
+addopts = "-v"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
