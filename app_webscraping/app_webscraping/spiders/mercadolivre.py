@@ -15,27 +15,22 @@ class MercadoLivreSpider(scrapy.Spider):
         nota_avaliacao_seletor = "span.ui-search-reviews__rating-number::text"
         num_avaliacoes_seletor = "span.ui-search-reviews__amount::text"
 
-        preco_velho_seletor = "s.andes-money-amount.ui-search-price__part.ui-search-price__part--small.ui-search-price__original-value.andes-money-amount--previous.andes-money-amount--cents-superscript.andes-money-amount--compact"
-        preco_velho_real_seletor = "span.andes-money-amount__fraction::text"
-        preco_velho_centavo_seletor = "span.andes-money-amount__cents.andes-money-amount__cents--superscript-16::text"
-
-        preco_novo_seletor = "div.ui-search-price__second-line"
-        preco_novo_real_seletor = "span.andes-money-amount__fraction::text"
-        preco_novo_centavo_seletor = "span.andes-money-amount__cents.andes-money-amount__cents--superscript-24::text"
+        preco_real_seletor = "span.andes-money-amount__fraction::text"
+        preco_centavo_seletor = "span.andes-money-amount__cents::text"
 
         for produto in produtos:
-            preco_velho = produto.css(preco_velho_seletor)
+            precos_real = produto.css(preco_real_seletor).getall()
+            precos_centavo = produto.css(preco_centavo_seletor).getall()
 
-            preco_velho_real = preco_velho.css(preco_velho_real_seletor).get()
-            preco_velho_centavo = preco_velho.css(
-                preco_velho_centavo_seletor
-            ).get()
+            preco_velho_real = precos_real[0] if len(precos_real) > 0 else None
+            preco_novo_real = precos_real[1] if len(precos_real) > 1 else None
 
-            preco_novo = produto.css(preco_novo_seletor)
-            preco_novo_real = preco_novo.css(preco_novo_real_seletor).get()
-            preco_novo_centavo = preco_novo.css(
-                preco_novo_centavo_seletor
-            ).get()
+            preco_velho_centavo = (
+                precos_centavo[0] if len(precos_centavo) > 0 else None
+            )
+            preco_novo_centavo = (
+                precos_centavo[1] if len(precos_centavo) > 1 else None
+            )
 
             num_avaliacoes_nao_tratado = produto.css(
                 num_avaliacoes_seletor
