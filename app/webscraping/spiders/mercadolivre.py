@@ -19,17 +19,21 @@ class MercadoLivreSpider(scrapy.Spider):
         preco_centavo_seletor = "span.andes-money-amount__cents::text"
 
         for produto in produtos:
-            precos_real = produto.css(preco_real_seletor).getall()
-            precos_centavo = produto.css(preco_centavo_seletor).getall()
+            precos_reais = produto.css(preco_real_seletor).getall()
+            precos_centavos = produto.css(preco_centavo_seletor).getall()
 
-            preco_velho_real = precos_real[0] if len(precos_real) > 0 else None
-            preco_novo_real = precos_real[1] if len(precos_real) > 1 else None
-
-            preco_velho_centavo = (
-                precos_centavo[0] if len(precos_centavo) > 0 else None
+            preco_velho_reais = (
+                precos_reais[0] if len(precos_reais) > 0 else None
             )
-            preco_novo_centavo = (
-                precos_centavo[1] if len(precos_centavo) > 1 else None
+            preco_novo_reais = (
+                precos_reais[1] if len(precos_reais) > 1 else None
+            )
+
+            preco_velho_centavos = (
+                precos_centavos[0] if len(precos_centavos) > 0 else None
+            )
+            preco_novo_centavos = (
+                precos_centavos[1] if len(precos_centavos) > 1 else None
             )
 
             num_avaliacoes_nao_tratado = produto.css(
@@ -43,9 +47,11 @@ class MercadoLivreSpider(scrapy.Spider):
 
             yield {
                 "marca": produto.css(marca_seletor).get(),
-                "nome_produto": produto.css(nome_produto_seletor).get(),
-                "preco_velho": f"{preco_velho_real}.{preco_velho_centavo}",
-                "preco_novo": f"{preco_novo_real}.{preco_novo_centavo}",
+                "nome": produto.css(nome_produto_seletor).get(),
+                "preco_velho_reais": preco_velho_reais,
+                "preco_velho_centavos": preco_velho_centavos,
+                "preco_novo_reais": preco_novo_reais,
+                "preco_novo_centavos": preco_novo_centavos,
                 "nota_avaliacao": produto.css(nota_avaliacao_seletor).get(),
                 "num_avaliacoes": num_avaliacoes,
             }
