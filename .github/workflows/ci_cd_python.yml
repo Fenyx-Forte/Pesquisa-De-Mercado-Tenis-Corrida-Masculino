@@ -16,11 +16,6 @@ jobs:
         - name: Install Poetry
           run: |
             curl -sSL https://install.python-poetry.org | python3 -
-            poetry config virtualenvs.in-project true
-
-        - name: Activate Poetry
-          run: |
-            poetry shell
 
         - name: Install dependencies
           run: |
