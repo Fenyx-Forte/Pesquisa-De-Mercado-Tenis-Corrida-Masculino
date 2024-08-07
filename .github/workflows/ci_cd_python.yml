@@ -28,16 +28,16 @@ jobs:
 
         - name: Format
           run: |
-            ruff format .
+            poetry run ruff format .
 
         - name: Linter
           run: |
-            ruff check .
+            poetry run ruff check .
 
         - name: Audit
           run: |
-            bandit -c pyproject.toml -r app/ tests/
+            poetry run bandit -c pyproject.toml -r app/ tests/
 
         # - name: Test with pytest
           # run: |
-            # pytest
+            # poetry run pytest
