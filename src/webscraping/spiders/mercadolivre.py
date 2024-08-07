@@ -1,9 +1,12 @@
 import scrapy
+from modulos.uteis import teste_scrapy
 
 
 class MercadoLivreSpider(scrapy.Spider):
     name = "mercadolivre"
     start_urls = ["https://lista.mercadolivre.com.br/tenis-corrida-masculino"]
+    page_count = 1
+    max_pages = 10
 
     def parse(self, response):
         produtos_seletor = "div.ui-search-result__content"
@@ -36,15 +39,6 @@ class MercadoLivreSpider(scrapy.Spider):
                 precos_centavos[1] if len(precos_centavos) > 1 else None
             )
 
-            num_avaliacoes_nao_tratado = produto.css(
-                num_avaliacoes_seletor
-            ).get()
-
-            if num_avaliacoes_nao_tratado is None:
-                num_avaliacoes = None
-            else:
-                num_avaliacoes = num_avaliacoes_nao_tratado[1:-1]
-
             yield {
                 "marca": produto.css(marca_seletor).get(),
                 "nome": produto.css(nome_produto_seletor).get(),
@@ -53,5 +47,14 @@ class MercadoLivreSpider(scrapy.Spider):
                 "preco_novo_reais": preco_novo_reais,
                 "preco_novo_centavos": preco_novo_centavos,
                 "nota_avaliacao": produto.css(nota_avaliacao_seletor).get(),
-                "num_avaliacoes": num_avaliacoes,
+                "num_avaliacoes": produto.css(num_avaliacoes_seletor).get(),
             }
+
+        if self.page_count < self.max_pages:
+            next_page = response.css(
+                "li.andes-pagination__button.andes-pagination__button--next a::attr(href)"
+            ).get()
+
+            if next_page:
+                self.page_count += 1
+                yield scrapy.Request(url=next_page, callback=self.parse)

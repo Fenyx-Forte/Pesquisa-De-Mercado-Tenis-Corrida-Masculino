@@ -31,7 +31,7 @@ jobs:
 
         - name: Audit
           run: |
-            poetry run bandit -c pyproject.toml -r app/ tests/
+            poetry run bandit -c pyproject.toml -r src/ tests/
 
         # - name: Test with pytest
           # run: |

@@ -1,55 +1,511 @@
 marca,nome,preco_velho_reais,preco_velho_centavos,preco_novo_reais,preco_novo_centavos,nota_avaliacao,num_avaliacoes
-FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,343
-UNDER ARMOUR,Under Armour Pacer Masculino Adultos,449,99,221,07,4.6,957
-OLYMPIKUS,Olympikus Marez Masculino Adultos,349,99,239,90,4.8,125
-UNDER ARMOUR,Tênis Masculino E Feminino Charged Slight 3 Under Armour,359,99,286,99,4.9,167
-FILA,Tênis Fila Improve Masculino Preto,399,90,39,99,,
-FILA,Tênis Fila Efecto Masculino Marinho,299,90,33,32,,
-FILA,Tênis Fila Progress Lite Masculino Preto,299,90,33,32,,
-FILA,Tênis Fila Progress Lite Masculino Marinho,299,90,33,32,,
-OLYMPIKUS,Olympikus Treino Proof 3 Masculino Adultos,246,94,178,60,4.8,1987
-UNDER ARMOUR,Under Armour Charged Skyline 4 Masculino Adultos,399,99,259,99,3.7,3
-OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,7688
-OLYMPIKUS,Olympikus CORRIDA Voa 2 Masculino Adultos,261,62,32,,4.8,509
-ADIDAS,Tênis Esportivo Masculino E Feminino Lite Racer 4.0 adidas,299,99,268,99,4.8,12
-NIKE,Tênis Nike Revolution 6 Flyease Next Nature Masculino,299,99,29,08,3.8,5
-OLYMPIKUS,Tênis Masculino Olympikus Urbano Ast Casual E Confortável,198,50,19,29,,
-OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,7688
-MIZUNO,Tênis Mizuno Wave Mirai 6 - Masculino - Azul-escuro,531,14,499,91,,
-OLYMPIKUS,Tênis Masculino E Feminino Dynamic Olympikus Super Novo,279,99,236,99,4.8,318
-UNDER ARMOUR,Tênis Masculino Charged Great Under Armour,299,99,253,99,4.8,102
+OLYMPIKUS,Olympikus Treino Proof 3 Masculino Adultos,246,94,178,60,4.8,(1987)
 OLYMPIKUS,Olympikus Subverse Masculino Adultos,349,99,286,99,,
-FILA,Tênis Fila Venture Tracer Masculino Preto Original,439,98,42,66,,
-FILA,Tênis Fila Venture Tracer Masculino Preto E Branco Original,439,98,42,66,,
-OLYMPIKUS,Olympikus 24/7 Lap Masculino Adultos 43769946,149,90,37,48,4.8,9917
-NIKE,Tênis Nike Flex Experience 12 Masculino,279,99,27,15,4.8,31
-TRYD,Tênis Para Treino Academia Caminhada Corrida Tryd 5400 Leve,99,99,70,99,4.5,10842
-ADIDAS,adidas Lite Racer 3.0 Masculino Adultos,299,90,33,32,4.7,532
-FILA,Tênis Fila Racer Sky,379,90,37,99,,
-OLYMPIKUS,Tênis Masculino Versa Com Sola Caixa Olympikus,259,99,206,99,4.8,936
-OUSY SHOES,Kit Tênis Masculino Caminhada 3 Pares Easy Confortável Combo,229,90,170,12,4.5,7508
-,Kit Combo 2 Tenis Masculino Academia Caminhada Corrida Top,169,90,151,21,4.6,2100
-,Tênis Masculino Confortável Versátil Para Caminhada Fitness,69,90,23,30,,
-OLYMPIKUS,Tenis Masculino Olympikus Veloz,329,90,273,81,,
-UNDER ARMOUR,Under Armour Pacer Masculino Adultos,449,99,221,07,4.6,957
-ASCENSION,Tenis Masculino E Feminino De Caminhada Ortopedico Crossfit,68,50,6,66,4.7,2667
-,Tênis Masculino Academia Rixxon Leve Promoção Barato ,87,90,58,89,4.5,599
-OLYMPIKUS,Tênis Olympikus Challenger Caminhada Masculino Academia,259,90,246,90,,
-,Tenis Masculino Feminino Academia Leve Macio Confortável,68,99,6,71,4.5,1937
-,Tenis Feminino Casual Nyc Shoes Masculino Moda Adulto,109,90,76,93,4.5,4519
-,Tênis Cross Tryd 5400 Academia Caminhada Confortável Leve,99,99,68,99,4.5,1761
-,Tênis Masculino Versátil Fitness Caminhada Leve Confortável,69,90,23,30,,
+OLYMPIKUS,Olympikus 24/7 Lap Masculino Adultos 43769946,149,90,37,48,4.8,(9918)
+UNDER ARMOUR,Tênis Masculino E Feminino Charged Slight 3 Under Armour,359,99,286,99,4.9,(168)
+OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,(7688)
+OLYMPIKUS,Olympikus Caminhada Urano 2 Sem gênero Adultos,229,99,182,99,4.8,(1872)
+NIKE,Tênis Nike Flex Experience 12 Masculino,279,99,27,15,4.8,(31)
+TRYD,Tênis Para Treino Academia Caminhada Corrida Tryd 5400 Leve,99,99,70,99,4.5,(10843)
+UNDER ARMOUR,Under Armour Pacer Masculino Adultos,449,99,221,07,4.6,(957)
 ADIDAS,Tênis Masculino Duramo Sl adidas,499,99,356,35,,
-,Tenis Sapatilha Bike Pesca Corrida Academia Neoprene Confort,53,67,17,,4.6,681
-,Tênis Masculino Sports Academia Advanced Solado Extraleve,219,90,147,33,,
-FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,343
-EVOLTENN,Tenis Academia Corrida Original Caminhada Evoltenn Crossfit,78,90,72,58,4.5,4026
-OLYMPIKUS,Olympikus CORRIDA Reverso 2 Masculino Adultos,332,19,32,,4.8,88
-,Kit 3 Tênis Masculino Macio Confortável Fitness Caminhada,199,90,33,32,,
-,Tenis Esporte Academia Corrida Caminhada Confortável Leve,78,90,71,10,4.5,578
-DM DAMANDO,Kit Tenis Confortavel Masculino P/academia Corrida + Relógio,78,90,74,95,4.6,329
-OLYMPIKUS,Olympikus Only 2 Masculino Adultos,199,99,154,90,4.7,2835
-UNDER ARMOUR,Under Armour Charged Skyline 4 Masculino Adultos,399,99,259,99,3.7,3
-,Tênis Masculino Olymp Olimp Space Caminhada Barato Promoção,78,90,71,01,4.2,2581
-OLIMPAK,Tênis Esportivo Masculino Olimpak Para Caminhada Academia,106,10,99,73,4.4,3397
-,Tenis Para Caminhada Academia Corrida Treino - Leve E Macio,67,90,6,60,4.5,427
+,Kit Combo 2 Tenis Masculino Academia Caminhada Corrida Top,169,90,151,21,4.6,(2100)
+OUSY SHOES,Kit Tênis Masculino Caminhada 3 Pares Easy Confortável Combo,229,90,170,12,4.5,(7509)
+OLYMPIKUS,Tênis Esportivo Masculino E Feminino Proof 3 Olympikus,199,99,158,99,4.8,(186)
+RAINHA,Tênis Rainha Vl 2500 Futsal Vôlei Academia Capoeira Corrida,78,90,7,67,4.6,(931)
+ASCENSION,Tenis Masculino E Feminino De Caminhada Ortopedico Crossfit,68,50,6,66,4.7,(2667)
+OLYMPIKUS,Olympikus Casual Index 3 Masculino Adultos 43611218_1-004,145,09,14,,4.8,(1532)
+NEW BALANCE,New Balance 997s Masculino Adultos,196,90,177,30,5.0,(1)
+OLYMPIKUS,Olympikus Poseidon Masculino Adultos,199,99,155,80,4.7,(712)
+,Tenis Masculino Feminino Academia Leve Macio Confortável,68,99,6,71,4.5,(1937)
+EVOLTENN,Kit 3 Pares Tênis Esportivo Masculino Evoltenn Style Corrida,188,90,175,67,4.4,(1797)
+EVOLTENN,Kit 3 Tênis Desportivo Solado Trançado Macio Envio Imadiato,189,90,174,70,4.4,(108)
+NIKE,Tênis Nike Flex Experience 12 Masculino,289,99,28,11,4.5,(65)
+,Tênis Masculino Academia Rixxon Leve Promoção Barato ,87,90,58,89,4.5,(599)
+,Tenis Skechers Go Run Elevate 220184-blk Preto,312,39,31,24,,
+,Sapatilha Aquatica Neoprene Secarapido Sola Forte Confort,52,90,17,63,4.6,(897)
+,Tenis Feminino Casual Nyc Shoes Masculino Moda Adulto,109,90,76,93,4.5,(4519)
+OLYMPIKUS,Tênis Masculino Versa Com Sola Caixa Olympikus,259,99,206,99,4.8,(936)
+OUSY SHOES,Kit Tênis Masculino Caminhada 3 Pares Easy Confortável Combo,229,90,170,12,4.5,(7509)
+,Kit Combo 2 Tenis Masculino Academia Caminhada Corrida Top,169,90,151,21,4.6,(2100)
+,Tenis Masculino Feminino Academia Leve Macio Confortável,68,99,6,71,4.5,(1937)
+,Tenis Masculino Olimp Kit 02 Pares Academia Promoção Oferta,144,90,14,08,4.4,(3594)
+,Kit 2 Tenis Masculino Esportivo Adulto Caminhada Corrida To,154,70,15,04,4.6,(180)
+,Tênis Cross Tryd 5400 Academia Caminhada Confortável Leve,99,99,68,99,4.5,(1761)
+OLYMPIKUS,Olympikus Neblina Masculino Adultos,259,11,25,,4.7,(77)
+,Tênis Bolsonaro Masculino Feminino Patriota Style Super Leve,199,90,33,32,4.7,(203)
+,Tenis Sapatilha Bike Pesca Corrida Academia Neoprene Confort,53,67,17,,4.6,(681)
+ADIDAS,Tênis Masculino Duramo Sl adidas,499,99,356,35,,
+NEW BALANCE,Tênis Masculino New Balance 997s - Couro Camurça Borracha,213,90,30,56,3.8,(4)
+EVOLTENN,Tenis Academia Corrida Original Caminhada Evoltenn Crossfit,78,90,72,58,4.5,(4026)
+,Tênis Bolsonaro : Liberdade Style Super Confortável ,169,90,33,98,4.8,(165)
+,Tenis Esporte Academia Corrida Caminhada Confortável Leve,78,90,71,10,4.5,(578)
+DM DAMANDO,Kit Tenis Confortavel Masculino P/academia Corrida + Relógio,78,90,74,95,4.6,(329)
+OLYMPIKUS,Olympikus CORRIDA Reverso 2 Masculino Adultos,332,19,32,,4.8,(88)
+,Tênis Masculino Olymp Olimp Space Caminhada Barato Promoção,78,90,71,01,4.2,(2581)
+OLYMPIKUS,Tenis Olympikus Only 2 Unissex ,149,99,14,58,4.8,(20)
+OLYMPIKUS,Olympikus Only 2 Masculino Adultos,199,99,154,90,4.7,(2835)
+OLIMPAK,Tênis Esportivo Masculino Olimpak Para Caminhada Academia,106,10,99,73,4.4,(3397)
+STARFLEX,Tênis Com Amortecedor Masculino Corrida Esportivo Flex Mola ,133,55,33,39,4.6,(59)
+,Tenis Para Caminhada Academia Corrida Treino - Leve E Macio,67,90,6,60,4.5,(427)
+,Tenis Menino Infantil Ad Escolar Esportivo Merks ,55,90,5,43,4.6,(323)
+MIZUNO,Mizuno Wave Mirai 5 Masculino Adultos,329,90,277,11,4.5,(671)
+MIZUNO,Mizuno Wave Vitality 4 Masculino Adultos,379,90,37,99,4.7,(190)
+BAD FISH,Tênis Track Sapatilha Bad Fish Adventure Pesca Rosa Preto ,204,99,19,93,4.8,(90)
+FILA,Fila Recovery Masculino Adultos,373,32,276,25,4.7,(1523)
+FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,(343)
+ADIDAS,adidas Response Masculino Adultos,499,99,303,72,4.7,(114)
+OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,(7688)
+SAPATOFRAN,Tênis Sapatênis Esportivo Para Academia X-try Original Leve,75,71,7,36,4.1,(360)
+ASICS,Asics Gel-Shogun 5 Masculino Adultos,399,90,39,99,4.8,(160)
+,Tenis Feminino Masculino Olimp Academia Leve Confortável,69,99,6,80,4.4,(1192)
+,Tênis Academia Caminhada Corrida Confortável Leve Pra Malhar,99,90,62,93,4.5,(249)
+OLYMPIKUS,Tênis Masculino E Feminino Dynamic Azul Olympikus,279,99,236,99,4.8,(643)
+T-SHOES,Tênis Extremecross Speed Trekking Trilha Ciclismo Corrida,174,49,155,29,4.5,(304)
+OLYMPIKUS,Tênis Masculino Versa Com Sola Caixa Olympikus,259,99,206,99,4.8,(936)
+ON RUNNING,Tênis On Running Cloud X 2.0,599,90,59,99,4.8,(55)
+MIZUNO,Mizuno Wave Dynasty 5 Masculino Adultos,479,80,297,47,4.7,(969)
+POLO JOY,Tênis Cano Alto Masculino Polo Joy Detalhes Em Couro,134,90,33,72,4.0,(6)
+HAYMAX,Tênis Skatista Masculino Feminino Old School Envio Imediato,99,99,9,72,4.5,(886)
+,Tênis Olympikus Proof 3 Masculino Original Esportivo N* 48,199,99,187,99,4.9,(119)
+RAINHA,Tênis Rainha Vl 2500 Futsal Vôlei Academia Capoeira Corrida,78,90,7,67,4.6,(931)
+UNDER ARMOUR,Under Armour Charged Wing SE Masculino Adultos,289,02,28,,4.7,(6)
+OLDSEN,Tenis Unissex Infantil Jaguar Corrida Academia Treino 34-43,77,32,7,52,4.6,(925)
+UNDER ARMOUR,Under Armour Charged Skyline 4 Masculino Adultos,399,99,259,99,3.7,(3)
+RAINHA,Tênis Masculino Corrida Leve E Resistente Lindo Rainha Z239,169,99,16,52,4.7,(109)
+ASCENSION,Tenis Masculino Leve Confortavel  Para Treino + Relógio ,109,90,36,63,4.8,(4)
+MARATHON,Tênis Esportivo Corrida Marathon Flex Amortecedor Mola Leve,199,90,77,96,4.1,(21)
+TAYGRA,Taygra Original Para Dança Confortável  Preto - Envio 24hs ,179,90,17,49,4.8,(137)
+OLYMPIKUS,Tênis Olympikus Corre Supra Unissex,1.199,99,119,,,
+,Tenis Olimp Esportivo Masculino Feminino Leve E Macio,64,90,6,31,,
+OLYMPIKUS,Olympikus Casual Jogging 100 Sem gênero Adultos OBTN068_1-012,229,99,170,19,4.7,(3384)
+OLYMPIKUS,Tênis Olympikus Dynamic Masculino Original Com Nota Fiscal,259,78,25,19,4.9,(179)
+,Tênis Masculino Corrida Esportivo Trekking Academia Promoção,109,90,36,63,4.4,(21)
+HOKA ONE ONE,Tênis Hoka One One Clifton 9 Preto/branco Masculino,1.299,99,129,,,
+,Tênis Esporte Masculino Pronta Entrega Barato,66,90,62,88,4.4,(1504)
+ASCENSION,Combo Tenis Masculino De Caminhada Ortopedico Mochila Basic,128,60,32,15,4.4,(17)
+FILA,Fila Outfield Masculino Adultos,299,90,275,90,4.7,(27)
+ASICS,Asics Shinobi Masculino Adultos,388,90,350,01,4.8,(40)
+OLDSEN,Tenis Corrida Casual Insanity Leve Confortável Macio 34-43,63,90,6,21,4.5,(313)
+BF SHOES,Tênis Branco Masculino Para Academia Esportivo Bf Shoes,78,90,74,95,4.9,(60)
+TAYGRA,Tênis Taygra Conforto Original + Brinde Unissex Várias Cores,179,90,17,49,4.8,(106)
+SKECHERS,Skechers Ultra Flex 2.0 Mirkon Masculino Adultos,349,99,286,99,4.7,(7)
+POLO JOY,Tenis Masculino Sapatenis Polo Joy Confortavel Casual Café,139,99,109,25,4.8,(19)
+FITTY,Tênis Casual Masculino Conforto Slip On Leve Fitty,114,99,11,18,5.0,(8)
+OLDSEN,Tênis Masculino Academia Esportivo Caminhada Academia ,78,90,74,95,4.2,(229)
+WONDER,Tenis Masculino Wonder Esportivo Fit Academia Corrida Casual,78,90,7,67,4.3,(25)
+,Tênis Masculino Hot Sol Numero Especial 38 Ao 48 Para Treino,119,90,39,97,4.8,(32)
+HOKA,Tênis Hoka Clifton 9 Masculino Original,1.299,90,129,,,
+LORENZZO LOPEZ,Tenis Masculino Caminha E Academia Super Leve Na Promoção,39,10,3,79,4.3,(40)
+POLO JOY,Kit Tênis Barato +relógio E Cinto Em Promoção Envio Imediato,138,45,34,61,4.7,(7)
+UNDER ARMOUR,Tênis Masculino Pacer Under Armour  *oferta*,449,99,221,07,4.7,(270)
+LETS,Tenis Para Corrida Masculino Casual Esportivo Academia Lets,129,90,32,48,4.3,(54)
+,Sapatênis Ranster Masculino Couro Legítimo Azul Confort,209,90,20,40,4.8,(18)
+OLYMPIKUS,Tênis Olympikus Masculino Triunfo 2 Preto Dourado Corrida,227,69,22,13,,
+OLYMPIKUS,Tênis Olympikus Chroma Masculino Preto Academia Caminhada,251,24,180,49,4.6,(25)
+ON RUNNING,Tênis On Running Cloudmonster Masculino Preto Corrida,1.099,90,109,,4.7,(39)
+FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,(343)
+ADIDAS,adidas Response Masculino Adultos,499,99,303,72,4.7,(114)
+OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,(7688)
+ON RUNNING,Tênis On Running Cloudmonster Masculino Preto Corrida,1.099,90,109,,4.7,(39)
+,"Tenis Olympikus Proof 3 Masculino Numero 45,46,47,48",199,90,19,43,4.8,(511)
+FILA,Tenis Fila Efecto Masculino-preto/grafite/prata,238,90,34,13,,
+NEW BALANCE,New Balance 997s Masculino Adultos,196,90,177,30,5.0,(1)
+ACTVITTA,Tenis Masculino Esportivo Actvitta Academia 4901200 Conforto,189,90,18,46,,
+UMBRO,Tenis Umbro Rudy-rose/branco/preto,149,90,14,57,,
+ON RUNNING,Tênis On Running Cloudflow 4 Laranja/preto Masculino,1.049,90,104,,,
+,Tenis Sem Cardaço Masculino Esportivo ,109,33,36,,4.7,(16)
+OLYMPIKUS,Tênis Masculino Olympikus De Caminha Corrida Marte,199,99,33,33,,
+NEW BALANCE,Tênis Clássico New Balance 997s Sport Têxtil Importado ,219,99,21,38,4.6,(49)
+ADIDAS,Tênis Esportivo Masculino E Feminino Lite Racer 4.0 adidas,299,99,268,99,4.8,(12)
+MIZUNO,Mizuno Wave Way 3 Masculino Adultos,349,90,34,99,4.7,(315)
+TAYGRA,Taygra Tenis Dança Conforto Original - Grafite + Brinde,179,05,170,01,4.8,(24)
+OLYMPIKUS,Olympikus Poseidon Masculino Adultos,199,99,155,80,4.7,(712)
+OLDSEN,Tênis Masculino Para Correr Caminhar Colorado Oferta Barato ,78,90,7,67,4.2,(862)
+OLDSEN,Tenis Masculino Lançamento Original Confortavel Tecido 38-45,78,95,68,68,4.3,(555)
+,Tênis Masculino Esportivo Caminhada Academia Corrida,78,90,69,90,4.5,(533)
+,Tênis Masculino Academia Rixxon Leve Promoção Barato ,87,90,58,89,4.5,(599)
+,Tenis Skechers Go Run Elevate 220184-blk Preto,312,39,31,24,,
+,Tenis Masculino Olimp Kit 02 Pares Academia Promoção Oferta,144,90,14,08,4.4,(3594)
+OLYMPIKUS,Tênis Masculino E Feminino Dynamic Olympikus Super Novo,279,99,236,99,4.8,(319)
+ON RUNNING,On Running Cloud 5 Masculino Midnight White,996,45,99,65,,
+OLYMPIKUS,Olympikus Caminhada Urano 2 Sem gênero Adultos,229,99,182,99,4.8,(1872)
+ON RUNNING,Tênis On Running Cloudswift 3 Masculino Azul Caminhada,1.049,90,104,,,
+ULTRABONE,Tênis Unissex Ultrabone Black Esportivo Material Respirável,103,50,93,15,4.8,(9)
+SKECHERS,Tênis Masculino Go Run Vast Skechers Novo,349,99,311,99,5.0,(24)
+MIZUNO,Tênis Mizuno Wave Rider 28 - Masculino - Branco-azul,849,99,85,,,
+OLYMPIKUS,Tênis Olympikus Proof 3 Masculino Esporte Original,189,22,179,75,,
+EVERLAST,Tênis Everlast Bunker Treino Academia Caminhada Corrida Leve,239,90,147,25,4.6,(18)
+SAPATOFRAN,Tênis Caminhada Corrida Masculino Preto Lançamento Tendência,99,65,90,68,5.0,(3)
+OLYMPIKUS,Tênis Olympikus Perfect 4 Masculino Esportivo Confortável  ,349,99,237,49,4.5,(34)
+UNDER ARMOUR,Tênis Masculino Charged Great Under Armour,299,99,253,99,4.8,(102)
+,Sapatênis Masculino Ranster Em Couro Gelo Palmilha Gel,209,90,20,40,4.6,(64)
+,Sapatilha Aquatica Neoprene Secarapido Sola Forte Confort,52,90,17,63,4.6,(897)
+ASCENSION,Tenis Ortopedico Masculino Corrida Caminhada Tamanho Grande,149,90,37,48,4.7,(6)
+OLYMPIKUS,Tênis Masculino Subverse Olympikus,349,99,278,99,4.7,(55)
+,Kit 2 Tenis Masculino Esportivo Adulto Caminhada Corrida To,154,70,15,04,4.6,(180)
+ON RUNNING,On Running Cloud Coast 5 Masculino Black Shadow,1.048,90,104,,,
+,Tênis Masculino Esportivo Academia Advanced Solado Extraleve,219,90,171,52,4.7,(37)
+BOX200,Tênis Masculino Tamanho Especial Esporte Caminhada Box 200,89,90,76,41,4.5,(707)
+POLO JOY,Tenis Meia Polo Joy Masculino Caminhada Original Confortavel,129,99,116,99,4.8,(56)
+MARATHON,Tênis Esportivo Academia Marathon Max Ok Anti Impacto Leve,299,90,119,96,4.5,(84)
+CARDUME,Sapatilha Cardume Porus Preto,74,90,24,97,5.0,(6)
+,Tênis Masculino Hot Sol Numero Especial 38 Ao 43,104,90,34,97,4.4,(27)
+ACTVITTA,Tenis Activitta Esportivo Masculino Calce Fácil Confortavel ,139,90,13,60,4.8,(9)
+FILA,Fila Running Progress Masculino Adultos,366,59,326,26,4.7,(201)
+ADIDAS,adidas Response Masculino Adultos,499,99,303,72,4.7,(114)
+,Tênis Masculino Esportivo Caminhada Ortopédico Casual Macio,124,90,75,29,4.7,(7)
+FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,(343)
+ADIDAS,adidas Response Masculino Adultos,499,99,303,72,4.7,(114)
+OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,(7688)
+MARATHON,Tênis Masculino Marathon Max Ok Esportivo Anti Impacto Leve,129,90,109,11,4.0,(3)
+,Tênis Sapatilha Porus Pesca Caiaque Ciclismo Trilha Jet Sky,85,75,80,92,4.7,(62)
+SKECHERS,Tênis Skechers Bountiful Masculino Cinza Promoção Pix,299,11,266,80,,
+,Tênis Masculino Esportivo Super Leve Envio Imediato,77,90,25,97,4.6,(84)
+OLYMPIKUS,Tênis Masculino Olympikus Triunfo 3 Dia A Dia Caminhada,229,99,218,49,5.0,(5)
+CARDUME,Tênis Neoprene Anfibius Trilha Jetski Pesca Academia Cardume,189,99,31,67,4.6,(19)
+PLUMAX,Tênis Casual Skatista Retrô Plumax Masculino Feminino,77,32,25,77,5.0,(1)
+FILA,Tênis Masculino Esportivo Progress Azul-marinho/bege Fila,385,90,299,99,4.6,(28)
+OLYMPIKUS,Tênis Olympikus Masculino Perfect Original,299,99,200,99,4.7,(31)
+OLYMPIKUS,Olympikus Neblina Masculino Adultos,259,11,25,,4.7,(77)
+OLYMPIKUS,Olympikus Eros Masculino Adultos,199,90,159,45,4.8,(1650)
+T-SHOES,Tênis Speed Corrida Academia Trekking Ciclismo Trilha Oferta,174,80,155,57,4.3,(23)
+GERAL,Tênis Speed Cross   Bike Masculino Bicicleta  Camping Trilha,185,90,173,78,4.5,(336)
+ON RUNNING,Tênis On Running Cloud 5 Masculino Azul Corrida E Caminhada,949,90,94,,,
+FILA,Tênis Original Fila Freestyle Masculino Performance Leve,299,90,33,32,,
+LORENZZO LOPEZ,Tênis Masculino Para Academia E Corrida Super Macio E Leve,39,10,13,03,4.4,(22)
+POLO JOY,Kit Tênis Masculino Runner Polo Joy Sport Com Relogio,125,24,31,31,4.3,(13)
+HOKA ONE ONE,Tênis Hoka One One Clifton 9 Azul Marinho Masculino,1.299,99,129,,,
+OLYMPIKUS,Tênis Olympikus Diffuse 5 Masculino,299,90,29,08,,
+ON RUNNING,Tênis On Running The Roger Pro Masculino,1.249,99,124,,,
+MIZUNO,Tênis Mizuno De Corrida Wave Legend 2,509,90,50,,,
+OLYMPIKUS,Tênis Masculino Olympikus Index 3 Caminhada Treino Dia A Dia,192,99,183,34,,
+SKECHERS,Tenis Para Caminhada Skechers Ultra Leve Masculino Original,319,90,31,01,4.8,(29)
+ASCENSION,Tenis Para Caminhada Corrida Ultra Ortopedico Leve Macio,69,,23,,4.7,(18)
+ASCENSION,Tenis Masculino Feminino Caminhada Academia Corrida Crossfit,119,57,11,,,
+ASCENSION,Tênis Masculino Ortopédico Caminhada Treino Calce Facil,99,90,33,30,4.7,(40)
+,Tênis Número Especial Esportivo Corrida E Academia 44-48,149,90,128,91,4.2,(73)
+MIZUNO,Tênis Esportivo Masculino Cool Ride Mizuno,359,99,36,,,
+POLO JOY,Tenis Masculino Sapatenis Polo Joy Confortavel Preto Amarelo,139,99,118,99,,
+,Tênis Bolsonaro Masculino Feminino Patriota Style Super Leve,199,90,33,32,4.7,(203)
+,Kit 2 Tenis Masculino Olimp Esportivo Volcan Academia Barato,129,99,12,64,,
+,Tenis Masculino Fxb Para Caminhada Treino Trainning Ax01,57,25,5,56,,
+FILA,Fila Recovery Masculino Adultos,373,32,276,25,4.7,(1523)
+EVER WAY,Tênis De Caminhada Confortável Detalhes Em Couro Legitimo,78,90,74,95,4.4,(309)
+ON RUNNING,Tênis On Running Cloudeclipse Masculino Lançamento,1.149,90,114,,,
+OLYMPIKUS,Olympikus Casual Index 3 Masculino Adultos 43611218_1-004,145,09,14,,4.8,(1532)
+LYND,Tênis Masculino Corrida Academia Caminhada Lynd- Grid 321,199,90,179,91,4.7,(492)
+NEW BALANCE,Tênis Masculino New Balance 997s - Couro Camurça Borracha,213,90,30,56,3.8,(4)
+,Tênis Bolsonaro : Liberdade Style Super Confortável ,169,90,33,98,4.8,(165)
+,Tenis Olympikus Dynamic Masculino Esportivo  Original,254,90,24,71,4.8,(1483)
+EVER WAY,Tênis Caminhada Corrida  Macio Confortável Academia Fitness,119,90,92,15,4.8,(21)
+,Tênis Treino Crossfit Corrida Academia Barato Leve Dia-a-dia,78,99,45,02,4.7,(28)
+OLYMPIKUS,Tênis Olympikus Masculino Versa,268,50,26,03,4.9,(22)
+MOLEKINHO,Tênis Menino Casual Calce Fácil Dia A Dia Conforto Original,78,88,74,14,5.0,(31)
+,Tênis Masculino Hot Sol Para Treino Academia Caminhada,104,90,10,20,4.7,(9)
+OLYMPIKUS,Tenis Olympikus Only 2 Unissex ,149,99,14,58,4.8,(20)
+,Tenis Sport Titanium 277  Original - Esportivo,78,90,67,06,4.4,(1956)
+OLYMPIKUS,Tênis Unissex Olympikus Rua Corrida Caminhada Treino Leve,229,99,22,36,5.0,(1)
+FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,(343)
+OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,(7688)
+ADIDAS,adidas Response Masculino Adultos,499,99,303,72,4.7,(114)
+ZEUS,Tênis Zeus Adulto Masculino - 87kx-a,89,65,8,,,
+FILA,Tênis Fila Float Knit 3.0 Royal,349,90,34,99,5.0,(8)
+ON RUNNING,Tênis On Running Cloudmonster Hyper Laranja Masculino,1.399,90,139,,5.0,(2)
+,Tênis Esportivo Olimp Space Kit 2 Pares Caminhada Lançamento,143,09,35,77,4.4,(265)
+ADIDAS,adidas Switch Run Masculino Adultos,553,41,53,65,,
+BOX200,Tenis Box 200 Com Degrade No Cabedal - Bx2247,102,94,34,31,5.0,(1)
+OLYMPIKUS,Tênis Masculino Olympikus  Zex/168,229,90,216,10,4.6,(46)
+ON RUNNING,On Running The Roger Clubhouse Masculino White Sand,999,85,96,,4.0,(2)
+KALUM,Tênis Feminino Academia Caminhada Corrida Barato,64,90,21,63,3.5,(12)
+OLIMPAK,Tênis Esportivo Masculino Olimpak Para Caminhada Academia,106,10,99,73,4.4,(3397)
+FILA,Tênis Fila Renno Classic Masculino Marinho ,299,22,33,,,
+,Tenis Sapatilha Ciclista Pesca Caminhada  Promoção  Militar,78,20,26,07,4.5,(15)
+STARFLEX,Tênis Com Amortecedor Masculino Corrida Esportivo Flex Mola ,133,55,33,39,4.6,(59)
+UNDER ARMOUR,Tênis Under Armour Original,279,90,31,10,4.5,(2)
+ON RUNNING,Tênis On Running Cloudflow 4 Masculino Preto/branco Original,1.049,90,104,,5.0,(1)
+ASICS,Tênis Asics Gel-cumulus 26 Azul Marinho E Laranja Running,899,99,90,,,
+NEW BALANCE,Tenis New Balance  Fresh Foam X 880v14 Preto Branco,429,56,42,96,,
+,Tênis Masculino Grande Tamanho Especial 43 Ao 48,149,90,37,48,3.5,(4)
+FILA,Tênis Fila Masculino Street Fit 2 Original,349,90,34,99,,
+OLYMPIKUS,Tênis Olympikus Corrida De Rua Preto - Masculino,249,99,222,37,5.0,(6)
+OLYMPIKUS,Tênis Olympikus Ultraleve 237g Masculino Preto,259,38,32,,,
+MIZUNO,Mizuno Wave Vitality 4 Masculino Adultos,379,90,37,99,4.7,(190)
+ON RUNNING,Tênis On Running Cloudflow 4 Cinza/preto Masculino,1.049,90,104,,,
+BAD FISH,Tênis Track Sapatilha Bad Fish Adventure Pesca Rosa Preto ,204,99,19,93,4.8,(90)
+ASICS,Tênis Asics Gel-nimbus 26 Preto E Verde Macio Leve Masculino,1.199,,120,,,
+CARDUME,Tênis Anfibius Neoprene Cardume Trilha Jetski Pesca Academia,179,99,17,50,4.6,(90)
+NEW BALANCE,Tênis Masculino New Balance Fresh Foam X Kaiha Road,699,90,552,92,4.9,(9)
+ASCENSION,Kit Tênis Masculino 3 Pares Para Caminhada Academia Treino,209,90,34,98,4.6,(5)
+POLO JOY,Tênis Bota Cano Médio Lançamento Polo Joy Detalhes Em Couro,134,90,33,72,4.8,(15)
+GERAL,Tênis Resistente A Água Para Trilha Corrida Escalada,187,78,175,16,,
+VILI,Tênis Masculino Academia Caminhada Vili Barato Leve Corrida,108,39,10,54,4.5,(2488)
+SKECHERS,Tênis Masculino Corrida Skechers Go Run Ride 9 Macio,529,90,52,,5.0,(3)
+TAYGRA,Tenis Taygra Dança Unissex  Bordô Original + Brinde Envio24h,179,90,17,49,4.9,(8)
+,Tenis Masculino Neec Bx-214 Academia Caminhada Resistente,85,81,81,51,3.8,(4)
+,Kit Tênis Unissex Esportivo Corrida Academia Treino+ Relógio,124,90,74,94,5.0,(1)
+REEBOK,Tênis Esportivo Reebok Speed 22 Lançamento Verde Neon,699,99,454,99,,
+OLP,Tênis Masculino Feminino Varias Cores Do 34 Ao 43 Promoção,89,99,8,75,4.0,(44)
+OLYMPIKUS,Tênis Masculino Olympikus Esportivo  Urano/160,210,40,197,90,4.6,(43)
+,Sapatilha Híbrida Aquática Pesca Neoprene Trilha Bike Praia,53,67,17,,4.6,(262)
+ASICS,Tênis Asics Gel Kayano 31 Platinum - Masculino,1.399,90,139,,5.0,(1)
+,Tenis Masculino Academia Corrida Wave Force Promoção Barato,74,47,7,24,4.2,(492)
+ADIDAS,Tênis adidas Lite Racer 4.0 Masculino - Original,299,99,29,08,4.9,(14)
+FILA,Tênis Fila Recovery Masculino Branco Cinza Azul ,379,90,37,,,
+OLYMPIKUS,Tênis Masculino Corrida Olympikus Triunfo 3 Original,229,99,32,86,,
+,Tênis New Balance 997s Original Cores Lançamento Exclusivos!,209,99,35,,4.2,(53)
+ADIDAS,adidas Runfalcon 3.0 Masculino Adultos,399,90,39,99,4.7,(641)
+OLYMPIKUS,Tênis Olympikus Eros Casual Original Adulto Branco Unissex ,237,49,182,99,4.8,(60)
+OLYMPIKUS,Tênis Unissex Olympikus Index 3,199,90,189,90,,
+FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,(343)
+OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,(7688)
+ADIDAS,adidas Response Masculino Adultos,499,99,303,72,4.7,(114)
+,Tênis New Balance 997s Original Cores Lançamento Exclusivos!,209,99,35,,4.2,(53)
+ADIDAS,adidas Runfalcon 3.0 Masculino Adultos,399,90,39,99,4.7,(641)
+OLYMPIKUS,Tênis Olympikus Eros Casual Original Adulto Branco Unissex ,237,49,182,99,4.8,(60)
+ZEUS,Tênis Zeus Masc Calce Fácil Flex Power Moove Fit Pratico Fit,78,79,26,26,3.7,(9)
+OLYMPIKUS,Tenis De Correr Masculino Adulto Olympikus Venum Preto,249,90,31,24,,
+POLO JOY,Sapatênis Tênis Slip-on Masculino Polo Joy Calce Fácil Preto,139,99,118,99,,
+RAYON,Tênis Masculino 3 Pares  Academia Atacado Promoção Barato,184,99,174,99,4.7,(272)
+NEW BALANCE,Tênis New Balance 574 V2 Masculino Cinza,599,90,59,,,
+LETS,Tenis Masculino Casual Academia Caminhada Conforto Let's ,114,89,11,17,4.4,(22)
+HOST,Tenis Host Com Laterais Estilizadas - H50020,65,99,22,,,
+SALOMON,Tênis Masculino Salomon Xa Pro 3d V9 Azul Trail Running,1.214,89,1.141,20,,
+OLYMPIKUS,Olympikus Cyber 4 Masculino Adultos,299,99,227,99,,
+,Tênis Unissex Esportivo Corrida Academia Macio Confortável,124,90,74,94,,
+RAINHA,Tênis Rainha Masculino Leve E Resistente Lindo Z239,179,99,36,,4.7,(11)
+ZEUS,Tênis Zeus Cadarço Esportivo Infantil Tecido/sintético 87kx,64,99,21,66,,
+OLYMPIKUS,Tênis Olympikus Cyber 4 - Original,299,99,227,99,,
+OLYMPIKUS,Tênis Olympikus Estilo 2 Preto,199,90,33,32,4.2,(25)
+OLYMPIKUS,Tênis Olympikus Estilo 2 Masculino Amortecedor Corrida,199,90,33,32,,
+,Tênis Unissex Esportivo Corrida Ortopédico Macio Confortável,124,90,69,94,4.3,(28)
+ON RUNNING,Tênis On Running The Roger Spin 2 Masculino Branco Original,949,90,94,,,
+ASICS,Tênis Asics Novablast 4 Le Masculino + Pochete De Corrida,1.119,99,111,,,
+NEW BALANCE,Tênis Casual Masculino New Balance 500 V2,409,99,41,,5.0,(2)
+FILA,Tênis Fila Kr6 Masculino ,599,90,59,,,
+BURCOLLI,Tênis Sapatilha Masculina Aquática Ciclista Trilha Macia,59,90,19,97,4.8,(78)
+NEW BALANCE,Tenis New Balance Running Ultra Leve Masculino 520 V8,459,90,45,99,,
+FILA,Tênis Fila Original Masculino Street Fit Confortável,359,90,35,99,4.8,(6)
+ACTVITTA,Tenis Caminhada Corrida Actvitta Knit Esporao Joanete Flex,199,99,33,33,,
+BURCOLLI,Tênis Sapatilha Aquática Esportiva Trilha Cachoeira Bike,59,90,56,90,4.5,(96)
+FITTY,Tênis Masculino Slip On Confortável Casual  Academia Corrida,138,50,34,62,,
+RABUTSS,Tênis Jogger Masculino Casual Esportivo Academia Dia A Dia,89,90,8,74,,
+RAINHA,Tenis Esportivo Unissex Leve Rainha Drive Iii 02050015,179,90,35,98,,
+FILA,Tênis Fila Masculino Esportivo Confortável Float Prime,369,90,319,20,4.8,(4)
+,"Tenis Esportivo Feminino Masculino,resistente, Confortavel!",69,90,6,79,4.5,(212)
+OLYMPIKUS,Olympikus Marte Masculino Adultos,189,99,159,59,4.8,(319)
+OUSY SHOES,3 Tênis Esporte Caminhada Leve Easy Masculino Lançamento,199,90,33,32,4.6,(117)
+,Tênis Masculino Hot Sol Numero Especial 38 Ao 48,119,90,11,65,4.6,(87)
+,Tênis Meia Masculino E Feminino Unicc Lançamento,81,90,27,30,4.7,(102)
+,Tênis Corrida Esportivo Trekking Academia Masculino Promoção,139,90,34,98,,
+LORENZZO LOPEZ,Tênis Masculino Esportivo Caminhada E Academia Leve,109,90,87,92,3.7,(3)
+FILA,Tênis Fila Kr6 Running Corrida ,399,90,343,90,,
+OLYMPIKUS,Tenis Olympikus Corrida Voa 2 - Masculino - Preto Original,289,90,275,40,4.9,(7)
+,Tenis Academia Masculino Corrida Caminhada West Boot Wave 20,90,77,30,26,4.3,(13)
+,Tênis Esportivo Olimp Dpizar Leve Masculino Confortável+meia,77,32,7,52,4.4,(151)
+,Bota Coturno Tênis De Couro Ecológico Bem Leve E Macio Acompanha  Palmilha De Gel Pu Conforto Aos Pés De Brinde Promoção,78,20,7,60,4.5,(6)
+,Kit Tenis Masculino Esportivo Academia + Chapeu + Relógio,78,89,7,67,,
+NEW BALANCE,Tênis New Balance Fresh Foam X Hierro V7 Masculino Promoção,799,90,77,55,5.0,(2)
+RAINHA,Tênis Rainha Masculino Leve E Resistente Lindo Z239,169,99,16,52,4.8,(10)
+OLYMPIKUS,Olympikus Casual Noventa Masculino Adultos,279,31,248,14,4.7,(1013)
+FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,(343)
+ADIDAS,adidas Response Masculino Adultos,499,99,303,72,4.7,(114)
+OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,(7688)
+NEW BALANCE,Tênis New Balance Bb80 Masculino Preto,399,90,39,,,
+OLYMPIKUS,Olympikus Casual Noventa Masculino Adultos,279,31,248,14,4.7,(1013)
+OLYMPIKUS,Tênis Olympikus Rayo Masculino Esportivo Corrida Macio,259,99,203,52,,
+ACTVITTA,Tenis Actvita Masculino Treino Leve Conforto Macio Original,174,90,17,,4.7,(18)
+,Tênis Star Vagalumes The Last Of Us Série Lançamento Unissex,129,90,32,48,5.0,(3)
+BURCOLLI,Tênis Sapatilha Masculina Aquática Ciclista Trilha Bike,59,90,56,90,4.5,(42)
+,Tenis Reed Com Entressola Estilizada - 072,75,99,25,33,,
+OLYMPIKUS,Tênis Olympikus Neblina Masculino,279,90,31,10,4.6,(48)
+OLYMPIKUS,Tênis Olympikus Cyber 4 Caminhada Corrida Running Confort,259,99,228,79,,
+OLYMPIKUS,Tênis Olympikus Challenger 5 - Masculino - Laranja,268,70,239,14,,
+MIZUNO,Tenis Mizuno Cool Ride Preto ,245,62,30,,5.0,(9)
+ASCENSION,Tenis Masculino E Feminino De Caminhada Academia Ortopedic ,69,90,6,79,,
+JOHNCAT,Tenis Masculino Yezee Leve Corrida Lançamento Super Promoção,78,90,26,30,,
+OLYMPIKUS,Tênis Masculino Olympikus  Marte Oferta!,199,90,189,90,4.6,(19)
+,Tênis Meia Masculino E Feminino Sem Cadarço Confortável,81,90,7,96,4.8,(113)
+TAYGRA,Taygra Cinza Tenis  Original Envio 24h,179,90,17,49,5.0,(5)
+OLYMPIKUS,Tênis Olympikus Estilo 2 Preto,209,90,34,98,4.7,(17)
+DM DAMANDO,Tenis Masculino Esportivo Academia Confortavel Crossfit Leve,82,90,8,06,5.0,(5)
+KAPPA,Tênis Kappa Impact Masculino Open Box,99,90,9,71,4.8,(20)
+,Tênis Esportivo Masculino Meia Academia Treino Confortável,79,90,7,77,4.5,(20)
+RAINHA,Tênis Esportivo Rainha Fire Eva.soft Fixfit Conforto Ra0267,178,19,35,64,,
+,Tênis Meia  Super Confortável Macio + Brinde Carteira ,74,98,7,29,,
+POLO JOY,Tênis Bota Café Cano Médio Polo Joy Jeans Envio Imediato,124,90,12,14,4.5,(2)
+BOX200,"Tênis Masculino Corrida,caminhada Esportivo Box 200 Original",69,20,6,73,,
+PHILIPP PLEIN,Tênis Masculino Philipp Plein Dream Big 78%-nitrogen  ,299,99,33,33,4.1,(9)
+,Kit 2 Tênis Masculino Prospect Ultra Varias Cores Leve Macio,139,90,34,98,,
+,Tenis Redley Originals Preto Unissex - 3294,219,10,197,16,4.8,(567)
+POLO JOY,Tenis Masculino Sapatenis Polo Joy Confortavel Casual Cinza,139,99,118,99,,
+,Tênis Preto Feminino Dowens F1 Esportivo Confortável,78,92,69,44,,
+OLYMPIKUS,Tenis Masculino Olympikus Beats Supporter Evasense  Original,279,60,27,11,,
+ON RUNNING,On Running The Roger Advantage Masculino White Midnight ,949,01,92,,5.0,(1)
+ZEUS,Tênis Zeus Velcro Infantil Esportivo Caminhada Corrida 59kx,64,99,21,66,,
+OLYMPIKUS,Tênis Olympikus Cyber 4 Marinho E Laranja - Unissex,259,99,209,96,,
+CARDUME,Tênis Cardume Porus Pesca Lazer Camping Disponível 3 Cores,76,89,7,47,4.6,(5)
+NEW BALANCE,Tênis New Balance 55 Masculino Promoção Pix,329,07,273,47,,
+OLYMPIKUS,Tênis Olympikus Cyber 4 Marinho E Laranja - Unissex,259,99,210,59,,
+LETS,Tenis Masculino Corrida Casual Caminhada Confortavel Lets,119,90,11,65,4.4,(591)
+ASCENSION,Tênis Esportivo Ortopédico Para Academia Treino Dia A Dia,139,10,13,52,4.5,(420)
+ASCENSION,Tenis Masculino Feminino Basic Crossfit Caminhada Esporte ,69,,23,,,
+K2,Tenis Academia Alta Performance Leve Confortavel K2-2010,78,90,74,95,5.0,(2)
+,Tênis Esportivo Masculino Leve Confortável Academia Corrida,79,90,26,63,4.8,(6)
+NEW BALANCE,Tênis New Balance Masculino 880v14,1.187,90,855,28,,
+FITTY,Tênis Masculino Caminhada Corrida Casual Academia Barato,118,70,11,54,4.8,(9)
+FILA,Tênis Masculino Fila Racer Nairobi Preto Corrida Original,379,99,251,36,4.8,(4)
+OLYMPIKUS,Tenis Para Homem Olympikus Estilo Academia Corrida,199,34,19,,,
+UNDER ARMOUR,Tênis De Corrida Under Armour Charged Starlight,199,99,33,33,4.6,(18)
+OLYMPIKUS,Olympikus Caminhada Cygnus Masculino Adultos,189,90,31,65,4.8,(959)
+FILA,Fila Float Maxxi 2 Pro Masculino Adultos,810,,81,,5.0,(5)
+FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,(343)
+ADIDAS,adidas Response Masculino Adultos,499,99,303,72,4.7,(114)
+OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,(7688)
+LYND,Tênis Lynd Academia Corrida Treino Gravit Flux 2,229,90,22,35,4.9,(13)
+NEW BALANCE,New Balance 373v2 Masculino Adultos,312,25,30,,4.5,(96)
+ADAPTION,Kit 2 Pares De Tenis Masculino Academia Limited + Relogio,130,10,12,65,4.4,(4206)
+OLYMPIKUS,Tenis Masculino Olympikus Delta 122 Esportivo,150,58,14,,,
+WEST,Kit 2 Tenis Masculino Cores Promoção Confortavel Treino Wave,161,40,32,28,4.0,(34)
+MIZUNO,Tênis Mizuno Masculino 12s Leve E Confortável!,339,97,166,58,4.3,(177)
+FILA,Fila Racer Spider Masculino Adultos,311,92,230,82,4.8,(211)
+SCHIARELI,Tênis Confortavel Esportivo Leve Macio Varias Cores,139,90,34,98,4.6,(72)
+PLAZA,Tênis Masculino Plaza Neo Academia Caminhada Promoção Casual,62,90,6,11,4.3,(12)
+POLO JOY,Combo 2 Pares Tenis Masculino Polo Joy Casual Slip On Iate,169,90,16,51,4.6,(392)
+OLYMP,Tênis Kit 2 Pares  Olymp Lançamento Zoo Meg Top Homem Sport#,143,75,35,,4.3,(449)
+,Tênis Polo Energy Masculino,78,97,26,32,4.5,(31)
+,Tenis Olympikus Dynamic Masculino Esportivo  Original,259,99,246,99,4.8,(106)
+FILA,Tenis Fila Masculino Promoção ,289,90,32,21,4.6,(61)
+PERFLEX,Tênis Esportivo Academia Caminhada Corrida,59,90,49,11,4.5,(17)
+SCHIARELI,Tenis  Esportivo Leve Confortavel Corrida Academia Original,120,50,108,,,
+MIZUNO,Mizuno Victory RSP Masculino Adultos,429,99,347,70,5.0,(9)
+EVOLTENN,Kit 3 Tênis Desportivo Solado Trançado Macio Envio Imadiato,189,90,174,70,4.4,(108)
+OLYMPIKUS,Olympikus Corre Trilha Sem gênero Adultos,599,90,443,92,5.0,(8)
+PLAZA,Kit 4 Pares Tênis Masculino Casual Academia Caminhada Atacad,289,90,32,21,4.3,(440)
+OLYMPIKUS,Tênis Olympikus Metro,209,90,34,98,5.0,(6)
+,Tênis Chuky Linha Eco Nylon Espumado Ranclafe,159,90,31,98,4.9,(18)
+PLAZA,Kit 2 Pares De Tênis Masculino Academia Caminhada Casual Neo,139,90,13,60,4.2,(600)
+,Tênis Meia Masculino E Feminino Sem Cadarço Confortável,62,90,6,11,4.7,(219)
+ADRUN,Tênis Esportivo Masculino Adrun Power Fly 10104m Marinho,189,90,31,65,,
+SKECHERS,Tenis Skechers Go Run Fast 894258-bkw Preto,296,77,32,97,,
+,Tenis Hibrido Sapatilha Aquatica Neoprene Confortável Top,54,,18,,4.7,(48)
+MIZUNO,Tênis Mizuno Enigma Masculino,359,99,335,99,,
+EVOLTENN,Kit 3 Combo Tenis Masculino Corrida Treino Academia Leve,189,95,180,45,4.6,(337)
+MIZUNO,Tenis Mizuno Victory Rsp Preto,364,58,36,46,5.0,(9)
+,Tênis Yezy 350 Masculino- Promoção,299,90,33,32,4.6,(11)
+,Kit Tênis 2 Pares Masculino Super Confortável Leve Academia,129,90,12,63,4.4,(51)
+MIZUNO,Mizuno Wave Falcon 5 Masculino Adultos,429,90,299,88,4.9,(39)
+HEADER,Kit 1 Tênis Masculino Caminhada Spider Levinho + 1 Chinelo,108,80,36,27,4.2,(5)
+,Tenis Box 200 Bx2325 Masculino Lançamento Liquidação,49,33,16,,5.0,(2)
+PUMA,Puma Viz-Tech Viz Runner V2 BDP Masculino Adultos,366,56,317,07,4.6,(134)
+,Kit 3 Pares Tênis Lançamento Mega Leve Olymp Masculino Macio,204,90,34,15,4.6,(122)
+,Tênis Chuky Linha Eco Nylon Espumado Ranclafe Preto/branco,159,90,31,98,5.0,(5)
+OLDSEN,Tênis Unissex Caminhada Barato Corrida Oldsen Jaguar 34-43,69,90,6,79,4.6,(113)
+STARFLEX,Tênis Com Amortecedor Masculino Corrida Academia Flex Molas,133,55,33,39,4.6,(64)
+,Tênis Masculino Prospect Ultra Leve Macio Esportivo Academia,78,90,26,30,,
+MIZUNO,Tênis Mizuno Wave Vitality 4 Masculino,379,90,37,99,,
+PAM KIDS,Tenis Para Crianças Masculino Tênis Atacado Menino Infantil,35,90,11,97,4.7,(11)
+OLYMPIKUS,Oferta Olympikus Cyber 3 Preto/ Dourado C/nf Lucaisane Tênis,229,99,22,36,4.9,(37)
+OLYMPIKUS,Olympikus Eros Sem gênero Adultos,199,05,189,38,4.8,(175)
+POLO JOY,Tenis Confortável Academia Esporte Polo Joy,78,02,7,58,4.5,(99)
+MIZUNO,Mizuno Wave Endeavor Masculino Adultos,473,30,47,,4.7,(160)
+,Tenis Sapatilha Neoprene Bike Pesca Unissex Top Promoção ,52,33,17,,4.6,(534)
+,Tenis Sapatilha Neoprene Bike Pesca Unissex Top Promoção ,52,33,17,,4.6,(534)
+OLYMPIKUS,Tênis Olympikus Diffuse 4 Preto E Dourado,200,85,33,48,4.7,(73)
+UNDER ARMOUR,Tênis Under Armour Spawn 3 Preto,349,90,34,99,4.7,(297)
+OLDSEN,Kit 2 Tênis Masculino Casual Oldsen Jaguar Frete Gratis Novo,159,90,15,54,4.4,(318)
+FACEOFF,Tênis Masculino Esporte Fino Kit Carteira + Relogio Brinde,104,90,10,20,4.4,(136)
+,Tenis Esportivo Masculino Corrida Caminhada Lançamento Ghost,120,90,11,75,,
+NEW BALANCE,New Balance Fresh Foam Arishi V4 Masculino Adultos,499,99,424,99,4.5,(4)
+ULTRABONE,Tênis Unissex Academia Leve Macio Basico Caminhada Fitness ,63,99,60,79,4.3,(7)
+,Mizuno Wave Prophecy X Masculino Adultos,78,,,,,
+ON,Tênis On Running Cloudgo Corrida Masculino,699,90,69,,,
+OLYMPIKUS,Olympikus Challenger 4 Masculino Adultos,258,39,25,05,4.8,(10)
+ZEUZ,Tênis Esportio Masculino Caminhada Academia Confortável Leve,64,90,6,31,,
+POLO BLU,Sapatenis Masculino Kit Tenis Relogio Com Meia Polo,94,90,9,22,4.7,(14)
+GALAXY,Tênis Masculino Caminhada Academia Leve Promoção Kit 3 Pares,176,90,17,19,4.4,(153)
+,Kit Tênis Masculino 2 Pares Super Confortável Leve Academia ,129,90,12,63,4.3,(9)
+OLYMPIKUS,Tênis Masculino E Feminino Reverso 2 Olympikus,379,99,279,99,4.7,(559)
+,3 Pares Tênis Esportivo Tenis Masculino Leve E Macio Frete,169,90,33,98,4.3,(101)
+,Conjunto Moletom Masculino Pijama Blusa Tenis Masculino,159,90,15,54,4.3,(32)
+,Tênis Masculino Academia Caminhada Fxb Lançamento Corrida,69,90,23,30,4.4,(557)
+NEW BALANCE,New Balance Fresh Foam X 1080 V12 Masculino Adultos,999,90,739,92,5.0,(5)
+OLYMPIKUS,Olympikus Ultraleve 130g Feminino Adultos,208,22,20,,4.8,(4172)
+VIA LIVRE,Tênis Masculino Ultra Leve Advanced Pro Run Academia Vl060,134,90,13,11,3.7,(3)
+MIZUNO,Tênis Mizuno Masculino Beta Lançamento!,369,98,177,59,4.3,(187)
+MIZUNO,Mizuno Wave Falcon 4 Masculino Adultos,381,66,240,44,4.8,(189)
+FILA,Fila Classic Runner Masculino Adultos,259,90,32,49,4.7,(450)
+WM,Tenis Revelation Masculino Feminino Promoção Pronta Entrega,109,99,10,69,4.5,(148)
+BAD FISH,Tênis Adventure Caminhada Academia Trail Trekking Air Mesh,199,49,19,39,4.7,(168)
+REEBOK,Tênis Reebok Nfx Trainer Masculino,499,90,354,92,4.8,(20)
+,Kit Combo 2 Tenis Masculino P/ Treino Academia Confortável,166,80,33,36,4.4,(26)
+,Kit 2 Pares De Tenis Esportivo Feminino Masculino,159,45,15,,4.6,(22)
+OLYMPIKUS,Tênis Masculino Olympikus Proof 3 ,167,23,16,,4.0,(3)
+,Kit Bermuda Masculina Moletom + Tenis Esporte Com Brinde,109,90,10,68,4.3,(35)
+,Sapatenis Masculino Casual Sapato Tênis Original Lançamento,76,40,7,43,4.2,(53)
+OLYMPIKUS,Tênis Masculino Olympikus Corrida Macio Wellness Original,229,99,218,49,4.9,(13)
+,Kits 3 Pares Tenis Masculino Corrida Caminhada Barato Casual,148,40,37,10,,
+DM DAMANDO,Kit 4 Pares Tênis Masculino Confortável Academia Crossfit ,239,90,225,50,4.5,(13)
+,Tenis Masculino Kit Olimp 02 Pares Academia Entrega Rapida,144,90,14,08,4.4,(770)
+SAPATOFRAN,Kit Tênis Academia Sapatênis Chinela Relógio Carteira,129,80,116,82,4.3,(275)
+OLDSEN,Tênis Lançamento Original Confortável Corrida Esportivo,63,90,6,21,5.0,(7)
+NEW STYLE,Kit 2 Tenis Masculino Sport De Caminhar Confortavel +brindes,109,90,10,68,,
+WEST,Tênis Kit 2 Pares Mizwest 20 Promoção Masculino Garantia !!1,160,70,15,62,4.1,(394)
+POLO BLU,Sapato Masculino Tenis Sapatenis Promoçao Kit Relogio Meia,69,90,6,79,4.6,(22)
+LORENZZO LOPEZ,Tenis Para Caminhada Corrida Tênis Barato Fique Em Casa,59,90,19,97,3.9,(42)
+DM DAMANDO,Tênis Masculino Academia Treino Crossfit Sola Transada Macia,72,90,7,09,,
+,Lançamento Tênis Chunky Snekeaer Couro Cano Medio ,189,90,31,65,4.8,(6)
+,Tenis Hibrido Top Sapatilha Pra Agua Confortavel Oferta Top ,53,67,17,,4.5,(75)
+EVOLTENN,Kit 3 Tênis Feminino Unissex Masculino De Corrida Academia,189,90,167,11,4.7,(49)
+BURCOLLI,Tênis Sapatilha Masculina E Feminina Trilha Aquática Pesca,59,90,56,90,4.7,(511)
+OLYMPIKUS,Olympikus Treino Dynamic Masculino Adultos,199,99,19,44,4.8,(7688)
+FILA,Fila KR6 Masculino Adultos,420,31,328,83,4.7,(343)
+ADIDAS,adidas Response Masculino Adultos,499,99,303,72,4.7,(114)
+ZEUZ,Tênis Masculino Leve Esportivo Conforto Dia A Dia Elástico,89,99,30,,4.4,(10)
+OLDSEN,Kit 2 Tenis Masculino Unissex Botinha Casual Academia Urbano,159,90,15,54,4.0,(6)
+DK SHOES,Tenis Masculino Dk Skatista Original Street Casual Skate,48,90,16,30,4.9,(29)
+DM DAMANDO,Tênis Masculino Esporte/passeio Ultraleve Conforto + Relógio,78,90,74,95,4.2,(182)
+,Tênis Masculino Corrida Esportivo Caminhada Academia Oferta.,113,90,37,97,4.4,(8)
+EVOLTENN,Tênis Boost Masculino Evoltenn Esporte Casual Colmeia Treino,68,50,6,66,4.8,(4)
+OLDSEN,Tenis Masculino Oldsen Spyder Kit 2 Macio Conforto Promoção,149,90,14,57,4.0,(2)
+DM DAMANDO,Tenis Masculino Para Sport Treino Academia Ultra Leve ,84,90,28,30,4.7,(40)
+,Tênis Masculino Esportivo Academia Corrida Confortável,54,90,5,34,,
+POLO BLU,Tênis Masculino Botinha Polo Blu Kit Carteira E Relogio !,99,90,9,71,4.4,(73)
+,Kit 2 Tênis Masculino Respiral Conforto Para Seus Pés Brinde,105,53,10,26,5.0,(1)
+,Tênis Masculino Esportivo Meia Academia Treino Confortável,89,90,29,97,,
+EVOLTENN,Kit 2 Tênis Masculino Academia Crossfit Corrida Barato ,159,90,125,99,4.5,(751)
+FREE JUMP,Sapato Masculino Tênis Esportivo Ortopédico Esporão E Facete,129,90,67,54,4.5,(58)
+OVERTRAK,Tênis Esportivo Lançamento Original Confortável,89,90,66,52,4.5,(97)
+OLDSEN,Kit 2 Tenis Masculino Academia Botinha Casual Conforto Moda,159,90,15,54,4.0,(20)
+ADAPTION,Kit 2 Pares Tenis + Relogio Brinde Academia Caminhada Leve,129,90,12,63,4.5,(91)
+,Tênis Esportivo Masculino Vorax Ultra Leve Para Caminhada,118,33,39,,,
+DM DAMANDO,Combo 2 Tênis Crossfit Masculino Caminhada Academia +relógio,149,90,37,48,4.9,(10)
+HEADER,Kit 2 Tênis Casual Masculino Spider Top Promoção + Relógio,128,60,12,50,4.4,(18)
+OLYMPIKUS,Tênis Olympikus Challenger 5 Preto Unissex Pro,285,50,256,87,5.0,(7)
+OLYMPIKUS,Tênis Olympikus Eros Branco Unissex Pro,190,62,171,,4.7,(18)
+,Kit 2 Tênis Academia Caminhada Unisex Oadsey Easy Top,139,90,112,10,4.3,(142)
+HEADER,Kit 2 Tênis Masculino Spider Caminhada Promoção + Relógio,128,60,12,50,4.6,(17)
+OLYMPIKUS,Olympikus Treino Volcan Masculino Adultos,157,41,15,30,4.7,(1293)
+,Tênis Para Corrida Olimpikus Veloz Caminhada Crossfit,99,90,94,90,4.3,(111)
+OLYMPIKUS,Tênis Olympikus Challenger 4 Unissex,199,99,33,33,4.7,(6)
+UNDER ARMOUR,Tênis Masculino Ch. Wing Se  Under Armour Novo,329,99,244,99,4.6,(69)
+OLP,Tênis Asisc Reveletion Masculino Feminino Do 34-43 Promoção,92,15,8,96,,
+,Tênis Bolha Plus 1 Tn Corrida Muito Leve Promoção Envio Ja,118,86,39,62,,
+,Tênis Refletivo 12 Molas Masculino & Feminino Amortecimento ,101,90,33,97,4.5,(89)
+OLYMPIKUS,Tênis Olympikus Diffuse 4 Unissex,169,99,34,,4.7,(49)
+,Sapatilha Hibrida Nautica Pesca Esportiva Corrida Pedal,43,50,14,50,4.7,(75)
+,Tenis Sapatilha Unissex Esporte Bike Trilha Pesca Camping ,132,90,33,22,4.0,(2)
+OLYMPIKUS,Olympikus Wellness 2 Masculino Adultos,194,33,32,,4.6,(56)
+SKECHERS,Tênis Skechers Ultra Flex 2.0  Masculino - Cinza,349,90,34,99,,
+UNDER ARMOUR,Under Armour Buzzer Masculino Adultos,389,90,337,25,4.5,(911)
+OLYMPIKUS,Tênis Olympikus Poseidon Unissex,149,99,37,50,4.7,(12)
+VANS,Vans UltraRange V3 Sem gênero Adultos,399,86,139,95,3.4,(10)
+OLP,Tênis Reveletion Masculino Feminino Do 34 Ao 43 Promoção,89,99,30,,5.0,(1)
+,Tênis Okley Na Promoção Bravo 2.0 Resistente Confortável,109,90,36,63,4.5,(95)
+,Sapatilha Híbrida Água Ciclismo Pesca Trilha ,132,90,33,22,4.6,(29)
+OLYMPIKUS,Olympikus Cyber 3 Masculino Adultos,197,99,19,24,4.7,(43)
+OLYMPIKUS,Olympikus CORRIDA Swift 4 Feminino Adultos,279,99,31,11,4.8,(1115)
+,Tênis Masculino Tn 01 Plus Lançamento Envio Ja Oferta,118,86,39,62,,
+OLYMPIKUS,Olympikus CORRIDA Voa 2 Masculino Adultos,261,62,32,,4.8,(509)
+MIZUNO,Mizuno Space 3 Masculino Adultos,299,98,33,33,4.7,(1674)
+MIZUNO,Tênis De Corrida Masculino Mizuno Wave Interceptor Rsp,329,99,33,,4.2,(6)

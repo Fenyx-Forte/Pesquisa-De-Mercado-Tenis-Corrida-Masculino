@@ -51,17 +51,20 @@ scrapy = "^2.11.2"
 
 [tool.taskipy.tasks]
 apagar_csv_ml = "rm ../dados/nao_processados/mercado_livre.csv"
+apagar_json_ml = "rm ../dados/nao_processados/mercado_livre.json"
 rodar_ml = "scrapy crawl mercadolivre -o ../dados/nao_processados/mercado_livre.csv"
+rodar_ml_json = "scrapy crawl mercadolivre -o ../dados/nao_processados/mercado_livre.json"
 mercado_livre = "task apagar_csv_ml && task rodar_ml"
+mercado_livre_json = "task apagar_json_ml && task rodar_ml_json"
 mercado_livre_interativo = "scrapy shell 'https://lista.mercadolivre.com.br/tenis-corrida-masculino'"
-run = "python app/main.py"
+run = "python src/main.py"
 test = "pytest"
 
 
 [tool.ruff]
 line-length = 80
 target-version = "py312"
-include = ["pyproject.toml", "app/**/*.py", "tests/**/*.py", "app/*.py", "tests/*.py"]
+include = ["pyproject.toml", "src/**/*.py", "tests/**/*.py", "src/*.py", "tests/*.py"]
 
 [tool.ruff.lint]
 ignore = ["D203", "E111", "E203", "F401"]
