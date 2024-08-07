@@ -16,6 +16,11 @@ jobs:
         - name: Install Poetry
           run: |
             curl -sSL https://install.python-poetry.org | python3 -
+            poetry config virtualenvs.in-project true
+
+        - name: Activate Poetry
+          run: |
+            poetry shell
 
         - name: Install dependencies
           run: |
@@ -23,16 +28,16 @@ jobs:
 
         - name: Format
           run: |
-            poetry run ruff format .
+            ruff format .
 
         - name: Linter
           run: |
-            poetry run ruff check .
+            ruff check .
 
         - name: Audit
           run: |
-            poetry run bandit -c pyproject.toml -r app/ tests/
+            bandit -c pyproject.toml -r app/ tests/
 
         # - name: Test with pytest
           # run: |
-            # poetry run pytest
+            # pytest
