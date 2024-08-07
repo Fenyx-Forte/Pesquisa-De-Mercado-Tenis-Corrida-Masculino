@@ -50,6 +50,10 @@ scrapy = "^2.11.2"
 
 
 [tool.taskipy.tasks]
+apagar_csv_ml = "rm ../dados/nao_processados/mercado_livre.csv"
+rodar_ml = "scrapy crawl mercadolivre -o ../dados/nao_processados/mercado_livre.csv"
+mercado_livre = "task apagar_csv_ml && task rodar_ml"
+mercado_livre_interativo = "scrapy shell 'https://lista.mercadolivre.com.br/tenis-corrida-masculino'"
 run = "python app/main.py"
 test = "pytest"
 
