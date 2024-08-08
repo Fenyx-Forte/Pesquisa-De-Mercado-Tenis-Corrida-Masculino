@@ -25,11 +25,11 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY src ./src
 
-COPY config ./config
+# COPY config ./config
 
-COPY dados ./dados
+# COPY dados ./dados
 
-COPY sql ./sql
+# COPY sql . sql
 
 EXPOSE 8501
 ENTRYPOINT ["poetry","run", "streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
