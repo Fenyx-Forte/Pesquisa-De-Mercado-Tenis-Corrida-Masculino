@@ -49,6 +49,10 @@ loguru = ">=0.7.2"
 scrapy = "^2.11.2"
 
 
+[tool.poetry.group.frontend.dependencies]
+streamlit = "^1.37.1"
+
+
 [tool.taskipy.tasks]
 apagar_csv_ml = "rm ../dados/nao_processados/mercado_livre.csv"
 apagar_json_ml = "rm ../dados/nao_processados/mercado_livre.json"
