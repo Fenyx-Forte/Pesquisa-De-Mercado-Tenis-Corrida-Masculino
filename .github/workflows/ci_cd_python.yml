@@ -19,7 +19,7 @@ jobs:
 
         - name: Install dependencies
           run: |
-            poetry install --no-interaction --no-root --without docs,jupyter,segredos,logging,webscraping,streamlit && rm -rf $POETRY_CACHE_DIR
+            poetry install --no-interaction --no-root --without docs,jupyter,segredos,webscraping,frontend && rm -rf $POETRY_CACHE_DIR
 
         - name: Format
           run: |
