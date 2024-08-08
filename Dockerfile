@@ -31,5 +31,7 @@ COPY src ./src
 
 # COPY sql . sql
 
+WORKDIR /src
+
 EXPOSE 8501
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
