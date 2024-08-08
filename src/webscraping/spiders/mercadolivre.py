@@ -14,7 +14,7 @@ class MercadoLivreSpider(scrapy.Spider):
         produtos = response.css(produtos_seletor)
 
         marca_seletor = "span.ui-search-item__brand-discoverability.ui-search-item__group__element::text"
-        nome_produto_seletor = "h2.ui-search-item__title::text"
+        produto_seletor = "h2.ui-search-item__title::text"
         nota_avaliacao_seletor = "span.ui-search-reviews__rating-number::text"
         num_avaliacoes_seletor = "span.ui-search-reviews__amount::text"
 
@@ -28,24 +28,24 @@ class MercadoLivreSpider(scrapy.Spider):
             preco_velho_reais = (
                 precos_reais[0] if len(precos_reais) > 0 else None
             )
-            preco_novo_reais = (
+            preco_atual_reais = (
                 precos_reais[1] if len(precos_reais) > 1 else None
             )
 
             preco_velho_centavos = (
                 precos_centavos[0] if len(precos_centavos) > 0 else None
             )
-            preco_novo_centavos = (
+            preco_atual_centavos = (
                 precos_centavos[1] if len(precos_centavos) > 1 else None
             )
 
             yield {
                 "marca": produto.css(marca_seletor).get(),
-                "nome": produto.css(nome_produto_seletor).get(),
+                "produto": produto.css(produto_seletor).get(),
                 "preco_velho_reais": preco_velho_reais,
                 "preco_velho_centavos": preco_velho_centavos,
-                "preco_novo_reais": preco_novo_reais,
-                "preco_novo_centavos": preco_novo_centavos,
+                "preco_atual_reais": preco_atual_reais,
+                "preco_atual_centavos": preco_atual_centavos,
                 "nota_avaliacao": produto.css(nota_avaliacao_seletor).get(),
                 "num_avaliacoes": produto.css(num_avaliacoes_seletor).get(),
             }
