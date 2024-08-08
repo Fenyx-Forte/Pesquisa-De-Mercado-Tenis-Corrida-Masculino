@@ -1,5 +1,5 @@
 # The builder image, used to build the virtual environment
-FROM python:3.12-buster as builder
+FROM python:3.12-bookworm as builder
 
 RUN curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.8.3 python3 -
 
@@ -16,7 +16,7 @@ RUN touch README.md
 RUN poetry install --without docs,jupyter,dev,testes,webscraping --no-root && rm -rf $POETRY_CACHE_DIR
 
 # The runtime image, used to just run the code provided its virtual environment
-FROM python:3.12-slim-buster as runtime
+FROM python:3.12-slim-bookworm as runtime
 
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
