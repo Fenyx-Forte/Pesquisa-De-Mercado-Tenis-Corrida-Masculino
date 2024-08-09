@@ -31,6 +31,8 @@ COPY dados ./dados
 
 COPY sql ./sql
 
+COPY pyproject.toml .
+
 WORKDIR /src
 
 EXPOSE 8501
