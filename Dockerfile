@@ -25,11 +25,11 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY src ./src
 
-# COPY config ./config
+COPY config ./config
 
-# COPY dados ./dados
+COPY dados ./dados
 
-# COPY sql . sql
+COPY sql ./sql
 
 WORKDIR /src
 
