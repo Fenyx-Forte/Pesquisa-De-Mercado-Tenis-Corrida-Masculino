@@ -1,5 +1,5 @@
 import streamlit as st
 
 
-def dash():
+def dashboard():
     st.write("Hello World")
