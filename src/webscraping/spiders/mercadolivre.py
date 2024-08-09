@@ -71,9 +71,9 @@ def retorna_num_avaliacoes(produto) -> str:
 
 
 def retorna_preco_velho_reais(produto) -> str:
-    caixa_precos = produto.css(seletor_caixa_precos()).get()
+    caixa_precos = produto.css(seletor_caixa_precos())
 
-    caixa_preco_velho = caixa_precos.css(seletor_caixa_preco_velho()).get()
+    caixa_preco_velho = caixa_precos.css(seletor_caixa_preco_velho())
 
     preco_velho_reais = caixa_preco_velho.css(seletor_preco_reais()).get()
 
@@ -81,9 +81,9 @@ def retorna_preco_velho_reais(produto) -> str:
 
 
 def retorna_preco_velho_centavos(produto) -> str:
-    caixa_precos = produto.css(seletor_caixa_precos()).get()
+    caixa_precos = produto.css(seletor_caixa_precos())
 
-    caixa_preco_velho = caixa_precos.css(seletor_caixa_preco_velho()).get()
+    caixa_preco_velho = caixa_precos.css(seletor_caixa_preco_velho())
 
     preco_velho_centavos = caixa_preco_velho.css(seletor_preco_centavos()).get()
 
@@ -91,9 +91,9 @@ def retorna_preco_velho_centavos(produto) -> str:
 
 
 def retorna_preco_atual_reais(produto) -> str:
-    caixa_precos = produto.css(seletor_caixa_precos()).get()
+    caixa_precos = produto.css(seletor_caixa_precos())
 
-    caixa_preco_atual = caixa_precos.css(seletor_caixa_preco_atual()).get()
+    caixa_preco_atual = caixa_precos.css(seletor_caixa_preco_atual())
 
     preco_atual_reais = caixa_preco_atual.css(seletor_preco_reais()).get()
 
@@ -101,9 +101,9 @@ def retorna_preco_atual_reais(produto) -> str:
 
 
 def retorna_preco_atual_centavos(produto) -> str:
-    caixa_precos = produto.css(seletor_caixa_precos()).get()
+    caixa_precos = produto.css(seletor_caixa_precos())
 
-    caixa_preco_atual = caixa_precos.css(seletor_caixa_preco_atual()).get()
+    caixa_preco_atual = caixa_precos.css(seletor_caixa_preco_atual())
 
     preco_atual_centavos = caixa_preco_atual.css(seletor_preco_centavos()).get()
 
@@ -131,15 +131,15 @@ class MercadoLivreSpider(scrapy.Spider):
         produtos = response.css(seletor_caixa_produtos())
 
         for produto in produtos:
-            self.ordem_produtos += 1
+            self.ordem_produto += 1
 
             yield {
                 "marca": retorna_marca(produto),
                 "produto": retorna_nome_produto(produto),
                 "preco_velho_reais": retorna_preco_velho_reais(produto),
                 "preco_velho_centavos": retorna_preco_velho_centavos(produto),
-                "preco_atual_reais": retorna_preco_atual_reais(),
-                "preco_atual_centavos": retorna_preco_atual_centavos(),
+                "preco_atual_reais": retorna_preco_atual_reais(produto),
+                "preco_atual_centavos": retorna_preco_atual_centavos(produto),
                 "nota_avaliacao": retorna_nota_avaliacao(produto),
                 "num_avaliacoes": retorna_num_avaliacoes(produto),
                 "_fonte": self.fonte,
