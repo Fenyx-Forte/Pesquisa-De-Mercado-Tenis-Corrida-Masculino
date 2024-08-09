@@ -14,6 +14,7 @@ polars = {version = ">=1.4.0", extras = ["pyarrow"]}
 fastexcel = ">=0.11.5"
 pandera = {version = ">=0.20.3", extras = ["polars"]}
 duckdb = ">=1.0.0"
+pandas = ">=2.2.2"
 
 
 [tool.poetry.group.docs.dependencies]
