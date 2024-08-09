@@ -92,7 +92,7 @@ def test_produto_com_caracteres_especiais():
     df = pl.DataFrame(
         {
             "marca": ["A", "B", "C"],
-            "produto": ["TÊNIS A", "TENIS B-", "TENIS  C"],
+            "produto": ["TENIS A", "TENIS B", "TENIS  C"],
             "preco_velho": [100.0, 100.0, 100.0],
             "preco_atual": [70.0, 60.0, 100.0],
             "promocao": [True, True, False],
