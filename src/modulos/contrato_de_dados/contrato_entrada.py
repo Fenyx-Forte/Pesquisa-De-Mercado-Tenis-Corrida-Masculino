@@ -16,6 +16,7 @@ class MercadoLivreEntrada(pa.DataFrameModel):
     nota_avaliacao: pl.String = campo_string_padrao()
     num_avaliacoes: pl.String = campo_string_padrao()
     fonte: pl.String = pa.Field(alias="_fonte")
+    site: pl.String = pa.Field(alias="_site")
     data_coleta: pl.String = pa.Field(alias="_data_coleta")
     pagina: pl.String = pa.Field(alias="_pagina")
     ordem: pl.String = pa.Field(alias="_ordem")
