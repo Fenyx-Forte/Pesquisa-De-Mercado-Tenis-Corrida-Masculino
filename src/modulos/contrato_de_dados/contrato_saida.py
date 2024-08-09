@@ -1,5 +1,6 @@
 import pandera.polars as pa
 import polars as pl
+from modulos.transformacao import mercado_livre
 
 
 class MercadoLivreSaida(pa.DataFrameModel):
@@ -26,35 +27,13 @@ class MercadoLivreSaida(pa.DataFrameModel):
     @pa.check("marca")
     def checa_marca(cls, data: pa.PolarsData) -> pl.LazyFrame:
         return data.lazyframe.select(
-            pl.col(data.key)
-            == pl.col(data.key)
-            .str.to_uppercase()
-            .str.replace_all(r"[ÁÀÂÃÄÅ]", "A")
-            .str.replace_all(r"[ÉÈÊË]", "E")
-            .str.replace_all(r"[ÍÌÎÏ]", "I")
-            .str.replace_all(r"[ÓÒÔÕÖ]", "O")
-            .str.replace_all(r"[ÚÙÛÜ]", "U")
-            .str.replace_all("Ç", "C", literal=True)
-            .str.replace_all(r"[^A-Z0-9 ]", " ")
-            .str.replace_all(r"\s+", " ")
-            .str.strip_chars()
+            pl.col(data.key) == mercado_livre.tratar_coluna_string(data.key)
         )
 
     @pa.check("produto")
     def checa_produto(cls, data: pa.PolarsData) -> pl.LazyFrame:
         return data.lazyframe.select(
-            pl.col(data.key)
-            == pl.col(data.key)
-            .str.to_uppercase()
-            .str.replace_all(r"[ÁÀÂÃÄÅ]", "A")
-            .str.replace_all(r"[ÉÈÊË]", "E")
-            .str.replace_all(r"[ÍÌÎÏ]", "I")
-            .str.replace_all(r"[ÓÒÔÕÖ]", "O")
-            .str.replace_all(r"[ÚÙÛÜ]", "U")
-            .str.replace_all("Ç", "C", literal=True)
-            .str.replace_all(r"[^A-Z0-9 ]", " ")
-            .str.replace_all(r"\s+", " ")
-            .str.strip_chars()
+            pl.col(data.key) == mercado_livre.tratar_coluna_string(data.key)
         )
 
     @pa.check("_fonte")
