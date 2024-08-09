@@ -31,9 +31,7 @@ COPY dados ./dados
 
 COPY sql ./sql
 
-COPY pyproject.toml .
-
 WORKDIR /src
 
 EXPOSE 8501
-ENTRYPOINT ["task", "run-streamlit"]
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
