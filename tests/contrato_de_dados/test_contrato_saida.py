@@ -1,3 +1,9 @@
+import os
+import sys
+
+# Adiciona a pasta 'src' ao sys.path
+sys.path.append(os.path.abspath(os.path.join("./", "src")))
+
 from datetime import datetime
 
 import pandera.polars as pa
