@@ -18,8 +18,8 @@ class MercadoLivreEntrada(pa.DataFrameModel):
     fonte: pl.String = pa.Field(alias="_fonte")
     site: pl.String = pa.Field(alias="_site")
     data_coleta: pl.String = pa.Field(alias="_data_coleta")
-    pagina: pl.String = pa.Field(alias="_pagina")
-    ordem: pl.String = pa.Field(alias="_ordem")
+    pagina: pl.Int64 = pa.Field(alias="_pagina")
+    ordem: pl.Int64 = pa.Field(alias="_ordem")
 
     class Config:
         strict = True

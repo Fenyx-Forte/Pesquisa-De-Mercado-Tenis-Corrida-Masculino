@@ -11,6 +11,7 @@ class MercadoLivreSaida(pa.DataFrameModel):
     percentual_promocao: pl.Float32 = pa.Field(ge=0, le=100)
     nota_avaliacao: pl.Float32 = pa.Field(ge=0, le=5)
     num_avaliacoes: pl.Int32 = pa.Field(ge=0)
+
     fonte: pl.Categorical = pa.Field(alias="_fonte")
     site: pl.Categorical = pa.Field(alias="_site")
     data_coleta: pl.Datetime = pa.Field(alias="_data_coleta")
@@ -35,7 +36,7 @@ class MercadoLivreSaida(pa.DataFrameModel):
             .str.replace_all(r"[ÚÙÛÜ]", "U")
             .str.replace_all("Ç", "C", literal=True)
             .str.replace_all(r"[^A-Z0-9 ]", " ")
-            .str.replace_all("  ", " ", literal=True)
+            .str.replace_all(r"\s+", " ")
             .str.strip_chars()
         )
 
@@ -52,7 +53,7 @@ class MercadoLivreSaida(pa.DataFrameModel):
             .str.replace_all(r"[ÚÙÛÜ]", "U")
             .str.replace_all("Ç", "C", literal=True)
             .str.replace_all(r"[^A-Z0-9 ]", " ")
-            .str.replace_all("  ", " ", literal=True)
+            .str.replace_all(r"\s+", " ")
             .str.strip_chars()
         )
 
