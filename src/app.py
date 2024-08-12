@@ -1,4 +1,4 @@
-from dashboard import streamlit_dash
+from dashboard import dash_dash
 from modulos.pipelines import pipeline_mercado_livre
 from modulos.uteis import carregar_env, configuracao_loguru, configuracao_polars
 
@@ -17,5 +17,5 @@ def pipeline():
     pipeline_mercado_livre.pipeline(caminho_json, caminho_parquet)
 
 
-def dashboard():
-    streamlit_dash.dashboard()
+def dash_dashboard():
+    dash_dash.dashboard()

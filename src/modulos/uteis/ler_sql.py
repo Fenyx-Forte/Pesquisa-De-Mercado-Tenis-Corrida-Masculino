@@ -1,5 +1,5 @@
 import duckdb
-import pandas as pd
+import polars as pl
 
 
 def ler_conteudo_query(caminho_query: str) -> str:
@@ -10,9 +10,7 @@ def ler_conteudo_query(caminho_query: str) -> str:
     return query
 
 
-def ler_query(query_path: str) -> pd.DataFrame:
+def ler_query(query_path: str) -> pl.DataFrame:
     query_content = ler_conteudo_query(query_path)
 
-    pl_df = duckdb.sql(query_content).df()
-
-    return pl_df
+    return duckdb.sql(query_content).pl()
