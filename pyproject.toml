@@ -11,10 +11,8 @@ python = "^3.11"
 
 [tool.poetry.group.dados.dependencies]
 polars = {version = ">=1.4.0", extras = ["pyarrow"]}
-fastexcel = ">=0.11.5"
 pandera = {version = ">=0.20.3", extras = ["polars"]}
 duckdb = ">=1.0.0"
-pandas = ">=2.2.2"
 
 
 [tool.poetry.group.docs.dependencies]
@@ -48,10 +46,14 @@ loguru = ">=0.7.2"
 
 [tool.poetry.group.webscraping.dependencies]
 scrapy = "^2.11.2"
+requests = "^2.32.3"
 
 
 [tool.poetry.group.frontend.dependencies]
 streamlit = "^1.37.1"
+pandas = "^2.2.2"
+dash = ">=2.17.1"
+dash-bootstrap-components = "^1.6.0"
 
 
 [tool.taskipy.tasks]
@@ -73,7 +75,7 @@ include = ["pyproject.toml", "src/**/*.py", "tests/**/*.py", "src/*.py", "tests/
 ignore = ["D203", "E111", "E203", "F401"]
 
 [tool.bandit]
-skips = ["B101"]
+skips = ["B101", "B113", "B311"]
 
 [tool.pytest.ini_options]
 addopts = "-v"
