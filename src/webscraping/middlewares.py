@@ -2,6 +2,7 @@ from random import randint
 from urllib.parse import urlencode
 
 import requests
+from scrapy import Request
 
 
 class ScrapeOpsFakeBrowserHeadersMiddleware:
@@ -46,7 +47,7 @@ class ScrapeOpsFakeBrowserHeadersMiddleware:
         for key, val in random_header.items():
             request.headers[key] = val
 
-        request.header["accept-language"] = "pt-BR,pt;q=0.9,en;q=0.8"
+        request.headers["accept-language"] = "pt-BR,pt;q=0.9,en;q=0.8"
 
 
 class ScrapeOpsProxyMiddleware:
@@ -92,7 +93,7 @@ class ScrapeOpsProxyMiddleware:
 
         scrapeops_url = self._get_scrapeops_url(request)
         new_request = request.replace(
-            cls=request, url=scrapeops_url, meta=request.meta
+            cls=Request, url=scrapeops_url, meta=request.meta
         )
         return new_request
 
