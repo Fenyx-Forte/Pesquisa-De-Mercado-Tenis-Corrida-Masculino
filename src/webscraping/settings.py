@@ -37,7 +37,7 @@ DOWNLOADER_MIDDLEWARES = {
     "scrapy.downloadermiddlewares.retry.RetryMiddleware": None,
 }
 
-DOWNLOAD_TIMEOUT = 120
+DOWNLOAD_TIMEOUT = 121
 
 # Monitoring
 EXTENSIONS = {
@@ -45,12 +45,12 @@ EXTENSIONS = {
 }
 
 FEEDS = {
-    "../dados/nao_processados/mercado_livre_1.csv": {
+    "../dados/nao_processados/mercado_livre_2.csv": {
         "format": "csv",
         "overwrite": True,
         "encoding": "utf8",
     },
-    "../dados/nao_processados/mercado_livre_1.json": {
+    "../dados/nao_processados/mercado_livre_2.json": {
         "format": "json",
         "overwrite": True,
         "encoding": "utf8",
