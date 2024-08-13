@@ -33,9 +33,16 @@ SCRAPEOPS_PROXY_SETTINGS = {"country": "br"}
 DOWNLOADER_MIDDLEWARES = {
     "webscraping.middlewares.ScrapeOpsFakeBrowserHeadersMiddleware": 400,
     "webscraping.middlewares.ScrapeOpsProxyMiddleware": 725,
+    "scrapeops_scrapy.middleware.retry.RetryMiddleware": 550,
+    "scrapy.downloadermiddlewares.retry.RetryMiddleware": None,
 }
 
 DOWNLOAD_TIMEOUT = 120
+
+# Monitoring
+EXTENSIONS = {
+    "scrapeops_scrapy.extension.ScrapeOpsMonitor": 500,
+}
 
 FEEDS = {
     "../dados/nao_processados/mercado_livre_1.csv": {

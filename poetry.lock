@@ -1019,6 +1019,17 @@ files = [
 ]
 
 [[package]]
+name = "json5"
+version = "0.9.25"
+description = "A Python implementation of the JSON5 data format."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "json5-0.9.25-py3-none-any.whl", hash = "sha256:34ed7d834b1341a86987ed52f3f76cd8ee184394906b6e22a1e0deb9ab294e8f"},
+    {file = "json5-0.9.25.tar.gz", hash = "sha256:548e41b9be043f9426776f05df8635a00fe06104ea51ed24b67f908856e151ae"},
+]
+
+[[package]]
 name = "jsonschema"
 version = "4.23.0"
 description = "An implementation of JSON Schema validation for Python"
@@ -3071,6 +3082,23 @@ files = [
 ]
 
 [[package]]
+name = "scrapeops-scrapy"
+version = "0.5.6"
+description = "Scrapeops Scrapy SDK, is a monitoring tool for your Scrapy spiders."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "scrapeops_scrapy-0.5.6.tar.gz", hash = "sha256:42a78c2e48c395895a2145d57ee912dbdf14c675738187fa08c191fb637f6a2a"},
+]
+
+[package.dependencies]
+itemadapter = ">=0.8.0"
+json5 = ">=0.9.13"
+requests = ">=2.32.0"
+tld = ">=0.13"
+urllib3 = ">=1.26.14"
+
+[[package]]
 name = "scrapy"
 version = "2.11.2"
 description = "A high-level Web Crawling and Web Scraping framework"
@@ -3263,6 +3291,17 @@ files = [
 [package.extras]
 doc = ["reno", "sphinx"]
 test = ["pytest", "tornado (>=4.5)", "typeguard"]
+
+[[package]]
+name = "tld"
+version = "0.13"
+description = "Extract the top-level domain (TLD) from the URL given."
+optional = false
+python-versions = ">=3.7, <4"
+files = [
+    {file = "tld-0.13-py2.py3-none-any.whl", hash = "sha256:f75b2be080f767ed17c2338a339eaa4fab5792586319ca819119da252f9f3749"},
+    {file = "tld-0.13.tar.gz", hash = "sha256:93dde5e1c04bdf1844976eae440706379d21f4ab235b73c05d7483e074fb5629"},
+]
 
 [[package]]
 name = "tldextract"
@@ -3754,4 +3793,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f8e91a7c18b93a055f841cff31d864d858a06e8c5f9fc1b24b39d83e2fccf1f2"
+content-hash = "1bdc503c14c01a2bfdbd78cede60bca4610bf6c8731a1bec2d7149ac63c6aa0b"

@@ -47,6 +47,7 @@ loguru = ">=0.7.2"
 [tool.poetry.group.webscraping.dependencies]
 scrapy = "^2.11.2"
 requests = "^2.32.3"
+scrapeops-scrapy = "^0.5.6"
 
 
 [tool.poetry.group.frontend.dependencies]
