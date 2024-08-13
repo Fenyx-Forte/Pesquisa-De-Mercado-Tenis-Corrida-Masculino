@@ -33,7 +33,6 @@ python-dotenv = "^1.0.1"
 pre-commit = ">=3.8.0"
 ruff = ">=0.5.5"
 bandit = ">=1.7.9"
-taskipy = "^1.13.0"
 
 
 [tool.poetry.group.testes.dependencies]
@@ -56,6 +55,10 @@ pandas = "^2.2.2"
 dash = ">=2.17.1"
 dash-bootstrap-components = "^1.6.0"
 
+
+
+[tool.poetry.group.tasks.dependencies]
+taskipy = "^1.13.0"
 
 [tool.taskipy.tasks]
 apagar_ml = "rm ../dados/nao_processados/mercado_livre.json"
