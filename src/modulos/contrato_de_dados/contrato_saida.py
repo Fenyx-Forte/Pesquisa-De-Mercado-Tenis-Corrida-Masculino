@@ -1,6 +1,6 @@
 import pandera.polars as pa
 import polars as pl
-from modulos.transformacao import mercado_livre
+from etl import transformacao
 
 
 class MercadoLivreSaida(pa.DataFrameModel):
@@ -27,13 +27,13 @@ class MercadoLivreSaida(pa.DataFrameModel):
     @pa.check("marca")
     def checa_marca(cls, data: pa.PolarsData) -> pl.LazyFrame:
         return data.lazyframe.select(
-            pl.col(data.key) == mercado_livre.tratar_coluna_string(data.key)
+            pl.col(data.key) == transformacao.tratar_coluna_string(data.key)
         )
 
     @pa.check("produto")
     def checa_produto(cls, data: pa.PolarsData) -> pl.LazyFrame:
         return data.lazyframe.select(
-            pl.col(data.key) == mercado_livre.tratar_coluna_string(data.key)
+            pl.col(data.key) == transformacao.tratar_coluna_string(data.key)
         )
 
     @pa.check("_fonte")
