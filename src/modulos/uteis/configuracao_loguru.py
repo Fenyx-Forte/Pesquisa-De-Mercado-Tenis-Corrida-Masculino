@@ -1,7 +1,9 @@
 import sys
 
+from loguru import logger
 
-def configuracao_loguru() -> dict:
+
+def configuracao_loguru() -> None:
     configuracao = {
         "handlers": [
             {
@@ -18,7 +20,7 @@ def configuracao_loguru() -> dict:
                 "enqueue": True,
             },
             {
-                "sink": "logs/info.log",
+                "sink": "../logs/info.log",
                 "rotation": "1 MB",
                 "delay": True,
                 "level": "INFO",
@@ -36,4 +38,4 @@ def configuracao_loguru() -> dict:
         "extra": {"user": "someone"},
     }
 
-    return configuracao
+    logger.configure(**configuracao)
