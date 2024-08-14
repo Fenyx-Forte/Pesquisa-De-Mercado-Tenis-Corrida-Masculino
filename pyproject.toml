@@ -61,9 +61,6 @@ dash-bootstrap-components = "^1.6.0"
 taskipy = "^1.13.0"
 
 [tool.taskipy.tasks]
-apagar_ml = "rm ../dados/nao_processados/mercado_livre.json"
-rodar_ml = "scrapy crawl mercadolivre -o ../dados/nao_processados/mercado_livre.json"
-mercado_livre = "task apagar_ml && task rodar_ml"
 mercado_livre_interativo = "scrapy shell 'https://lista.mercadolivre.com.br/tenis-corrida-masculino'"
 run-streamlit = "streamlit run main.py --server.port=8501 --server.address=0.0.0.0"
 run = "python etl_main.py"
