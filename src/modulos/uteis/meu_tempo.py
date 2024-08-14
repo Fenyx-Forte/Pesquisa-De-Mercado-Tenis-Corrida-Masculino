@@ -1,20 +1,24 @@
-import datetime
+from datetime import datetime, timedelta, timezone
 
 
-def fuso_horario_brasilia() -> datetime.timezone:
-    return datetime.timezone(datetime.timedelta(hours=-3), "BRT")
+def formatacao_tempo_completo() -> str:
+    return "%d-%m-%Y %H:%M:%S"
 
 
-def data_agora() -> datetime.datetime:
-    return datetime.datetime.now(fuso_horario_brasilia)
+def fuso_horario_brasilia() -> timezone:
+    return timezone(timedelta(hours=-3), "BRT")
+
+
+def data_agora() -> datetime:
+    return datetime.now(fuso_horario_brasilia())
 
 
 def data_agora_string() -> str:
-    return data_agora().strftime("%d/%m/%Y %H:%M")
+    return data_agora().strftime(formatacao_tempo_completo())
 
 
 def data_agora_simplificada() -> str:
-    return data_agora().strftime("%d/%m/%Y")
+    return data_agora().strftime("%d-%m-%Y")
 
 
 def data_agora_simplificada_com_underline() -> str:

@@ -128,7 +128,7 @@ class MercadoLivreSpider(scrapy.Spider):
     ordem_produto = 0
 
     def parse(self, response):
-        data_coleta = meu_tempo.data_agora()
+        data_coleta = meu_tempo.data_agora_string()
 
         produtos = response.css(seletor_caixa_produtos())
 

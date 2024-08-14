@@ -1,4 +1,5 @@
 import polars as pl
+from modulos.uteis import meu_tempo
 
 
 def tratar_coluna_string(nome_coluna: str) -> pl.Expr:
@@ -79,7 +80,9 @@ def tratar_site() -> pl.Expr:
 
 
 def tratar_data_coleta() -> pl.Expr:
-    coluna_tratada = pl.col("_data_coleta").str.to_datetime("%d/%m/%Y %H:%M")
+    coluna_tratada = pl.col("_data_coleta").str.to_datetime(
+        format=meu_tempo.formatacao_tempo_completo()
+    )
 
     return coluna_tratada
 
