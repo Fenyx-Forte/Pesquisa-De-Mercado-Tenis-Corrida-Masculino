@@ -1,6 +1,7 @@
 import polars as pl
 from etl import extracao, filtros, salvar, transformacao, validar_dados
 from loguru import logger
+from modulos.uteis import meu_tempo
 
 
 def tratar_colunas_iniciais(lf: pl.LazyFrame) -> pl.LazyFrame:
@@ -58,8 +59,12 @@ def adicionar_promocao_e_tratar_preco_velho(
     )
 
 
-def pipeline(caminho_json: str, caminho_parquet: str) -> None:
+def pipeline() -> None:
     logger.info("Inicio pipeline")
+
+    caminho_json = f"../dados/nao_processados/mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}.json"
+
+    caminho_parquet = f"../dados/processados/mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}.parquet"
 
     df = extracao.extrair_dados_json(caminho_json)
 
