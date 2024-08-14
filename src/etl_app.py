@@ -11,6 +11,4 @@ def configurar_polars() -> None:
 
 
 def pipeline() -> None:
-    caminho_json = "../dados/nao_processados/mercado_livre.json"
-    caminho_parquet = "../dados/processados/mercado_livre.parquet"
-    pipeline_mercado_livre.pipeline(caminho_json, caminho_parquet)
+    pipeline_mercado_livre.pipeline()
