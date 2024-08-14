@@ -1,6 +1,6 @@
 import os
 
-from modulos.uteis import carregar_env
+from modulos.uteis import carregar_env, meu_tempo
 
 carregar_env.carregar_env()
 
@@ -45,12 +45,7 @@ EXTENSIONS = {
 }
 
 FEEDS = {
-    "../dados/nao_processados/mercado_livre_2.csv": {
-        "format": "csv",
-        "overwrite": True,
-        "encoding": "utf8",
-    },
-    "../dados/nao_processados/mercado_livre_2.json": {
+    f"../dados/nao_processados/mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}.json": {
         "format": "json",
         "overwrite": True,
         "encoding": "utf8",
