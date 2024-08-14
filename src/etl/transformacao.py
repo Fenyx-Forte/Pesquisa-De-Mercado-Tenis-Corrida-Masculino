@@ -79,7 +79,7 @@ def tratar_site() -> pl.Expr:
 
 
 def tratar_data_coleta() -> pl.Expr:
-    coluna_tratada = pl.col("_data_coleta").str.to_datetime()
+    coluna_tratada = pl.col("_data_coleta").str.to_datetime("%d/%m/%Y %H:%M")
 
     return coluna_tratada
 
