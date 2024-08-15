@@ -62,7 +62,7 @@ with fase_1 as (
     preco_atual_reais is not null
 )
 
-select
+select distinct
     marca
   , produto
   , coalesce(preco_velho, preco_atual, preco_velho) as preco_velho
