@@ -1,4 +1,4 @@
-from etl import pipeline_mercado_livre
+from etl import etl_duckdb, pipeline_mercado_livre
 from modulos.uteis import carregar_env, configuracao_loguru, configuracao_polars
 
 
@@ -12,3 +12,7 @@ def configurar_polars() -> None:
 
 def pipeline() -> None:
     pipeline_mercado_livre.pipeline()
+
+
+def pipeline_duckdb() -> None:
+    etl_duckdb.pipeline()
