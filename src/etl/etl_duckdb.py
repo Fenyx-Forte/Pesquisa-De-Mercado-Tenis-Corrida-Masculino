@@ -58,17 +58,17 @@ def pipeline() -> None:
 
     df.show()
 
-    cast_dict_saida = {
-        "preco_velho": pl.Float32,
-        "preco_atual": pl.Float32,
-        "percentual_promocao": pl.Float32,
-        "nota_avaliacao": pl.Float32,
-        "num_avaliacoes": pl.Int32,
-        "_pagina": pl.Int8,
-        "_ordem": pl.Int8,
-    }
-
-    validar_dados.validar_dados_saida(df.pl().cast(cast_dict_saida))
+    validar_dados.validar_dados_saida(
+        df.pl().with_columns(
+            pl.col("preco_velho").cast(pl.Float32),
+            pl.col("preco_atual").cast(pl.Float32),
+            pl.col("percentual_promocao").cast(pl.Float32),
+            pl.col("nota_avaliacao").cast(pl.Float32),
+            pl.col("num_avaliacoes").cast(pl.Int32),
+            pl.col("_pagina").cast(pl.Int8),
+            pl.col("_ordem").cast(pl.Int8),
+        )
+    )
 
     salvar_dados(df, caminho_parquet)
 

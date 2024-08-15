@@ -1,3 +1,5 @@
+import math
+
 import pandera.polars as pa
 import polars as pl
 from etl import transformacao
@@ -66,10 +68,15 @@ class MercadoLivreSaida(pa.DataFrameModel):
     @pa.dataframe_check
     def checa_percentual_promocao(cls, data: pa.PolarsData) -> pl.LazyFrame:
         return data.lazyframe.select(
-            pl.col("percentual_promocao")
-            == 100
-            * (pl.col("preco_velho") - pl.col("preco_atual"))
-            / pl.col("preco_velho")
+            abs(
+                pl.col("percentual_promocao")
+                - (
+                    100
+                    * (pl.col("preco_velho") - pl.col("preco_atual"))
+                    / pl.col("preco_velho")
+                )
+            )
+            <= 0.01
         )
 
     @pa.dataframe_check
