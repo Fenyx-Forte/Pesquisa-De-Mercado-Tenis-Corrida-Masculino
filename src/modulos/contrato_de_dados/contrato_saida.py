@@ -13,8 +13,8 @@ class MercadoLivreSaida(pa.DataFrameModel):
     nota_avaliacao: pl.Float32 = pa.Field(ge=0, le=5)
     num_avaliacoes: pl.Int32 = pa.Field(ge=0)
 
-    fonte: pl.Categorical = pa.Field(alias="_fonte")
-    site: pl.Categorical = pa.Field(alias="_site")
+    fonte: pl.String = pa.Field(alias="_fonte")
+    site: pl.String = pa.Field(alias="_site")
     data_coleta: pl.Datetime = pa.Field(alias="_data_coleta")
     pagina: pl.Int8 = pa.Field(ge=1, le=10, alias="_pagina")
     ordem: pl.Int8 = pa.Field(ge=1, le=54, alias="_ordem")
