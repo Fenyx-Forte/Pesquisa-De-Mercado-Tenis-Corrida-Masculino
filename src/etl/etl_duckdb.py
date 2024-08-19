@@ -1,75 +1,74 @@
-import duckdb
+import os
+
 import polars as pl
-from etl import validar_dados
+from etl import (
+    duckdb_local,
+    extracao_sql,
+    salvar_sql,
+    transformacao_sql,
+    validar_dados,
+)
 from loguru import logger
 from modulos.uteis import ler_sql, meu_tempo
 
 
-def extracao_dados(caminho_json: str) -> duckdb.DuckDBPyRelation:
-    logger.info("Extraindo dados...")
-
-    df = duckdb.read_json(caminho_json)
-
-    logger.info("Dados extraidos")
-
-    return df
-
-
-def transformacao(
-    query: str, df: duckdb.DuckDBPyRelation
-) -> duckdb.DuckDBPyRelation:
-    logger.info("Realizando transformacoes...")
-
-    df = duckdb.sql(query)
-
-    logger.info("Transformacoes realizadas")
-
-    return df
-
-
-def salvar_dados(df: duckdb.DuckDBPyRelation, caminho_parquet: str) -> None:
-    logger.info("Salvando dados...")
-
-    df.write_parquet(caminho_parquet)
-
-    logger.info("Dados salvos")
-
-
 def pipeline() -> None:
-    logger.info("Inicio pipeline")
+    # Extracao
+    horario = meu_tempo.data_agora_string()
 
-    caminho_json = f"../dados/nao_processados/mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}.json"
+    nome_arquivo = (
+        f"mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}"
+    )
 
-    caminho_parquet = f"../dados/processados/mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}.parquet"
+    caminho_json = f"../dados/nao_processados/{nome_arquivo}.json"
 
-    caminho_query = "../sql/queries/tratamento_mercado_livre.sql"
+    # Verificacao
+    arquivo_ja_foi_salvo = duckdb_local.verifica_se_arquivo_ja_foi_salvo(
+        nome_arquivo
+    )
 
-    df = extracao_dados(caminho_json)
+    if arquivo_ja_foi_salvo:
+        logger.info("Arquivo ja foi salvo no banco de dados!")
+        return None
 
+    df = extracao_sql.extracao_json(caminho_json)
+
+    # Validacao
     cast_dict_entrada = {
         "_data_coleta": pl.String,
     }
 
     validar_dados.validar_dados_entrada(df.pl().cast(cast_dict_entrada))
 
+    # Transformacao
+    caminho_query = "../sql/queries/tratamento_mercado_livre.sql"
+
     query = ler_sql.ler_conteudo_query(caminho_query)
 
-    df = transformacao(query, df)
+    df = transformacao_sql.transformacao(query, df)
 
-    df.show()
+    # Validacao
+    cast_dict_saida = {
+        "preco_velho": pl.Float32,
+        "preco_atual": pl.Float32,
+        "percentual_promocao": pl.Float32,
+        "nota_avaliacao": pl.Float32,
+        "num_avaliacoes": pl.Int32,
+        "_pagina": pl.Int8,
+        "_ordem": pl.Int8,
+    }
 
-    validar_dados.validar_dados_saida(
-        df.pl().with_columns(
-            pl.col("preco_velho").cast(pl.Float32),
-            pl.col("preco_atual").cast(pl.Float32),
-            pl.col("percentual_promocao").cast(pl.Float32),
-            pl.col("nota_avaliacao").cast(pl.Float32),
-            pl.col("num_avaliacoes").cast(pl.Int32),
-            pl.col("_pagina").cast(pl.Int8),
-            pl.col("_ordem").cast(pl.Int8),
-        )
+    validar_dados.validar_dados_saida(df.pl().cast(cast_dict_saida))
+
+    # Salvar
+    query_conexao = f"""
+        INSTALL postgres;
+        LOAD postgres;
+        ATTACH '{os.getenv("DATABASE_URL")}' AS db (TYPE POSTGRES);
+    """
+
+    query_insercao = ler_sql.ler_conteudo_query("../sql/dml/inserir_dados.sql")
+
+    salvar_sql.salvar_dados(
+        df, query_conexao, query_insercao, nome_arquivo, horario
     )
-
-    salvar_dados(df, caminho_parquet)
-
-    logger.info("Fim pipeline")
