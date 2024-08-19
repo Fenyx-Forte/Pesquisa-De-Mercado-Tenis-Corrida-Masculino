@@ -28,7 +28,7 @@ as cast(
         when col_preco_reais is not null and col_preco_centavos is not null
           then concat(replace(col_preco_reais, '.', ''), '.', col_preco_centavos)
         else
-          col_preco_reais
+          replace(col_preco_reais, '.', '')
       end
     ) as decimal(9, 2)
   );
