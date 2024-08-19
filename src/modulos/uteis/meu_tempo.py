@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 
 
 def formatacao_tempo_completo() -> str:
-    return "%d-%m-%Y %H:%M:%S"
+    return "%Y-%m-%d %H:%M:%S"
 
 
 def fuso_horario_brasilia() -> timezone:
@@ -18,8 +18,8 @@ def data_agora_string() -> str:
 
 
 def data_agora_simplificada() -> str:
-    return data_agora().strftime("%d-%m-%Y")
+    return data_agora().strftime("%Y-%m-%d")
 
 
 def data_agora_simplificada_com_underline() -> str:
-    return data_agora().strftime("%d_%m_%Y")
+    return data_agora().strftime("%Y_%m_%d")
