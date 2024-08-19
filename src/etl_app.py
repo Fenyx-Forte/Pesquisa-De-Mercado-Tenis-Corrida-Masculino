@@ -2,11 +2,9 @@ from etl import etl_duckdb, pipeline_mercado_livre
 from modulos.uteis import carregar_env, configuracao_loguru, configuracao_polars
 
 
-def configurar_loguru() -> None:
+def ativar_configuracoes():
+    carregar_env.carregar_env()
     configuracao_loguru.configuracao_loguru()
-
-
-def configurar_polars() -> None:
     configuracao_polars.configuracao_polars("../config/polars.json")
 
 
