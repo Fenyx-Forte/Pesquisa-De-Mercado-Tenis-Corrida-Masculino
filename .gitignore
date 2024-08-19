@@ -1,5 +1,6 @@
 notebooks/
 logs/
+db_auxiliar.db
 
 # Docs
 site/
