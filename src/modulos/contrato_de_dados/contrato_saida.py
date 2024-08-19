@@ -76,7 +76,7 @@ class MercadoLivreSaida(pa.DataFrameModel):
                     / pl.col("preco_velho")
                 )
             )
-            <= 0.02
+            <= 0.01
         )
 
     @pa.dataframe_check
