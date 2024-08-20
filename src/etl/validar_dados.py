@@ -11,6 +11,7 @@ def validar_dados_entrada(df: pl.DataFrame) -> None:
         logger.info("Dados validos")
     except pa.errors.SchemaError as exc:
         logger.error(exc)
+        raise pa.errors.SchemaError("Dados de entrada nao sao validos!")
 
 
 def validar_dados_saida(df: pl.DataFrame) -> None:
@@ -20,3 +21,4 @@ def validar_dados_saida(df: pl.DataFrame) -> None:
         logger.info("Dados validos")
     except pa.errors.SchemaError as exc:
         logger.error(exc)
+        raise pa.errors.SchemaError("Dados de saida nao sao validos!")
