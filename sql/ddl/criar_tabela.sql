@@ -9,7 +9,8 @@ create table if not exists mercado_livre (
   , num_avaliacoes integer not null
   , _fonte varchar(255) not null
   , _site varchar(255) not null
-  , _data_coleta timestamp not null
+  , _data_coleta date not null
+  , _horario_coleta time not null
   , _pagina smallint not null
   , _ordem smallint not null
 );

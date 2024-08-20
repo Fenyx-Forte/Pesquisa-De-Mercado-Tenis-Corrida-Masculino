@@ -14,7 +14,9 @@ from src.modulos.contrato_de_dados import contrato_saida
 
 
 def test_contrato_correto():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -33,6 +35,7 @@ def test_contrato_correto():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -51,7 +54,9 @@ def test_contrato_correto():
 
 
 def test_marca_com_caracteres_especiais():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -70,6 +75,7 @@ def test_marca_com_caracteres_especiais():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -89,12 +95,14 @@ def test_marca_com_caracteres_especiais():
 
 
 def test_produto_com_caracteres_especiais():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
             "marca": ["A", "B", "C"],
-            "produto": ["TENIS A", "TENIS B", "TENIS  C"],
+            "produto": ["TENIS A", "TÊNIS B", "TENIS  C"],
             "preco_velho": [100.0, 100.0, 100.0],
             "preco_atual": [70.0, 60.0, 100.0],
             "promocao": [True, True, False],
@@ -108,6 +116,7 @@ def test_produto_com_caracteres_especiais():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -127,7 +136,9 @@ def test_produto_com_caracteres_especiais():
 
 
 def test_preco_velho_fora_intervalo():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -146,6 +157,7 @@ def test_preco_velho_fora_intervalo():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -165,7 +177,9 @@ def test_preco_velho_fora_intervalo():
 
 
 def test_preco_velho_menor_do_que_preco_atual():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -184,6 +198,7 @@ def test_preco_velho_menor_do_que_preco_atual():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -203,7 +218,9 @@ def test_preco_velho_menor_do_que_preco_atual():
 
 
 def test_preco_atual_fora_intervalo():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -222,6 +239,7 @@ def test_preco_atual_fora_intervalo():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -241,7 +259,9 @@ def test_preco_atual_fora_intervalo():
 
 
 def test_percentual_promocao_fora_intervalo():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -260,6 +280,7 @@ def test_percentual_promocao_fora_intervalo():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -279,7 +300,9 @@ def test_percentual_promocao_fora_intervalo():
 
 
 def test_nota_avaliacao_fora_intervalo():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -298,6 +321,7 @@ def test_nota_avaliacao_fora_intervalo():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -317,7 +341,9 @@ def test_nota_avaliacao_fora_intervalo():
 
 
 def test_nota_avaliacao_sem_avaliacao():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -336,6 +362,7 @@ def test_nota_avaliacao_sem_avaliacao():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -355,7 +382,9 @@ def test_nota_avaliacao_sem_avaliacao():
 
 
 def test_num_avaliacoes_fora_intervalo():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -374,6 +403,7 @@ def test_num_avaliacoes_fora_intervalo():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -393,7 +423,9 @@ def test_num_avaliacoes_fora_intervalo():
 
 
 def test_pagina_fora_intervalo():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -412,6 +444,7 @@ def test_pagina_fora_intervalo():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [-1, 11, 0],
             "_ordem": [1, 2, 3],
         },
@@ -431,7 +464,9 @@ def test_pagina_fora_intervalo():
 
 
 def test_ordem_fora_intervalo():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -450,6 +485,7 @@ def test_ordem_fora_intervalo():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [-1, 0, 55],
         },
@@ -469,7 +505,9 @@ def test_ordem_fora_intervalo():
 
 
 def test_fonte_incorreta():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -488,6 +526,7 @@ def test_fonte_incorreta():
             ],
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },
@@ -507,7 +546,9 @@ def test_fonte_incorreta():
 
 
 def test_site_incorreto():
-    data = datetime.now()
+    data_completa = datetime.now()
+    data = data_completa.date()
+    horario = data_completa.time()
 
     df = pl.DataFrame(
         {
@@ -526,6 +567,7 @@ def test_site_incorreto():
             ],
             "_site": ["MERCADO LIV", "MERCADO", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
+            "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         },

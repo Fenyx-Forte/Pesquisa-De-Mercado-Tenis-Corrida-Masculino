@@ -10,6 +10,7 @@ insert into db.mercado_livre (
   , _fonte
   , _site
   , _data_coleta
+  , _horario_coleta
   , _pagina
   , _ordem
 )

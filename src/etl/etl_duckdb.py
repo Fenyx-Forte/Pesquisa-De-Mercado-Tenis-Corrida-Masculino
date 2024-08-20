@@ -1,11 +1,8 @@
-import os
-
 import polars as pl
 from etl import (
     duckdb_local,
     extracao_sql,
     salvar_sql,
-    transformacao_sql,
     validar_dados,
 )
 from loguru import logger
@@ -19,6 +16,8 @@ def pipeline() -> None:
     nome_arquivo = (
         f"mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}"
     )
+
+    nome_arquivo = "mercado_livre_2024_08_19"
 
     caminho_json = f"../dados/nao_processados/{nome_arquivo}.json"
 
@@ -41,11 +40,9 @@ def pipeline() -> None:
     validar_dados.validar_dados_entrada(df.pl().cast(cast_dict_entrada))
 
     # Transformacao
-    caminho_query = "../sql/queries/tratamento_mercado_livre.sql"
+    caminho_query = "../sql/transformacao/tratamento_mercado_livre.sql"
 
-    query = ler_sql.ler_conteudo_query(caminho_query)
-
-    df = transformacao_sql.transformacao(query, df)
+    df = ler_sql.query_df(caminho_query, df)
 
     # Validacao
     cast_dict_saida = {
@@ -61,14 +58,6 @@ def pipeline() -> None:
     validar_dados.validar_dados_saida(df.pl().cast(cast_dict_saida))
 
     # Salvar
-    query_conexao = f"""
-        INSTALL postgres;
-        LOAD postgres;
-        ATTACH '{os.getenv("DATABASE_URL")}' AS db (TYPE POSTGRES);
-    """
-
     query_insercao = ler_sql.ler_conteudo_query("../sql/dml/inserir_dados.sql")
 
-    salvar_sql.salvar_dados(
-        df, query_conexao, query_insercao, nome_arquivo, horario
-    )
+    salvar_sql.salvar_dados(df, query_insercao, nome_arquivo, horario)

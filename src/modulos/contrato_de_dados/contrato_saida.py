@@ -17,7 +17,8 @@ class MercadoLivreSaida(pa.DataFrameModel):
 
     fonte: pl.String = pa.Field(alias="_fonte")
     site: pl.String = pa.Field(alias="_site")
-    data_coleta: pl.Datetime = pa.Field(alias="_data_coleta")
+    data_coleta: pl.Date = pa.Field(alias="_data_coleta")
+    horario_coleta: pl.Time = pa.Field(alias="_horario_coleta")
     pagina: pl.Int8 = pa.Field(ge=1, le=10, alias="_pagina")
     ordem: pl.Int8 = pa.Field(ge=1, le=54, alias="_ordem")
 
