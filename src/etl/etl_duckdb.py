@@ -17,8 +17,6 @@ def pipeline() -> None:
         f"mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}"
     )
 
-    nome_arquivo = "mercado_livre_2024_08_19"
-
     caminho_json = f"../dados/nao_processados/{nome_arquivo}.json"
 
     # Verificacao
