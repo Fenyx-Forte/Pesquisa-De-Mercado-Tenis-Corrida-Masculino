@@ -27,8 +27,6 @@ COPY src ./src
 
 COPY config ./config
 
-COPY dados ./dados
-
 COPY sql ./sql
 
 WORKDIR /src
