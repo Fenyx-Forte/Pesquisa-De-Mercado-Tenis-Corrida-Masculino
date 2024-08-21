@@ -4,6 +4,10 @@ from loguru import logger
 from modulos.contrato_de_dados import contrato_entrada, contrato_saida
 
 
+class ErroValidacao(Exception):
+    pass
+
+
 def validar_dados_entrada(df: pl.DataFrame) -> None:
     logger.info("Validando dados de entrada...")
     try:
@@ -11,7 +15,7 @@ def validar_dados_entrada(df: pl.DataFrame) -> None:
         logger.info("Dados validos")
     except pa.errors.SchemaError as exc:
         logger.error(exc)
-        raise pa.errors.SchemaError("Dados de entrada nao sao validos!")
+        raise ErroValidacao("Dados de entrada nao sao validos!")
 
 
 def validar_dados_saida(df: pl.DataFrame) -> None:
@@ -21,4 +25,4 @@ def validar_dados_saida(df: pl.DataFrame) -> None:
         logger.info("Dados validos")
     except pa.errors.SchemaError as exc:
         logger.error(exc)
-        raise pa.errors.SchemaError("Dados de saida nao sao validos!")
+        raise ErroValidacao("Dados de saida nao sao validos!")
