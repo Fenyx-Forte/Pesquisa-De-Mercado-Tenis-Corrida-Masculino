@@ -25,10 +25,6 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY src ./src
 
-COPY config ./config
-
-COPY sql ./sql
-
 WORKDIR /src
 
 EXPOSE 8501
