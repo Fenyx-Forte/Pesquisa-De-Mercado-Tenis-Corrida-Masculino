@@ -33,9 +33,7 @@ def conexao_banco_de_dados_apenas_leitura() -> duckdb.DuckDBPyConnection:
     return duckdb.execute(query_conexao)
 
 
-def query_banco_de_dados(caminho_query: str) -> pl.DataFrame:
-    query = ler_conteudo_query(caminho_query)
-
+def query_banco_de_dados(query: str) -> pl.DataFrame:
     df: pl.DataFrame = None
 
     with conexao_banco_de_dados() as conexao:
@@ -48,10 +46,8 @@ def query_banco_de_dados(caminho_query: str) -> pl.DataFrame:
 
 
 def query_banco_de_dados_apenas_leitura(
-    caminho_query: str,
+    query: str,
 ) -> pl.DataFrame:
-    query = ler_conteudo_query(caminho_query)
-
     df: pl.DataFrame = None
 
     with conexao_banco_de_dados_apenas_leitura() as conexao:
@@ -63,30 +59,29 @@ def query_banco_de_dados_apenas_leitura(
     return df
 
 
-def query_df(
-    caminho_query: str, df: duckdb.DuckDBPyRelation | pl.DataFrame
-) -> pl.DataFrame:
-    query = ler_conteudo_query(caminho_query)
-
+def query_pl_para_pl(query: str, df: pl.DataFrame) -> pl.DataFrame:
     with duckdb.connect() as conexao:
         df_novo = conexao.sql(query).pl()
 
     return df_novo
 
 
-def query_df_direto(
-    query: str, df: duckdb.DuckDBPyRelation | pl.DataFrame
-) -> pl.DataFrame:
-    with duckdb.connect() as conexao:
-        df_novo = conexao.sql(query).pl()
-
-    return df_novo
-
-
-def query_df_com_parametros(
-    query: str, parametros: dict, df: duckdb.DuckDBPyRelation | pl.DataFrame
+def query_pl_para_pl_com_parametro(
+    query: str, parametros: dict, df: pl.DataFrame
 ) -> pl.DataFrame:
     with duckdb.connect() as conexao:
         df_novo = conexao.execute(query, parametros).pl()
 
     return df_novo
+
+
+def query_duckbdb_para_pl(
+    query: str, df: duckdb.DuckDBPyRelation
+) -> pl.DataFrame:
+    return duckdb.sql(query).pl()
+
+
+def query_duckdb_para_duckdb(
+    query: str, df: duckdb.DuckDBPyRelation
+) -> duckdb.DuckDBPyRelation:
+    return duckdb.sql(query)
