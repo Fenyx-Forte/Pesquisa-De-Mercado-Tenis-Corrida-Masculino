@@ -1,4 +1,3 @@
-import polars as pl
 from etl import (
     duckdb_local,
     extracao_sql,
@@ -6,7 +5,7 @@ from etl import (
     validar_dados,
 )
 from loguru import logger
-from modulos.uteis import ler_sql, meu_tempo
+from modulos.uteis import ler_sql, meu_tempo, minhas_queries
 
 
 def pipeline() -> None:
@@ -31,29 +30,25 @@ def pipeline() -> None:
     df = extracao_sql.extracao_json(caminho_json)
 
     # Validacao
-    cast_dict_entrada = {
-        "_data_coleta": pl.String,
-    }
+    query_entrada = minhas_queries.cast_polars_entrada()
 
-    validar_dados.validar_dados_entrada(df.pl().cast(cast_dict_entrada))
+    validar_dados.validar_dados_entrada(
+        ler_sql.query_duckbdb_para_pl(query_entrada, df)
+    )
 
     # Transformacao
     caminho_query = "../sql/transformacao/tratamento_mercado_livre.sql"
 
-    df = ler_sql.query_df(caminho_query, df)
+    query_transfomacao = ler_sql.ler_conteudo_query(caminho_query)
+
+    df = ler_sql.query_duckdb_para_duckdb(query_transfomacao, df)
 
     # Validacao
-    cast_dict_saida = {
-        "preco_velho": pl.Float32,
-        "preco_atual": pl.Float32,
-        "percentual_promocao": pl.Float32,
-        "nota_avaliacao": pl.Float32,
-        "num_avaliacoes": pl.Int32,
-        "_pagina": pl.Int8,
-        "_ordem": pl.Int8,
-    }
+    query_saida = minhas_queries.cast_polars_saida()
 
-    validar_dados.validar_dados_saida(df.pl().cast(cast_dict_saida))
+    validar_dados.validar_dados_saida(
+        ler_sql.query_duckbdb_para_pl(query_saida, df)
+    )
 
     # Salvar
     query_insercao = ler_sql.ler_conteudo_query("../sql/dml/inserir_dados.sql")
