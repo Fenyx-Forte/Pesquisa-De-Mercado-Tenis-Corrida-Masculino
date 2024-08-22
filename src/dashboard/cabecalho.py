@@ -2,21 +2,21 @@ import dash_bootstrap_components as dbc
 from dash import Input, Output, callback, html
 
 
-def cabecalho() -> dbc.Row:
-    titulo_1 = html.Div(
+def cabecalho() -> html.Div:
+    titulo_1 = html.H1(
         "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
         className="text-primary text-center fs-3",
     )
 
-    data_coleta_html = html.Div(
+    data_coleta_html = html.P(
         "",
         className="text-center",
         id="data_coleta",
     )
 
-    linha = dbc.Row([titulo_1, data_coleta_html], class_name="cabecalho")
-
-    return linha
+    return html.Div(
+        [titulo_1, data_coleta_html, html.Hr()], className="cabecalho"
+    )
 
 
 @callback(

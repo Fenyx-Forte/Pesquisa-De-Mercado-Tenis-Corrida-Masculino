@@ -7,11 +7,7 @@ def sidebar():
     sidebar = html.Div(
         [
             html.H1("Sidebar"),
-            html.Hr(),
-            html.H2(
-                "A simple sidebar layout with navigation links",
-                className="lead",
-            ),
+            html.Br(),
             dbc.Nav(
                 [
                     dbc.NavLink(
