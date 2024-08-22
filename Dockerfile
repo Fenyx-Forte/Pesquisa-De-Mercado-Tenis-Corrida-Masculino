@@ -25,6 +25,8 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY src ./src
 
+COPY assets ./assets
+
 WORKDIR /src
 
 EXPOSE 8501
