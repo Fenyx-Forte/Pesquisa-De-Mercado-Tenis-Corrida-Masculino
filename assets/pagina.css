@@ -1,5 +1,17 @@
 .pagina{
-    margin-left: 16rem;
-    margin-right: 4rem;
-    padding: 2rem 1rem;
+    padding-bottom: 1rem;
+}
+
+/* Centralizar colunas e valores de dags*/
+.center-aligned-header .ag-header-cell-label {
+    justify-content: center;
+}
+
+.center-aligned-cell {
+    text-align: center;
+}
+
+.meu-dag{
+    max-width: 60%;
+    width: auto;
 }
