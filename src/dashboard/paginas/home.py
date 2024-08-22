@@ -1,6 +1,5 @@
 import dash
 import dash_bootstrap_components as dbc
-import duckdb
 import plotly.express as px
 import polars as pl
 from dash import Input, Output, callback, dash_table, dcc, html
@@ -10,47 +9,14 @@ dash.register_page(__name__, path="/", name="Home", title="Home")
 
 
 def layout(**kwargs) -> html.Div:
-    conteudo = cabecalho()
+    conteudo = html.Div(
+        [
+            html.H1("This is our Home page"),
+            html.Div("This is our Home page content."),
+        ],
+        className="pagina",
+    )
     return conteudo
-
-
-def cabecalho():
-    content_style = {
-        "marginLeft": "16rem",
-        "marginRight": "2rem",
-        "padding": "2rem 1rem",
-    }
-
-    titulo_1 = html.Div(
-        children="Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
-        className="text-primary text-center fs-3",
-    )
-
-    data_coleta_html = html.Div(
-        children="", className="text-center", id="data_coleta"
-    )
-
-    linha = dbc.Row([titulo_1, data_coleta_html], style=content_style)
-
-    return linha
-
-
-# @callback(
-#    Output(component_id="data_coleta", component_property="children"),
-#    Input(component_id="store", component_property="data"),
-# )
-def data_coleta(json_dict):
-    query = minhas_queries.data_coleta_mais_recente()
-
-    df_data_coleta = ler_sql.query_pl_para_pl(query, json_dict)
-
-    data_coleta = df_data_coleta.item(0, 0)
-
-    horario_coleta = df_data_coleta.item(0, 1)
-
-    data_e_hora = f"Data Coleta: {data_coleta} - {horario_coleta}"
-
-    return data_e_hora
 
 
 def testando_coisas(df: pl.DataFrame):

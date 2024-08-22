@@ -7,12 +7,6 @@ dash.register_page(
 
 
 def layout(**kwargs) -> html.Div:
-    content_style = {
-        "marginLeft": "16rem",
-        "marginRight": "2rem",
-        "padding": "2rem 1rem",
-    }
-
     conteudo = html.Div(
         [
             html.H1("This is our Analytics page"),
@@ -29,13 +23,14 @@ def layout(**kwargs) -> html.Div:
             html.Br(),
             html.Div(id="analytics-output"),
         ],
-        style=content_style,
+        className="pagina",
     )
     return conteudo
 
 
 @callback(
-    Output("analytics-output", "children"), Input("analytics-input", "value")
+    Output("analytics-output", "children"),
+    Input("analytics-input", "value"),
 )
 def update_city_selected(input_value):
     return f"You selected: {input_value}"
