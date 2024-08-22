@@ -45,9 +45,7 @@ def query_banco_de_dados(query: str) -> pl.DataFrame:
     return df
 
 
-def query_banco_de_dados_apenas_leitura(
-    query: str,
-) -> pl.DataFrame:
+def query_banco_de_dados_apenas_leitura(query: str) -> pl.DataFrame:
     df: pl.DataFrame = None
 
     with conexao_banco_de_dados_apenas_leitura() as conexao:
