@@ -1,0 +1,24 @@
+import dash
+from dash import html
+
+dash.register_page(
+    __name__, path="/pagina-2", name="Pagina 2", title="Pagina 2"
+)
+
+
+def layout(**kwargs) -> html.Div:
+    content_style = {
+        "marginLeft": "16rem",
+        "marginRight": "2rem",
+        "padding": "2rem 1rem",
+    }
+
+    conteudo = html.Div(
+        [
+            html.H1("This is our Archive page"),
+            html.Div("This is our Archive page content."),
+        ],
+        style=content_style,
+    )
+
+    return conteudo

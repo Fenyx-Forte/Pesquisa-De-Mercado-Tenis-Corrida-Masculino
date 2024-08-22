@@ -1,3 +1,4 @@
+import dash
 import dash_bootstrap_components as dbc
 from dash import html
 
@@ -10,14 +11,14 @@ def sidebar():
         "bottom": 0,
         "width": "12rem",
         "padding": "2rem 1rem",
-        "background-color": "#f8f9fa",
-        "box-shadow": "5px 5px 5px 5px lightgrey",
+        "backgroundColor": "#f8f9fa",
+        "boxShadow": "5px 5px 5px 5px lightgrey",
     }
 
-    h1_style = {"font-size": "30px", "font-weight": "bold"}
+    h1_style = {"fontSize": "30px", "fontWeight": "bold"}
 
     h2_style = {
-        "font-size": "20px",
+        "fontSize": "16px",
     }
 
     sidebar = html.Div(
@@ -31,9 +32,13 @@ def sidebar():
             ),
             dbc.Nav(
                 [
-                    dbc.NavLink("Home", href="/", active="exact"),
-                    dbc.NavLink("Page 1", href="/page-1", active="exact"),
-                    dbc.NavLink("Page 2", href="/page-2", active="exact"),
+                    dbc.NavLink(
+                        html.Div(page["name"]),
+                        href=page["path"],
+                        active="exact",
+                    )
+                    for page in dash.page_registry.values()
+                    if page["name"] != "Not Found 404"
                 ],
                 vertical=True,
                 pills=True,
