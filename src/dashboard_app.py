@@ -1,13 +1,13 @@
 from dash import Dash, Input, Output, callback, page_container
 from dash.dcc import Location
-from dash_bootstrap_components import Col, Container, Row, Stack, themes
+from dash_bootstrap_components import Col, Container, Row, Stack, icons, themes
 from dashboard import cabecalho, minha_sidebar, processamento_dados
 from modulos.uteis import carregar_env
 
 # Inicializacao dados
 ## Carregando env
 carregar_env.carregar_env()
-
+"""
 ## Query banco de dados
 df = processamento_dados.dados_mais_recentes()
 
@@ -58,12 +58,12 @@ def exportar_csv(n_clicks):
     if n_clicks:
         return True
     return False
-
+"""
 
 # Dashboard
 app = Dash(
     __name__,
-    external_stylesheets=[themes.LUMEN],
+    external_stylesheets=[themes.LUMEN, icons.FONT_AWESOME],
     update_title=None,
     assets_folder="../assets/",
     use_pages=True,
@@ -71,7 +71,7 @@ app = Dash(
     # suppress_callback_exceptions=True,
     # prevent_initial_callbacks = True
 )
-
+data_coleta = ".."
 app.layout = Container(
     [
         Location(id="url"),

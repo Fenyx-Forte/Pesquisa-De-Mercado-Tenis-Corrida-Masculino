@@ -1,4 +1,4 @@
-.sidebar{
+.minha-sidebar{
     top: 0;
     margin-top: 0;
     left: 0;
@@ -16,11 +16,29 @@
     box-shadow: 3px 3px 3px 3px lightgrey;
 }
 
-.sidebar H1{
-    font-size: 30px;
-    font-weight: bold;
+.minha-sidebar H1{
+    font-size: 22px;
 }
 
-.sidebar H2{
-    font-size: 16px;
+.minha-sidebar-links label{
+    padding-left: 5px;
 }
+
+.meu-icone{
+    width: 14px;
+    height: 14px;
+}
+
+/*
+.minha-sidebar-links{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.minha-sidebar-links a{
+    text-decoration: none;
+    flex: 1;
+    text-align: center;
+}
+*/
