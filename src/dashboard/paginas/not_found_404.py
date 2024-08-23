@@ -1,10 +1,6 @@
-import dash
-from dash import html
+from dash import html, register_page
 
-dash.register_page(__name__, name="Not Found 404", title="Not Found 404")
+register_page(__name__, name="Not Found 404", title="Not Found 404")
 
 
-def layout(**kwargs) -> html.Div:
-    conteudo = html.H1("Page not found! Error 404", className="pagina")
-
-    return conteudo
+layout = html.H1("Page not found! Error 404", className="pagina")

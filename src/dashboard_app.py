@@ -1,67 +1,95 @@
-import dash
-import dash_bootstrap_components as dbc
-from dash import Dash, dcc
-from dashboard import cabecalho, minha_sidebar
-from modulos.uteis import carregar_env, ler_sql, minhas_queries
+from dash import Dash, Input, Output, callback, page_container
+from dash.dcc import Location
+from dash_bootstrap_components import Col, Container, Row, Stack, themes
+from dashboard import cabecalho, minha_sidebar, processamento_dados
+from modulos.uteis import carregar_env
+
+# Inicializacao dados
+## Carregando env
+carregar_env.carregar_env()
+
+## Query banco de dados
+df = processamento_dados.dados_mais_recentes()
+
+## Processamento
+### Cabecalho
+data_coleta = processamento_dados.data_coleta(df)
 
 
-def dashboard():
-    carregar_env.carregar_env()
+### Pagina 2
+pagina_2_dag_dados = processamento_dados.inicializacao_pagina_2(df)
 
-    query = minhas_queries.dados_mais_recentes_do_banco_de_dados()
+pagina_2_dag_colunas = [
+    {
+        "headerName": "Marca",
+        "field": "marca",
+        "headerTooltip": "Marca do tênis",
+    },
+    {
+        "headerName": "Preço",
+        "field": "preco_atual",
+        "headerTooltip": "Preço do tênis",
+    },
+]
 
-    df = ler_sql.query_banco_de_dados_apenas_leitura(query)
 
-    # Pre-computacao de dados a serem armazenados na store
-    query_data_coleta = minhas_queries.data_coleta_mais_recente()
-    df_data_coleta = ler_sql.query_pl_para_pl(query_data_coleta, df)
+# Callbacks
+## Inicializacao
+### Pagina 2
+@callback(
+    Output("meu-dag", "rowData"),
+    Output("meu-dag", "columnDefs"),
+    Input("input-estatico", "children"),
+)
+def inicializacao_pagina_2(_):
+    return [
+        pagina_2_dag_dados,
+        pagina_2_dag_colunas,
+    ]
 
-    data_coleta = df_data_coleta.item(0, 0)
-    horario_coleta = df_data_coleta.item(0, 1)
 
-    data_e_horario = f"{data_coleta} - {horario_coleta}"
+## Pagina 2
+@callback(
+    Output("meu-dag", "exportDataAsCsv"),
+    Input("csv-button", "n_clicks"),
+    prevent_initial_call=True,
+)
+def exportar_csv(n_clicks):
+    if n_clicks:
+        return True
+    return False
 
-    store = {
-        "data_e_horario": data_e_horario,
-        "df": df.to_dicts(),
-        "colunas": [{"name": i, "id": i} for i in df.columns],
-    }
 
-    external_stylesheets = [dbc.themes.LUMEN]
-    app = Dash(
-        __name__,
-        external_stylesheets=external_stylesheets,
-        update_title=None,
-        assets_folder="../assets/",
-        use_pages=True,
-        pages_folder="./dashboard/paginas",
-        # suppress_callback_exceptions = True,
-        # prevent_initial_callbacks = True
-    )
+# Dashboard
+app = Dash(
+    __name__,
+    external_stylesheets=[themes.LUMEN],
+    update_title=None,
+    assets_folder="../assets/",
+    use_pages=True,
+    pages_folder="./dashboard/paginas",
+    # suppress_callback_exceptions=True,
+    # prevent_initial_callbacks = True
+)
 
-    app.layout = dbc.Container(
-        [
-            dcc.Store(id="store", data=store),
-            dcc.Location(id="url"),
-            dbc.Row(
-                [
-                    dbc.Col(minha_sidebar.sidebar(), width="auto"),
-                    dbc.Col(
-                        dbc.Stack(
-                            [
-                                cabecalho.cabecalho(),
-                                dash.page_container,
-                            ],
-                        ),
+app.layout = Container(
+    [
+        Location(id="url"),
+        Row(
+            [
+                Col(minha_sidebar.sidebar(), width="auto"),
+                Col(
+                    Stack(
+                        [
+                            cabecalho.cabecalho(data_coleta),
+                            page_container,
+                        ],
                     ),
-                ],
-            ),
-        ],
-        fluid=True,
-    )
+                ),
+            ],
+        ),
+    ],
+    fluid=True,
+)
 
-    app.run(debug=True, dev_tools_hot_reload=False)
-
-
-if __name__ == "__main__":
-    dashboard()
+app.run(debug=True, dev_tools_hot_reload=False)

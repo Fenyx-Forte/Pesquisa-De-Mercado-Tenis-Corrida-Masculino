@@ -1,26 +1,25 @@
-import dash
-import dash_bootstrap_components as dbc
-from dash import html
+from dash import html, page_registry
+from dash_bootstrap_components import Nav, NavLink
 
 
 def sidebar():
     sidebar = html.Div(
         [
-            html.H1("Sidebar"),
             html.Br(),
-            dbc.Nav(
+            Nav(
                 [
-                    dbc.NavLink(
+                    NavLink(
                         html.Div(page["name"]),
                         href=page["path"],
                         active="exact",
                     )
-                    for page in dash.page_registry.values()
+                    for page in page_registry.values()
                     if page["name"] != "Not Found 404"
                 ],
                 vertical=True,
                 pills=True,
             ),
+            html.Div(id="input-estatico"),
         ],
         className="sidebar",
     )

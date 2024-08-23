@@ -1,8 +1,8 @@
-import os
+from os import getenv
 
-import duckdb
-import polars as pl
+from duckdb import DuckDBPyConnection, DuckDBPyRelation, connect, execute, sql
 from loguru import logger
+from polars import DataFrame
 
 
 def ler_conteudo_query(caminho_query: str) -> str:
@@ -13,28 +13,28 @@ def ler_conteudo_query(caminho_query: str) -> str:
     return query
 
 
-def conexao_banco_de_dados() -> duckdb.DuckDBPyConnection:
+def conexao_banco_de_dados() -> DuckDBPyConnection:
     query_conexao = f"""
         INSTALL postgres;
         LOAD postgres;
-        ATTACH '{os.getenv("DATABASE_URL")}' AS db (TYPE POSTGRES);
+        ATTACH '{getenv("DATABASE_URL")}' AS db (TYPE POSTGRES);
     """
 
-    return duckdb.execute(query_conexao)
+    return execute(query_conexao)
 
 
-def conexao_banco_de_dados_apenas_leitura() -> duckdb.DuckDBPyConnection:
+def conexao_banco_de_dados_apenas_leitura() -> DuckDBPyConnection:
     query_conexao = f"""
         INSTALL postgres;
         LOAD postgres;
-        ATTACH '{os.getenv("DATABASE_URL")}' AS db (TYPE POSTGRES, READ_ONLY);
+        ATTACH '{getenv("DATABASE_URL")}' AS db (TYPE POSTGRES, READ_ONLY);
     """
 
-    return duckdb.execute(query_conexao)
+    return execute(query_conexao)
 
 
-def query_banco_de_dados(query: str) -> pl.DataFrame:
-    df: pl.DataFrame = None
+def query_banco_de_dados(query: str) -> DataFrame:
+    df: DataFrame = None
 
     with conexao_banco_de_dados() as conexao:
         logger.info("Conexao criada")
@@ -45,8 +45,8 @@ def query_banco_de_dados(query: str) -> pl.DataFrame:
     return df
 
 
-def query_banco_de_dados_apenas_leitura(query: str) -> pl.DataFrame:
-    df: pl.DataFrame = None
+def query_banco_de_dados_apenas_leitura(query: str) -> DataFrame:
+    df: DataFrame = None
 
     with conexao_banco_de_dados_apenas_leitura() as conexao:
         # logger.info("Conexao criada")
@@ -57,29 +57,27 @@ def query_banco_de_dados_apenas_leitura(query: str) -> pl.DataFrame:
     return df
 
 
-def query_pl_para_pl(query: str, df: pl.DataFrame) -> pl.DataFrame:
-    with duckdb.connect() as conexao:
+def query_pl_para_pl(query: str, df: DataFrame) -> DataFrame:
+    with connect() as conexao:
         df_novo = conexao.sql(query).pl()
 
     return df_novo
 
 
 def query_pl_para_pl_com_parametro(
-    query: str, parametros: dict, df: pl.DataFrame
-) -> pl.DataFrame:
-    with duckdb.connect() as conexao:
+    query: str, parametros: dict, df: DataFrame
+) -> DataFrame:
+    with connect() as conexao:
         df_novo = conexao.execute(query, parametros).pl()
 
     return df_novo
 
 
-def query_duckbdb_para_pl(
-    query: str, df: duckdb.DuckDBPyRelation
-) -> pl.DataFrame:
-    return duckdb.sql(query).pl()
+def query_duckbdb_para_pl(query: str, df: DuckDBPyRelation) -> DataFrame:
+    return sql(query).pl()
 
 
 def query_duckdb_para_duckdb(
-    query: str, df: duckdb.DuckDBPyRelation
-) -> duckdb.DuckDBPyRelation:
-    return duckdb.sql(query)
+    query: str, df: DuckDBPyRelation
+) -> DuckDBPyRelation:
+    return sql(query)
