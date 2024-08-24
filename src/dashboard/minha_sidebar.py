@@ -1,9 +1,9 @@
 from dash import html, page_registry
-from dash_bootstrap_components import Nav, NavbarBrand, NavLink
+from dash_bootstrap_components import Nav, NavLink
 
 
-def sidebar():
-    sidebar = html.Div(
+def sidebar() -> html.Div:
+    conteudo = html.Div(
         [
             html.Div(
                 [
@@ -79,4 +79,4 @@ def sidebar():
         className="minha-sidebar",
     )
 
-    return sidebar
+    return conteudo

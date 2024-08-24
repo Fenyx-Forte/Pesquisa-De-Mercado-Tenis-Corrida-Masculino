@@ -1,3 +1,18 @@
+/* Cabecalho */
+.cabecalho{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.cabecalho #titulo-aplicacao{
+    font-size: 30px;
+}
+
+.cabecalho #data-coleta{
+    font-size: 16px;
+}
+
+/* Sidebar */
 .minha-sidebar{
     top: 0;
     margin-top: 0;
@@ -24,7 +39,7 @@
     padding-left: 5px;
 }
 
-.meu-icone{
+.minha-sidebar .meu-icone{
     width: 14px;
     height: 14px;
 }
@@ -42,3 +57,22 @@
     text-align: center;
 }
 */
+
+/* Conteudo Pagina */
+.pagina{
+    padding-bottom: 1rem;
+}
+
+/* Centralizar colunas e valores de dags */
+.pagina .center-aligned-header .ag-header-cell-label {
+    justify-content: center;
+}
+
+.pagina .center-aligned-cell {
+    text-align: center;
+}
+
+.pagina .meu-dag{
+    max-width: 60%;
+    width: auto;
+}
