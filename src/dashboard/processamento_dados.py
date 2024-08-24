@@ -19,4 +19,6 @@ def data_coleta(df: DataFrame) -> str:
 
 
 def inicializacao_pagina_2(df: DataFrame) -> list[dict]:
-    return df.select("marca", "preco_atual").to_dicts()
+    return df.select(
+        "marca", "preco_atual", "promocao", "percentual_promocao"
+    ).to_dicts()
