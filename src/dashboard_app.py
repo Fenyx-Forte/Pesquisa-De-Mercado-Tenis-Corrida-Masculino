@@ -69,7 +69,41 @@ app = Dash(
     use_pages=True,
     pages_folder="./dashboard/paginas",
     # suppress_callback_exceptions=True,
-    # prevent_initial_callbacks = True
+    # prevent_initial_callbacks = True,
+    meta_tags=[
+        {
+            "name": "viewport",
+            "content": "width=device-width, initial-scale=1.0",
+        },
+        {
+            "http-equiv": "Content-Language",
+            "content": "pt-BR",
+        },
+        {
+            "name": "author",
+            "content": "Fenyx Forte",
+        },
+        {
+            "name": "application-name",
+            "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
+        },
+        {
+            "name": "keywords",
+            "content": "webscraping dashboard dados",
+        },
+        {
+            "name": "google",
+            "content": "notranslate",
+        },
+        {
+            "name": "robots",
+            "content": "index, follow",
+        },
+        {
+            "name": "googlebot",
+            "content": "index, follow",
+        },
+    ],
 )
 data_coleta = ".."
 app.layout = Container(

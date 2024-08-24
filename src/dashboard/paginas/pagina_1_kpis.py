@@ -1,6 +1,13 @@
 from dash import html, register_page
 
-register_page(__name__, path="/pagina-1", name="Pagina 1", title="Pagina 1")
+register_page(
+    __name__,
+    path="/kpis",
+    name="KPI's",
+    title="KPI's",
+    description="KPI's",
+    image="logo.png",
+)
 
 
 layout = html.Div(
