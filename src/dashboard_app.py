@@ -7,7 +7,7 @@ from modulos.uteis import carregar_env
 # Inicializacao dados
 ## Carregando env
 carregar_env.carregar_env()
-"""
+
 ## Query banco de dados
 df = processamento_dados.dados_mais_recentes()
 
@@ -19,33 +19,16 @@ data_coleta = processamento_dados.data_coleta(df)
 ### Pagina 2
 pagina_2_dag_dados = processamento_dados.inicializacao_pagina_2(df)
 
-pagina_2_dag_colunas = [
-    {
-        "headerName": "Marca",
-        "field": "marca",
-        "headerTooltip": "Marca do tênis",
-    },
-    {
-        "headerName": "Preço",
-        "field": "preco_atual",
-        "headerTooltip": "Preço do tênis",
-    },
-]
-
 
 # Callbacks
 ## Inicializacao
 ### Pagina 2
 @callback(
     Output("meu-dag", "rowData"),
-    Output("meu-dag", "columnDefs"),
     Input("input-estatico", "children"),
 )
 def inicializacao_pagina_2(_):
-    return [
-        pagina_2_dag_dados,
-        pagina_2_dag_colunas,
-    ]
+    return pagina_2_dag_dados
 
 
 ## Pagina 2
@@ -58,7 +41,7 @@ def exportar_csv(n_clicks):
     if n_clicks:
         return True
     return False
-"""
+
 
 # Dashboard
 app = Dash(
@@ -105,7 +88,7 @@ app = Dash(
         },
     ],
 )
-data_coleta = ".."
+
 app.layout = Container(
     [
         Location(id="url"),
@@ -119,6 +102,7 @@ app.layout = Container(
                             page_container,
                         ],
                     ),
+                    width=True,
                 ),
             ],
         ),
