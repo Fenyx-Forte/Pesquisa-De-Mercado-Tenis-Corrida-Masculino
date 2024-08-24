@@ -6,7 +6,7 @@ def dados_mais_recentes_do_banco_de_dados() -> str:
         , preco_velho::FLOAT4 AS preco_velho
         , preco_atual::FLOAT4 AS preco_atual
         , promocao
-        , percentual_promocao::FLOAT4 AS percentual_promocao
+        , (percentual_promocao/100)::FLOAT4 AS percentual_promocao
         , nota_avaliacao::FLOAT4 AS nota_avaliacao
         , num_avaliacoes::INT4 AS num_avaliacoes
         , _data_coleta
