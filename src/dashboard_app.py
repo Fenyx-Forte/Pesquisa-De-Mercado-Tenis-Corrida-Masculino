@@ -52,7 +52,6 @@ app = Dash(
     use_pages=True,
     pages_folder="./dashboard/paginas",
     # suppress_callback_exceptions=True,
-    # prevent_initial_callbacks = True,
     meta_tags=[
         {
             "name": "viewport",

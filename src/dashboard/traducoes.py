@@ -169,7 +169,7 @@ def dag_locale_pt_br() -> dict[str, str]:
         "totalRows": "Total de Linhas",
         "totalAndFilteredRows": "Linhas",
         "more": "Mais",
-        "to": "para",
+        "to": "até",
         "of": "de",
         "page": "Página",
         "pageLastRowUnknown": "?",

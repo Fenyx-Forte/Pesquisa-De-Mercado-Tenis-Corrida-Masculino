@@ -34,7 +34,7 @@ layout = html.Div(
                     "cellDataType": "text",
                 },
                 {
-                    "headerName": "Preço",
+                    "headerName": "Preço Atual",
                     "field": "preco_atual",
                     "headerTooltip": "Preço do tênis",
                     "cellDataType": "number",
