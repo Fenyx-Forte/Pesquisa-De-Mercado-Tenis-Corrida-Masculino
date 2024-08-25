@@ -34,7 +34,7 @@ def inicializacao_pagina_2(_):
 ## Pagina 2
 @callback(
     Output("meu-dag", "exportDataAsCsv"),
-    Input("csv-button", "n_clicks"),
+    Input("botao-exportar-csv", "n_clicks"),
     prevent_initial_call=True,
 )
 def exportar_csv(n_clicks):

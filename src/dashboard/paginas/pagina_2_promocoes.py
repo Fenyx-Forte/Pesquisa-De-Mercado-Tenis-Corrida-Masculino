@@ -6,15 +6,15 @@ register_page(
     path="/promocoes",
     name="Promoções",
     title="Promoções",
-    description="Promoções",
-    image="logo.png",
+    description="Página Promoções",
+    image="imagem_link.jpg",
 )
 
 
 layout = html.Div(
     [
-        html.H1("This is our Promoções page"),
-        html.Div("This is our Promoções page content."),
+        html.H1("Página Promoções"),
+        html.Div("Conteúdo Página Promoções"),
     ],
     className="pagina",
 )

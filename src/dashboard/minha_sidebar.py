@@ -7,14 +7,14 @@ def sidebar() -> html.Div:
         [
             html.Div(
                 [
-                    html.H1("Fenyx Forte"),
+                    html.H1("Fenyx Forte", className="text-primary"),
                     html.Hr(),
                     html.Div(
                         [
                             html.A(
                                 [
                                     html.Img(
-                                        src="assets/favicon.ico",
+                                        src="assets/portfolio.ico",
                                         className="meu-icone",
                                     ),
                                     html.Label("Portfólio"),

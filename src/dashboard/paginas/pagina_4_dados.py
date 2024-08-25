@@ -7,24 +7,24 @@ register_page(
     path="/dados",
     name="Dados",
     title="Dados",
-    description="Dados",
-    image="logo.png",
+    description="Página Dados",
+    image="imagem_link.jpg",
 )
 
 
 layout = html.Div(
     [
-        html.H1("This is our Dados page"),
-        html.Div("This is our Dados page content."),
+        html.H1("Página Dados"),
+        html.Div("Conteúdo Página Dados"),
         html.Br(),
-        html.Button("Download CSV", id="csv-button", n_clicks=0),
+        html.Button("Exportar CSV", id="botao-exportar-csv", n_clicks=0),
         AgGrid(
             id="meu-dag",
             columnDefs=[
                 {
                     "headerName": "Marca",
                     "field": "marca",
-                    "headerTooltip": "Marca do tênis",
+                    "headerTooltip": "Marca tênis",
                     "cellDataType": "text",
                 },
                 {
@@ -36,7 +36,7 @@ layout = html.Div(
                 {
                     "headerName": "Preço Atual",
                     "field": "preco_atual",
-                    "headerTooltip": "Preço do tênis",
+                    "headerTooltip": "Preço tênis",
                     "cellDataType": "number",
                     "valueFormatter": {
                         "function": f"{formatacoes.dag_format_pt_br()}.format('$,.2f')(params.value)",
@@ -51,7 +51,7 @@ layout = html.Div(
                 {
                     "headerName": "Desconto",
                     "field": "percentual_promocao",
-                    "headerTooltip": "Desconto do tênis",
+                    "headerTooltip": "Desconto tênis",
                     "cellDataType": "number",
                     "valueFormatter": {
                         "function": f"{formatacoes.dag_format_pt_br()}.format(',.2%')(params.value)",

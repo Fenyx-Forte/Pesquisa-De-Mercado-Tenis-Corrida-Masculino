@@ -5,15 +5,15 @@ register_page(
     path="/satisfacao",
     name="Satisfação",
     title="Satisfação",
-    description="Satisfação",
-    image="logo.png",
+    description="Página Satisfação",
+    image="imagem_link.jpg",
 )
 
 
 layout = html.Div(
     [
-        html.H1("This is our Satisfação page"),
-        html.Div("This is our Satisfação page content."),
+        html.H1("Página Satisfação"),
+        html.Div("Conteúdo Página Satisfação"),
     ],
     className="pagina",
 )

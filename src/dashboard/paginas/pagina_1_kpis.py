@@ -5,15 +5,15 @@ register_page(
     path="/kpis",
     name="KPI's",
     title="KPI's",
-    description="KPI's",
-    image="logo.png",
+    description="Página KPI's",
+    image="imagem_link.jpg",
 )
 
 
 layout = html.Div(
     [
-        html.H1("This is our Analytics page"),
-        html.Div("This is our Analytics page content."),
+        html.H1("Página KPI's"),
+        html.Div("Conteúdo Página KPI's"),
     ],
     className="pagina",
 )

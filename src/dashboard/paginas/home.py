@@ -5,15 +5,15 @@ register_page(
     path="/",
     name="Home",
     title="Home",
-    description="Home",
-    image="logo.png",
+    description="Página Home",
+    image="imagem_link.jpg",
 )
 
 
 layout = html.Div(
     [
-        html.H1("This is our Home page"),
-        html.Div("This is our Home page content."),
+        html.H1("Página Home"),
+        html.Div("Conteúdo Página Home"),
     ],
     className="pagina",
 )
