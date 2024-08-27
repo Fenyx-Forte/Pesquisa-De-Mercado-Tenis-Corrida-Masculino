@@ -1,6 +1,7 @@
-from dash import html, register_page
+from dash import Input, Output, callback, html, register_page
 from dash_ag_grid import AgGrid
-from dashboard import formatacoes, traducoes
+
+from dashboard import formatacoes, processamento_dados, traducoes
 
 register_page(
     __name__,
@@ -19,6 +20,7 @@ layout = html.Div(
         html.Br(),
         html.Button("Exportar CSV", id="botao-exportar-csv", n_clicks=0),
         AgGrid(
+            rowData=processamento_dados.recuperar_dados_dag(),
             id="meu-dag",
             columnDefs=[
                 {
@@ -83,3 +85,14 @@ layout = html.Div(
     ],
     className="pagina",
 )
+
+
+@callback(
+    Output("meu-dag", "exportDataAsCsv"),
+    Input("botao-exportar-csv", "n_clicks"),
+    prevent_initial_call=True,
+)
+def exportar_csv(n_clicks):
+    if n_clicks:
+        return True
+    return False

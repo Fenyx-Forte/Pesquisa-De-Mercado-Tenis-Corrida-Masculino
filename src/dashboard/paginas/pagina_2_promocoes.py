@@ -1,5 +1,4 @@
 from dash import html, register_page
-from dash_ag_grid import AgGrid
 
 register_page(
     __name__,

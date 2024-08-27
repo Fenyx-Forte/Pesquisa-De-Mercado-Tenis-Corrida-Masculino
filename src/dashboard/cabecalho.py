@@ -1,7 +1,9 @@
 from dash import html
 
+from dashboard import processamento_dados
 
-def cabecalho(data_coleta: str) -> html.Div:
+
+def cabecalho() -> html.Div:
     conteudo = html.Div(
         [
             html.H1(
@@ -10,7 +12,7 @@ def cabecalho(data_coleta: str) -> html.Div:
                 id="titulo-aplicacao",
             ),
             html.H4(
-                f"Data Coleta: {data_coleta}",
+                f"Data Coleta: {processamento_dados.recuperar_data_coleta()}",
                 className="text-center",
                 id="data-coleta",
             ),
