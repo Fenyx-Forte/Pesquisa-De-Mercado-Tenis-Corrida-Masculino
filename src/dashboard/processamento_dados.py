@@ -1,28 +1,75 @@
-from modulos.uteis import ler_sql, minhas_queries
+from duckdb import connect
 from polars import DataFrame
 
+from modulos.uteis import carregar_env, ler_sql, minhas_queries
 
-def dados_mais_recentes() -> DataFrame:
+
+def inicializacao() -> None:
+    global conexao_global
+
+    conexao_global = connect(":memory:conexao_global")
+
+    carregar_env.carregar_env()
+
+    df_geral = extrair_dados_mais_recentes()
+
+    salvar_dados_na_memoria_duckdb(df_geral)
+
+    inicializar_data_coleta()
+
+
+def extrair_dados_mais_recentes() -> DataFrame:
     query = minhas_queries.dados_mais_recentes_do_banco_de_dados()
 
     return ler_sql.query_banco_de_dados_apenas_leitura(query)
 
 
-def data_coleta(df: DataFrame) -> str:
-    query_data_coleta = minhas_queries.data_coleta_mais_recente()
-    df_data_coleta = ler_sql.query_pl_para_pl(query_data_coleta, df)
+def salvar_dados_na_memoria_duckdb(df_geral: DataFrame) -> None:
+    query = """
+    CREATE TABLE
+        minha_tabela AS
+    SELECT
+        *
+    FROM
+        df_geral
+    """
 
-    data_coleta = df_data_coleta.item(0, 0)
-    horario_coleta = df_data_coleta.item(0, 1)
-
-    return f"{data_coleta} - {horario_coleta}"
+    conexao_global.sql(query)
 
 
-def inicializacao_pagina_2(df: DataFrame) -> list[dict]:
-    return df.select(
-        "marca",
-        "produto",
-        "preco_atual",
-        "promocao",
-        "percentual_promocao",
-    ).to_dicts()
+def inicializar_data_coleta() -> None:
+    global data_coleta
+
+    query = """
+    SELECT
+        CONCAT(
+            STRFTIME(_data_coleta, '%d/%m/%Y')
+            , ' - '
+            , _horario_coleta::VARCHAR
+        ) AS coluna_data_coleta
+    FROM
+        minha_tabela
+    LIMIT
+        1;
+    """
+
+    data_coleta = conexao_global.sql(query).fetchall()[0][0]
+
+
+def recuperar_data_coleta() -> str:
+    return data_coleta
+
+
+def recuperar_dados_dag() -> list[dict]:
+    query = """
+    SELECT
+        marca
+        , produto
+        , preco_atual
+        , promocao
+        , percentual_promocao
+    FROM
+        minha_tabela;
+    """
+
+    return conexao_global.sql(query).df().to_dict("records")
