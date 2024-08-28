@@ -1,11 +1,14 @@
+from duckdb import connect
+from loguru import logger
+
 from etl import (
     duckdb_local,
     extracao_sql,
     salvar_sql,
     validar_dados,
 )
-from loguru import logger
-from modulos.uteis import ler_sql, meu_tempo, minhas_queries
+from modulos.uteis import meu_tempo, minhas_queries
+from src.modulos.uteis import funcoes_sql
 
 
 def pipeline() -> None:
@@ -27,30 +30,37 @@ def pipeline() -> None:
         logger.info("Arquivo ja foi salvo no banco de dados!")
         return None
 
-    df = extracao_sql.extracao_json(caminho_json)
+    conexao = connect(":memory:")
+
+    df = extracao_sql.extracao_json(caminho_json, conexao)
 
     # Validacao
     query_entrada = minhas_queries.cast_polars_entrada()
 
     validar_dados.validar_dados_entrada(
-        ler_sql.query_duckbdb_para_pl(query_entrada, df)
+        funcoes_sql.query_duckbdb_para_pl(query_entrada, df, conexao)
     )
 
     # Transformacao
     caminho_query = "../sql/transformacao/tratamento_mercado_livre.sql"
 
-    query_transfomacao = ler_sql.ler_conteudo_query(caminho_query)
+    query_transfomacao = funcoes_sql.ler_conteudo_query(caminho_query)
 
-    df = ler_sql.query_duckdb_para_duckdb(query_transfomacao, df)
+    df = funcoes_sql.query_duckdb_para_duckdb(query_transfomacao, df, conexao)
 
     # Validacao
     query_saida = minhas_queries.cast_polars_saida()
 
     validar_dados.validar_dados_saida(
-        ler_sql.query_duckbdb_para_pl(query_saida, df)
+        funcoes_sql.query_duckbdb_para_pl(query_saida, df, conexao)
     )
 
     # Salvar
-    query_insercao = ler_sql.ler_conteudo_query("../sql/dml/inserir_dados.sql")
+    query_insercao = funcoes_sql.ler_conteudo_query(
+        "../sql/dml/inserir_dados.sql"
+    )
 
-    salvar_sql.salvar_dados(df, query_insercao, nome_arquivo, horario)
+    with conexao as conexao:
+        salvar_sql.salvar_dados(query_insercao, df, conexao)
+
+    duckdb_local.inserir_arquivo(nome_arquivo, horario)
