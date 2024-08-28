@@ -1,38 +1,27 @@
 from duckdb import connect
-from polars import DataFrame
 
-from modulos.uteis import carregar_env, ler_sql, minhas_queries
+from modulos.uteis import carregar_env, funcoes_sql, meu_tempo, minhas_queries
 
 
 def inicializacao() -> None:
-    global conexao_global
-
-    conexao_global = connect(":memory:conexao_global")
+    print("Inicializacao")
 
     carregar_env.carregar_env()
 
-    df_geral = extrair_dados_mais_recentes()
+    global conexao_global
+    conexao_global = connect(":memory:")
 
-    salvar_dados_na_memoria_duckdb(df_geral)
+    extrair_dados_mais_recentes_e_salvar_dados_na_memoria()
 
     inicializar_data_coleta()
 
+    print("Fim inicializacao")
 
-def extrair_dados_mais_recentes() -> DataFrame:
+
+def extrair_dados_mais_recentes_e_salvar_dados_na_memoria() -> None:
     query = minhas_queries.dados_mais_recentes_do_banco_de_dados()
 
-    return ler_sql.query_banco_de_dados_apenas_leitura(query)
-
-
-def salvar_dados_na_memoria_duckdb(df_geral: DataFrame) -> None:
-    query = """
-    CREATE TABLE
-        minha_tabela AS
-    SELECT
-        *
-    FROM
-        df_geral
-    """
+    funcoes_sql.conexao_banco_de_dados_apenas_leitura(conexao_global)
 
     conexao_global.sql(query)
 
@@ -40,18 +29,7 @@ def salvar_dados_na_memoria_duckdb(df_geral: DataFrame) -> None:
 def inicializar_data_coleta() -> None:
     global data_coleta
 
-    query = """
-    SELECT
-        CONCAT(
-            STRFTIME(_data_coleta, '%d/%m/%Y')
-            , ' - '
-            , _horario_coleta::VARCHAR
-        ) AS coluna_data_coleta
-    FROM
-        minha_tabela
-    LIMIT
-        1;
-    """
+    query = minhas_queries.data_coleta_mais_recente()
 
     data_coleta = conexao_global.sql(query).fetchall()[0][0]
 
