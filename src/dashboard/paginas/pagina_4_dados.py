@@ -1,7 +1,7 @@
 from dash import Input, Output, callback, html, register_page
 from dash_ag_grid import AgGrid
 
-from dashboard import formatacoes, processamento_dados, traducoes
+from dashboard.uteis import formatacoes, processamento_dados, traducoes
 
 register_page(
     __name__,
@@ -9,7 +9,7 @@ register_page(
     name="Dados",
     title="Dados",
     description="Página Dados",
-    image="imagem_link.jpg",
+    image="images/imagem_link.jpg",
 )
 
 

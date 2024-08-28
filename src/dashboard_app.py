@@ -1,6 +1,7 @@
 from dash import Dash
 
-from dashboard import configuracoes_dash, processamento_dados
+from dashboard import configuracoes_dash
+from dashboard.uteis import processamento_dados
 
 
 def aplicacao():

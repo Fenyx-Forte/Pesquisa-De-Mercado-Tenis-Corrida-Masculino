@@ -6,7 +6,7 @@ register_page(
     name="Satisfação",
     title="Satisfação",
     description="Página Satisfação",
-    image="imagem_link.jpg",
+    image="images/imagem_link.jpg",
 )
 
 

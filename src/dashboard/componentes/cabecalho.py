@@ -1,6 +1,6 @@
 from dash import html
 
-from dashboard import processamento_dados
+from dashboard.uteis import processamento_dados
 
 
 def cabecalho() -> html.Div:

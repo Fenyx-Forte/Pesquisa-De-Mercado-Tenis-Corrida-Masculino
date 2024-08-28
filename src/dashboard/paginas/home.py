@@ -6,7 +6,7 @@ register_page(
     name="Home",
     title="Home",
     description="Página Home",
-    image="imagem_link.jpg",
+    image="images/imagem_link.jpg",
 )
 
 

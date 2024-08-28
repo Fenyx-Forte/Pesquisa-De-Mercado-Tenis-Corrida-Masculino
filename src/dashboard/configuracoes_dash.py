@@ -1,8 +1,7 @@
 from dash import page_container
-from dash.dcc import Location
 from dash_bootstrap_components import Col, Container, Row, Stack, icons, themes
 
-from dashboard import cabecalho, minha_sidebar
+from dashboard.componentes import cabecalho, minha_sidebar
 
 
 def minhas_meta_tags() -> list[dict[str, str]]:
@@ -63,26 +62,23 @@ def configuracoes_app() -> dict:
 
 def layout_app() -> Container:
     layout = Container(
-        [
-            Location(id="url"),
-            Row(
-                [
-                    Col(
-                        minha_sidebar.sidebar(),
-                        width="auto",
+        Row(
+            [
+                Col(
+                    minha_sidebar.sidebar(),
+                    width="auto",
+                ),
+                Col(
+                    Stack(
+                        [
+                            cabecalho.cabecalho(),
+                            page_container,
+                        ],
                     ),
-                    Col(
-                        Stack(
-                            [
-                                cabecalho.cabecalho(),
-                                page_container,
-                            ],
-                        ),
-                        width=True,
-                    ),
-                ],
-            ),
-        ],
+                    width=True,
+                ),
+            ],
+        ),
         fluid=True,
     )
 

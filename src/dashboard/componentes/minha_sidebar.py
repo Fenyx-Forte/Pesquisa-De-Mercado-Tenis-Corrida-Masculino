@@ -14,7 +14,7 @@ def sidebar() -> html.Div:
                             html.A(
                                 [
                                     html.Img(
-                                        src="assets/portfolio.ico",
+                                        src="/assets/images/portfolio.ico",
                                         className="meu-icone",
                                     ),
                                     html.Label("Portfólio"),
@@ -74,7 +74,6 @@ def sidebar() -> html.Div:
                 vertical=True,
                 pills=True,
             ),
-            html.Div(id="input-estatico"),
         ],
         className="minha-sidebar",
     )
