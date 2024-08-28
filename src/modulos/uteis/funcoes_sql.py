@@ -36,6 +36,10 @@ def conexao_banco_de_dados(conexao: DuckDBPyConnection) -> None:
     conexao.sql(string_conexao_banco_de_dados())
 
 
+def conexao_banco_de_dados_apenas_leitura(conexao: DuckDBPyConnection) -> None:
+    conexao.sql(string_conexao_banco_de_dados_apenas_leitura())
+
+
 def query_banco_de_dados_apenas_leitura(query: str) -> DataFrame:
     df: DataFrame = None
 
