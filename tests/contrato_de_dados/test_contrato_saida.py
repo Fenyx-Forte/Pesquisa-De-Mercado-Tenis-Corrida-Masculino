@@ -487,7 +487,7 @@ def test_ordem_fora_intervalo():
             "_data_coleta": [data, data, data],
             "_horario_coleta": [horario, horario, horario],
             "_pagina": [1, 1, 1],
-            "_ordem": [-1, 0, 55],
+            "_ordem": [-1, 0, 74],
         },
         schema_overrides={
             "preco_velho": pl.Float32,

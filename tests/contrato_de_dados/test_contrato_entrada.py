@@ -322,7 +322,7 @@ def test_ordem_incorreta():
             "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
             "_pagina": [1, 1, 1],
-            "_ordem": [-1, 55, 3],
+            "_ordem": [-1, 74, 3],
         }
     )
 

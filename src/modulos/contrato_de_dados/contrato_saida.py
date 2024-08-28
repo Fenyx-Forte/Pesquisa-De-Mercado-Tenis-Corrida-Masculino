@@ -2,6 +2,7 @@ import math
 
 import pandera.polars as pa
 import polars as pl
+
 from etl import transformacao
 
 
@@ -20,7 +21,7 @@ class MercadoLivreSaida(pa.DataFrameModel):
     data_coleta: pl.Date = pa.Field(alias="_data_coleta")
     horario_coleta: pl.Time = pa.Field(alias="_horario_coleta")
     pagina: pl.Int8 = pa.Field(ge=1, le=10, alias="_pagina")
-    ordem: pl.Int8 = pa.Field(ge=1, le=54, alias="_ordem")
+    ordem: pl.Int8 = pa.Field(ge=1, le=72, alias="_ordem")
 
     class Config:
         strict = True
