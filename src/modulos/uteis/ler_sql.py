@@ -1,6 +1,6 @@
 from os import getenv
 
-from duckdb import DuckDBPyRelation, connect
+from duckdb import DuckDBPyRelation, connect, sql
 from loguru import logger
 from polars import DataFrame
 
@@ -79,16 +79,10 @@ def query_pl_para_pl_com_parametro(
 
 
 def query_duckbdb_para_pl(query: str, df: DuckDBPyRelation) -> DataFrame:
-    with connect(":memory:") as conexao:
-        df_novo = conexao.sql(query).pl()
-
-    return df_novo
+    return sql(query).pl()
 
 
 def query_duckdb_para_duckdb(
     query: str, df: DuckDBPyRelation
 ) -> DuckDBPyRelation:
-    with connect(":memory:") as conexao:
-        df_novo = conexao.sql(query)
-
-    return df_novo
+    return sql(query)
