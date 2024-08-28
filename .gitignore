@@ -2,6 +2,8 @@ notebooks/
 logs/
 db_auxiliar.db
 
+src/dashboard/configuracoes/*
+
 # Docs
 site/
 .tbls.yml
