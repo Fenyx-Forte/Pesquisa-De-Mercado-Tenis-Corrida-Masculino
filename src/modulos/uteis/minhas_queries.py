@@ -1,5 +1,7 @@
 def dados_mais_recentes_do_banco_de_dados() -> str:
     query = """
+    CREATE TABLE
+        minha_tabela AS
     SELECT
         marca
         , produto
@@ -22,6 +24,8 @@ def dados_mais_recentes_do_banco_de_dados() -> str:
             FROM
                 db.mercado_livre
         );
+
+    DETACH db;
     """
 
     return query
@@ -30,12 +34,30 @@ def dados_mais_recentes_do_banco_de_dados() -> str:
 def data_coleta_mais_recente() -> str:
     query = """
     SELECT
-        STRFTIME(_data_coleta, '%d/%m/%Y')
-        , _horario_coleta
+        CONCAT(
+            STRFTIME(_data_coleta, '%d/%m/%Y')
+            , ' - '
+            , _horario_coleta::VARCHAR
+        ) AS coluna_data_coleta
     FROM
-        df
+        minha_tabela
     LIMIT
         1;
+    """
+
+    return query
+
+
+def tabela_dag() -> str:
+    query = """
+    SELECT
+        marca
+        , produto
+        , preco_atual
+        , promocao
+        , percentual_promocao
+    FROM
+        minha_tabela;
     """
 
     return query
