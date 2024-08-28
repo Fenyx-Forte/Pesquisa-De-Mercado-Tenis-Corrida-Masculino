@@ -7,8 +7,7 @@ from etl import (
     salvar_sql,
     validar_dados,
 )
-from modulos.uteis import meu_tempo, minhas_queries
-from src.modulos.uteis import funcoes_sql
+from modulos.uteis import funcoes_sql, meu_tempo, minhas_queries
 
 
 def pipeline() -> None:

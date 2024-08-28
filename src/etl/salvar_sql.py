@@ -1,7 +1,7 @@
 from duckdb import DuckDBPyConnection, DuckDBPyRelation
 from loguru import logger
 
-from src.modulos.uteis import funcoes_sql
+from modulos.uteis import funcoes_sql
 
 
 def salvar_dados(
