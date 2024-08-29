@@ -35,5 +35,8 @@ COPY assets ./assets
 
 WORKDIR /src
 
+# Defina permissões de execução para o script
+RUN chmod +x ./script_docker.sh
+
 EXPOSE 80
-ENTRYPOINT ["bash", "script_docker.sh"]
+ENTRYPOINT ["script_docker.sh"]
