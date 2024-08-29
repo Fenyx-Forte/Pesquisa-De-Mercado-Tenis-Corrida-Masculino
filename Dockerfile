@@ -1,3 +1,9 @@
+# nginx setup
+FROM nginx:latest
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY dash_app.conf /etc/nginx/conf.d/
+
 # The builder image, used to build the virtual environment
 FROM python:3.12-bookworm as builder
 
@@ -29,5 +35,5 @@ COPY assets ./assets
 
 WORKDIR /src
 
-EXPOSE 8501
-ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]
+EXPOSE 80
+ENTRYPOINT ["script_docker.sh"]
