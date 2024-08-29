@@ -30,10 +30,11 @@ ENV VIRTUAL_ENV=/app/.venv \
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 # Arquivos na render
-COPY .env .env
+COPY .env ./
 
-COPY gunicorn_prod.py /
+COPY gunicorn_prod.py ./
 
+# Arquivos repositorios
 COPY src ./src
 
 COPY assets ./assets
@@ -44,4 +45,4 @@ WORKDIR /src
 # RUN chmod +x ./script_docker.sh
 
 EXPOSE 80
-ENTRYPOINT ["gunicorn", "-c ../gunicorn_prod.py"]
+ENTRYPOINT ["gunicorn", "-c", "../gunicorn_prod.py"]
