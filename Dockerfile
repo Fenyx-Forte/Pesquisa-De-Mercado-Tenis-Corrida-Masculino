@@ -1,7 +1,6 @@
 # nginx setup
-FROM nginx:latest
-# FROM ubuntu:latest
-# RUN apt-get update && apt-get install -y nginx
+FROM ubuntu:latest
+RUN apt-get update && apt-get install -y nginx
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY dash_app.conf /etc/nginx/conf.d/
