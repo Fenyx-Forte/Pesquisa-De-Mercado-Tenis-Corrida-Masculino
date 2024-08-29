@@ -1,4 +1,11 @@
-from dash import Input, Output, callback, html, register_page
+from dash import (
+    Input,
+    Output,
+    callback,
+    clientside_callback,
+    html,
+    register_page,
+)
 from dash_ag_grid import AgGrid
 
 from dashboard.uteis import formatacoes, processamento_dados, traducoes
@@ -87,12 +94,16 @@ layout = html.Div(
 )
 
 
-@callback(
+clientside_callback(
+    """
+    function(nClicks) {
+        if (nClicks) {
+            return true;
+        }
+        return false;
+    }
+    """,
     Output("meu-dag", "exportDataAsCsv"),
     Input("botao-exportar-csv", "n_clicks"),
     prevent_initial_call=True,
 )
-def exportar_csv(n_clicks):
-    if n_clicks:
-        return True
-    return False
