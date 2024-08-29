@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Iniciar o Nginx
-service nginx start
+/usr/sbin/nginx -g daemon off;
 
 # Iniciar o Gunicorn
-exec gunicorn -c ../gunicorn_prod.py
+exec gunicorn -c ../gunicorn_prod.py;
