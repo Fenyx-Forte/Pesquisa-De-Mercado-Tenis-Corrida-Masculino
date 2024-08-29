@@ -4,18 +4,14 @@ from modulos.uteis import carregar_env, funcoes_sql, meu_tempo, minhas_queries
 
 
 def inicializacao() -> None:
-    print("Inicializacao")
-
-    carregar_env.carregar_env()
-
     global conexao_global
     conexao_global = connect(":memory:")
+
+    carregar_env.carregar_env()
 
     extrair_dados_mais_recentes_e_salvar_dados_na_memoria()
 
     inicializar_data_coleta()
-
-    print("Fim inicializacao")
 
 
 def extrair_dados_mais_recentes_e_salvar_dados_na_memoria() -> None:
