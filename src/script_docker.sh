@@ -21,8 +21,11 @@ touch ./var/log/gunicorn/error.log
 chown -R www-data:www-data /var/run/gunicorn
 chown -R www-data:www-data /var/log/gunicorn
 
+# Ver se o nginx esta instalado
+which nginx
+
 # Iniciar o nginx
-/usr/sbin/nginx -g 'daemon off;' &
+/sbin/nginx -g 'daemon off;' &
 
 cd src/
 
