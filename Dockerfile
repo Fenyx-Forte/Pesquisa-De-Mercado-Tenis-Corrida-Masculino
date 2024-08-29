@@ -90,7 +90,7 @@ COPY assets /app/assets
 RUN chmod +x /app/src/script_docker.sh
 
 # Expõe as portas necessárias
-EXPOSE 8501
+EXPOSE 80
 
 # Define o entrypoint para o supervisord
 ENTRYPOINT [ "/app/src/script_docker.sh" ]
