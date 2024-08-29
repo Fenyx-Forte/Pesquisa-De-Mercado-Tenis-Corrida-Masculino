@@ -3,6 +3,9 @@ logs/
 db_auxiliar.db
 
 src/dashboard/configuracoes/*
+dash_app.conf
+gunicorn_prod.py
+nginx.conf
 
 # Docs
 site/
