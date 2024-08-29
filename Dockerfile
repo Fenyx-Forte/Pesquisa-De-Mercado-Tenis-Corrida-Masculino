@@ -41,7 +41,7 @@ COPY assets ./assets
 WORKDIR /src
 
 # Defina permissões de execução para o script
-RUN chmod +x ./script_docker.sh
+# RUN chmod +x ./script_docker.sh
 
 EXPOSE 80
-ENTRYPOINT ["script_docker.sh"]
+ENTRYPOINT ["gunicorn", "-c ../gunicorn_prod.py"]
