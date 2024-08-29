@@ -36,4 +36,4 @@ COPY assets ./assets
 WORKDIR /src
 
 EXPOSE 80
-ENTRYPOINT ["script_docker.sh"]
+ENTRYPOINT ["bash", "script_docker.sh"]
