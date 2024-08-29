@@ -21,7 +21,13 @@ touch /var/log/gunicorn/error.log
 chown -R www-data:www-data /var/run/gunicorn
 chown -R www-data:www-data /var/log/gunicorn
 
+
+# Iniciar o nginx
+nginx -g 'daemon off;' &
+
+# Iniciar o venv
 cd /app/src
+source /app/.venv/bin/activate
 
 # Iniciar o Gunicorn
 gunicorn -c /app/gunicorn_prod.py
