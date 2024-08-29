@@ -23,7 +23,7 @@ chown -R www-data:www-data /var/log/gunicorn
 
 
 # Iniciar o nginx
-nginx -g 'daemon off;' &
+# nginx -g 'daemon off;' &
 
 # Iniciar o venv
 cd /app/src
