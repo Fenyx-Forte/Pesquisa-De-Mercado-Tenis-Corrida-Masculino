@@ -1,10 +1,5 @@
 FROM ubuntu:latest
 
-# Instala nginx e supervisord
-# RUN apt-get update && apt-get install -y \
-#    nginx \
-#    supervisor
-
 # Dependencias python
 RUN apt-get update && apt-get install -y \
     git \
@@ -54,6 +49,11 @@ RUN curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.8.3 python3 -
 # Adicione o Poetry ao PATH
 ENV PATH="/root/.local/bin:$PATH"
 
+# Instala nginx e supervisord
+RUN apt-get update && apt-get install -y \
+    nginx \
+    supervisor
+
 # Ambiente virtual
 WORKDIR /app
 
@@ -70,25 +70,26 @@ RUN poetry install --without docs,jupyter,dev,testes,webscraping --no-root && rm
 
 # Configura o nginx
 WORKDIR /
-# COPY nginx.conf /etc/nginx/nginx.conf
-# COPY dash_app.conf /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY dash_app.conf /etc/nginx/conf.d/
+
 ## Logs nginx
-# RUN mkdir -p /var/log/nginx
-# RUN touch /var/log/nginx/error.log
-# RUN touch /var/log/nginx/access.log
-# RUN touch /var/log/nginx/dash_app.access.log
-# RUN touch /var/log/nginx/dash_app.error.log
-# RUN chown -R nginx:nginx /var/log/nginx
+RUN mkdir -p /var/log/nginx
+RUN touch /var/log/nginx/error.log
+RUN touch /var/log/nginx/access.log
+RUN touch /var/log/nginx/dash_app.access.log
+RUN touch /var/log/nginx/dash_app.error.log
+RUN chown -R www-data:www-data /var/log/nginx
 
 # Configura gunicorn
-# RUN mkdir -p /var/log/gunicorn
-# RUN mkdir -p /var/run/gunicorn
-# RUN touch /var/run/gunicorn/gunicorn_prod.pid
-# RUN touch /var/log/gunicorn/access.log
-# RUN touch /var/log/gunicorn/error.log
-# RUN chown -R nginx:nginx /var/run/gunicorn
-# RUN chown -R nginx:nginx /var/log/gunicorn
 COPY gunicorn_prod.py /app
+RUN mkdir -p /var/log/gunicorn
+RUN mkdir -p /var/run/gunicorn
+RUN touch /var/run/gunicorn/gunicorn_prod.pid
+RUN touch /var/log/gunicorn/access.log
+RUN touch /var/log/gunicorn/error.log
+RUN chown -R www-data:www-data /var/run/gunicorn
+RUN chown -R www-data:www-data /var/log/gunicorn
 
 # Variavies ambiente Python
 COPY .env /app
