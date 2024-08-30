@@ -58,6 +58,18 @@
 }
 */
 
+/* Conteiner */
+.meu-conteudo   {
+    display: flex;
+    flex-wrap: nowrap; /* Impede quebra de linha, força o uso de rolagem horizontal */
+    overflow-x: auto; /* Permite rolagem horizontal */
+}
+
+.meu-conteudo > * {
+    flex: 1 0 auto; /* Permite expansão mas impede quebra de linha */
+    min-width: 100%; /* Define uma largura mínima para cada item (ajuste conforme necessário) */
+}
+
 /* Conteudo Pagina */
 .pagina{
     padding-bottom: 1rem;

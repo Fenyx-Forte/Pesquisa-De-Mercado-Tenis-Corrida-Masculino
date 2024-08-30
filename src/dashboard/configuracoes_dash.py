@@ -76,10 +76,12 @@ def layout_app() -> Container:
                         ],
                     ),
                     width=True,
+                    class_name="meu-conteudo",
                 ),
             ],
         ),
         fluid=True,
+        class_name="meu-conteiner",
     )
 
     return layout
