@@ -100,5 +100,4 @@ COPY assets /app/assets
 # Define permissões de execução para o script
 RUN chmod +x /app/src/script_docker.sh
 
-EXPOSE 8501
 ENTRYPOINT ["/app/src/script_docker.sh"]
