@@ -1,9 +1,9 @@
 FROM ubuntu:latest
 
 # Instala nginx e supervisord
-RUN apt-get update && apt-get install -y \
-    nginx \
-    supervisor
+# RUN apt-get update && apt-get install -y \
+#    nginx \
+#    supervisor
 
 # Dependencias python
 RUN apt-get update && apt-get install -y \
@@ -36,8 +36,6 @@ RUN apt-get update && apt-get install -y \
 
 # pyenv
 RUN curl https://pyenv.run | bash
-
-# Variáveis de ambiente para o pyenv
 ENV PYENV_ROOT="/root/.pyenv"
 ENV PATH="$PYENV_ROOT/bin:$PATH"
 RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc && \
@@ -45,14 +43,11 @@ RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc && \
     echo 'eval "$(pyenv init --path)"' >> ~/.bashrc && \
     echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 
-# Instale o Python usando o pyenv
+# Instalar o Python usando o pyenv
 RUN bash -c "source ~/.bashrc && pyenv install 3.12.4 && pyenv global 3.12.4"
 
 # Defina o Python 3.12.4 como versão global
 ENV PATH="$PYENV_ROOT/versions/3.12.4/bin:$PATH"
-
-# Verifique se o Python foi instalado corretamente
-RUN python --version
 
 # Poetry
 RUN curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.8.3 python3 -
@@ -73,14 +68,30 @@ ENV POETRY_NO_INTERACTION=1 \
 
 RUN poetry install --without docs,jupyter,dev,testes,webscraping --no-root && rm -rf $POETRY_CACHE_DIR
 
-# Configura o Nginx
+# Configura o nginx
 WORKDIR /
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY dash_app.conf /etc/nginx/conf.d/
+# COPY nginx.conf /etc/nginx/nginx.conf
+# COPY dash_app.conf /etc/nginx/conf.d/
+## Logs nginx
+# RUN mkdir -p /var/log/nginx
+# RUN touch /var/log/nginx/error.log
+# RUN touch /var/log/nginx/access.log
+# RUN touch /var/log/nginx/dash_app.access.log
+# RUN touch /var/log/nginx/dash_app.error.log
+# RUN chown -R nginx:nginx /var/log/nginx
 
-# Arquivos na render
-COPY .env /app
+# Configura gunicorn
+# RUN mkdir -p /var/log/gunicorn
+# RUN mkdir -p /var/run/gunicorn
+# RUN touch /var/run/gunicorn/gunicorn_prod.pid
+# RUN touch /var/log/gunicorn/access.log
+# RUN touch /var/log/gunicorn/error.log
+# RUN chown -R nginx:nginx /var/run/gunicorn
+# RUN chown -R nginx:nginx /var/log/gunicorn
 COPY gunicorn_prod.py /app
+
+# Variavies ambiente Python
+COPY .env /app
 
 # Arquivos repositorios
 COPY src /app/src
@@ -89,8 +100,5 @@ COPY assets /app/assets
 # Define permissões de execução para o script
 RUN chmod +x /app/src/script_docker.sh
 
-# Expõe as portas necessárias
 EXPOSE 8501
-
-# Define o entrypoint para o supervisord
-ENTRYPOINT [ "/app/src/script_docker.sh" ]
+ENTRYPOINT ["/app/src/script_docker.sh"]
