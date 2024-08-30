@@ -75,10 +75,10 @@ COPY dash_app.conf /etc/nginx/conf.d/
 
 ## Logs nginx
 RUN mkdir -p /var/log/nginx
-RUN touch /var/log/nginx/error.log
-RUN touch /var/log/nginx/access.log
-RUN touch /var/log/nginx/dash_app.access.log
-RUN touch /var/log/nginx/dash_app.error.log
+# RUN touch /var/log/nginx/error.log
+# RUN touch /var/log/nginx/access.log
+# RUN touch /var/log/nginx/dash_app.access.log
+# RUN touch /var/log/nginx/dash_app.error.log
 RUN chown -R www-data:www-data /var/log/nginx
 
 # Configura gunicorn
@@ -86,8 +86,8 @@ COPY gunicorn_prod.py /app
 RUN mkdir -p /var/log/gunicorn
 RUN mkdir -p /var/run/gunicorn
 RUN touch /var/run/gunicorn/gunicorn_prod.pid
-RUN touch /var/log/gunicorn/access.log
-RUN touch /var/log/gunicorn/error.log
+# RUN touch /var/log/gunicorn/access.log
+# RUN touch /var/log/gunicorn/error.log
 RUN chown -R www-data:www-data /var/run/gunicorn
 RUN chown -R www-data:www-data /var/log/gunicorn
 
