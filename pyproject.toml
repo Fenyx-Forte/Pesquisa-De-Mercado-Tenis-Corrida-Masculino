@@ -10,11 +10,11 @@ python = "^3.11"
 
 
 [tool.poetry.group.etl.dependencies]
-polars = {version = ">=1.4.0", extras = ["pyarrow"]}
 pandera = {version = ">=0.20.3", extras = ["polars"]}
 
 
 [tool.poetry.group.processamento.dependencies]
+polars = {version = ">=1.4.0", extras = ["pyarrow"]}
 duckdb = ">=1.0.0"
 
 
