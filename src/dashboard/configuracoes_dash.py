@@ -10,9 +10,10 @@ def template_html_padrao() -> str:
         <html>
             <head>
                 {%metas%}
+                <link rel="icon" type="image/png" href="/assets/favicon.ico">
                 <title>{%title%}</title>
-                {%favicon%}
                 {%css%}
+                <link rel="stylesheet" href="/assets/css/styles.css">
             </head>
             <body>
                 {%app_entry%}
