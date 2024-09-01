@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Fenyx Forte">
+    <meta http-equiv="Content-Language" content="pt-BR">
+    <meta name="application-name" content="Pesquisa de Mercado: Tênis de Corrida no Mercado Livre">
+    <meta name="keywords" content="webscraping dashboard dados">
+    <meta name="google" content="notranslate">
+    <title>Carregando...</title>
+
+    <!-- Recarrega a página automaticamente a cada 5 segundos -->
+    <meta http-equiv="refresh" content="5">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .spinner {
+            border: 8px solid #d3d3d3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+    </div>
+</body>
+</html>
