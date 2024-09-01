@@ -6,7 +6,7 @@ register_page(
     name="KPI's",
     title="KPI's",
     description="Página KPI's",
-    image="images/imagem_link.jpg",
+    image_url="/assets/images/imagem_link.jpg",
 )
 
 

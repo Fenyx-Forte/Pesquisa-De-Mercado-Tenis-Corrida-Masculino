@@ -16,7 +16,7 @@ register_page(
     name="Dados",
     title="Dados",
     description="Página Dados",
-    image="images/imagem_link.jpg",
+    image_url="/assets/images/imagem_link.jpg",
 )
 
 

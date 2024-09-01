@@ -6,7 +6,7 @@ register_page(
     name="Promoções",
     title="Promoções",
     description="Página Promoções",
-    image="images/imagem_link.jpg",
+    image_url="/assets/images/imagem_link.jpg",
 )
 
 
