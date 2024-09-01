@@ -78,9 +78,9 @@ COPY src /app/src
 COPY assets /usr/share/nginx/html/assets
 
 # Permissões para o nginx acessar assets
-RUN chown -R www-data:www-data assets /usr/share/nginx/html/assets && \
-    find assets /usr/share/nginx/html/assets -type d -exec chmod 750 {} \; && \
-    find assets /usr/share/nginx/html/assets -type f -exec chmod 640 {} \;
+RUN chown -R www-data:www-data /usr/share/nginx/html/assets && \
+    find /usr/share/nginx/html/assets -type d -exec chmod 750 {} \; && \
+    find /usr/share/nginx/html/assets -type f -exec chmod 640 {} \;
 
 # Define permissões de execução para o script
 RUN chmod +x /app/src/script_docker.sh
