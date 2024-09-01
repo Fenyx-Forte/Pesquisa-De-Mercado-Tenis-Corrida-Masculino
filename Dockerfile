@@ -1,9 +1,11 @@
 # nginx
 FROM nginx:latest AS stage_nginx
 
+
 # supervisord
 FROM alpine:latest AS stage_supervisord
 RUN apk add --no-cache supervisor
+
 
 # The builder image, used to build the virtual environment
 FROM python:3.12.5-bookworm AS stage_builder
@@ -73,7 +75,12 @@ COPY dash_app.conf /etc/nginx/conf.d/
 COPY gunicorn_prod.py /app
 COPY .env /app
 COPY src /app/src
-COPY assets /app/assets
+COPY assets /usr/share/nginx/html/assets
+
+# Permissões para o nginx acessar assets
+RUN chown -R www-data:www-data assets /usr/share/nginx/html/assets && \
+    find assets /usr/share/nginx/html/assets -type d -exec chmod 750 {} \; && \
+    find assets /usr/share/nginx/html/assets -type f -exec chmod 640 {} \;
 
 # Define permissões de execução para o script
 RUN chmod +x /app/src/script_docker.sh

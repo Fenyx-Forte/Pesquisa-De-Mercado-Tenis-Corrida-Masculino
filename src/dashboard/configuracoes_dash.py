@@ -4,6 +4,30 @@ from dash_bootstrap_components import Col, Container, Row, Stack, icons, themes
 from dashboard.componentes import cabecalho, minha_sidebar
 
 
+def template_html_padrao() -> str:
+    template = """
+    <!DOCTYPE html>
+        <html>
+            <head>
+                {%metas%}
+                <title>{%title%}</title>
+                {%favicon%}
+                {%css%}
+            </head>
+            <body>
+                {%app_entry%}
+                <footer>
+                    {%config%}
+                    {%scripts%}
+                    {%renderer%}
+                </footer>
+            </body>
+        </html>
+    """
+
+    return template
+
+
 def minhas_meta_tags() -> list[dict[str, str]]:
     meta_tags = [
         {
@@ -51,9 +75,11 @@ def configuracoes_app() -> dict:
         ],
         "update_title": None,
         "assets_folder": "../assets/",
+        "assets_url_path": "assets",
         "use_pages": True,
         "pages_folder": "./dashboard/paginas",
         "suppress_callback_exceptions": True,
+        "index_string": template_html_padrao(),
         "meta_tags": minhas_meta_tags(),
     }
 
