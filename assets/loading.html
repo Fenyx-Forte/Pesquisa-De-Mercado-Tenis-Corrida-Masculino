@@ -8,7 +8,7 @@
     <meta name="application-name" content="Pesquisa de Mercado: Tênis de Corrida no Mercado Livre">
     <meta name="keywords" content="webscraping dashboard dados">
     <meta name="google" content="notranslate">
-    <meta http-equiv="refresh" content="8">
+    <meta http-equiv="refresh" content="40">
     <link rel="icon" type="image/png" href="/assets/favicon.ico">
     <title>Carregando...</title>
 
@@ -30,13 +30,23 @@
             text-align: center;
         }
         .spinner {
-            border: 8px solid #d3d3d3; /* Light grey */
-            border-top: 8px solid #3498db; /* Blue */
+            border: 8px solid #d3d3d3;
+            border-top: 8px solid #3498db;
             border-radius: 50%;
             width: 60px;
             height: 60px;
             animation: spin 1s linear infinite;
-            margin: 0 auto;
+            margin: 20px 0;
+        }
+        .loading-message {
+            font-size: 20px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .loading-submessage {
+            font-size: 16px;
+            color: #777;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -45,8 +55,15 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div id="minha-pagina-carregamento" class="container">
+        <div id="loading-message" class="loading-message">
+            Estamos preparando tudo para você!<br>
+            Apenas mais <span id="seconds">40</span> <span id="time-unit">segundos</span>.
+        </div>
         <div class="spinner"></div>
+        <div class="loading-submessage">Obrigado pela paciência!</div>
     </div>
+
+    <script src="/assets/js/loading.js"></script>
 </body>
 </html>
