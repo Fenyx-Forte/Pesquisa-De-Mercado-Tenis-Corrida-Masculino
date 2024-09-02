@@ -85,4 +85,8 @@ RUN chown -R www-data:www-data /usr/share/nginx/html/assets && \
 # Define permissões de execução para o script
 RUN chmod +x /app/src/script_docker.sh
 
+# Instalacao extensao postgresql
+COPY extensao_postgresql.py /app
+RUN python /app/extensao_postgresql.py
+
 ENTRYPOINT ["/app/src/script_docker.sh"]
