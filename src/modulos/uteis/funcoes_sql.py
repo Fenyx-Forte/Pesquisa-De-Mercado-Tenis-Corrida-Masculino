@@ -14,8 +14,6 @@ def ler_conteudo_query(caminho_query: str) -> str:
 
 def string_conexao_banco_de_dados() -> str:
     query_conexao = f"""
-        INSTALL postgres;
-        LOAD postgres;
         ATTACH '{getenv("DATABASE_URL")}' AS db (TYPE POSTGRES);
     """
 
@@ -24,8 +22,6 @@ def string_conexao_banco_de_dados() -> str:
 
 def string_conexao_banco_de_dados_apenas_leitura() -> str:
     query_conexao = f"""
-        INSTALL postgres;
-        LOAD postgres;
         ATTACH '{getenv("DATABASE_URL")}' AS db (TYPE POSTGRES, READ_ONLY);
     """
 
