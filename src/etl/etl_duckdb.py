@@ -59,7 +59,6 @@ def pipeline() -> None:
         "../sql/dml/inserir_dados.sql"
     )
 
-    with conexao as conexao:
-        salvar_sql.salvar_dados(query_insercao, df, conexao)
+    salvar_sql.salvar_dados(query_insercao, df, conexao, nome_arquivo, horario)
 
-    duckdb_local.inserir_arquivo(nome_arquivo, horario)
+    conexao.close()
