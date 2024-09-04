@@ -1,6 +1,6 @@
 from duckdb import connect
 
-from modulos.uteis import carregar_env, funcoes_sql, meu_tempo, minhas_queries
+from modulos.uteis import carregar_env, funcoes_sql, minhas_queries
 
 
 def inicializacao() -> None:
@@ -17,7 +17,7 @@ def inicializacao() -> None:
 def extrair_dados_mais_recentes_e_salvar_dados_na_memoria() -> None:
     query = minhas_queries.dados_mais_recentes_do_banco_de_dados()
 
-    funcoes_sql.conexao_banco_de_dados_apenas_leitura(conexao_global)
+    funcoes_sql.conexao_banco_de_dados_dashboard(conexao_global)
 
     conexao_global.sql(query)
 
