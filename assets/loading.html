@@ -76,13 +76,9 @@
                     const status = xhr.status;
                     if (status === 0 || (status >= 200 && status < 400)) {
                         const conteudo = xhr.responseText;
-                        if (conteudo.includes("Aguarde alguns instantes")){
-                            setTimeout(checkServer, 5000);
-                        } else{
+                        if (!conteudo.includes("Aguarde alguns instantes")){
                             window.location.reload();
                         }
-                    } else {
-                        setTimeout(checkServer, 5000);
                     }
                 }
             };
@@ -90,7 +86,7 @@
             xhr.send();
         }
 
-        checkServer();
+        setInterval(checkServer, 15000);
     </script>
 </body>
 </html>
