@@ -12,7 +12,7 @@
     }
 }
 
-.meu-toggle-navbar{
+#meu-toggle-navbar{
     position: absolute;
     z-index: 1001;
     color: #158cba;
@@ -26,6 +26,7 @@
     width: auto;
     height: auto;
     font-size: 24px;
+    visibility: visible;
 }
 
 
@@ -63,11 +64,12 @@
 }
 
 .minha-sidebar-escondida{
-    max-height: 0;
-    max-width: 0;
-    font-size: 0;
+    max-height: 0px;
+    max-width: 0px;
+    font-size: 0px;
     box-shadow: none;
     overflow: hidden;
+    visibility: hidden;
 }
 
 
