@@ -83,10 +83,10 @@ def sidebar() -> html.Div:
                         pills=True,
                     ),
                 ],
-                className="minha-sidebar",
-                id="minha-sidebar",
             ),
         ],
+        id="minha-sidebar",
+        className="minha-sidebar",
     )
 
     return conteudo
