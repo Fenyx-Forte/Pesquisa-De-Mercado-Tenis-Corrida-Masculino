@@ -2,15 +2,32 @@
 .cabecalho{
     padding-top: 1rem;
     padding-bottom: 1rem;
+
+    #titulo-aplicacao{
+        font-size: 30px;
+    }
+
+    #data-coleta{
+        font-size: 16px;
+    }
 }
 
-.cabecalho #titulo-aplicacao{
-    font-size: 30px;
+.meu-toggle-navbar{
+    position: absolute;
+    z-index: 1001;
+    color: #158cba;
+    top: 0;
+    margin-top: 0;
+    left: 0;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    width: auto;
+    height: auto;
+    font-size: 24px;
 }
 
-.cabecalho #data-coleta{
-    font-size: 16px;
-}
 
 /* Sidebar */
 .minha-sidebar{
@@ -29,34 +46,31 @@
     padding-bottom: 2rem;
     background-color: #f8f9fa;
     box-shadow: 3px 3px 3px 3px lightgrey;
+
+    H1{
+        font-size: 22px;
+        margin-top: 50px;
+    }
+
+    label{
+        padding-left: 5px;
+    }
+
+    .meu-icone{
+        width: 14px;
+        height: 14px;
+    }
 }
 
-.minha-sidebar H1{
-    font-size: 22px;
+.minha-sidebar-escondida{
+    max-height: 0;
+    max-width: 0;
+    font-size: 0;
+    box-shadow: none;
+    overflow: hidden;
 }
 
-.minha-sidebar-links label{
-    padding-left: 5px;
-}
 
-.minha-sidebar .meu-icone{
-    width: 14px;
-    height: 14px;
-}
-
-/*
-.minha-sidebar-links{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.minha-sidebar-links a{
-    text-decoration: none;
-    flex: 1;
-    text-align: center;
-}
-*/
 
 /* Conteiner */
 .meu-conteudo   {
@@ -73,18 +87,18 @@
 /* Conteudo Pagina */
 .pagina{
     padding-bottom: 1rem;
-}
 
-/* Centralizar colunas e valores de dags */
-.pagina .center-aligned-header .ag-header-cell-label {
-    justify-content: center;
-}
+    /* Centralizar colunas e valores de dags */
+    .center-aligned-header .ag-header-cell-label {
+        justify-content: center;
+    }
 
-.pagina .center-aligned-cell {
-    text-align: center;
-}
+    .center-aligned-cell {
+        text-align: center;
+    }
 
-.pagina .meu-dag{
-    max-width: 100%;
-    width: auto;
+    .meu-dag{
+        max-width: 100%;
+        width: auto;
+    }
 }

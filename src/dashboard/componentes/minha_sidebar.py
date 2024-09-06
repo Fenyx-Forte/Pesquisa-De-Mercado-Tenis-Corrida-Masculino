@@ -1,10 +1,21 @@
-from dash import html, page_registry
+from dash import (
+    Input,
+    Output,
+    clientside_callback,
+    html,
+    page_registry,
+)
 from dash_bootstrap_components import Nav, NavLink
 
 
 def sidebar() -> html.Div:
     conteudo = html.Div(
         [
+            html.Div(
+                html.I(className="fas fa-bars"),
+                className="meu-toggle-navbar",
+                id="meu-toggle-navbar",
+            ),
             html.Div(
                 [
                     html.H1("Fenyx Forte", className="text-primary"),
@@ -56,26 +67,43 @@ def sidebar() -> html.Div:
                                 rel="noreferrer",
                             ),
                         ],
-                        className="minha-sidebar-links",
                     ),
-                ]
-            ),
-            html.Hr(),
-            Nav(
-                [
-                    NavLink(
-                        html.Div(page["name"]),
-                        href=page["path"],
-                        active="exact",
-                    )
-                    for page in page_registry.values()
-                    if page["name"] != "Not Found 404"
+                    html.Hr(),
+                    Nav(
+                        [
+                            NavLink(
+                                html.Div(page["name"]),
+                                href=page["path"],
+                                active="exact",
+                            )
+                            for page in page_registry.values()
+                            if page["name"] != "Not Found 404"
+                        ],
+                        vertical=True,
+                        pills=True,
+                    ),
                 ],
-                vertical=True,
-                pills=True,
+                className="minha-sidebar",
+                id="minha-sidebar",
             ),
         ],
-        className="minha-sidebar",
     )
 
     return conteudo
+
+
+clientside_callback(
+    """
+    function(n_clicks) {
+        if (n_clicks % 2 == 1) {
+            return "minha-sidebar-escondida"
+        }
+        else {
+            return "minha-sidebar"
+        }
+    }
+    """,
+    Output("minha-sidebar", "className"),
+    Input("meu-toggle-navbar", "n_clicks"),
+    prevent_initial_call=True,
+)
