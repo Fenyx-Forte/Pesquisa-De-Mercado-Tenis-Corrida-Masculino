@@ -8,6 +8,7 @@
     <meta name="application-name" content="Pesquisa de Mercado: Tênis de Corrida no Mercado Livre">
     <meta name="keywords" content="webscraping dashboard dados">
     <meta name="google" content="notranslate">
+    <meta http-equiv="refresh" content="50">
     <link rel="icon" type="image/png" href="/assets/favicon.ico">
     <title>Carregando...</title>
 
@@ -56,37 +57,27 @@
 <body>
     <div id="minha-pagina-carregamento" class="container">
         <div id="loading-message" class="loading-message">
-            Carregando Aplicação<br>
-            Aguarde alguns instantes
+            Estamos preparando tudo para você!<br>
+            Apenas mais <span id="seconds">50</span> <span id="time-unit">segundos</span>.
         </div>
         <div class="spinner"></div>
         <div class="loading-submessage">Obrigado pela paciência!</div>
     </div>
 
     <script>
-        function checkServer() {
-            const xhr = new XMLHttpRequest();
-            const method = "GET";
-            const url = "/";
+        let seconds = 50;
+        const countdownElement = document.getElementById("seconds");
+        const timeUnitElement = document.getElementById("time-unit");
 
-            xhr.open(method, url, true);
-
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    const status = xhr.status;
-                    if (status === 0 || (status >= 200 && status < 400)) {
-                        const conteudo = xhr.responseText;
-                        if (!conteudo.includes("Aguarde alguns instantes")){
-                            window.location.reload();
-                        }
-                    }
-                }
-            };
-
-            xhr.send();
+        function updateCountdown() {
+            if (seconds > 0) {
+                seconds--;
+                countdownElement.textContent = seconds;
+                timeUnitElement.textContent = seconds === 1 ? "segundo" : "segundos";
+            }
         }
 
-        setInterval(checkServer, 15000);
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
