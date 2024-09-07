@@ -16,6 +16,7 @@
     position: absolute;
     z-index: 1001;
     color: #158cba;
+    font-size: 24px;
     top: 0;
     margin-top: 0;
     left: 0;
@@ -25,19 +26,18 @@
     padding-top: 1rem;
     width: auto;
     height: auto;
-    font-size: 24px;
     visibility: visible;
 }
 
 
 /* Sidebar */
 .minha-sidebar{
-    top: 0;
-    margin-top: 0;
-    left: 0;
-    margin-left: 0;
-    bottom: 0;
-    margin-bottom: 0;
+    top: 0px;
+    margin-top: 0px;
+    left: 0px;
+    margin-left: 0px;
+    bottom: 0px;
+    margin-bottom: 0px;
     width: auto;
     min-height: 100vh;
     height: 100%;
@@ -64,18 +64,41 @@
 }
 
 .minha-sidebar-escondida{
-    max-height: 0px;
-    max-width: 0px;
+    top: 0px;
+    margin-top: 0px;
+    left: 0px;
+    margin-left: 0px;
+    bottom: 0px;
+    margin-bottom: 0px;
+    width: 1px;
+    max-width: 1px;
+    min-height: 100vh;
+    height: 100%;
+
+    padding: 0px;
     font-size: 0px;
-    box-shadow: none;
     overflow: hidden;
     visibility: hidden;
+
+    H1{
+        font-size: 0px;
+        margin-top: 0px;
+    }
+
+    label{
+        padding-left: 0px;
+    }
+
+    .meu-icone{
+        width: 0px;
+        height: 0px;
+    }
 }
 
 
 
 /* Conteiner */
-.meu-conteudo   {
+.meu-conteudo {
     display: flex;
     flex-wrap: nowrap; /* Impede quebra de linha, força o uso de rolagem horizontal */
     overflow-x: auto; /* Permite rolagem horizontal */
