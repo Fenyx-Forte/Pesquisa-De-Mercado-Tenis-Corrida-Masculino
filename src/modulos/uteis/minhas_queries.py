@@ -50,6 +50,21 @@ def data_coleta_mais_recente() -> str:
     return query
 
 
+def dia_coleta_mais_antiga() -> str:
+    query = """
+    SELECT
+        STRFTIME(data_coleta, '%Y-%m-%d') as dia_coleta
+    FROM
+        dados_completos
+    ORDER BY
+        data_coleta ASC
+    LIMIT
+        1;
+    """
+
+    return query
+
+
 def tabela_dag() -> str:
     query = """
     SELECT
@@ -60,6 +75,66 @@ def tabela_dag() -> str:
         , percentual_promocao
     FROM
         dados_mais_recentes;
+    """
+
+    return query
+
+
+def top_10_marcas_dados_mais_recentes() -> str:
+    query = """
+    WITH marcas_dados_mais_recentes as (
+        SELECT
+            dmr.marca as Marca
+            , (
+                COUNT(marca) * 100.0 / (SUM(COUNT(*)) OVER())
+            ) as Porcentagem
+            , $dia_mais_recente as Período
+        FROM
+            dados_mais_recentes as dmr
+        GROUP BY
+            dmr.marca
+    )
+    SELECT
+        *
+    FROM
+        marcas_dados_mais_recentes
+    WHERE
+        Marca <> 'GENERICA'
+    ORDER BY
+        Porcentagem DESC
+    LIMIT
+        10;
+    """
+
+    return query
+
+
+def top_10_marcas_em_um_periodo() -> str:
+    query = """
+    WITH marcas_em_um_periodo AS (
+        SELECT
+            dc.marca as Marca
+            , (
+                COUNT(marca) * 100.0 / (SUM(COUNT(*)) OVER())
+            ) as Porcentagem
+            , $periodo as Período
+        FROM
+            dados_completos as dc
+        WHERE
+            dc.data_coleta BETWEEN $data_inicio AND $data_fim
+        GROUP BY
+            dc.marca
+    )
+    SELECT
+        *
+    FROM
+        marcas_em_um_periodo
+    WHERE
+        Marca IN (SELECT UNNEST ($lista_marcas))
+    ORDER BY
+        Porcentagem DESC
+    LIMIT
+        10;
     """
 
     return query
