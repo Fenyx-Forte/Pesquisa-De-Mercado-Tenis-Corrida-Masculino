@@ -82,6 +82,33 @@ def sidebar() -> html.Div:
                         vertical=True,
                         pills=True,
                     ),
+                    html.Hr(),
+                    html.Div(
+                        [
+                            html.A(
+                                [
+                                    html.I(className="fa-solid fa-code"),
+                                    html.Label("Repositório"),
+                                ],
+                                href="https://github.com/Fenyx-Forte/Analise-De-Dados",
+                                target="_blank",
+                                rel="noreferrer",
+                            ),
+                            html.Br(),
+                            html.A(
+                                [
+                                    html.I(className="fa-solid fa-book"),
+                                    html.Label(
+                                        "Documentação",
+                                        className="label-documentacao",
+                                    ),
+                                ],
+                                href="https://github.com/Fenyx-Forte",
+                                target="_blank",
+                                rel="noreferrer",
+                            ),
+                        ],
+                    ),
                 ],
             ),
         ],
