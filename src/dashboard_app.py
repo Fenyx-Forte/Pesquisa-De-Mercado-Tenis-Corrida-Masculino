@@ -5,7 +5,7 @@ from dashboard.uteis import processamento_dados
 
 
 def aplicacao():
-    processamento_dados.inicializacao()
+    processamento_dados.inicializacao_dados()
 
     app = Dash(__name__, **configuracoes_dash.configuracoes_app())
 
@@ -17,7 +17,7 @@ def aplicacao():
 
 
 def desenvolvimento():
-    processamento_dados.inicializacao()
+    processamento_dados.inicializacao_dados()
 
     app = Dash(__name__, **configuracoes_dash.configuracoes_app())
 
