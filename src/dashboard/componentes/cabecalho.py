@@ -12,7 +12,7 @@ def cabecalho() -> html.Div:
                 id="titulo-aplicacao",
             ),
             html.H4(
-                f"Data Coleta: {processamento_dados.recuperar_data_coleta()}",
+                f"Data Coleta: {processamento_dados.retorna_data_coleta()}",
                 className="text-center",
                 id="data-coleta",
             ),

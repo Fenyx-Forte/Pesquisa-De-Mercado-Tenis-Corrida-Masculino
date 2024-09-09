@@ -27,7 +27,7 @@ layout = html.Div(
         html.Br(),
         html.Button("Exportar CSV", id="botao-exportar-csv", n_clicks=0),
         AgGrid(
-            rowData=processamento_dados.recuperar_dados_dag(),
+            rowData=processamento_dados.retorna_dados_dag(),
             id="meu-dag",
             columnDefs=[
                 {
