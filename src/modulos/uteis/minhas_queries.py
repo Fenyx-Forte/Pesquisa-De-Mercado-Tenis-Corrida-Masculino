@@ -1,31 +1,33 @@
-def dados_mais_recentes_do_banco_de_dados() -> str:
+def dados_completos_do_banco_de_dados() -> str:
     query = """
     CREATE TABLE
-        minha_tabela AS
+        dados_completos AS
     SELECT
-        marca
-        , produto
-        , preco_velho::FLOAT4 AS preco_velho
-        , preco_atual::FLOAT4 AS preco_atual
-        , promocao
-        , (percentual_promocao/100)::FLOAT4 AS percentual_promocao
-        , nota_avaliacao::FLOAT4 AS nota_avaliacao
-        , num_avaliacoes::INT4 AS num_avaliacoes
-        , _data_coleta
-        , _horario_coleta
-        , _pagina::INT1 AS _pagina
-        , _ordem::INT1 AS _ordem
+        *
     FROM
-        db.mercado_livre AS ml
-    WHERE
-        "_data_coleta" = (
-            SELECT
-                MAX("_data_coleta")
-            FROM
-                db.mercado_livre
-        );
+        db.view_dados_completos;
 
     DETACH db;
+    """
+
+    return query
+
+
+def dados_mais_recentes() -> str:
+    query = """
+    CREATE TABLE
+        dados_mais_recentes AS
+    SELECT
+        *
+    FROM
+        dados_completos as dc
+    WHERE
+        dc.data_coleta = (
+            SELECT
+                MAX(data_coleta)
+            FROM
+                dados_completos
+        );
     """
 
     return query
@@ -35,12 +37,12 @@ def data_coleta_mais_recente() -> str:
     query = """
     SELECT
         CONCAT(
-            STRFTIME(_data_coleta, '%d/%m/%Y')
+            STRFTIME(data_coleta, '%d/%m/%Y')
             , ' - '
-            , _horario_coleta::VARCHAR
+            , horario_coleta::VARCHAR
         ) AS coluna_data_coleta
     FROM
-        minha_tabela
+        dados_mais_recentes
     LIMIT
         1;
     """
@@ -57,7 +59,7 @@ def tabela_dag() -> str:
         , promocao
         , percentual_promocao
     FROM
-        minha_tabela;
+        dados_mais_recentes;
     """
 
     return query
@@ -68,7 +70,7 @@ def kpi_num_total_itens() -> str:
     SELECT
         count(*) AS "Número Total de Produtos"
     FROM
-        df;
+        dados_mais_recentes;
     """
 
     return query
@@ -79,7 +81,7 @@ def kpi_num_marcas_unicas() -> str:
     SELECT
         COUNT(DISTINCT marca) AS "Número de Marcas"
     FROM
-        df
+        dados_mais_recentes
     WHERE
         marca <> 'GENERICA';
     """
@@ -92,7 +94,7 @@ def kpi_preco_atual_medio() -> str:
     SELECT
         AVG(preco_atual) AS "Média Preço"
     FROM
-        df;
+        dados_mais_recentes;
     """
 
     return query
@@ -104,7 +106,7 @@ def marcas_mais_encontradas() -> str:
         marca AS "Marca"
         , COUNT(marca) AS "Qtd Produtos"
     FROM
-        df
+        dados_mais_recentes
     GROUP BY
         marca
     ORDER BY
@@ -123,7 +125,7 @@ def preco_medio_por_marca() -> str:
         marcas as "Marca"
         , AVG(preco_atual) AS "Preço Médio"
     FROM
-        df
+        dados_mais_recentes
     GROUP BY
         marca
     ORDER BY
@@ -140,7 +142,7 @@ def satisfacao_media_por_marca() -> str:
         marca as "Marca"
         , AVG(nota_avalicao) as "Satisfação Média"
     FROM
-        df
+        dados_mais_recentes
     WHERE
         num_avaliacoes >= 20
     GROUP BY
