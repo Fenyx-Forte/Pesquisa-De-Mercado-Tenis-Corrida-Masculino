@@ -10,9 +10,15 @@ register_page(
 )
 
 
+def titulo() -> html.H1:
+    conteudo = html.H1("Página KPI's")
+
+    return conteudo
+
+
 layout = html.Div(
     [
-        html.H1("Página KPI's"),
+        titulo(),
         html.Div("Conteúdo Página KPI's"),
     ],
     className="pagina",
