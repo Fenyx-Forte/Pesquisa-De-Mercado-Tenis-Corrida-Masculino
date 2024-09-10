@@ -8,4 +8,10 @@ register_page(
 )
 
 
-layout = html.H1("Page not found! Error 404", className="pagina")
+def titulo() -> html.H1:
+    conteudo = html.H1("Page not found! Error 404", className="pagina")
+
+    return conteudo
+
+
+layout = titulo()
