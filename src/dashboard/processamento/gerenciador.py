@@ -4,6 +4,8 @@ from dashboard.processamento.paginas import (
     processamento_pagina_2,
     processamento_pagina_3,
     processamento_pagina_4,
+    processamento_pagina_5,
+    processamento_pagina_6,
 )
 
 
@@ -47,19 +49,19 @@ def retorna_data_coleta_mais_antiga() -> str:
     return escopo_aplicacaco.data_coleta_mais_antiga
 
 
-# Pagina 1
-def pagina_1_top_10_marcas_atual():
-    return processamento_pagina_1.inicializa_top_10_marcas_atual(
+# Pagina 2
+def pagina_2_top_10_marcas_atual():
+    return processamento_pagina_2.inicializa_top_10_marcas_atual(
         escopo_aplicacaco.conexao, escopo_aplicacaco.data_coleta_mais_recente
     )
 
 
-def pagina_1_grafico_comparacao_top_10(
+def pagina_2_grafico_comparacao_top_10(
     dados_grafico_atual: list[dict],
     data_inicio: str,
     data_fim: str,
 ):
-    return processamento_pagina_1.dados_grafico_comparacao_top_10(
+    return processamento_pagina_2.dados_grafico_comparacao_top_10(
         escopo_aplicacaco.conexao,
         dados_grafico_atual,
         data_inicio,
@@ -67,6 +69,6 @@ def pagina_1_grafico_comparacao_top_10(
     )
 
 
-# Pagina 4
-def pagina_4_inicializa_tabela() -> list[dict]:
-    return processamento_pagina_4.inicializa_tabela(escopo_aplicacaco.conexao)
+# Pagina 6
+def pagina_6_inicializa_tabela() -> list[dict]:
+    return processamento_pagina_6.inicializa_tabela(escopo_aplicacaco.conexao)

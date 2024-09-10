@@ -85,7 +85,7 @@ def configuracoes_colunas_tabela_dados() -> list[dict]:
 
 def tabela_dados() -> AgGrid:
     conteudo = AgGrid(
-        rowData=gerenciador.pagina_4_inicializa_tabela(),
+        rowData=gerenciador.pagina_6_inicializa_tabela(),
         id="tabela-dados",
         columnDefs=configuracoes_colunas_tabela_dados(),
         defaultColDef={
