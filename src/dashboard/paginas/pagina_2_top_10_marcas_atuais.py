@@ -79,6 +79,9 @@ def figura_top_10_marcas(df: pd_DataFrame) -> px.bar:
             hoverlabel=dict(font_size=12, font_color="#FFFFFF"),
             uniformtext_minsize=10,
             uniformtext_mode="hide",
+            legend=dict(
+                font=dict(size=14, color="black"),
+            ),
         )
     )
 
