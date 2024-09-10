@@ -2,6 +2,7 @@ import plotly.express as px
 from dash import Input, Output, State, callback, dcc, html, register_page
 from dash.exceptions import PreventUpdate
 from dash_bootstrap_components import Button
+from pandas import DataFrame as pd_DataFrame
 
 from dashboard.processamento import gerenciador
 
@@ -49,14 +50,43 @@ def botao_adicionar_periodo() -> Button:
     return conteudo
 
 
+def figura_top_10_marcas(df: pd_DataFrame) -> px.bar:
+    figura = (
+        px.bar(
+            df,
+            x="Marca",
+            y="Porcentagem",
+            color="Período",
+            color_discrete_sequence=["#6495ED", "#FFA07A", "#5CB85C"],
+            barmode="group",
+            hover_data={
+                "Porcentagem": ":.2f",
+                "Período": False,
+                "Marca": False,
+            },
+            text_auto=".2f",
+        )
+        .update_traces(
+            textfont_size=12,
+            textangle=0,
+            textfont_color="#000000",
+            textposition="outside",
+            cliponaxis=False,
+            # textposition="auto",
+        )
+        .update_layout(
+            dragmode=False,
+            hoverlabel=dict(font_size=12, font_color="#FFFFFF"),
+            uniformtext_minsize=10,
+            uniformtext_mode="hide",
+        )
+    )
+
+    return figura
+
+
 def grafico_top_10_marcas() -> dcc.Graph:
-    figura = px.bar(
-        gerenciador.pagina_2_top_10_marcas_atual(),
-        x="Marca",
-        y="Porcentagem",
-        color="Período",
-        barmode="group",
-    ).update_layout(dragmode=False)
+    figura = figura_top_10_marcas(gerenciador.pagina_2_top_10_marcas_atuais())
 
     conteudo = dcc.Graph(
         figure=figura,
@@ -77,11 +107,9 @@ def grafico_top_10_marcas() -> dcc.Graph:
 
 layout = html.Div(
     [
-        titulo(),
-        html.Br(),
+        # titulo(),
+        # html.Br(),
         seletor_datas(),
-        html.Br(),
-        html.Br(),
         botao_adicionar_periodo(),
         grafico_top_10_marcas(),
     ],
@@ -114,12 +142,6 @@ def adicionar_comparacao(n_clicks, data_inicio, data_fim, dados_grafico_atual):
         dados_grafico_atual, data_inicio, data_fim
     )
 
-    figura_nova = px.bar(
-        dados_grafico,
-        x="Marca",
-        y="Porcentagem",
-        color="Período",
-        barmode="group",
-    ).update_layout(dragmode=False)
+    figura_nova = figura_top_10_marcas(dados_grafico)
 
     return figura_nova, None, None
