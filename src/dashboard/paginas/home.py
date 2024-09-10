@@ -1,10 +1,9 @@
 import plotly.express as px
-import plotly.graph_objects as go
-from dash import Input, Output, Patch, State, callback, dcc, html, register_page
+from dash import Input, Output, State, callback, dcc, html, register_page
 from dash.exceptions import PreventUpdate
 from dash_bootstrap_components import Button
 
-from dashboard.uteis import processamento_dados
+from dashboard.processamento import gerenciador
 
 register_page(
     __name__,
@@ -28,8 +27,8 @@ def seletor_datas() -> dcc.DatePickerRange:
         start_date_placeholder_text="Data Inicial",
         end_date_placeholder_text="Data Final",
         display_format="DD/MM/YYYY",
-        min_date_allowed=processamento_dados.retorna_dia_coleta_mais_antiga(),
-        max_date_allowed=processamento_dados.retorna_dia_coleta_mais_recente(),
+        min_date_allowed=gerenciador.retorna_data_coleta_mais_antiga(),
+        max_date_allowed=gerenciador.retorna_data_coleta_mais_recente(),
         clearable=True,
         minimum_nights=0,
         show_outside_days=False,
@@ -52,7 +51,7 @@ def botao_adicionar_periodo() -> Button:
 
 def grafico_top_10_marcas() -> dcc.Graph:
     figura = px.bar(
-        processamento_dados.retorna_top_10_marcas_dados_mais_recentes(),
+        gerenciador.pagina_1_top_10_marcas_atual(),
         x="Marca",
         y="Porcentagem",
         color="Período",
@@ -110,7 +109,7 @@ def adicionar_comparacao(n_clicks, data_inicio, data_fim, dados_grafico_atual):
     if qtd_periodos >= 3:
         raise PreventUpdate
 
-    dados_grafico = processamento_dados.retorna_dados_grafico_comparacao_top_10(
+    dados_grafico = gerenciador.pagina_1_grafico_comparacao_top_10(
         dados_grafico_atual, data_inicio, data_fim
     )
 

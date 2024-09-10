@@ -1,6 +1,6 @@
 from dash import html
 
-from dashboard.uteis import processamento_dados
+from dashboard.processamento import gerenciador
 
 
 def titulo() -> html.H1:
@@ -15,7 +15,7 @@ def titulo() -> html.H1:
 
 def informacao_data_coleta() -> html.H4:
     conteudo = html.H4(
-        f"Data Coleta: {processamento_dados.retorna_data_coleta()}",
+        f"Data Coleta: {gerenciador.retorna_cabecalho_data_coleta()}",
         className="text-center",
         id="data-coleta",
     )

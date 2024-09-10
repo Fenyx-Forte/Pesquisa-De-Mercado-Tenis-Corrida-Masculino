@@ -9,7 +9,8 @@ from dash import (
 from dash_ag_grid import AgGrid
 from dash_bootstrap_components import Button
 
-from dashboard.uteis import formatacoes, processamento_dados, traducoes
+from dashboard.processamento import gerenciador
+from dashboard.uteis import formatacoes, traducoes
 
 register_page(
     __name__,
@@ -84,7 +85,7 @@ def configuracoes_colunas_tabela_dados() -> list[dict]:
 
 def tabela_dados() -> AgGrid:
     conteudo = AgGrid(
-        rowData=processamento_dados.retorna_dados_dag(),
+        rowData=gerenciador.pagina_4_inicializa_tabela(),
         id="tabela-dados",
         columnDefs=configuracoes_colunas_tabela_dados(),
         defaultColDef={

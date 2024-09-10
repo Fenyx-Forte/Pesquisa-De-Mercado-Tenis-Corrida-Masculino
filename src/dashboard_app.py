@@ -1,11 +1,11 @@
 from dash import Dash
 
 from dashboard import configuracoes_dash
-from dashboard.uteis import processamento_dados
+from dashboard.processamento import gerenciador
 
 
 def aplicacao():
-    processamento_dados.inicializacao_dados()
+    gerenciador.inicializar_escopo_global()
 
     app = Dash(__name__, **configuracoes_dash.configuracoes_app())
 
@@ -17,7 +17,7 @@ def aplicacao():
 
 
 def desenvolvimento():
-    processamento_dados.inicializacao_dados()
+    gerenciador.inicializar_escopo_global()
 
     app = Dash(__name__, **configuracoes_dash.configuracoes_app())
 
