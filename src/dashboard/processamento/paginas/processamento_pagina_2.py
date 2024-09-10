@@ -3,24 +3,12 @@ from pandas import DataFrame as pd_DataFrame
 from pandas import concat as pd_concat
 
 
-def query_top_10_marcas_atual() -> str:
+def query_top_10_marcas_atuais() -> str:
     query = """
-    WITH marcas_dados_mais_recentes as (
-        SELECT
-            dmr.marca as Marca
-            , (
-                COUNT(marca) * 100.0 / (SUM(COUNT(*)) OVER())
-            ) as Porcentagem
-            , $data_mais_recente as Período
-        FROM
-            dados_mais_recentes as dmr
-        GROUP BY
-            dmr.marca
-    )
     SELECT
         *
     FROM
-        marcas_dados_mais_recentes
+        top_10_marcas_atuais($periodo)
     WHERE
         Marca <> 'GENERICA'
     ORDER BY
@@ -34,24 +22,10 @@ def query_top_10_marcas_atual() -> str:
 
 def query_top_10_marcas_periodo() -> str:
     query = """
-    WITH marcas_em_um_periodo AS (
-        SELECT
-            dc.marca as Marca
-            , (
-                COUNT(marca) * 100.0 / (SUM(COUNT(*)) OVER())
-            ) as Porcentagem
-            , $periodo as Período
-        FROM
-            dados_completos as dc
-        WHERE
-            dc.data_coleta BETWEEN $data_inicio AND $data_fim
-        GROUP BY
-            dc.marca
-    )
     SELECT
         *
     FROM
-        marcas_em_um_periodo
+        top_10_marcas_periodo($periodo, $data_inicio, $data_fim)
     WHERE
         Marca IN (SELECT UNNEST ($lista_marcas))
     ORDER BY
@@ -73,12 +47,16 @@ def formatar_data_pt_br(data: str) -> str:
     return f"{dia}/{mes}/{ano}"
 
 
-def inicializa_top_10_marcas_atual(
+def inicializa_top_10_marcas_atuais(
     conexao: DuckDBPyConnection, data_coleta_mais_recente: str
 ) -> pd_DataFrame:
-    query = query_top_10_marcas_atual()
+    query = query_top_10_marcas_atuais()
 
-    parametros = {"data_mais_recente": data_coleta_mais_recente}
+    data_coleta_formatada = formatar_data_pt_br(data_coleta_mais_recente)
+
+    periodo = f"{data_coleta_formatada} - {data_coleta_formatada}"
+
+    parametros = {"periodo": periodo}
 
     return conexao.execute(query, parametros).df()
 

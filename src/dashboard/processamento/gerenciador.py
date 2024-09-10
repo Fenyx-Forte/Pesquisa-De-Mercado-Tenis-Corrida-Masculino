@@ -18,6 +18,8 @@ def inicializar_escopo_global() -> None:
     inicializacao_dados.configurar_duckdb(conexao)
     inicializacao_dados.inicializar_tabela_dados_completos(conexao)
     inicializacao_dados.inicializar_tabela_dados_mais_recentes(conexao)
+    inicializacao_dados.inicializar_macro_top_10_marcas_atuais(conexao)
+    inicializacao_dados.inicializar_macro_top_10_marcas_periodo(conexao)
 
     cabecalho_data_coleta = (
         inicializacao_dados.inicializar_cabecalho_data_coleta(conexao)
@@ -50,8 +52,8 @@ def retorna_data_coleta_mais_antiga() -> str:
 
 
 # Pagina 2
-def pagina_2_top_10_marcas_atual():
-    return processamento_pagina_2.inicializa_top_10_marcas_atual(
+def pagina_2_top_10_marcas_atuais():
+    return processamento_pagina_2.inicializa_top_10_marcas_atuais(
         escopo_aplicacaco.conexao, escopo_aplicacaco.data_coleta_mais_recente
     )
 

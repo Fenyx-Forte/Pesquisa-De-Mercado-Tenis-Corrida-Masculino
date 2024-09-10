@@ -1,6 +1,6 @@
 from duckdb import DuckDBPyConnection, connect
 
-from dashboard.processamento import tabelas_sql
+from dashboard.processamento import macros_sql, tabelas_sql
 from modulos.uteis import carregar_env, funcoes_sql
 
 
@@ -76,6 +76,20 @@ def inicializar_tabela_dados_completos(conexao: DuckDBPyConnection) -> None:
 
 def inicializar_tabela_dados_mais_recentes(conexao: DuckDBPyConnection) -> None:
     query = tabelas_sql.tabela_dados_mais_recentes()
+
+    conexao.sql(query)
+
+
+def inicializar_macro_top_10_marcas_atuais(conexao: DuckDBPyConnection) -> None:
+    query = macros_sql.top_10_marcas_atuais()
+
+    conexao.sql(query)
+
+
+def inicializar_macro_top_10_marcas_periodo(
+    conexao: DuckDBPyConnection,
+) -> None:
+    query = macros_sql.top_10_marcas_periodo()
 
     conexao.sql(query)
 
