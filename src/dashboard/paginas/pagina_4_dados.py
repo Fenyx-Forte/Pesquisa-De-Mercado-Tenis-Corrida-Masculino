@@ -119,6 +119,7 @@ layout = html.Div(
         html.Br(),
         botao_exportar_csv(),
         html.Br(),
+        html.Br(),
         tabela_dados(),
     ],
     className="pagina",
