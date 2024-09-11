@@ -22,4 +22,5 @@ layout = html.Div(
         html.Div("Conteúdo Página Promoções"),
     ],
     className="pagina",
+    id="pagina_4",
 )

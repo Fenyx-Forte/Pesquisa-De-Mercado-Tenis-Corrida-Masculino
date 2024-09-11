@@ -34,7 +34,7 @@ def botao_exportar_csv() -> Button:
         outline=True,
         color="primary",
         className="me-1",
-        id="botao-exportar-csv",
+        id="pagina_6_botao_exportar_csv",
     )
 
     return conteudo
@@ -86,7 +86,7 @@ def configuracoes_colunas_tabela_dados() -> list[dict]:
 def tabela_dados() -> AgGrid:
     conteudo = AgGrid(
         rowData=gerenciador.pagina_6_inicializa_tabela(),
-        id="tabela-dados",
+        id="pagina_6_tabela_dados",
         columnDefs=configuracoes_colunas_tabela_dados(),
         defaultColDef={
             "resizable": True,
@@ -124,6 +124,7 @@ layout = html.Div(
         tabela_dados(),
     ],
     className="pagina",
+    id="pagina_6",
 )
 
 
@@ -136,7 +137,7 @@ clientside_callback(
         return false;
     }
     """,
-    Output("tabela-dados", "exportDataAsCsv"),
-    Input("botao-exportar-csv", "n_clicks"),
+    Output("pagina_6_tabela_dados", "exportDataAsCsv"),
+    Input("pagina_6_botao_exportar_csv", "n_clicks"),
     prevent_initial_call=True,
 )

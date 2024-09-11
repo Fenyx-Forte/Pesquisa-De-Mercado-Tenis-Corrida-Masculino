@@ -22,4 +22,5 @@ layout = html.Div(
         html.Div("Conteúdo Página KPI's"),
     ],
     className="pagina",
+    id="pagina_1",
 )
