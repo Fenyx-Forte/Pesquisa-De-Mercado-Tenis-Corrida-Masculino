@@ -103,12 +103,12 @@ def layout_app() -> Container:
                         ],
                     ),
                     width=True,
-                    class_name="meu-conteudo",
+                    class_name="conteiner-pagina",
                 ),
             ],
         ),
         fluid=True,
-        class_name="meu-conteiner",
+        id="meu-conteiner",
     )
 
     return layout
