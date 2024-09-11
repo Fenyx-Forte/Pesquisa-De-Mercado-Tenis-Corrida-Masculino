@@ -1,10 +1,26 @@
 import plotly.express as px
-from dash import Input, Output, State, callback, dcc, html, register_page
+from dash import (
+    Input,
+    Output,
+    State,
+    callback,
+    clientside_callback,
+    dcc,
+    html,
+    register_page,
+)
 from dash.exceptions import PreventUpdate
-from dash_bootstrap_components import Button
+from dash_bootstrap_components import (
+    Button,
+    Modal,
+    ModalBody,
+    ModalHeader,
+    ModalTitle,
+)
 from pandas import DataFrame as pd_DataFrame
 
 from dashboard.processamento import gerenciador
+from dashboard.processamento.paginas import processamento_pagina_2
 
 register_page(
     __name__,
@@ -24,7 +40,7 @@ def titulo() -> html.H1:
 
 def seletor_datas() -> dcc.DatePickerRange:
     conteudo = dcc.DatePickerRange(
-        id="seletor-datas",
+        id="pagina_2_seletor_datas",
         start_date_placeholder_text="Data Inicial",
         end_date_placeholder_text="Data Final",
         display_format="DD/MM/YYYY",
@@ -44,7 +60,20 @@ def botao_adicionar_periodo() -> Button:
         outline=True,
         color="primary",
         className="me-1",
-        id="botao-adicionar-periodo",
+        id="pagina_2_botao",
+    )
+
+    return conteudo
+
+
+def modal_erro() -> Modal:
+    conteudo = Modal(
+        [
+            ModalHeader(ModalTitle("Titulo", id="pagina_2_modal_erro_titulo")),
+            ModalBody("Conteudo", id="pagina_2_modal_erro_conteudo"),
+        ],
+        id="pagina_2_modal_erro",
+        is_open=False,
     )
 
     return conteudo
@@ -56,12 +85,13 @@ def figura_top_10_marcas(df: pd_DataFrame) -> px.bar:
             df,
             x="Marca",
             y="Porcentagem",
-            color="Período",
+            color="Periodo",
+            labels={"Periodo": "Período"},
             color_discrete_sequence=["#6495ED", "#FFA07A", "#5CB85C"],
             barmode="group",
             hover_data={
                 "Porcentagem": ":.2f",
-                "Período": False,
+                "Periodo": False,
                 "Marca": False,
             },
             text_auto=".2f",
@@ -102,7 +132,7 @@ def grafico_top_10_marcas() -> dcc.Graph:
             "scrollZoom": False,
             "showTips": False,
         },
-        id="grafico-top-10-marcas",
+        id="pagina_2_grafico_top_10_marcas",
     )
 
     return conteudo
@@ -114,31 +144,86 @@ layout = html.Div(
         # html.Br(),
         seletor_datas(),
         botao_adicionar_periodo(),
+        modal_erro(),
         grafico_top_10_marcas(),
     ],
     className="pagina",
+    id="pagina_2",
 )
 
 
 @callback(
-    Output("grafico-top-10-marcas", "figure"),
-    Output("seletor-datas", "start_date"),
-    Output("seletor-datas", "end_date"),
-    Input("botao-adicionar-periodo", "n_clicks"),
-    State("seletor-datas", "start_date"),
-    State("seletor-datas", "end_date"),
-    State("grafico-top-10-marcas", "figure"),
+    Output("pagina_2_modal_erro_titulo", "children"),
+    Output("pagina_2_modal_erro_conteudo", "children"),
+    Input("pagina_2_botao", "n_clicks"),
+    State("pagina_2_seletor_datas", "start_date"),
+    State("pagina_2_seletor_datas", "end_date"),
+    State("pagina_2_grafico_top_10_marcas", "figure"),
     prevent_initial_call=True,
 )
-def adicionar_comparacao(n_clicks, data_inicio, data_fim, dados_grafico_atual):
-    if data_inicio is None:
-        raise PreventUpdate
-    if data_fim is None:
-        raise PreventUpdate
+def verificar_inputs(n_clicks, data_inicio, data_fim, dados_grafico_atual):
+    titulo = ""
+    conteudo = ""
 
-    qtd_periodos = len(dados_grafico_atual["data"])
+    if not processamento_pagina_2.verifica_se_datas_sao_validas(
+        data_inicio, data_fim
+    ):
+        titulo = "Período Inválido"
 
-    if qtd_periodos >= 3:
+        conteudo = "Selecione as datas usando o calendário ou escreva a data no formato DD/MM/YYYY."
+
+        return titulo, conteudo
+
+    if processamento_pagina_2.verifica_se_qtd_maxima_de_periodos_ja_foi_adicionada(
+        dados_grafico_atual
+    ):
+        titulo = "Quantidade Máxima de Períodos Atingida"
+
+        conteudo = "A quantidade máxima de períodos é 3."
+
+        return titulo, conteudo
+
+    if processamento_pagina_2.verifica_se_periodo_ja_foi_adicionado(
+        data_inicio, data_fim, dados_grafico_atual
+    ):
+        titulo = "Período já Adicionado"
+
+        conteudo = (
+            "Esse período já foi adicionado. Adicione um período diferente."
+        )
+
+        return titulo, conteudo
+
+    return titulo, conteudo
+
+
+clientside_callback(
+    """
+    function abrirModal(titulo) {
+        if (titulo === "") {
+            return window.dash_clientside.no_update;
+        }
+        return true;
+    }
+    """,
+    Output("pagina_2_modal_erro", "is_open"),
+    Input("pagina_2_modal_erro_titulo", "children"),
+    prevent_initial_call=True,
+)
+
+
+@callback(
+    Output("pagina_2_grafico_top_10_marcas", "figure"),
+    Output("pagina_2_seletor_datas", "start_date"),
+    Output("pagina_2_seletor_datas", "end_date"),
+    Input("pagina_2_modal_erro_titulo", "children"),
+    State("pagina_2_seletor_datas", "start_date"),
+    State("pagina_2_seletor_datas", "end_date"),
+    State("pagina_2_grafico_top_10_marcas", "figure"),
+    prevent_initial_call=True,
+)
+def adicionar_comparacao(titulo, data_inicio, data_fim, dados_grafico_atual):
+    if titulo != "":
         raise PreventUpdate
 
     dados_grafico = gerenciador.pagina_2_grafico_comparacao_top_10(
