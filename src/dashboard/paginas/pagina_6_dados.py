@@ -130,7 +130,7 @@ layout = html.Div(
 
 clientside_callback(
     """
-    function(nClicks) {
+    function exportarCSV(nClicks) {
         if (nClicks) {
             return true;
         }
