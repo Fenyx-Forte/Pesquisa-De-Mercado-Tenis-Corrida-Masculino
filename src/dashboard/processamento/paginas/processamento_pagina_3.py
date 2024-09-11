@@ -1,5 +1,6 @@
 from duckdb import DuckDBPyConnection
 from pandas import DataFrame as pd_DataFrame
+from plotly.graph_objects import Figure
 
 
 def verifica_se_datas_sao_validas(data_inicio: str, data_fim: str) -> bool:
@@ -7,6 +8,32 @@ def verifica_se_datas_sao_validas(data_inicio: str, data_fim: str) -> bool:
         return False
 
     return True
+
+
+def verifica_se_qtd_maxima_de_graficos_ja_foi_adicionada(
+    grafico_2: Figure, grafico_3: Figure
+) -> bool:
+    if (grafico_2 is None) or (grafico_3 is None):
+        return False
+
+    return True
+
+
+def verifica_se_periodo_ja_foi_adicionado(
+    data_inicio: str, data_fim: str, grafico_1: Figure, grafico_2: Figure
+) -> bool:
+    data_inicio_formatada = formatar_data_pt_br(data_inicio)
+    data_fim_formatada = formatar_data_pt_br(data_fim)
+
+    periodo = f"{data_inicio_formatada} - {data_fim_formatada}"
+
+    periodos = []
+
+    for grafico in [grafico_1, grafico_2]:
+        if grafico is not None:
+            periodos.append(grafico["data"][0]["legendgroup"])
+
+    return periodo in periodos
 
 
 def query_top_10_marcas_historico() -> str:
