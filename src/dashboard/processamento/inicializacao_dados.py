@@ -94,6 +94,14 @@ def inicializar_macro_top_10_marcas_periodo(
     conexao.sql(query)
 
 
+def inicializar_macro_top_10_marcas_historico(
+    conexao: DuckDBPyConnection,
+) -> None:
+    query = macros_sql.top_10_marcas_historico()
+
+    conexao.sql(query)
+
+
 def inicializar_cabecalho_data_coleta(conexao: DuckDBPyConnection) -> str:
     query = query_cabecalho_data_coleta()
 

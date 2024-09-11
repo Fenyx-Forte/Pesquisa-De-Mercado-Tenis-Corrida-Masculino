@@ -20,6 +20,7 @@ def inicializar_escopo_global() -> None:
     inicializacao_dados.inicializar_tabela_dados_mais_recentes(conexao)
     inicializacao_dados.inicializar_macro_top_10_marcas_atuais(conexao)
     inicializacao_dados.inicializar_macro_top_10_marcas_periodo(conexao)
+    inicializacao_dados.inicializar_macro_top_10_marcas_historico(conexao)
 
     cabecalho_data_coleta = (
         inicializacao_dados.inicializar_cabecalho_data_coleta(conexao)
@@ -32,10 +33,10 @@ def inicializar_escopo_global() -> None:
     )
 
     escopo_aplicacaco = escopo_global.EscopoGlobal(
-        conexao,
-        cabecalho_data_coleta,
-        data_coleta_mais_recente,
-        data_coleta_mais_antiga,
+        conexao=conexao,
+        cabecalho_data_coleta=cabecalho_data_coleta,
+        data_coleta_mais_recente=data_coleta_mais_recente,
+        data_coleta_mais_antiga=data_coleta_mais_antiga,
     )
 
 
@@ -54,7 +55,8 @@ def retorna_data_coleta_mais_antiga() -> str:
 # Pagina 2
 def pagina_2_top_10_marcas_atuais():
     return processamento_pagina_2.inicializa_top_10_marcas_atuais(
-        escopo_aplicacaco.conexao, escopo_aplicacaco.data_coleta_mais_recente
+        escopo_aplicacaco.conexao,
+        escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
@@ -66,6 +68,23 @@ def pagina_2_grafico_comparacao_top_10(
     return processamento_pagina_2.dados_grafico_comparacao_top_10(
         escopo_aplicacaco.conexao,
         dados_grafico_atual,
+        data_inicio,
+        data_fim,
+    )
+
+
+# Pagina 3
+def pagina_3_top_10_marcas_historico():
+    return processamento_pagina_3.inicializa_top_10_marcas_historico(
+        escopo_aplicacaco.conexao,
+        escopo_aplicacaco.data_coleta_mais_antiga,
+        escopo_aplicacaco.data_coleta_mais_recente,
+    )
+
+
+def pagina_3_top_10_marcas_periodo(data_inicio: str, data_fim: str):
+    return processamento_pagina_3.top_10_marcas_periodo(
+        escopo_aplicacaco.conexao,
         data_inicio,
         data_fim,
     )
