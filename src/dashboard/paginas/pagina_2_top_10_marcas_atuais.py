@@ -161,7 +161,9 @@ layout = html.Div(
     State("pagina_2_grafico_top_10_marcas", "figure"),
     prevent_initial_call=True,
 )
-def verificar_inputs(n_clicks, data_inicio, data_fim, dados_grafico_atual):
+def pagina_2_verificar_inputs(
+    n_clicks, data_inicio, data_fim, dados_grafico_atual
+):
     titulo = ""
     conteudo = ""
 
@@ -222,7 +224,9 @@ clientside_callback(
     State("pagina_2_grafico_top_10_marcas", "figure"),
     prevent_initial_call=True,
 )
-def adicionar_comparacao(titulo, data_inicio, data_fim, dados_grafico_atual):
+def pagina_2_adicionar_comparacao(
+    titulo, data_inicio, data_fim, dados_grafico_atual
+):
     if titulo != "":
         raise PreventUpdate
 
