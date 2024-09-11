@@ -30,7 +30,7 @@ def cabecalho() -> html.Div:
             informacao_data_coleta(),
             html.Hr(),
         ],
-        className="cabecalho",
+        id="cabecalho",
     )
 
     return conteudo
