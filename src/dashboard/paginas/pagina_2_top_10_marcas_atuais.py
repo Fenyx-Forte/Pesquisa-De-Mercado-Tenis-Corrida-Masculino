@@ -177,9 +177,9 @@ def verificar_inputs(n_clicks, data_inicio, data_fim, dados_grafico_atual):
     if processamento_pagina_2.verifica_se_qtd_maxima_de_periodos_ja_foi_adicionada(
         dados_grafico_atual
     ):
-        titulo = "Quantidade Máxima de Períodos Atingida"
+        titulo = "Quantidade Máxima de Comparações Atingida"
 
-        conteudo = "A quantidade máxima de períodos é 3."
+        conteudo = "A quantidade máxima de comparações é 3."
 
         return titulo, conteudo
 
