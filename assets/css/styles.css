@@ -118,14 +118,99 @@
     padding-bottom: 1rem;
 }
 
+#pagina_1{
+    .titulo-pagina{
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .div_seletor_datas_e_botao{
+        text-align: center;
+        align-items: center;
+
+        br{
+            display: inline;
+        }
+
+        .botao{
+            margin-top: 1rem;
+        }
+    }
+
+    .linha_colunas_kpis{
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    br{
+        display: none;
+    }
+
+    .titulo_coluna{
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .periodo_coluna{
+        font-size: 16px;
+        color:#158cba;
+    }
+
+    .informacoes_coluna{
+        margin-top: 2rem;
+
+        br{
+            display: inline;
+            line-height: 10px;
+        }
+    }
+
+    .div_card{
+        display: flex;
+        justify-content: center;
+
+        .card{
+            display: flex;
+            text-wrap: nowrap;
+            min-width: fit-content;
+            width: 60%;
+            max-width: 60%;
+            border: #5BBFD8 solid 2px;
+
+            i{
+                font-size: 20px;
+                margin-top: 5px;
+            }
+
+            .ranking_top_1{
+                color: #FFD700;
+            }
+
+            .ranking_top_2{
+                color: #C0C0C0;
+            }
+
+            .ranking_top_3{
+                color: #CD7F32;
+            }
+        }
+    }
+
+    .coluna_usuario{
+        border-left: #F28C8C solid 3px;
+        border-right: #F28C8C solid 3px;
+    }
+}
+
 #pagina_2{
-    #pagina_2_botao{
+    .botao{
         margin-left: 1rem;
     }
 }
 
 #pagina_3{
-    #pagina_3_botao{
+    .botao{
         margin-left: 1rem;
     }
 }
