@@ -61,6 +61,7 @@ def botao_adicionar_periodo() -> Button:
         color="primary",
         className="me-1",
         id="pagina_2_botao",
+        class_name="botao",
     )
 
     return conteudo

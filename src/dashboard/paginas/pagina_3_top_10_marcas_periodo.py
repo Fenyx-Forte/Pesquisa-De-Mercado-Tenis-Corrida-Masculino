@@ -61,6 +61,7 @@ def botao_adicionar_grafico() -> Button:
         color="primary",
         className="me-1",
         id="pagina_3_botao",
+        class_name="botao",
     )
 
     return conteudo
