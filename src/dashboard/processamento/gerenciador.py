@@ -52,6 +52,32 @@ def retorna_data_coleta_mais_antiga() -> str:
     return escopo_aplicacaco.data_coleta_mais_antiga
 
 
+# Pagina 1
+def pagina_1_inicializa_coluna_hoje():
+    return processamento_pagina_1.inicializar_coluna_hoje(
+        escopo_aplicacaco.conexao,
+        escopo_aplicacaco.data_coleta_mais_recente,
+    )
+
+
+def pagina_1_inicializa_coluna_escolhido():
+    return processamento_pagina_1.inicializar_coluna_periodo(
+        escopo_aplicacaco.conexao,
+        escopo_aplicacaco.data_coleta_mais_antiga,
+        escopo_aplicacaco.data_coleta_mais_recente,
+        "escolhido",
+    )
+
+
+def pagina_1_inicializa_coluna_historico():
+    return processamento_pagina_1.inicializar_coluna_periodo(
+        escopo_aplicacaco.conexao,
+        escopo_aplicacaco.data_coleta_mais_antiga,
+        escopo_aplicacaco.data_coleta_mais_recente,
+        "historico",
+    )
+
+
 # Pagina 2
 def pagina_2_top_10_marcas_atuais():
     return processamento_pagina_2.inicializa_top_10_marcas_atuais(

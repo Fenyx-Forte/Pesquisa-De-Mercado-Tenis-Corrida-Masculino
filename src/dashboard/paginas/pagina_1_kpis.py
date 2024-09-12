@@ -98,62 +98,58 @@ def div_seletor_datas_e_botao() -> html.Div:
     return conteudo
 
 
+def cartao(
+    titulo: str, valor: str, id_valor: str, ranking: str, id_ranking: str
+) -> Card:
+    conteudo = Card(
+        CardBody(
+            [
+                html.Div(
+                    titulo,
+                    className="titulo_cartao",
+                ),
+                html.Div(
+                    valor,
+                    className="valor_cartao",
+                    id=id_valor,
+                ),
+                html.Div(
+                    html.I(className="fa-solid fa-trophy"),
+                    className=ranking,
+                    id=id_ranking,
+                ),
+            ]
+        )
+    )
+
+    return conteudo
+
+
+def div_cartao(
+    titulo: str, valor: str, id_valor: str, ranking: str, id_ranking: str
+) -> html.Div:
+    conteudo = html.Div(
+        cartao(
+            titulo,
+            valor,
+            id_valor,
+            ranking,
+            id_ranking,
+        ),
+        className="div_card",
+    )
+
+    return conteudo
+
+
 def informacoes_coluna() -> html.Div:
     conteudo = html.Div(
         [
-            html.Div(
-                [
-                    Card(
-                        CardBody(
-                            [
-                                html.Div("Qtd Produtos"),
-                                html.Div("500"),
-                                html.Div(
-                                    html.I(className="fa-solid fa-trophy"),
-                                    className="ranking_top_1",
-                                ),
-                            ]
-                        )
-                    ),
-                ],
-                className="div_card",
-            ),
+            div_cartao("Qtd Produtos", "500", "ranking_top_1"),
             html.Br(),
-            html.Div(
-                [
-                    Card(
-                        CardBody(
-                            [
-                                html.Div("Qtd Produtos"),
-                                html.Div("500"),
-                                html.Div(
-                                    html.I(className="fa-solid fa-trophy"),
-                                    className="ranking_top_2",
-                                ),
-                            ]
-                        )
-                    ),
-                ],
-                className="div_card",
-            ),
+            div_cartao("Qtd Produtos", "500", "ranking_top_2"),
             html.Br(),
-            html.Div(
-                [
-                    Card(
-                        CardBody(
-                            [
-                                html.Div("Qtd Produtos"),
-                                html.Div("500"),
-                                html.Div(
-                                    html.I(className="fa-solid fa-trophy"),
-                                    className="ranking_top_3",
-                                ),
-                            ]
-                        )
-                    ),
-                ],
-                className="div_card",
-            ),
+            div_cartao("Qtd Produtos", "500", "ranking_top_3"),
         ],
         className="informacoes_coluna",
     )
@@ -187,29 +183,17 @@ layout = html.Div(
         Row(
             [
                 Col(
-                    coluna(
-                        titulo="Hoje",
-                        periodo="12/09/2024 - 12/09/2024",
-                        id_periodo="pagina_1_periodo_hoje",
-                    ),
+                    gerenciador.pagina_1_inicializa_coluna_hoje(),
                     width=4,
                     class_name="coluna_atual",
                 ),
                 Col(
-                    coluna(
-                        titulo="Período Escolhido",
-                        periodo="05/09/2024 - 12/09/2024",
-                        id_periodo="pagina_1_periodo_escolhido",
-                    ),
+                    gerenciador.pagina_1_inicializa_coluna_escolhido(),
                     width=4,
-                    class_name="coluna_usuario",
+                    class_name="coluna_escolhido",
                 ),
                 Col(
-                    coluna(
-                        titulo="Período Histórico",
-                        periodo="09/08/2024 - 12/09/2024",
-                        id_periodo="pagina_1_periodo_historico",
-                    ),
+                    gerenciador.pagina_1_inicializa_coluna_historico(),
                     width=4,
                     class_name="coluna_historico",
                 ),
@@ -283,4 +267,217 @@ clientside_callback(
     Output("pagina_1_modal_erro", "is_open"),
     Input("pagina_1_modal_erro_titulo", "children"),
     prevent_initial_call=True,
+)
+
+
+clientside_callback(
+    """
+    function ranking_num_produtos(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output("pagina_1_ranking_num_produtos_escolhido", "className"),
+    Output("pagina_1_ranking_num_produtos_hoje", "className"),
+    Output("pagina_1_ranking_num_produtos_historico", "className"),
+    Input("pagina_1_valor_num_produtos_escolhido", "children"),
+    State("pagina_1_valor_num_produtos_hoje", "children"),
+    State("pagina_1_valor_num_produtos_historico", "children"),
+)
+
+clientside_callback(
+    """
+    function ranking_num_marcas(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output("pagina_1_ranking_num_marcas_escolhido", "className"),
+    Output("pagina_1_ranking_num_marcas_hoje", "className"),
+    Output("pagina_1_ranking_num_marcas_historico", "className"),
+    Input("pagina_1_valor_num_marcas_escolhido", "children"),
+    State("pagina_1_valor_num_marcas_hoje", "children"),
+    State("pagina_1_valor_num_marcas_historico", "children"),
+)
+
+
+clientside_callback(
+    """
+    function ranking_num_promocoes(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output("pagina_1_ranking_num_promocoes_escolhido", "className"),
+    Output("pagina_1_ranking_num_promocoes_hoje", "className"),
+    Output("pagina_1_ranking_num_promocoes_historico", "className"),
+    Input("pagina_1_valor_num_promocoes_escolhido", "children"),
+    State("pagina_1_valor_num_promocoes_hoje", "children"),
+    State("pagina_1_valor_num_promocoes_historico", "children"),
+)
+
+
+clientside_callback(
+    """
+    function ranking_produtos_abaixo_200(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output("pagina_1_ranking_produtos_abaixo_200_escolhido", "className"),
+    Output("pagina_1_ranking_produtos_abaixo_200_hoje", "className"),
+    Output("pagina_1_ranking_produtos_abaixo_200_historico", "className"),
+    Input("pagina_1_valor_produtos_abaixo_200_escolhido", "children"),
+    State("pagina_1_valor_produtos_abaixo_200_hoje", "children"),
+    State("pagina_1_valor_produtos_abaixo_200_historico", "children"),
+)
+
+
+clientside_callback(
+    """
+    function ranking_percentual_medio_desconto(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output("pagina_1_ranking_percentual_medio_desconto_escolhido", "className"),
+    Output("pagina_1_ranking_percentual_medio_desconto_hoje", "className"),
+    Output("pagina_1_ranking_percentual_medio_desconto_historico", "className"),
+    Input("pagina_1_valor_percentual_medio_desconto_escolhido", "children"),
+    State("pagina_1_valor_percentual_medio_desconto_hoje", "children"),
+    State("pagina_1_valor_percentual_medio_desconto_historico", "children"),
+)
+
+
+clientside_callback(
+    """
+    function ranking_media_precos(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output("pagina_1_ranking_media_precos_escolhido", "className"),
+    Output("pagina_1_ranking_media_precos_hoje", "className"),
+    Output("pagina_1_ranking_media_precos_historico", "className"),
+    Input("pagina_1_valor_media_precos_escolhido", "children"),
+    State("pagina_1_valor_media_precos_hoje", "children"),
+    State("pagina_1_valor_media_precos_historico", "children"),
+)
+
+
+clientside_callback(
+    """
+    function ranking_num_produtos_mais_20_avaliacoes(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output(
+        "pagina_1_ranking_num_produtos_mais_20_avaliacoes_escolhido",
+        "className",
+    ),
+    Output(
+        "pagina_1_ranking_num_produtos_mais_20_avaliacoes_hoje", "className"
+    ),
+    Output(
+        "pagina_1_ranking_num_produtos_mais_20_avaliacoes_historico",
+        "className",
+    ),
+    Input(
+        "pagina_1_valor_num_produtos_mais_20_avaliacoes_escolhido", "children"
+    ),
+    State("pagina_1_valor_num_produtos_mais_20_avaliacoes_hoje", "children"),
+    State(
+        "pagina_1_valor_num_produtos_mais_20_avaliacoes_historico", "children"
+    ),
+)
+
+
+clientside_callback(
+    """
+    function ranking_num_produtos_sem_avaliacoes(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output(
+        "pagina_1_ranking_num_produtos_sem_avaliacoes_escolhido", "className"
+    ),
+    Output("pagina_1_ranking_num_produtos_sem_avaliacoes_hoje", "className"),
+    Output(
+        "pagina_1_ranking_num_produtos_sem_avaliacoes_historico", "className"
+    ),
+    Input("pagina_1_valor_num_produtos_sem_avaliacoes_escolhido", "children"),
+    State("pagina_1_valor_num_produtos_sem_avaliacoes_hoje", "children"),
+    State("pagina_1_valor_num_produtos_sem_avaliacoes_historico", "children"),
+)
+
+
+clientside_callback(
+    """
+    function ranking_num_produtos_nota_maior_4(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output("pagina_1_ranking_num_produtos_nota_maior_4_escolhido", "className"),
+    Output("pagina_1_ranking_num_produtos_nota_maior_4_hoje", "className"),
+    Output("pagina_1_ranking_num_produtos_nota_maior_4_historico", "className"),
+    Input("pagina_1_valor_num_produtos_nota_maior_4_escolhido", "children"),
+    State("pagina_1_valor_num_produtos_nota_maior_4_hoje", "children"),
+    State("pagina_1_valor_num_produtos_nota_maior_4_historico", "children"),
 )
