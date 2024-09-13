@@ -37,23 +37,25 @@ def formatar_data_pt_br(data: str) -> str:
     return f"{dia}/{mes}/{ano}"
 
 
-def numero_produtos_hoje(conexao: DuckDBPyConnection) -> str:
-    query = pagina_1_queries.query_numero_produtos_hoje()
+def numero_produtos_e_media_precos_hoje(
+    conexao: DuckDBPyConnection,
+) -> list[str]:
+    query = pagina_1_queries.query_numero_produtos_e_media_precos_hoje()
 
-    return str(conexao.sql(query).fetchall()[0][0])
+    return conexao.sql(query).fetchall()[0]
 
 
-def media_produtos_periodo(
+def media_produtos_e_media_precos_periodo(
     conexao: DuckDBPyConnection, data_inicio: str, data_fim: str
-) -> str:
-    query = pagina_1_queries.query_media_produtos_periodo()
+) -> list[str]:
+    query = pagina_1_queries.query_media_produtos_e_media_precos_periodo()
 
     parametros = {
         "data_inicio": data_inicio,
         "data_fim": data_fim,
     }
 
-    return str(conexao.execute(query, parametros).fetchall()[0][0])
+    return conexao.execute(query, parametros).fetchall()[0]
 
 
 def numero_marcas_hoje(conexao: DuckDBPyConnection) -> str:
@@ -75,23 +77,25 @@ def media_marcas_periodo(
     return str(conexao.execute(query, parametros).fetchall()[0][0])
 
 
-def numero_produtos_em_promocao_hoje(conexao: DuckDBPyConnection) -> str:
-    query = pagina_1_queries.query_numero_produtos_em_promocao_hoje()
+def numero_produtos_em_promocao_e_percentual_medio_desconto_hoje(
+    conexao: DuckDBPyConnection,
+) -> list[str]:
+    query = pagina_1_queries.query_numero_produtos_em_promocao_e_percentual_medio_desconto_hoje()
 
-    return str(conexao.sql(query).fetchall()[0][0])
+    return conexao.sql(query).fetchall()[0]
 
 
-def media_produtos_em_promocao_periodo(
+def media_produtos_em_promocao_e_percentual_medio_desconto_periodo(
     conexao: DuckDBPyConnection, data_inicio: str, data_fim: str
-) -> str:
-    query = pagina_1_queries.query_media_produtos_em_promocao_periodo()
+) -> list[str]:
+    query = pagina_1_queries.query_media_produtos_em_promocao_e_media_percentual_desconto_periodo()
 
     parametros = {
         "data_inicio": data_inicio,
         "data_fim": data_fim,
     }
 
-    return str(conexao.execute(query, parametros).fetchall()[0][0])
+    return conexao.execute(query, parametros).fetchall()[0]
 
 
 def numero_marcas_em_promocao_hoje(conexao: DuckDBPyConnection) -> str:
@@ -104,44 +108,6 @@ def media_marcas_em_promocao_periodo(
     conexao: DuckDBPyConnection, data_inicio: str, data_fim: str
 ) -> str:
     query = pagina_1_queries.query_media_marcas_em_promocao_periodo()
-
-    parametros = {
-        "data_inicio": data_inicio,
-        "data_fim": data_fim,
-    }
-
-    return str(conexao.execute(query, parametros).fetchall()[0][0])
-
-
-def percentual_medio_desconto_hoje(conexao: DuckDBPyConnection) -> str:
-    query = pagina_1_queries.query_percentual_medio_desconto_hoje()
-
-    return str(conexao.sql(query).fetchall()[0][0])
-
-
-def media_percentual_desconto_periodo(
-    conexao: DuckDBPyConnection, data_inicio: str, data_fim: str
-) -> str:
-    query = pagina_1_queries.query_media_percentual_desconto_periodo()
-
-    parametros = {
-        "data_inicio": data_inicio,
-        "data_fim": data_fim,
-    }
-
-    return str(conexao.execute(query, parametros).fetchall()[0][0])
-
-
-def media_precos_hoje(conexao: DuckDBPyConnection) -> str:
-    query = pagina_1_queries.query_media_precos_hoje()
-
-    return str(conexao.sql(query).fetchall()[0][0])
-
-
-def media_precos_periodo(
-    conexao: DuckDBPyConnection, data_inicio: str, data_fim: str
-) -> str:
-    query = pagina_1_queries.query_media_precos_periodo()
 
     parametros = {
         "data_inicio": data_inicio,
@@ -492,51 +458,87 @@ def inicializa_coluna_hoje(
 
     periodo = f"{data_coleta_formatada} - {data_coleta_formatada}"
 
+    # Inicializando valores
+    lista_um = numero_produtos_e_media_precos_hoje(conexao)
+
+    numero_produtos = lista_um[0]
+
+    media_precos = lista_um[1]
+
+    lista_dois = numero_produtos_em_promocao_e_percentual_medio_desconto_hoje(
+        conexao
+    )
+
+    numero_produtos_em_promocao = lista_dois[0]
+
+    percentual_medio_desconto = lista_dois[1]
+
+    numero_marcas = numero_marcas_hoje(conexao)
+
+    numero_marcas_em_promocao = numero_marcas_em_promocao_hoje(conexao)
+
+    numero_produtos_abaixo_de_200_reais = (
+        numero_produtos_abaixo_de_200_reais_hoje(conexao)
+    )
+
+    numero_produtos_com_20_ou_mais_avaliacoes = (
+        numero_produtos_com_20_ou_mais_avaliacoes_hoje(conexao)
+    )
+
+    numero_produtos_sem_avaliacoes = numero_produtos_sem_avaliacoes_hoje(
+        conexao
+    )
+
+    numero_produtos_com_nota_superior_4 = (
+        numero_produtos_com_nota_superior_4_hoje(conexao)
+    )
+
+    # Inicializando divs
     div_cartao_num_produtos = cartao_num_produtos(
-        valor=numero_produtos_hoje(conexao), sufixo="hoje"
+        valor=numero_produtos, sufixo="hoje"
     )
 
     div_cartao_num_marcas = cartao_num_marcas(
-        valor=numero_marcas_hoje(conexao), sufixo="hoje"
+        valor=numero_marcas, sufixo="hoje"
     )
 
     div_cartao_media_precos = cartao_media_precos(
-        valor=media_precos_hoje(conexao), sufixo="hoje"
+        valor=media_precos, sufixo="hoje"
     )
 
     div_cartao_num_produtos_promocoes = cartao_num_produtos_promocoes(
-        valor=numero_produtos_em_promocao_hoje(conexao), sufixo="hoje"
+        valor=numero_produtos_em_promocao, sufixo="hoje"
     )
 
     div_cartao_num_marcas_promocoes = cartao_num_marcas_promocoes(
-        valor=numero_marcas_em_promocao_hoje(conexao), sufixo="hoje"
+        valor=numero_marcas_em_promocao, sufixo="hoje"
     )
 
     div_cartao_percentual_medio_desconto = cartao_percentual_medio_desconto(
-        valor=percentual_medio_desconto_hoje(conexao), sufixo="hoje"
+        valor=percentual_medio_desconto, sufixo="hoje"
     )
 
     div_cartao_num_produtos_abaixo_200_reais = (
         cartao_produtos_abaixo_de_200_reais(
-            valor=numero_produtos_abaixo_de_200_reais_hoje(conexao),
+            valor=numero_produtos_abaixo_de_200_reais,
             sufixo="hoje",
         )
     )
 
     div_cartao_produtos_com_mais_20_avaliacoes = (
         cartao_produtos_com_mais_20_avaliacoes(
-            valor=numero_produtos_com_20_ou_mais_avaliacoes_hoje(conexao),
+            valor=numero_produtos_com_20_ou_mais_avaliacoes,
             sufixo="hoje",
         )
     )
 
     div_cartao_produtos_sem_avaliacao = cartao_produtos_sem_avaliacao(
-        valor=numero_produtos_sem_avaliacoes_hoje(conexao), sufixo="hoje"
+        valor=numero_produtos_sem_avaliacoes, sufixo="hoje"
     )
 
     div_cartao_produtos_com_nota_maior_que_4 = (
         cartao_produtos_com_nota_maior_que_4(
-            valor=numero_produtos_com_nota_superior_4_hoje(conexao),
+            valor=numero_produtos_com_nota_superior_4,
             sufixo="hoje",
         )
     )
@@ -576,68 +578,100 @@ def inicializa_coluna_periodo(
     else:
         titulo = "Período Histórico"
 
+    # Inicializando valores
+    lista_um = media_produtos_e_media_precos_periodo(
+        conexao, data_inicio, data_fim
+    )
+
+    media_produtos = lista_um[0]
+    media_precos = lista_um[1]
+
+    lista_dois = media_produtos_em_promocao_e_percentual_medio_desconto_periodo(
+        conexao, data_inicio, data_fim
+    )
+
+    media_produtos_em_promocao = lista_dois[0]
+    percentual_medio_desconto = lista_dois[1]
+
+    media_marcas = media_marcas_periodo(conexao, data_inicio, data_fim)
+
+    media_marcas_em_promocao = media_marcas_em_promocao_periodo(
+        conexao, data_inicio, data_fim
+    )
+
+    media_produtos_abaixo_de_200_reais = (
+        media_produtos_abaixo_de_200_reais_periodo(
+            conexao, data_inicio, data_fim
+        )
+    )
+
+    media_produtos_com_20_ou_mais_avaliacoes = (
+        media_produtos_com_20_ou_mais_avaliacoes_periodo(
+            conexao, data_inicio, data_fim
+        )
+    )
+
+    media_produtos_sem_avaliacoes = media_produtos_sem_avaliacoes_periodo(
+        conexao, data_inicio, data_fim
+    )
+
+    media_produtos_nota_superior_4 = media_produtos_com_nota_superior_4_periodo(
+        conexao, data_inicio, data_fim
+    )
+
+    # Inicializando divs
     div_cartao_num_produtos = cartao_num_produtos(
-        valor=media_produtos_periodo(conexao, data_inicio, data_fim),
+        valor=media_produtos,
         sufixo=sufixo,
     )
 
     div_cartao_num_marcas = cartao_num_marcas(
-        valor=media_marcas_periodo(conexao, data_inicio, data_fim),
+        valor=media_marcas,
         sufixo=sufixo,
     )
 
     div_cartao_media_precos = cartao_media_precos(
-        valor=media_precos_periodo(conexao, data_inicio, data_fim),
+        valor=media_precos,
         sufixo=sufixo,
     )
 
     div_cartao_num_produtos_promocoes = cartao_num_produtos_promocoes(
-        valor=media_produtos_em_promocao_periodo(
-            conexao, data_inicio, data_fim
-        ),
+        valor=media_produtos_em_promocao,
         sufixo=sufixo,
     )
 
     div_cartao_num_marcas_promocoes = cartao_num_marcas_promocoes(
-        valor=media_marcas_em_promocao_periodo(conexao, data_inicio, data_fim),
+        valor=media_marcas_em_promocao,
         sufixo=sufixo,
     )
 
     div_cartao_percentual_medio_desconto = cartao_percentual_medio_desconto(
-        valor=media_percentual_desconto_periodo(conexao, data_inicio, data_fim),
+        valor=percentual_medio_desconto,
         sufixo=sufixo,
     )
 
     div_cartao_num_produtos_abaixo_200_reais = (
         cartao_produtos_abaixo_de_200_reais(
-            valor=media_produtos_abaixo_de_200_reais_periodo(
-                conexao, data_inicio, data_fim
-            ),
+            valor=media_produtos_abaixo_de_200_reais,
             sufixo=sufixo,
         )
     )
 
     div_cartao_produtos_com_mais_20_avaliacoes = (
         cartao_produtos_com_mais_20_avaliacoes(
-            valor=media_produtos_com_20_ou_mais_avaliacoes_periodo(
-                conexao, data_inicio, data_fim
-            ),
+            valor=media_produtos_com_20_ou_mais_avaliacoes,
             sufixo=sufixo,
         )
     )
 
     div_cartao_produtos_sem_avaliacao = cartao_produtos_sem_avaliacao(
-        valor=media_produtos_sem_avaliacoes_periodo(
-            conexao, data_inicio, data_fim
-        ),
+        valor=media_produtos_sem_avaliacoes,
         sufixo=sufixo,
     )
 
     div_cartao_produtos_com_nota_maior_que_4 = (
         cartao_produtos_com_nota_maior_que_4(
-            valor=media_produtos_com_nota_superior_4_periodo(
-                conexao, data_inicio, data_fim
-            ),
+            valor=media_produtos_nota_superior_4,
             sufixo=sufixo,
         )
     )
@@ -664,32 +698,29 @@ def atualiza_coluna_periodo(
     data_inicio: str,
     data_fim: str,
 ) -> list[str]:
-    media_produtos = media_produtos_periodo(conexao, data_inicio, data_fim)
-
-    media_marcas = media_marcas_periodo(conexao, data_inicio, data_fim)
-
-    media_precos = media_precos_periodo(conexao, data_inicio, data_fim)
-
-    media_produtos_em_promocao = media_produtos_em_promocao_periodo(
+    # Inicializando valores
+    lista_um = media_produtos_e_media_precos_periodo(
         conexao, data_inicio, data_fim
     )
+
+    media_produtos = lista_um[0]
+    media_precos = lista_um[1]
+
+    lista_dois = media_produtos_em_promocao_e_percentual_medio_desconto_periodo(
+        conexao, data_inicio, data_fim
+    )
+
+    media_produtos_em_promocao = lista_dois[0]
+    percentual_medio_desconto = lista_dois[1]
+
+    media_marcas = media_marcas_periodo(conexao, data_inicio, data_fim)
 
     media_marcas_em_promocao = media_marcas_em_promocao_periodo(
         conexao, data_inicio, data_fim
     )
 
-    media_percentual_desconto = media_percentual_desconto_periodo(
-        conexao, data_inicio, data_fim
-    )
-
     media_produtos_abaixo_de_200_reais = (
         media_produtos_abaixo_de_200_reais_periodo(
-            conexao, data_inicio, data_fim
-        )
-    )
-
-    media_produtos_com_nota_superior_4 = (
-        media_produtos_com_nota_superior_4_periodo(
             conexao, data_inicio, data_fim
         )
     )
@@ -704,15 +735,19 @@ def atualiza_coluna_periodo(
         conexao, data_inicio, data_fim
     )
 
+    media_produtos_nota_superior_4 = media_produtos_com_nota_superior_4_periodo(
+        conexao, data_inicio, data_fim
+    )
+
     return [
         media_produtos,
         media_marcas,
         media_precos,
         media_produtos_em_promocao,
         media_marcas_em_promocao,
-        media_percentual_desconto,
+        percentual_medio_desconto,
         media_produtos_abaixo_de_200_reais,
-        media_produtos_com_nota_superior_4,
+        media_produtos_nota_superior_4,
         media_produtos_com_20_ou_mais_avaliacoes,
         media_produtos_sem_avaliacoes,
     ]
