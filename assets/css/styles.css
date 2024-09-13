@@ -178,9 +178,27 @@
             max-width: 60%;
             border: #5BBFD8 solid 2px;
 
+            .card-body{
+                padding: 2px;
+            }
+
+            .titulo_cartao{
+                color: #333333;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .valor_cartao{
+                color: #2ecc71;
+                font-size: 24px;
+                font-weight: 600;
+                margin-bottom: 15px;
+                margin-top: 15px;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+            }
+
             i{
                 font-size: 20px;
-                margin-top: 5px;
             }
 
             .ranking_top_1{
