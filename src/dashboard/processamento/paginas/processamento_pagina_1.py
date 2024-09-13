@@ -5,30 +5,77 @@ from duckdb import DuckDBPyConnection
 from dashboard.processamento.queries import pagina_1_queries
 
 
-def verifica_se_datas_sao_validas(data_inicio: str, data_fim: str) -> bool:
-    if (data_inicio is None) or (data_fim is None):
-        return False
+def callback_verificar_datas() -> str:
+    funcao = """
+    function verificar_datas(n_clicks, data_inicio, data_fim, periodo_hoje, periodo_ja_escolhido, periodo_historico) {
+        if (!data_inicio || !data_fim) {
+            return ["Período Inválido", "Selecione as datas usando o calendário ou escreva as datas no formato DD/MM/YYYY."];
+        }
 
-    return True
+        function formatar_data(data) {
+            const [ano, mes, dia] = data.split('-');
+            return `${dia}/${mes}/${ano}`;
+        }
+
+        const data_inicio_formatada = formatar_data(data_inicio);
+        const data_fim_formatada = formatar_data(data_fim);
+
+        const periodo = `${data_inicio_formatada} - ${data_fim_formatada}`;
+
+        if (periodo === periodo_hoje || periodo === periodo_ja_escolhido || periodo === periodo_historico) {
+            return ["Período Já Adicionado", "Esse período já foi adicionado. Adicione um período diferente."];
+        }
+
+        return ["", ""];
+    }
+    """
+
+    return funcao
 
 
-def verifica_se_periodo_ja_foi_adicionado(
-    data_inicio: str,
-    data_fim: str,
-    periodo_hoje: str,
-    periodo_ja_escolhido: str,
-    periodo_historico: str,
-) -> bool:
-    data_inicio_formatada = formatar_data_pt_br(data_inicio)
-    data_fim_formatada = formatar_data_pt_br(data_fim)
+def callback_abrir_modal() -> str:
+    funcao = """
+    function abrirModal(titulo) {
+        if (titulo === "") {
+            return window.dash_clientside.no_update;
+        }
+        return true;
+    }
+    """
 
-    periodo = f"{data_inicio_formatada} - {data_fim_formatada}"
+    return funcao
 
-    return periodo in [periodo_hoje, periodo_ja_escolhido, periodo_historico]
+
+def callback_ranking_direto_valores() -> str:
+    funcao = """
+    function ranking_direto(str1, str2, str3) {
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """
+
+    return funcao
+
+
+def callback_ranking_inverso_valores() -> str:
+    funcao = """
+    function ranking_inverso(str1, str2, str3) {
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => a - b))];
+
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """
+
+    return funcao
 
 
 def formatar_data_pt_br(data: str) -> str:
-    # "data" esta no formato YYYY/MM/DD
+    # "data" esta no formato YYYY-MM-DD
     componentes = data.split("-")
     dia = componentes[2]
     mes = componentes[1]
@@ -307,7 +354,7 @@ def cartao_produtos_abaixo_de_200_reais(valor: str, sufixo: str) -> html.Div:
 
 
 def cartao_percentual_medio_desconto(valor: str, sufixo: str) -> html.Div:
-    titulo = "% Média Desconto"
+    titulo = "Média Desconto (%)"
 
     conteudo = div_cartao(
         titulo=titulo,
@@ -320,7 +367,7 @@ def cartao_percentual_medio_desconto(valor: str, sufixo: str) -> html.Div:
 
 
 def cartao_media_precos(valor: str, sufixo: str) -> html.Div:
-    titulo = "Média Preços"
+    titulo = "Média Preços (R$)"
 
     conteudo = div_cartao(
         titulo=titulo,
@@ -698,6 +745,11 @@ def atualiza_coluna_periodo(
     data_inicio: str,
     data_fim: str,
 ) -> list[str]:
+    data_inicio_formatada = formatar_data_pt_br(data_inicio)
+    data_fim_formatada = formatar_data_pt_br(data_fim)
+
+    periodo = f"{data_inicio_formatada} - {data_fim_formatada}"
+
     # Inicializando valores
     lista_um = media_produtos_e_media_precos_periodo(
         conexao, data_inicio, data_fim
@@ -740,6 +792,7 @@ def atualiza_coluna_periodo(
     )
 
     return [
+        periodo,
         media_produtos,
         media_marcas,
         media_precos,

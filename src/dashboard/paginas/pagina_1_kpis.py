@@ -11,8 +11,6 @@ from dash import (
 from dash.exceptions import PreventUpdate
 from dash_bootstrap_components import (
     Button,
-    Card,
-    CardBody,
     Col,
     Modal,
     ModalBody,
@@ -128,8 +126,8 @@ layout = html.Div(
     id="pagina_1",
 )
 
-
-@callback(
+clientside_callback(
+    processamento_pagina_1.callback_verificar_datas(),
     Output("pagina_1_modal_erro_titulo", "children"),
     Output("pagina_1_modal_erro_conteudo", "children"),
     Input("pagina_1_botao", "n_clicks"),
@@ -140,45 +138,10 @@ layout = html.Div(
     State("pagina_1_periodo_historico", "children"),
     prevent_initial_call=True,
 )
-def pagina_2_verificar_inputs(
-    n_clicks,
-    data_inicio,
-    data_fim,
-    periodo_hoje,
-    periodo_ja_escolhido,
-    periodo_historico,
-):
-    titulo = ""
-    conteudo = ""
-
-    if not processamento_pagina_1.verifica_se_datas_sao_validas(
-        data_inicio, data_fim
-    ):
-        titulo = "Período Inválido"
-
-        conteudo = "Selecione as datas usando o calendário ou escreva as datas no formato DD/MM/YYYY."
-
-        return titulo, conteudo
-
-    if processamento_pagina_1.verifica_se_periodo_ja_foi_adicionado(
-        data_inicio,
-        data_fim,
-        periodo_hoje,
-        periodo_ja_escolhido,
-        periodo_historico,
-    ):
-        titulo = "Período já Adicionado"
-
-        conteudo = (
-            "Esse período já foi adicionado. Adicione um período diferente."
-        )
-
-        return titulo, conteudo
-
-    return titulo, conteudo
 
 
 @callback(
+    Output("pagina_1_periodo_escolhido", "children"),
     Output("pagina_1_valor_num_produtos_escolhido", "children"),
     Output("pagina_1_valor_num_marcas_escolhido", "children"),
     Output("pagina_1_valor_media_precos_escolhido", "children"),
@@ -211,14 +174,7 @@ def pagina_2_atualizar_dados_periodo_escolhido(titulo, data_inicio, data_fim):
 
 
 clientside_callback(
-    """
-    function abrirModal(titulo) {
-        if (titulo === "") {
-            return window.dash_clientside.no_update;
-        }
-        return true;
-    }
-    """,
+    processamento_pagina_1.callback_abrir_modal(),
     Output("pagina_1_modal_erro", "is_open"),
     Input("pagina_1_modal_erro_titulo", "children"),
     prevent_initial_call=True,
@@ -226,18 +182,7 @@ clientside_callback(
 
 
 clientside_callback(
-    """
-    function ranking_num_produtos(str1, str2, str3) {
-        // Converter strings para números
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
-
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_direto_valores(),
     Output("pagina_1_ranking_num_produtos_escolhido", "className"),
     Output("pagina_1_ranking_num_produtos_hoje", "className"),
     Output("pagina_1_ranking_num_produtos_historico", "className"),
@@ -247,18 +192,7 @@ clientside_callback(
 )
 
 clientside_callback(
-    """
-    function ranking_num_marcas(str1, str2, str3) {
-        // Converter strings para números
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
-
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_direto_valores(),
     Output("pagina_1_ranking_num_marcas_escolhido", "className"),
     Output("pagina_1_ranking_num_marcas_hoje", "className"),
     Output("pagina_1_ranking_num_marcas_historico", "className"),
@@ -269,18 +203,7 @@ clientside_callback(
 
 
 clientside_callback(
-    """
-    function ranking_num_produtos_promocoes(str1, str2, str3) {
-        // Converter strings para números
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
-
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_direto_valores(),
     Output("pagina_1_ranking_num_produtos_promocoes_escolhido", "className"),
     Output("pagina_1_ranking_num_produtos_promocoes_hoje", "className"),
     Output("pagina_1_ranking_num_produtos_promocoes_historico", "className"),
@@ -290,18 +213,7 @@ clientside_callback(
 )
 
 clientside_callback(
-    """
-    function ranking_num_marcas_promocoes(str1, str2, str3) {
-        // Converter strings para números
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
-
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_direto_valores(),
     Output("pagina_1_ranking_num_marcas_promocoes_escolhido", "className"),
     Output("pagina_1_ranking_num_marcas_promocoes_hoje", "className"),
     Output("pagina_1_ranking_num_marcas_promocoes_historico", "className"),
@@ -312,18 +224,7 @@ clientside_callback(
 
 
 clientside_callback(
-    """
-    function ranking_produtos_abaixo_200(str1, str2, str3) {
-        // Converter strings para números
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
-
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_direto_valores(),
     Output("pagina_1_ranking_produtos_abaixo_200_escolhido", "className"),
     Output("pagina_1_ranking_produtos_abaixo_200_hoje", "className"),
     Output("pagina_1_ranking_produtos_abaixo_200_historico", "className"),
@@ -334,18 +235,7 @@ clientside_callback(
 
 
 clientside_callback(
-    """
-    function ranking_percentual_medio_desconto(str1, str2, str3) {
-        // Converter strings para números
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
-
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_direto_valores(),
     Output("pagina_1_ranking_percentual_medio_desconto_escolhido", "className"),
     Output("pagina_1_ranking_percentual_medio_desconto_hoje", "className"),
     Output("pagina_1_ranking_percentual_medio_desconto_historico", "className"),
@@ -356,15 +246,7 @@ clientside_callback(
 
 
 clientside_callback(
-    """
-    function ranking_media_precos(str1, str2, str3) {
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => a - b))];
-
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_inverso_valores(),
     Output("pagina_1_ranking_media_precos_escolhido", "className"),
     Output("pagina_1_ranking_media_precos_hoje", "className"),
     Output("pagina_1_ranking_media_precos_historico", "className"),
@@ -375,18 +257,7 @@ clientside_callback(
 
 
 clientside_callback(
-    """
-    function ranking_num_produtos_20_ou_mais_avaliacoes(str1, str2, str3) {
-        // Converter strings para números
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
-
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_direto_valores(),
     Output(
         "pagina_1_ranking_num_produtos_20_ou_mais_avaliacoes_escolhido",
         "className",
@@ -411,18 +282,7 @@ clientside_callback(
 
 
 clientside_callback(
-    """
-    function ranking_num_produtos_sem_avaliacoes(str1, str2, str3) {
-        // Converter strings para números
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => a - b))];
-
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_inverso_valores(),
     Output(
         "pagina_1_ranking_num_produtos_sem_avaliacoes_escolhido", "className"
     ),
@@ -437,18 +297,7 @@ clientside_callback(
 
 
 clientside_callback(
-    """
-    function ranking_num_produtos_nota_maior_4(str1, str2, str3) {
-        // Converter strings para números
-        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
-
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
-
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
-        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
-    }
-    """,
+    processamento_pagina_1.callback_ranking_direto_valores(),
     Output("pagina_1_ranking_num_produtos_nota_maior_4_escolhido", "className"),
     Output("pagina_1_ranking_num_produtos_nota_maior_4_hoje", "className"),
     Output("pagina_1_ranking_num_produtos_nota_maior_4_historico", "className"),
