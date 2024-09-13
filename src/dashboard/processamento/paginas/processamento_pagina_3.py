@@ -2,6 +2,8 @@ from duckdb import DuckDBPyConnection
 from pandas import DataFrame as pd_DataFrame
 from plotly.graph_objects import Figure
 
+from dashboard.processamento.queries import pagina_3_queries
+
 
 def verifica_se_datas_sao_validas(data_inicio: str, data_fim: str) -> bool:
     if (data_inicio is None) or (data_fim is None):
@@ -36,44 +38,6 @@ def verifica_se_periodo_ja_foi_adicionado(
     return periodo in periodos
 
 
-def query_top_10_marcas_historico() -> str:
-    query = """
-    SELECT
-        marca AS Marca
-        , porcentagem AS Porcentagem
-        , periodo AS Periodo
-    FROM
-        top_10_marcas_historico($periodo)
-    WHERE
-        Marca <> 'GENERICA'
-    ORDER BY
-        Porcentagem DESC
-    LIMIT
-        10;
-    """
-
-    return query
-
-
-def query_top_10_marcas_periodo() -> str:
-    query = """
-    SELECT
-        marca AS Marca
-        , porcentagem AS Porcentagem
-        , periodo AS Periodo
-    FROM
-        top_10_marcas_periodo($periodo, $data_inicio, $data_fim)
-    WHERE
-        Marca <> 'GENERICA'
-    ORDER BY
-        Porcentagem DESC
-    LIMIT
-        10;
-    """
-
-    return query
-
-
 def formatar_data_pt_br(data: str) -> str:
     # "data" esta no formato YYYY/MM/DD
     componentes = data.split("-")
@@ -89,7 +53,7 @@ def inicializa_top_10_marcas_historico(
     data_inicio: str,
     data_fim: str,
 ) -> pd_DataFrame:
-    query = query_top_10_marcas_historico()
+    query = pagina_3_queries.query_top_10_marcas_historico()
 
     data_inicio_formatada = formatar_data_pt_br(data_inicio)
     data_fim_formatada = formatar_data_pt_br(data_fim)
@@ -110,7 +74,7 @@ def top_10_marcas_periodo(
 
     periodo = f"{data_inicio_formatada} - {data_fim_formatada}"
 
-    query = query_top_10_marcas_periodo()
+    query = pagina_3_queries.query_top_10_marcas_periodo()
 
     parametros = {
         "data_inicio": data_inicio,
