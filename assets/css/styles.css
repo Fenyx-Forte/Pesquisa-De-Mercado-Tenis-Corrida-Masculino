@@ -225,6 +225,10 @@
     .botao{
         margin-left: 1rem;
     }
+
+    .div_periodo{
+        display: none;
+    }
 }
 
 #pagina_3{
