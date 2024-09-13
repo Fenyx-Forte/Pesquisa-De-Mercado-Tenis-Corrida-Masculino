@@ -57,7 +57,7 @@ def seletor_datas() -> dcc.DatePickerRange:
 
 def botao_adicionar_periodo() -> Button:
     conteudo = Button(
-        "Adicionar Período",
+        "Selecionar Período",
         outline=True,
         color="primary",
         className="me-1",
