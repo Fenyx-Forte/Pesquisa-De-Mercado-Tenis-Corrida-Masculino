@@ -18,6 +18,7 @@ def inicializar_escopo_global() -> None:
     inicializacao_dados.configurar_duckdb(conexao)
     inicializacao_dados.inicializar_tabela_dados_completos(conexao)
     inicializacao_dados.inicializar_tabela_dados_mais_recentes(conexao)
+    inicializacao_dados.inicializar_macro_dados_completos_por_periodo(conexao)
     inicializacao_dados.inicializar_macro_top_10_marcas_atuais(conexao)
     inicializacao_dados.inicializar_macro_top_10_marcas_periodo(conexao)
     inicializacao_dados.inicializar_macro_top_10_marcas_historico(conexao)
@@ -31,11 +32,15 @@ def inicializar_escopo_global() -> None:
     data_coleta_mais_antiga = (
         inicializacao_dados.inicializar_data_coleta_mais_antiga(conexao)
     )
+    data_6_dias_atras = inicializacao_dados.inicializar_data_6_dias_atras(
+        conexao
+    )
 
     escopo_aplicacaco = escopo_global.EscopoGlobal(
         conexao=conexao,
         cabecalho_data_coleta=cabecalho_data_coleta,
         data_coleta_mais_recente=data_coleta_mais_recente,
+        data_6_dias_atras=data_6_dias_atras,
         data_coleta_mais_antiga=data_coleta_mais_antiga,
     )
 
@@ -54,35 +59,43 @@ def retorna_data_coleta_mais_antiga() -> str:
 
 # Pagina 1
 def pagina_1_inicializa_coluna_hoje():
-    return processamento_pagina_1.inicializar_coluna_hoje(
-        escopo_aplicacaco.conexao,
-        escopo_aplicacaco.data_coleta_mais_recente,
+    return processamento_pagina_1.inicializa_coluna_hoje(
+        conexao=escopo_aplicacaco.conexao,
+        data_coleta_mais_recente=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
 def pagina_1_inicializa_coluna_escolhido():
-    return processamento_pagina_1.inicializar_coluna_periodo(
-        escopo_aplicacaco.conexao,
-        escopo_aplicacaco.data_coleta_mais_antiga,
-        escopo_aplicacaco.data_coleta_mais_recente,
-        "escolhido",
+    return processamento_pagina_1.inicializa_coluna_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_6_dias_atras,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+        sufixo="escolhido",
     )
 
 
 def pagina_1_inicializa_coluna_historico():
-    return processamento_pagina_1.inicializar_coluna_periodo(
-        escopo_aplicacaco.conexao,
-        escopo_aplicacaco.data_coleta_mais_antiga,
-        escopo_aplicacaco.data_coleta_mais_recente,
-        "historico",
+    return processamento_pagina_1.inicializa_coluna_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+        sufixo="historico",
+    )
+
+
+def pagina_1_atualiza_coluna_escolhido(data_inicio: str, data_fim: str):
+    return processamento_pagina_1.atualiza_coluna_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=data_inicio,
+        data_fim=data_fim,
     )
 
 
 # Pagina 2
 def pagina_2_top_10_marcas_atuais():
     return processamento_pagina_2.inicializa_top_10_marcas_atuais(
-        escopo_aplicacaco.conexao,
-        escopo_aplicacaco.data_coleta_mais_recente,
+        conexao=escopo_aplicacaco.conexao,
+        data_coleta_mais_recente=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
@@ -92,30 +105,32 @@ def pagina_2_grafico_comparacao_top_10(
     data_fim: str,
 ):
     return processamento_pagina_2.dados_grafico_comparacao_top_10(
-        escopo_aplicacaco.conexao,
-        dados_grafico_atual,
-        data_inicio,
-        data_fim,
+        conexao=escopo_aplicacaco.conexao,
+        dados_grafico_atual=dados_grafico_atual,
+        data_inicio=data_inicio,
+        data_fim=data_fim,
     )
 
 
 # Pagina 3
 def pagina_3_top_10_marcas_historico():
     return processamento_pagina_3.inicializa_top_10_marcas_historico(
-        escopo_aplicacaco.conexao,
-        escopo_aplicacaco.data_coleta_mais_antiga,
-        escopo_aplicacaco.data_coleta_mais_recente,
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
 def pagina_3_top_10_marcas_periodo(data_inicio: str, data_fim: str):
     return processamento_pagina_3.top_10_marcas_periodo(
-        escopo_aplicacaco.conexao,
-        data_inicio,
-        data_fim,
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=data_inicio,
+        data_fim=data_fim,
     )
 
 
 # Pagina 6
 def pagina_6_inicializa_tabela() -> list[dict]:
-    return processamento_pagina_6.inicializa_tabela(escopo_aplicacaco.conexao)
+    return processamento_pagina_6.inicializa_tabela(
+        conexao=escopo_aplicacaco.conexao,
+    )

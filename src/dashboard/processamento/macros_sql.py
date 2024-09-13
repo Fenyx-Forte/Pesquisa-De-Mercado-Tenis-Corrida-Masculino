@@ -1,3 +1,23 @@
+def macro_dados_completos_por_periodo() -> str:
+    query = """
+    CREATE OR REPLACE MACRO dados_completos_por_periodo(data_inicio, data_fim) AS TABLE
+        SELECT
+            marca
+            , preco_atual
+            , promocao
+            , percentual_promocao
+            , nota_avaliacao
+            , num_avaliacoes
+            , data_coleta
+        FROM
+            dados_completos
+        WHERE
+            data_coleta BETWEEN data_inicio AND data_fim;
+    """
+
+    return query
+
+
 def top_10_marcas_atuais() -> str:
     query = """
     CREATE OR REPLACE MACRO top_10_marcas_atuais(periodo) AS TABLE

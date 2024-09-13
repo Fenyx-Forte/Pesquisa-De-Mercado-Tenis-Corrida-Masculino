@@ -98,83 +98,6 @@ def div_seletor_datas_e_botao() -> html.Div:
     return conteudo
 
 
-def cartao(
-    titulo: str, valor: str, id_valor: str, ranking: str, id_ranking: str
-) -> Card:
-    conteudo = Card(
-        CardBody(
-            [
-                html.Div(
-                    titulo,
-                    className="titulo_cartao",
-                ),
-                html.Div(
-                    valor,
-                    className="valor_cartao",
-                    id=id_valor,
-                ),
-                html.Div(
-                    html.I(className="fa-solid fa-trophy"),
-                    className=ranking,
-                    id=id_ranking,
-                ),
-            ]
-        )
-    )
-
-    return conteudo
-
-
-def div_cartao(
-    titulo: str, valor: str, id_valor: str, ranking: str, id_ranking: str
-) -> html.Div:
-    conteudo = html.Div(
-        cartao(
-            titulo,
-            valor,
-            id_valor,
-            ranking,
-            id_ranking,
-        ),
-        className="div_card",
-    )
-
-    return conteudo
-
-
-def informacoes_coluna() -> html.Div:
-    conteudo = html.Div(
-        [
-            div_cartao("Qtd Produtos", "500", "ranking_top_1"),
-            html.Br(),
-            div_cartao("Qtd Produtos", "500", "ranking_top_2"),
-            html.Br(),
-            div_cartao("Qtd Produtos", "500", "ranking_top_3"),
-        ],
-        className="informacoes_coluna",
-    )
-
-    return conteudo
-
-
-def coluna(
-    titulo: str,
-    periodo: str,
-    id_periodo: str,
-) -> html.Div:
-    conteudo = html.Div(
-        [
-            html.H4(titulo, className="titulo_coluna"),
-            html.Br(),
-            html.Div(periodo, className="periodo_coluna", id=id_periodo),
-            html.Br(),
-            informacoes_coluna(),
-        ],
-    )
-
-    return conteudo
-
-
 layout = html.Div(
     [
         # titulo(),
@@ -255,6 +178,38 @@ def pagina_2_verificar_inputs(
     return titulo, conteudo
 
 
+@callback(
+    Output("pagina_1_valor_num_produtos_escolhido", "children"),
+    Output("pagina_1_valor_num_marcas_escolhido", "children"),
+    Output("pagina_1_valor_media_precos_escolhido", "children"),
+    Output("pagina_1_valor_num_produtos_promocoes_escolhido", "children"),
+    Output("pagina_1_valor_num_marcas_promocoes_escolhido", "children"),
+    Output("pagina_1_valor_percentual_medio_desconto_escolhido", "children"),
+    Output("pagina_1_valor_produtos_abaixo_200_escolhido", "children"),
+    Output("pagina_1_valor_num_produtos_nota_maior_4_escolhido", "children"),
+    Output(
+        "pagina_1_valor_num_produtos_20_ou_mais_avaliacoes_escolhido",
+        "children",
+    ),
+    Output("pagina_1_valor_num_produtos_sem_avaliacoes_escolhido", "children"),
+    Output("pagina_1_seletor_datas", "start_date"),
+    Output("pagina_1_seletor_datas", "end_date"),
+    Input("pagina_1_modal_erro_titulo", "children"),
+    State("pagina_1_seletor_datas", "start_date"),
+    State("pagina_1_seletor_datas", "end_date"),
+    prevent_initial_call=True,
+)
+def pagina_2_atualizar_dados_periodo_escolhido(titulo, data_inicio, data_fim):
+    if titulo != "":
+        raise PreventUpdate
+
+    return [
+        *gerenciador.pagina_1_atualiza_coluna_escolhido(data_inicio, data_fim),
+        None,
+        None,
+    ]
+
+
 clientside_callback(
     """
     function abrirModal(titulo) {
@@ -315,7 +270,7 @@ clientside_callback(
 
 clientside_callback(
     """
-    function ranking_num_promocoes(str1, str2, str3) {
+    function ranking_num_produtos_promocoes(str1, str2, str3) {
         // Converter strings para números
         let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
 
@@ -326,12 +281,33 @@ clientside_callback(
         return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
     }
     """,
-    Output("pagina_1_ranking_num_promocoes_escolhido", "className"),
-    Output("pagina_1_ranking_num_promocoes_hoje", "className"),
-    Output("pagina_1_ranking_num_promocoes_historico", "className"),
-    Input("pagina_1_valor_num_promocoes_escolhido", "children"),
-    State("pagina_1_valor_num_promocoes_hoje", "children"),
-    State("pagina_1_valor_num_promocoes_historico", "children"),
+    Output("pagina_1_ranking_num_produtos_promocoes_escolhido", "className"),
+    Output("pagina_1_ranking_num_produtos_promocoes_hoje", "className"),
+    Output("pagina_1_ranking_num_produtos_promocoes_historico", "className"),
+    Input("pagina_1_valor_num_produtos_promocoes_escolhido", "children"),
+    State("pagina_1_valor_num_produtos_promocoes_hoje", "children"),
+    State("pagina_1_valor_num_produtos_promocoes_historico", "children"),
+)
+
+clientside_callback(
+    """
+    function ranking_num_marcas_promocoes(str1, str2, str3) {
+        // Converter strings para números
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        // Ordenar os números em ordem decrescente e remover duplicatas
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """,
+    Output("pagina_1_ranking_num_marcas_promocoes_escolhido", "className"),
+    Output("pagina_1_ranking_num_marcas_promocoes_hoje", "className"),
+    Output("pagina_1_ranking_num_marcas_promocoes_historico", "className"),
+    Input("pagina_1_valor_num_marcas_promocoes_escolhido", "children"),
+    State("pagina_1_valor_num_marcas_promocoes_hoje", "children"),
+    State("pagina_1_valor_num_marcas_promocoes_historico", "children"),
 )
 
 
@@ -382,13 +358,10 @@ clientside_callback(
 clientside_callback(
     """
     function ranking_media_precos(str1, str2, str3) {
-        // Converter strings para números
         let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
 
-        // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => a - b))];
 
-        // Mapear cada número ao seu dense rank no formato "ranking_top_X"
         return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
     }
     """,
@@ -403,7 +376,7 @@ clientside_callback(
 
 clientside_callback(
     """
-    function ranking_num_produtos_mais_20_avaliacoes(str1, str2, str3) {
+    function ranking_num_produtos_20_ou_mais_avaliacoes(str1, str2, str3) {
         // Converter strings para números
         let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
 
@@ -415,22 +388,24 @@ clientside_callback(
     }
     """,
     Output(
-        "pagina_1_ranking_num_produtos_mais_20_avaliacoes_escolhido",
+        "pagina_1_ranking_num_produtos_20_ou_mais_avaliacoes_escolhido",
         "className",
     ),
     Output(
-        "pagina_1_ranking_num_produtos_mais_20_avaliacoes_hoje", "className"
+        "pagina_1_ranking_num_produtos_20_ou_mais_avaliacoes_hoje", "className"
     ),
     Output(
-        "pagina_1_ranking_num_produtos_mais_20_avaliacoes_historico",
+        "pagina_1_ranking_num_produtos_20_ou_mais_avaliacoes_historico",
         "className",
     ),
     Input(
-        "pagina_1_valor_num_produtos_mais_20_avaliacoes_escolhido", "children"
+        "pagina_1_valor_num_produtos_20_ou_mais_avaliacoes_escolhido",
+        "children",
     ),
-    State("pagina_1_valor_num_produtos_mais_20_avaliacoes_hoje", "children"),
+    State("pagina_1_valor_num_produtos_20_ou_mais_avaliacoes_hoje", "children"),
     State(
-        "pagina_1_valor_num_produtos_mais_20_avaliacoes_historico", "children"
+        "pagina_1_valor_num_produtos_20_ou_mais_avaliacoes_historico",
+        "children",
     ),
 )
 
@@ -442,7 +417,7 @@ clientside_callback(
         let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
 
         // Ordenar os números em ordem decrescente e remover duplicatas
-        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => a - b))];
 
         // Mapear cada número ao seu dense rank no formato "ranking_top_X"
         return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);

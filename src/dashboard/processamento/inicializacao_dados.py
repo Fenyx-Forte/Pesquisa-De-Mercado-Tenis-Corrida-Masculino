@@ -34,6 +34,19 @@ def query_data_coleta_mais_recente() -> str:
     return query
 
 
+def query_data_6_dias_atras() -> str:
+    query = """
+    SELECT
+        STRFTIME(data_coleta - INTERVAL 6 DAY, '%Y-%m-%d') as data_6_dias_atras
+    FROM
+        dados_mais_recentes
+    LIMIT
+        1;
+    """
+
+    return query
+
+
 def query_data_coleta_mais_antiga() -> str:
     query = """
     SELECT
@@ -80,6 +93,14 @@ def inicializar_tabela_dados_mais_recentes(conexao: DuckDBPyConnection) -> None:
     conexao.sql(query)
 
 
+def inicializar_macro_dados_completos_por_periodo(
+    conexao: DuckDBPyConnection,
+) -> None:
+    query = macros_sql.macro_dados_completos_por_periodo()
+
+    conexao.sql(query)
+
+
 def inicializar_macro_top_10_marcas_atuais(conexao: DuckDBPyConnection) -> None:
     query = macros_sql.top_10_marcas_atuais()
 
@@ -116,6 +137,14 @@ def inicializar_data_coleta_mais_recente(conexao: DuckDBPyConnection) -> str:
     data_coleta_mais_recente = conexao.sql(query).fetchall()[0][0]
 
     return data_coleta_mais_recente
+
+
+def inicializar_data_6_dias_atras(conexao: DuckDBPyConnection) -> str:
+    query = query_data_6_dias_atras()
+
+    data_6_dias_atras = conexao.sql(query).fetchall()[0][0]
+
+    return data_6_dias_atras
 
 
 def inicializar_data_coleta_mais_antiga(conexao: DuckDBPyConnection) -> str:
