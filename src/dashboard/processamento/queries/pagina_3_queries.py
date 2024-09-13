@@ -5,7 +5,7 @@ def query_top_10_marcas_historico() -> str:
         , porcentagem AS Porcentagem
         , periodo AS Periodo
     FROM
-        top_10_marcas_historico($periodo)
+        top_10_marcas_periodo($periodo, $data_inicio, $data_fim)
     WHERE
         Marca <> 'GENERICA'
     ORDER BY

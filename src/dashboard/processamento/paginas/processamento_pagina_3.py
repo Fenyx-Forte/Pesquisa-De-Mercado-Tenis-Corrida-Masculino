@@ -39,7 +39,7 @@ def verifica_se_periodo_ja_foi_adicionado(
 
 
 def formatar_data_pt_br(data: str) -> str:
-    # "data" esta no formato YYYY/MM/DD
+    # "data" esta no formato YYYY-MM-DD
     componentes = data.split("-")
     dia = componentes[2]
     mes = componentes[1]
@@ -59,7 +59,11 @@ def inicializa_top_10_marcas_historico(
     data_fim_formatada = formatar_data_pt_br(data_fim)
 
     periodo = f"{data_inicio_formatada} - {data_fim_formatada}"
-    parametros = {"periodo": periodo}
+    parametros = {
+        "data_inicio": data_inicio,
+        "data_fim": data_fim,
+        "periodo": periodo,
+    }
 
     return conexao.execute(query, parametros).df()
 
