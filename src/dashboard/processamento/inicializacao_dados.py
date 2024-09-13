@@ -101,24 +101,10 @@ def inicializar_macro_dados_completos_por_periodo(
     conexao.sql(query)
 
 
-def inicializar_macro_top_10_marcas_atuais(conexao: DuckDBPyConnection) -> None:
-    query = macros_sql.top_10_marcas_atuais()
-
-    conexao.sql(query)
-
-
 def inicializar_macro_top_10_marcas_periodo(
     conexao: DuckDBPyConnection,
 ) -> None:
-    query = macros_sql.top_10_marcas_periodo()
-
-    conexao.sql(query)
-
-
-def inicializar_macro_top_10_marcas_historico(
-    conexao: DuckDBPyConnection,
-) -> None:
-    query = macros_sql.top_10_marcas_historico()
+    query = macros_sql.macro_top_10_marcas_periodo()
 
     conexao.sql(query)
 
