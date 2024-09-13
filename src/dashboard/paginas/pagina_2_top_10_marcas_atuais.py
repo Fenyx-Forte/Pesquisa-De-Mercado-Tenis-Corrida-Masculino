@@ -18,6 +18,7 @@ from dash_bootstrap_components import (
     ModalTitle,
 )
 from pandas import DataFrame as pd_DataFrame
+from plotly.graph_objects import Figure
 
 from dashboard.processamento import gerenciador
 from dashboard.processamento.paginas import processamento_pagina_2
@@ -80,7 +81,7 @@ def modal_erro() -> Modal:
     return conteudo
 
 
-def figura_top_10_marcas(df: pd_DataFrame) -> px.bar:
+def figura_top_10_marcas(df: pd_DataFrame) -> Figure:
     figura = (
         px.bar(
             df,
