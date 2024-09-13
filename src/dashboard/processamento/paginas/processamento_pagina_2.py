@@ -5,42 +5,49 @@ from pandas import concat as pd_concat
 from dashboard.processamento.queries import pagina_2_queries
 
 
-def verifica_se_datas_sao_validas(data_inicio: str, data_fim: str) -> bool:
-    if (data_inicio is None) or (data_fim is None):
-        return False
+def callback_verificar_datas() -> str:
+    funcao = """
+    function verificar_datas(n_clicks, data_inicio, data_fim, periodo_hoje, periodo_ja_escolhido, periodo_historico) {
+        if (!data_inicio || !data_fim) {
+            return ["Período Inválido", "Selecione as datas usando o calendário ou escreva as datas no formato DD/MM/YYYY."];
+        }
 
-    return True
+        function formatar_data(data) {
+            const [ano, mes, dia] = data.split('-');
+            return `${dia}/${mes}/${ano}`;
+        }
+
+        const data_inicio_formatada = formatar_data(data_inicio);
+        const data_fim_formatada = formatar_data(data_fim);
+
+        const periodo = `${data_inicio_formatada} - ${data_fim_formatada}`;
+
+        if (periodo === periodo_hoje || periodo === periodo_ja_escolhido || periodo === periodo_historico) {
+            return ["Período Já Adicionado", "Esse período já foi adicionado. Adicione um período diferente."];
+        }
+
+        return ["", ""];
+    }
+    """
+
+    return funcao
 
 
-def verifica_se_qtd_maxima_de_periodos_ja_foi_adicionada(
-    dados_grafico_atual: list[dict],
-) -> bool:
-    qtd_periodos = len(dados_grafico_atual["data"])
+def callback_abrir_modal() -> str:
+    funcao = """
+    function abrirModal(titulo) {
+        if (titulo === "") {
+            return window.dash_clientside.no_update;
+        }
+        return true;
+    }
+    """
 
-    if qtd_periodos >= 3:
-        return True
-
-    return False
-
-
-def verifica_se_periodo_ja_foi_adicionado(
-    data_inicio: str, data_fim: str, dados_grafico_atual: list[dict]
-) -> bool:
-    data_inicio_formatada = formatar_data_pt_br(data_inicio)
-    data_fim_formatada = formatar_data_pt_br(data_fim)
-
-    periodo = f"{data_inicio_formatada} - {data_fim_formatada}"
-
-    periodos = []
-
-    for dados in dados_grafico_atual["data"]:
-        periodos.append(dados["legendgroup"])
-
-    return periodo in periodos
+    return funcao
 
 
 def formatar_data_pt_br(data: str) -> str:
-    # "data" esta no formato YYYY/MM/DD
+    # "data" esta no formato YYYY-MM-DD
     componentes = data.split("-")
     dia = componentes[2]
     mes = componentes[1]
@@ -49,7 +56,7 @@ def formatar_data_pt_br(data: str) -> str:
     return f"{dia}/{mes}/{ano}"
 
 
-def inicializa_top_10_marcas_atuais(
+def top_10_marcas_hoje(
     conexao: DuckDBPyConnection, data_coleta_mais_recente: str
 ) -> pd_DataFrame:
     query = pagina_2_queries.query_top_10_marcas_atuais()
@@ -79,42 +86,76 @@ def top_10_marcas_periodo(
     parametros = {
         "data_inicio": data_inicio,
         "data_fim": data_fim,
-        "lista_marcas": lista_marcas,
         "periodo": periodo,
+        "lista_marcas": lista_marcas,
     }
 
     return conexao.execute(query, parametros).df()
 
 
-def dados_grafico_comparacao_top_10(
+def inicializa_top_10_marcas_atuais(
     conexao: DuckDBPyConnection,
-    dados_grafico_atual: list[dict],
+    data_coleta_mais_recente: str,
+    data_6_dias_atras: str,
+    data_coleta_mais_antiga: str,
+) -> pd_DataFrame:
+    df_hoje = top_10_marcas_hoje(conexao, data_coleta_mais_recente)
+
+    lista_marcas = df_hoje["Marca"].tolist()
+
+    df_ultima_semana = top_10_marcas_periodo(
+        conexao, data_6_dias_atras, data_coleta_mais_recente, lista_marcas
+    )
+
+    df_historico = top_10_marcas_periodo(
+        conexao, data_coleta_mais_antiga, data_coleta_mais_recente, lista_marcas
+    )
+
+    return pd_concat([df_hoje, df_ultima_semana, df_historico])
+
+
+def dataframe_a_partir_dados_grafico(
+    dados_grafico_atual: dict[str, list[dict]], i: int, qtd_itens: int
+):
+    return pd_DataFrame(
+        {
+            "Marca": dados_grafico_atual["data"][i]["x"],
+            "Porcentagem": dados_grafico_atual["data"][i]["y"],
+            "Periodo": [
+                dados_grafico_atual["data"][i]["legendgroup"]
+                for n in range(qtd_itens)
+            ],
+        }
+    )
+
+
+def dados_grafico_atualizado(
+    conexao: DuckDBPyConnection,
+    dados_grafico_atual: dict[str, list[dict]],
     data_inicio: str,
     data_fim: str,
-) -> pd_DataFrame:
+):
     lista_marcas = dados_grafico_atual["data"][0]["x"]
 
-    qtd_itens_periodo = len(lista_marcas)
+    qtd_itens = len(lista_marcas)
 
-    dados_top_10_periodo = top_10_marcas_periodo(
+    df_hoje = dataframe_a_partir_dados_grafico(
+        dados_grafico_atual, 0, qtd_itens
+    )
+
+    df_novo = top_10_marcas_periodo(
         conexao, data_inicio, data_fim, lista_marcas
     )
 
-    lista_dataframes = []
+    df_historico = dataframe_a_partir_dados_grafico(
+        dados_grafico_atual, 2, qtd_itens
+    )
 
-    for dados in dados_grafico_atual["data"]:
-        dataframe = pd_DataFrame(
-            {
-                "Marca": dados["x"],
-                "Porcentagem": dados["y"],
-                "Periodo": [
-                    dados["legendgroup"] for n in range(qtd_itens_periodo)
-                ],
-            }
-        )
+    return pd_concat([df_hoje, df_novo, df_historico])
 
-        lista_dataframes.append(dataframe)
 
-    lista_dataframes.append(dados_top_10_periodo)
+def retorna_periodo_novo(data_inicio: str, data_fim: str):
+    data_inicio_formatada = formatar_data_pt_br(data_inicio)
+    data_fim_formatada = formatar_data_pt_br(data_fim)
 
-    return pd_concat(lista_dataframes)
+    return f"{data_inicio_formatada} - {data_fim_formatada}"

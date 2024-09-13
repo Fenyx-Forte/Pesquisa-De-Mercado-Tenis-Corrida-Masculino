@@ -1,11 +1,22 @@
 def query_top_10_marcas_atuais() -> str:
     query = """
+    WITH marcas_agrupadas AS (
+        SELECT
+            dmr.marca AS marca
+            , (
+                COUNT(marca) * 100.0 / (SUM(COUNT(*)) OVER())
+            ) AS porcentagem
+        FROM
+            dados_mais_recentes AS dmr
+        GROUP BY
+            dmr.marca
+    )
     SELECT
         marca AS Marca
         , porcentagem AS Porcentagem
-        , periodo AS Periodo
+        , $periodo AS Periodo
     FROM
-        top_10_marcas_atuais($periodo)
+        marcas_agrupadas
     WHERE
         Marca <> 'GENERICA'
     ORDER BY
@@ -19,7 +30,7 @@ def query_top_10_marcas_atuais() -> str:
 
 def query_top_10_marcas_periodo() -> str:
     query = """
-    WITH tabela_reservas AS (
+    WITH tabela_reserva AS (
         SELECT
             unnest($lista_marcas) AS marca,
             0.0 AS porcentagem,
@@ -44,7 +55,7 @@ def query_top_10_marcas_periodo() -> str:
     FROM
         tabela_principal AS t1
     RIGHT JOIN
-        tabela_reservas AS t2
+        tabela_reserva AS t2
         ON t1.marca = t2.marca
     ORDER BY
         Porcentagem DESC

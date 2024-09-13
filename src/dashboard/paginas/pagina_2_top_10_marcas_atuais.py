@@ -121,7 +121,9 @@ def figura_top_10_marcas(df: pd_DataFrame) -> Figure:
 
 
 def grafico_top_10_marcas() -> dcc.Graph:
-    figura = figura_top_10_marcas(gerenciador.pagina_2_top_10_marcas_atuais())
+    figura = figura_top_10_marcas(
+        df=gerenciador.pagina_2_top_10_marcas_atuais()
+    )
 
     conteudo = dcc.Graph(
         figure=figura,
@@ -140,76 +142,48 @@ def grafico_top_10_marcas() -> dcc.Graph:
     return conteudo
 
 
+def div_periodo(periodo: str, sufixo: str) -> html.Div:
+    conteudo = html.Div(
+        periodo,
+        id=f"pagina_2_div_periodo_{sufixo}",
+        className="div_periodo",
+    )
+
+    return conteudo
+
+
 layout = html.Div(
     [
         # titulo(),
-        # html.Br(),
         seletor_datas(),
         botao_adicionar_periodo(),
         modal_erro(),
         grafico_top_10_marcas(),
+        div_periodo(gerenciador.pagina_2_periodo_hoje(), "hoje"),
+        div_periodo(gerenciador.pagina_2_periodo_ultima_semana(), "escolhido"),
+        div_periodo(gerenciador.pagina_2_periodo_historico(), "historico"),
     ],
     className="pagina",
     id="pagina_2",
 )
 
 
-@callback(
+clientside_callback(
+    processamento_pagina_2.callback_verificar_datas(),
     Output("pagina_2_modal_erro_titulo", "children"),
     Output("pagina_2_modal_erro_conteudo", "children"),
     Input("pagina_2_botao", "n_clicks"),
     State("pagina_2_seletor_datas", "start_date"),
     State("pagina_2_seletor_datas", "end_date"),
-    State("pagina_2_grafico_top_10_marcas", "figure"),
+    State("pagina_2_div_periodo_hoje", "children"),
+    State("pagina_2_div_periodo_escolhido", "children"),
+    State("pagina_2_div_periodo_historico", "children"),
     prevent_initial_call=True,
 )
-def pagina_2_verificar_inputs(
-    n_clicks, data_inicio, data_fim, dados_grafico_atual
-):
-    titulo = ""
-    conteudo = ""
-
-    if not processamento_pagina_2.verifica_se_datas_sao_validas(
-        data_inicio, data_fim
-    ):
-        titulo = "Período Inválido"
-
-        conteudo = "Selecione as datas usando o calendário ou escreva a data no formato DD/MM/YYYY."
-
-        return titulo, conteudo
-
-    if processamento_pagina_2.verifica_se_qtd_maxima_de_periodos_ja_foi_adicionada(
-        dados_grafico_atual
-    ):
-        titulo = "Quantidade Máxima de Comparações Atingida"
-
-        conteudo = "A quantidade máxima de comparações é 3."
-
-        return titulo, conteudo
-
-    if processamento_pagina_2.verifica_se_periodo_ja_foi_adicionado(
-        data_inicio, data_fim, dados_grafico_atual
-    ):
-        titulo = "Período já Adicionado"
-
-        conteudo = (
-            "Esse período já foi adicionado. Adicione um período diferente."
-        )
-
-        return titulo, conteudo
-
-    return titulo, conteudo
 
 
 clientside_callback(
-    """
-    function abrirModal(titulo) {
-        if (titulo === "") {
-            return window.dash_clientside.no_update;
-        }
-        return true;
-    }
-    """,
+    processamento_pagina_2.callback_abrir_modal(),
     Output("pagina_2_modal_erro", "is_open"),
     Input("pagina_2_modal_erro_titulo", "children"),
     prevent_initial_call=True,
@@ -220,22 +194,29 @@ clientside_callback(
     Output("pagina_2_grafico_top_10_marcas", "figure"),
     Output("pagina_2_seletor_datas", "start_date"),
     Output("pagina_2_seletor_datas", "end_date"),
+    Output("pagina_2_div_periodo_escolhido", "children"),
     Input("pagina_2_modal_erro_titulo", "children"),
     State("pagina_2_seletor_datas", "start_date"),
     State("pagina_2_seletor_datas", "end_date"),
     State("pagina_2_grafico_top_10_marcas", "figure"),
     prevent_initial_call=True,
 )
-def pagina_2_adicionar_comparacao(
+def pagina_2_atualizar_comparacao(
     titulo, data_inicio, data_fim, dados_grafico_atual
 ):
     if titulo != "":
         raise PreventUpdate
 
-    dados_grafico = gerenciador.pagina_2_grafico_comparacao_top_10(
-        dados_grafico_atual, data_inicio, data_fim
+    dados_grafico_atualizado = gerenciador.pagina_2_dados_grafico_atualizado(
+        dados_grafico_atual=dados_grafico_atual,
+        data_inicio=data_inicio,
+        data_fim=data_fim,
     )
 
-    figura_nova = figura_top_10_marcas(dados_grafico)
+    figura_nova = figura_top_10_marcas(dados_grafico_atualizado)
 
-    return figura_nova, None, None
+    periodo_novo = processamento_pagina_2.retorna_periodo_novo(
+        data_inicio=data_inicio, data_fim=data_fim
+    )
+
+    return figura_nova, None, None, periodo_novo
