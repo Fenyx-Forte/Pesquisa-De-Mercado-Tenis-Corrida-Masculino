@@ -1,3 +1,5 @@
+from pandas import DataFrame as pd_DataFrame
+
 from dashboard.processamento import escopo_global, inicializacao_dados
 from dashboard.processamento.paginas import (
     processamento_pagina_1,
@@ -91,6 +93,10 @@ def retorna_periodo_historico() -> str:
     return escopo_aplicacaco.periodo_historico
 
 
+def retorna_top_10_marcas_hoje() -> pd_DataFrame:
+    return escopo_aplicacaco.df_top_10_marcas_hoje
+
+
 # Pagina 1
 def pagina_1_inicializa_coluna_hoje():
     return processamento_pagina_1.inicializa_coluna_hoje(
@@ -150,11 +156,23 @@ def pagina_2_dados_grafico_atualizado(
 
 
 # Pagina 3
-def pagina_3_top_10_marcas_hoje():
-    return escopo_aplicacaco.df_top_10_marcas_hoje
+def pagina_3_inicializa_top_10_marcas_escolhido():
+    return processamento_pagina_3.df_top_10_marcas_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_6_dias_atras,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+    )
 
 
-def pagina_3_top_10_marcas_periodo(data_inicio: str, data_fim: str):
+def pagina_3_inicializa_top_10_marcas_historico():
+    return processamento_pagina_3.df_top_10_marcas_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+    )
+
+
+def pagina_3_atualiza_top_10_marcas_periodo(data_inicio: str, data_fim: str):
     return processamento_pagina_3.df_top_10_marcas_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=data_inicio,

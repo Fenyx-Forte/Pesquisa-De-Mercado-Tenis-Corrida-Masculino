@@ -2,6 +2,7 @@ import plotly.express as px
 from dash import (
     Input,
     Output,
+    Patch,
     State,
     callback,
     clientside_callback,
@@ -12,10 +13,12 @@ from dash import (
 from dash.exceptions import PreventUpdate
 from dash_bootstrap_components import (
     Button,
+    Col,
     Modal,
     ModalBody,
     ModalHeader,
     ModalTitle,
+    Row,
 )
 from pandas import DataFrame as pd_DataFrame
 from plotly.graph_objects import Figure
@@ -55,14 +58,27 @@ def seletor_datas() -> dcc.DatePickerRange:
     return conteudo
 
 
-def botao_adicionar_grafico() -> Button:
+def botao_selecionar_periodo() -> Button:
     conteudo = Button(
-        "Adicionar Gráfico",
+        "Selecionar Período",
         outline=True,
         color="primary",
         className="me-1",
         id="pagina_3_botao",
         class_name="botao",
+    )
+
+    return conteudo
+
+
+def div_seletor_datas_e_botao() -> html.Div:
+    conteudo = html.Div(
+        [
+            seletor_datas(),
+            html.Br(),
+            botao_selecionar_periodo(),
+        ],
+        className="div_seletor_datas_e_botao",
     )
 
     return conteudo
@@ -81,55 +97,19 @@ def modal_erro() -> Modal:
     return conteudo
 
 
-def modal_sucesso() -> Modal:
-    conteudo = Modal(
-        [
-            ModalHeader(
-                ModalTitle(
-                    "Gráfico Adicionado", id="pagina_3_modal_sucesso_titulo"
-                )
-            ),
-            ModalBody(
-                "Para ver o gráfico, role a tela para baixo.",
-                id="pagina_3_modal_sucesso_conteudo",
-            ),
-        ],
-        id="pagina_3_modal_sucesso",
-        is_open=False,
-    )
-
-    return conteudo
-
-
-def configuracoes_grafico():
-    configuracoes = {
-        "responsive": True,
-        "config": {
-            "displayModeBar": False,
-            "doubleClick": False,
-            "editSelection": False,
-            "editable": False,
-            "scrollZoom": False,
-            "showTips": False,
-        },
-    }
-
-    return configuracoes
-
-
 def figura_top_10_marcas(df: pd_DataFrame, cor: str) -> Figure:
     figura = (
         px.bar(
             df,
             x="Marca",
             y="Porcentagem",
-            color="Periodo",
-            labels={"Periodo": "Período"},
+            labels={
+                "Porcentagem": "Porcentagem (%)",
+            },
             color_discrete_sequence=[cor],
             barmode="group",
             hover_data={
                 "Porcentagem": ":.2f",
-                "Periodo": False,
                 "Marca": False,
             },
             text_auto=".2f",
@@ -146,50 +126,117 @@ def figura_top_10_marcas(df: pd_DataFrame, cor: str) -> Figure:
             dragmode=False,
             hoverlabel=dict(font_size=12, font_color="#FFFFFF"),
             uniformtext_minsize=10,
-            uniformtext_mode="hide",
-            legend=dict(
-                font=dict(size=14, color="black"),
-            ),
+            uniformtext_mode="show",
+            showlegend=False,
         )
     )
 
     return figura
 
 
+def grafico_top_10_marcas(df: pd_DataFrame, cor: str, sufixo: str) -> dcc.Graph:
+    figura = figura_top_10_marcas(df=df, cor=cor)
+
+    conteudo = dcc.Graph(
+        figure=figura,
+        responsive=True,
+        config={
+            "displayModeBar": False,
+            "doubleClick": False,
+            "editSelection": False,
+            "editable": False,
+            "scrollZoom": False,
+            "showTips": False,
+        },
+        id=f"pagina_3_grafico_top_10_marcas_{sufixo}",
+    )
+
+    return conteudo
+
+
+def div_periodo(
+    titulo: str, periodo: str, df: pd_DataFrame, cor: str, sufixo: str
+) -> html.Div:
+    conteudo = html.Div(
+        [
+            html.H4(titulo, className="titulo_coluna"),
+            html.Br(),
+            html.Div(
+                periodo,
+                className="periodo_coluna",
+                id=f"pagina_3_periodo_{sufixo}",
+            ),
+            html.Br(),
+            grafico_top_10_marcas(df, cor, sufixo),
+        ]
+    )
+
+    return conteudo
+
+
+def colunas(
+    periodo_hoje: str,
+    periodo_escolhido: str,
+    periodo_historico: str,
+    df_hoje: pd_DataFrame,
+    df_escolhido: pd_DataFrame,
+    df_historico: pd_DataFrame,
+) -> Row:
+    conteudo = Row(
+        [
+            Col(
+                div_periodo(
+                    titulo="Hoje",
+                    periodo=periodo_hoje,
+                    df=df_hoje,
+                    cor="#6495ED",
+                    sufixo="hoje",
+                ),
+                width=4,
+                class_name="coluna_hoje",
+            ),
+            Col(
+                div_periodo(
+                    titulo="Período Escolhido",
+                    periodo=periodo_escolhido,
+                    df=df_escolhido,
+                    cor="#FFA07A",
+                    sufixo="escolhido",
+                ),
+                width=4,
+                class_name="coluna_escolhido",
+            ),
+            Col(
+                div_periodo(
+                    titulo="Histórico",
+                    periodo=periodo_historico,
+                    df=df_historico,
+                    cor="#5CB85C",
+                    sufixo="historico",
+                ),
+                width=4,
+                class_name="coluna_historico",
+            ),
+        ],
+        class_name="linha_colunas_periodos",
+    )
+
+    return conteudo
+
+
 layout = html.Div(
     [
         # titulo(),
         # html.Br(),
-        seletor_datas(),
-        botao_adicionar_grafico(),
+        div_seletor_datas_e_botao(),
         modal_erro(),
-        modal_sucesso(),
-        html.Div(
-            dcc.Graph(
-                figure=figura_top_10_marcas(
-                    df=gerenciador.pagina_3_top_10_marcas_historico(),
-                    cor="#6495ED",
-                ),
-                id="grafico-top-10-marcas-1",
-                **configuracoes_grafico(),
-            ),
-            id="pagina_3_div_1",
-        ),
-        html.Div(
-            dcc.Graph(
-                id="grafico-top-10-marcas-2",
-                **configuracoes_grafico(),
-            ),
-            id="pagina_3_div_2",
-            style={"display": "none"},
-        ),
-        html.Div(
-            dcc.Graph(
-                id="grafico-top-10-marcas-3",
-                **configuracoes_grafico(),
-            ),
-            id="pagina_3_div_3",
-            style={"display": "none"},
+        colunas(
+            periodo_hoje=gerenciador.retorna_periodo_hoje(),
+            periodo_escolhido=gerenciador.retorna_periodo_ultima_semana(),
+            periodo_historico=gerenciador.retorna_periodo_historico(),
+            df_hoje=gerenciador.retorna_top_10_marcas_hoje(),
+            df_escolhido=gerenciador.pagina_3_inicializa_top_10_marcas_escolhido(),
+            df_historico=gerenciador.pagina_3_inicializa_top_10_marcas_historico(),
         ),
     ],
     className="pagina",
@@ -197,74 +244,22 @@ layout = html.Div(
 )
 
 
-@callback(
+clientside_callback(
+    processamento_pagina_3.callback_verificar_datas(),
     Output("pagina_3_modal_erro_titulo", "children"),
     Output("pagina_3_modal_erro_conteudo", "children"),
     Input("pagina_3_botao", "n_clicks"),
     State("pagina_3_seletor_datas", "start_date"),
     State("pagina_3_seletor_datas", "end_date"),
-    State("grafico-top-10-marcas-1", "figure"),
-    State("grafico-top-10-marcas-2", "figure"),
-    State("grafico-top-10-marcas-3", "figure"),
+    State("pagina_3_periodo_hoje", "children"),
+    State("pagina_3_periodo_escolhido", "children"),
+    State("pagina_3_periodo_historico", "children"),
     prevent_initial_call=True,
 )
-def pagina_3_verificar_inputs(
-    n_clicks, data_inicio, data_fim, grafico_1, grafico_2, grafico_3
-):
-    titulo = ""
-    conteudo = ""
-
-    if not processamento_pagina_3.verifica_se_datas_sao_validas(
-        data_inicio, data_fim
-    ):
-        titulo = "Período Inválido"
-
-        conteudo = "Selecione as datas usando o calendário ou escreva a data no formato DD/MM/YYYY."
-
-        return titulo, conteudo
-
-    if processamento_pagina_3.verifica_se_qtd_maxima_de_graficos_ja_foi_adicionada(
-        grafico_2, grafico_3
-    ):
-        titulo = "Quantidade Máxima de Gráficos Atingida"
-
-        conteudo = "A quantidade máxima de gráficos é 3."
-
-        return titulo, conteudo
-
-    if processamento_pagina_3.verifica_se_periodo_ja_foi_adicionado(
-        data_inicio, data_fim, grafico_1, grafico_2
-    ):
-        titulo = "Período Já Adicionado"
-
-        conteudo = (
-            "Esse período já foi adicionado. Adicione um período diferente."
-        )
-
-        return titulo, conteudo
-
-    # Nesse ponto, todas as validacoes ja foram feitas
-
-    # O titulo do modal ira decidir o grafico que sera criado
-    if grafico_2 is None:
-        titulo = "2"
-
-        return titulo, conteudo
-
-    titulo = "3"
-
-    return titulo, conteudo
 
 
 clientside_callback(
-    """
-    function abrirModal(titulo) {
-        if (titulo === "2" || titulo === "3") {
-            return window.dash_clientside.no_update;
-        }
-        return true;
-    }
-    """,
+    processamento_pagina_3.callback_abrir_modal(),
     Output("pagina_3_modal_erro", "is_open"),
     Input("pagina_3_modal_erro_titulo", "children"),
     prevent_initial_call=True,
@@ -272,64 +267,30 @@ clientside_callback(
 
 
 @callback(
-    Output("grafico-top-10-marcas-2", "figure"),
-    Output("pagina_3_div_2", "style"),
-    Input("pagina_3_modal_erro_titulo", "children"),
-    State("pagina_3_seletor_datas", "start_date"),
-    State("pagina_3_seletor_datas", "end_date"),
-    prevent_initial_call=True,
-)
-def pagina_3_adicionar_grafico_2(titulo, data_inicio, data_fim):
-    if titulo != "2":
-        raise PreventUpdate
-
-    dados_grafico = gerenciador.pagina_3_top_10_marcas_periodo(
-        data_inicio, data_fim
-    )
-
-    return figura_top_10_marcas(dados_grafico, "#FFA07A"), {"display": "inline"}
-
-
-@callback(
-    Output("grafico-top-10-marcas-3", "figure"),
-    Output("pagina_3_div_3", "style"),
-    Input("pagina_3_modal_erro_titulo", "children"),
-    State("pagina_3_seletor_datas", "start_date"),
-    State("pagina_3_seletor_datas", "end_date"),
-    prevent_initial_call=True,
-)
-def pagina_3_adicionar_grafico_3(titulo, data_inicio, data_fim):
-    if titulo != "3":
-        raise PreventUpdate
-
-    dados_grafico = gerenciador.pagina_3_top_10_marcas_periodo(
-        data_inicio, data_fim
-    )
-
-    return figura_top_10_marcas(dados_grafico, "#5CB85C"), {"display": "inline"}
-
-
-clientside_callback(
-    """
-    function limparSeletorDatas(n_clicks, style_2, style_3) {
-        return [null, null];
-    }
-    """,
+    Output("pagina_3_grafico_top_10_marcas_escolhido", "figure"),
     Output("pagina_3_seletor_datas", "start_date"),
     Output("pagina_3_seletor_datas", "end_date"),
-    Input("pagina_3_div_2", "style"),
-    Input("pagina_3_div_3", "style"),
+    Output("pagina_3_periodo_escolhido", "children"),
+    Input("pagina_3_modal_erro_titulo", "children"),
+    State("pagina_3_seletor_datas", "start_date"),
+    State("pagina_3_seletor_datas", "end_date"),
     prevent_initial_call=True,
 )
+def pagina_3_atualizar_comparacao(titulo, data_inicio, data_fim):
+    if titulo != "":
+        raise PreventUpdate
 
-clientside_callback(
-    """
-    function abrirModalSucesso(style_1, style_2) {
-        return true;
-    }
-    """,
-    Output("pagina_3_modal_sucesso", "is_open"),
-    Input("pagina_3_div_2", "style"),
-    Input("pagina_3_div_3", "style"),
-    prevent_initial_call=True,
-)
+    df_novo = gerenciador.pagina_3_atualiza_top_10_marcas_periodo(
+        data_inicio, data_fim
+    )
+
+    periodo_novo = processamento_pagina_3.retorna_periodo_novo(
+        data_inicio=data_inicio, data_fim=data_fim
+    )
+
+    patch_figura = Patch()
+
+    patch_figura["data"][0]["x"] = df_novo["Marca"].values
+    patch_figura["data"][0]["y"] = df_novo["Porcentagem"].values
+
+    return patch_figura, None, None, periodo_novo
