@@ -70,19 +70,6 @@ def botao_selecionar_periodo() -> Button:
     return conteudo
 
 
-def modal_erro() -> Modal:
-    conteudo = Modal(
-        [
-            ModalHeader(ModalTitle("Titulo", id="pagina_1_modal_erro_titulo")),
-            ModalBody("Conteudo", id="pagina_1_modal_erro_conteudo"),
-        ],
-        id="pagina_1_modal_erro",
-        is_open=False,
-    )
-
-    return conteudo
-
-
 def div_seletor_datas_e_botao() -> html.Div:
     conteudo = html.Div(
         [
@@ -91,6 +78,19 @@ def div_seletor_datas_e_botao() -> html.Div:
             botao_selecionar_periodo(),
         ],
         className="div_seletor_datas_e_botao",
+    )
+
+    return conteudo
+
+
+def modal_erro() -> Modal:
+    conteudo = Modal(
+        [
+            ModalHeader(ModalTitle("Titulo", id="pagina_1_modal_erro_titulo")),
+            ModalBody("Conteudo", id="pagina_1_modal_erro_conteudo"),
+        ],
+        id="pagina_1_modal_erro",
+        is_open=False,
     )
 
     return conteudo
