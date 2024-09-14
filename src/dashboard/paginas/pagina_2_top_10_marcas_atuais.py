@@ -12,10 +12,12 @@ from dash import (
 from dash.exceptions import PreventUpdate
 from dash_bootstrap_components import (
     Button,
+    Col,
     Modal,
     ModalBody,
     ModalHeader,
     ModalTitle,
+    Row,
 )
 from pandas import DataFrame as pd_DataFrame
 from plotly.graph_objects import Figure
@@ -55,7 +57,7 @@ def seletor_datas() -> dcc.DatePickerRange:
     return conteudo
 
 
-def botao_adicionar_periodo() -> Button:
+def botao_selecionar_periodo() -> Button:
     conteudo = Button(
         "Selecionar Período",
         outline=True,
@@ -63,6 +65,19 @@ def botao_adicionar_periodo() -> Button:
         className="me-1",
         id="pagina_2_botao",
         class_name="botao",
+    )
+
+    return conteudo
+
+
+def div_seletor_datas_e_botao() -> html.Div:
+    conteudo = html.Div(
+        [
+            seletor_datas(),
+            html.Br(),
+            botao_selecionar_periodo(),
+        ],
+        className="div_seletor_datas_e_botao",
     )
 
     return conteudo
@@ -88,7 +103,10 @@ def figura_top_10_marcas(df: pd_DataFrame) -> Figure:
             x="Marca",
             y="Porcentagem",
             color="Periodo",
-            labels={"Periodo": "Período"},
+            labels={
+                "Periodo": "Período",
+                "Porcentagem": "Porcentagem (%)",
+            },
             color_discrete_sequence=["#6495ED", "#FFA07A", "#5CB85C"],
             barmode="group",
             hover_data={
@@ -111,9 +129,7 @@ def figura_top_10_marcas(df: pd_DataFrame) -> Figure:
             hoverlabel=dict(font_size=12, font_color="#FFFFFF"),
             uniformtext_minsize=10,
             uniformtext_mode="hide",
-            legend=dict(
-                font=dict(size=14, color="black"),
-            ),
+            showlegend=False,
         )
     )
 
@@ -142,11 +158,51 @@ def grafico_top_10_marcas() -> dcc.Graph:
     return conteudo
 
 
-def div_periodo(periodo: str, sufixo: str) -> html.Div:
+def div_periodo(titulo: str, periodo: str, sufixo: str) -> html.Div:
     conteudo = html.Div(
-        periodo,
-        id=f"pagina_2_div_periodo_{sufixo}",
-        className="div_periodo",
+        [
+            html.H4(titulo, className="titulo_coluna"),
+            html.Br(),
+            html.Div(
+                periodo,
+                className="periodo_coluna",
+                id=f"pagina_2_periodo_{sufixo}",
+            ),
+            html.Br(),
+            html.Div(
+                html.I(className="fa-solid fa-square"),
+                className=f"legenda_{sufixo}",
+            ),
+        ]
+    )
+
+    return conteudo
+
+
+def colunas(
+    periodo_hoje: str, periodo_escolhido: str, periodo_historico: str
+) -> Row:
+    conteudo = Row(
+        [
+            Col(
+                div_periodo("Hoje", periodo_hoje, "hoje"),
+                width=4,
+                class_name="coluna_hoje",
+            ),
+            Col(
+                div_periodo(
+                    "Período Escolhido", periodo_escolhido, "escolhido"
+                ),
+                width=4,
+                class_name="coluna_escolhido",
+            ),
+            Col(
+                div_periodo("Histórico", periodo_historico, "historico"),
+                width=4,
+                class_name="coluna_historico",
+            ),
+        ],
+        class_name="linha_colunas_periodos",
     )
 
     return conteudo
@@ -155,13 +211,14 @@ def div_periodo(periodo: str, sufixo: str) -> html.Div:
 layout = html.Div(
     [
         # titulo(),
-        seletor_datas(),
-        botao_adicionar_periodo(),
+        div_seletor_datas_e_botao(),
         modal_erro(),
+        colunas(
+            periodo_hoje=gerenciador.pagina_2_periodo_hoje(),
+            periodo_escolhido=gerenciador.pagina_2_periodo_ultima_semana(),
+            periodo_historico=gerenciador.pagina_2_periodo_historico(),
+        ),
         grafico_top_10_marcas(),
-        div_periodo(gerenciador.pagina_2_periodo_hoje(), "hoje"),
-        div_periodo(gerenciador.pagina_2_periodo_ultima_semana(), "escolhido"),
-        div_periodo(gerenciador.pagina_2_periodo_historico(), "historico"),
     ],
     className="pagina",
     id="pagina_2",
@@ -175,9 +232,9 @@ clientside_callback(
     Input("pagina_2_botao", "n_clicks"),
     State("pagina_2_seletor_datas", "start_date"),
     State("pagina_2_seletor_datas", "end_date"),
-    State("pagina_2_div_periodo_hoje", "children"),
-    State("pagina_2_div_periodo_escolhido", "children"),
-    State("pagina_2_div_periodo_historico", "children"),
+    State("pagina_2_periodo_hoje", "children"),
+    State("pagina_2_periodo_escolhido", "children"),
+    State("pagina_2_periodo_historico", "children"),
     prevent_initial_call=True,
 )
 
@@ -194,7 +251,7 @@ clientside_callback(
     Output("pagina_2_grafico_top_10_marcas", "figure"),
     Output("pagina_2_seletor_datas", "start_date"),
     Output("pagina_2_seletor_datas", "end_date"),
-    Output("pagina_2_div_periodo_escolhido", "children"),
+    Output("pagina_2_periodo_escolhido", "children"),
     Input("pagina_2_modal_erro_titulo", "children"),
     State("pagina_2_seletor_datas", "start_date"),
     State("pagina_2_seletor_datas", "end_date"),
