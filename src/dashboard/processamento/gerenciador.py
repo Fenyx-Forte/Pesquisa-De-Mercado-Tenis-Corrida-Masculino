@@ -1,3 +1,5 @@
+from pandas import DataFrame as pd_DataFrame
+
 from dashboard.processamento import escopo_global, inicializacao_dados
 from dashboard.processamento.paginas import (
     processamento_pagina_1,
@@ -34,12 +36,19 @@ def inicializar_escopo_global() -> None:
         conexao
     )
 
+    df_top_10_marcas_hoje = (
+        inicializacao_dados.inicializar_df_top_10_marcas_hoje(
+            conexao, data_coleta_mais_recente
+        )
+    )
+
     escopo_aplicacaco = escopo_global.EscopoGlobal(
         conexao=conexao,
         cabecalho_data_coleta=cabecalho_data_coleta,
         data_coleta_mais_recente=data_coleta_mais_recente,
         data_6_dias_atras=data_6_dias_atras,
         data_coleta_mais_antiga=data_coleta_mais_antiga,
+        df_top_10_marcas_hoje=df_top_10_marcas_hoje,
     )
 
 
@@ -130,6 +139,7 @@ def pagina_2_top_10_marcas_atuais():
         data_coleta_mais_recente=escopo_aplicacaco.data_coleta_mais_recente,
         data_6_dias_atras=escopo_aplicacaco.data_6_dias_atras,
         data_coleta_mais_antiga=escopo_aplicacaco.data_coleta_mais_antiga,
+        df_hoje=escopo_aplicacaco.df_top_10_marcas_hoje,
     )
 
 

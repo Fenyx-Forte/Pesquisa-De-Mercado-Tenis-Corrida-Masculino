@@ -56,20 +56,6 @@ def formatar_data_pt_br(data: str) -> str:
     return f"{dia}/{mes}/{ano}"
 
 
-def top_10_marcas_hoje(
-    conexao: DuckDBPyConnection, data_coleta_mais_recente: str
-) -> pd_DataFrame:
-    query = pagina_2_queries.query_top_10_marcas_atuais()
-
-    data_coleta_formatada = formatar_data_pt_br(data_coleta_mais_recente)
-
-    periodo = f"{data_coleta_formatada} - {data_coleta_formatada}"
-
-    parametros = {"periodo": periodo}
-
-    return conexao.execute(query, parametros).df()
-
-
 def top_10_marcas_periodo(
     conexao: DuckDBPyConnection,
     data_inicio: str,
@@ -98,9 +84,8 @@ def inicializa_top_10_marcas_atuais(
     data_coleta_mais_recente: str,
     data_6_dias_atras: str,
     data_coleta_mais_antiga: str,
+    df_hoje: pd_DataFrame,
 ) -> pd_DataFrame:
-    df_hoje = top_10_marcas_hoje(conexao, data_coleta_mais_recente)
-
     lista_marcas = df_hoje["Marca"].tolist()
 
     df_ultima_semana = top_10_marcas_periodo(

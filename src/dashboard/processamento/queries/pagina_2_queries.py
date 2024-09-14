@@ -1,33 +1,3 @@
-def query_top_10_marcas_atuais() -> str:
-    query = """
-    WITH marcas_agrupadas AS (
-        SELECT
-            dmr.marca AS marca
-            , (
-                COUNT(marca) * 100.0 / (SUM(COUNT(*)) OVER())
-            ) AS porcentagem
-        FROM
-            dados_mais_recentes AS dmr
-        GROUP BY
-            dmr.marca
-    )
-    SELECT
-        marca AS Marca
-        , porcentagem AS Porcentagem
-        , $periodo AS Periodo
-    FROM
-        marcas_agrupadas
-    WHERE
-        Marca <> 'GENERICA'
-    ORDER BY
-        porcentagem DESC
-    LIMIT
-        10;
-    """
-
-    return query
-
-
 def query_top_10_marcas_periodo() -> str:
     query = """
     WITH tabela_reserva AS (

@@ -1,7 +1,18 @@
 from duckdb import DuckDBPyConnection, connect
+from pandas import DataFrame as pd_DataFrame
 
 from dashboard.processamento import macros_sql, tabelas_sql
 from modulos.uteis import carregar_env, funcoes_sql
+
+
+def formatar_data_pt_br(data: str) -> str:
+    # "data" esta no formato YYYY-MM-DD
+    componentes = data.split("-")
+    dia = componentes[2]
+    mes = componentes[1]
+    ano = componentes[0]
+
+    return f"{dia}/{mes}/{ano}"
 
 
 def query_cabecalho_data_coleta() -> str:
@@ -57,6 +68,36 @@ def query_data_coleta_mais_antiga() -> str:
         data_coleta ASC
     LIMIT
         1;
+    """
+
+    return query
+
+
+def query_top_10_marcas_hoje() -> str:
+    query = """
+    WITH marcas_agrupadas AS (
+        SELECT
+            dmr.marca AS marca
+            , (
+                COUNT(marca) * 100.0 / (SUM(COUNT(*)) OVER())
+            ) AS porcentagem
+        FROM
+            dados_mais_recentes AS dmr
+        GROUP BY
+            dmr.marca
+    )
+    SELECT
+        marca AS Marca
+        , porcentagem AS Porcentagem
+        , $periodo AS Periodo
+    FROM
+        marcas_agrupadas
+    WHERE
+        Marca <> 'GENERICA'
+    ORDER BY
+        porcentagem DESC
+    LIMIT
+        10;
     """
 
     return query
@@ -139,3 +180,19 @@ def inicializar_data_coleta_mais_antiga(conexao: DuckDBPyConnection) -> str:
     data_coleta_mais_antiga = conexao.sql(query).fetchall()[0][0]
 
     return data_coleta_mais_antiga
+
+
+def inicializar_df_top_10_marcas_hoje(
+    conexao: DuckDBPyConnection, data_coleta_mais_recente: str
+) -> pd_DataFrame:
+    query = query_top_10_marcas_hoje()
+
+    data_hoje = formatar_data_pt_br(data_coleta_mais_recente)
+
+    periodo = f"{data_hoje} - {data_hoje}"
+
+    parametros = {
+        "periodo": periodo,
+    }
+
+    return conexao.execute(query, parametros).df()
