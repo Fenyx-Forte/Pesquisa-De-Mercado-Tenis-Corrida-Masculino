@@ -128,7 +128,7 @@ def figura_top_10_marcas(df: pd_DataFrame) -> Figure:
             dragmode=False,
             hoverlabel=dict(font_size=12, font_color="#FFFFFF"),
             uniformtext_minsize=10,
-            uniformtext_mode="hide",
+            uniformtext_mode="show",
             showlegend=False,
         )
     )
