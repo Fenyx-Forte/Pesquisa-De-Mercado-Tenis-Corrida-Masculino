@@ -623,7 +623,7 @@ def inicializa_coluna_periodo(
     if sufixo == "escolhido":
         titulo = "Período Escolhido"
     else:
-        titulo = "Período Histórico"
+        titulo = "Histórico"
 
     # Inicializando valores
     lista_um = media_produtos_e_media_precos_periodo(
