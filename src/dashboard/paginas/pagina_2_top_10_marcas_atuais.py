@@ -214,9 +214,9 @@ layout = html.Div(
         div_seletor_datas_e_botao(),
         modal_erro(),
         colunas(
-            periodo_hoje=gerenciador.pagina_2_periodo_hoje(),
-            periodo_escolhido=gerenciador.pagina_2_periodo_ultima_semana(),
-            periodo_historico=gerenciador.pagina_2_periodo_historico(),
+            periodo_hoje=gerenciador.retorna_periodo_hoje(),
+            periodo_escolhido=gerenciador.retorna_periodo_ultima_semana(),
+            periodo_historico=gerenciador.retorna_periodo_historico(),
         ),
         grafico_top_10_marcas(),
     ],

@@ -182,6 +182,32 @@ def inicializar_data_coleta_mais_antiga(conexao: DuckDBPyConnection) -> str:
     return data_coleta_mais_antiga
 
 
+def inicializar_periodo_hoje(data_coleta_mais_recente: str) -> str:
+    data_hoje = formatar_data_pt_br(data_coleta_mais_recente)
+
+    return f"{data_hoje} - {data_hoje}"
+
+
+def inicializar_periodo_ultima_semana(
+    data_6_dias_atras: str, data_coleta_mais_recente: str
+) -> str:
+    data_6_dias_atras_formatada = formatar_data_pt_br(data_6_dias_atras)
+
+    data_hoje = formatar_data_pt_br(data_coleta_mais_recente)
+
+    return f"{data_6_dias_atras_formatada} - {data_hoje}"
+
+
+def inicializar_periodo_historico(
+    data_coleta_mais_antiga: str, data_coleta_mais_recente: str
+) -> str:
+    data_mais_antiga = formatar_data_pt_br(data_coleta_mais_antiga)
+
+    data_mais_recente = formatar_data_pt_br(data_coleta_mais_recente)
+
+    return f"{data_mais_antiga} - {data_mais_recente}"
+
+
 def inicializar_df_top_10_marcas_hoje(
     conexao: DuckDBPyConnection, data_coleta_mais_recente: str
 ) -> pd_DataFrame:

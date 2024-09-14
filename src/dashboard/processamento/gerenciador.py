@@ -1,5 +1,3 @@
-from pandas import DataFrame as pd_DataFrame
-
 from dashboard.processamento import escopo_global, inicializacao_dados
 from dashboard.processamento.paginas import (
     processamento_pagina_1,
@@ -36,6 +34,20 @@ def inicializar_escopo_global() -> None:
         conexao
     )
 
+    periodo_hoje = inicializacao_dados.inicializar_periodo_hoje(
+        data_coleta_mais_recente
+    )
+
+    periodo_ultima_semana = (
+        inicializacao_dados.inicializar_periodo_ultima_semana(
+            data_6_dias_atras, data_coleta_mais_recente
+        )
+    )
+
+    periodo_historico = inicializacao_dados.inicializar_periodo_historico(
+        data_coleta_mais_antiga, data_coleta_mais_recente
+    )
+
     df_top_10_marcas_hoje = (
         inicializacao_dados.inicializar_df_top_10_marcas_hoje(
             conexao, data_coleta_mais_recente
@@ -48,6 +60,9 @@ def inicializar_escopo_global() -> None:
         data_coleta_mais_recente=data_coleta_mais_recente,
         data_6_dias_atras=data_6_dias_atras,
         data_coleta_mais_antiga=data_coleta_mais_antiga,
+        periodo_hoje=periodo_hoje,
+        periodo_ultima_semana=periodo_ultima_semana,
+        periodo_historico=periodo_historico,
         df_top_10_marcas_hoje=df_top_10_marcas_hoje,
     )
 
@@ -62,6 +77,18 @@ def retorna_data_coleta_mais_recente() -> str:
 
 def retorna_data_coleta_mais_antiga() -> str:
     return escopo_aplicacaco.data_coleta_mais_antiga
+
+
+def retorna_periodo_hoje() -> str:
+    return escopo_aplicacaco.periodo_hoje
+
+
+def retorna_periodo_ultima_semana() -> str:
+    return escopo_aplicacaco.periodo_ultima_semana
+
+
+def retorna_periodo_historico() -> str:
+    return escopo_aplicacaco.periodo_historico
 
 
 # Pagina 1
@@ -99,40 +126,6 @@ def pagina_1_atualiza_coluna_escolhido(data_inicio: str, data_fim: str):
 
 
 # Pagina 2
-def pagina_2_periodo_hoje():
-    data_hoje = escopo_aplicacaco.data_coleta_mais_recente
-
-    data_hoje_formatada = processamento_pagina_2.formatar_data_pt_br(data_hoje)
-
-    return f"{data_hoje_formatada} - {data_hoje_formatada}"
-
-
-def pagina_2_periodo_ultima_semana():
-    data_6_dias_atras = escopo_aplicacaco.data_6_dias_atras
-
-    data_hoje = escopo_aplicacaco.data_coleta_mais_recente
-
-    data_6_dias_atras_formatada = processamento_pagina_2.formatar_data_pt_br(
-        data_6_dias_atras
-    )
-    data_hoje_formatada = processamento_pagina_2.formatar_data_pt_br(data_hoje)
-
-    return f"{data_6_dias_atras_formatada} - {data_hoje_formatada}"
-
-
-def pagina_2_periodo_historico():
-    data_mais_antiga = escopo_aplicacaco.data_coleta_mais_antiga
-
-    data_hoje = escopo_aplicacaco.data_coleta_mais_recente
-
-    data_mais_antiga_formatada = processamento_pagina_2.formatar_data_pt_br(
-        data_mais_antiga
-    )
-    data_hoje_formatada = processamento_pagina_2.formatar_data_pt_br(data_hoje)
-
-    return f"{data_mais_antiga_formatada} - {data_hoje_formatada}"
-
-
 def pagina_2_top_10_marcas_atuais():
     return processamento_pagina_2.inicializa_top_10_marcas_atuais(
         conexao=escopo_aplicacaco.conexao,
@@ -157,16 +150,12 @@ def pagina_2_dados_grafico_atualizado(
 
 
 # Pagina 3
-def pagina_3_top_10_marcas_historico():
-    return processamento_pagina_3.inicializa_top_10_marcas_historico(
-        conexao=escopo_aplicacaco.conexao,
-        data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
-        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
-    )
+def pagina_3_top_10_marcas_hoje():
+    return escopo_aplicacaco.df_top_10_marcas_hoje
 
 
 def pagina_3_top_10_marcas_periodo(data_inicio: str, data_fim: str):
-    return processamento_pagina_3.top_10_marcas_periodo(
+    return processamento_pagina_3.df_top_10_marcas_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=data_inicio,
         data_fim=data_fim,
