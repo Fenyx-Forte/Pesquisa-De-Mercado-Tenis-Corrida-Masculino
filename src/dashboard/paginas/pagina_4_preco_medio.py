@@ -1,6 +1,7 @@
 from dash import (
     Input,
     Output,
+    Patch,
     State,
     callback,
     clientside_callback,
@@ -89,30 +90,52 @@ def modal_erro() -> Modal:
     return conteudo
 
 
-def configuracoes_colunas_tabela() -> list[dict]:
-    configuracoes = [
-        {
-            "headerName": "Marca",
-            "field": "marca",
-            "cellDataType": "text",
-        },
-        {
-            "headerName": "Preço Médio",
-            "field": "preco_medio",
-            "cellDataType": "number",
-            "valueFormatter": {
-                "function": f"{formatacoes.dag_format_pt_br()}.format('$,.2f')(params.value)",
-            },
-        },
-        {
-            "headerName": "Produtos",
-            "field": "num_produtos",
-            "headerTooltip": "Quantidade de Produtos",
-            "cellDataType": "number",
-        },
-    ]
+def configuracoes_colunas_tabela(sufixo: str) -> list[dict]:
+    configuracao_marca = {
+        "headerName": "Marca",
+        "field": "marca",
+        "cellDataType": "text",
+    }
 
-    return configuracoes
+    configuracao_preco_medio = {
+        "headerName": "Preço Médio",
+        "field": "preco_medio",
+        "cellDataType": "number",
+        "valueFormatter": {
+            "function": f"{formatacoes.dag_format_pt_br()}.format('$,.2f')(params.value)",
+        },
+    }
+
+    configuracao_num_produtos_hoje = {
+        "headerName": "Produtos",
+        "field": "num_produtos",
+        "headerTooltip": "Quantidade de Produtos",
+        "cellDataType": "number",
+    }
+
+    configuracao_num_produtos_periodo = {
+        "headerName": "Produtos",
+        "field": "num_produtos",
+        "headerTooltip": "Quantidade de Produtos",
+        "cellDataType": "number",
+        "valueFormatter": {
+            "function": f"{formatacoes.dag_format_pt_br()}.format('.2f')(params.value)",
+        },
+    }
+
+    if sufixo == "hoje":
+        return [
+            configuracao_marca,
+            configuracao_preco_medio,
+            configuracao_num_produtos_hoje,
+        ]
+
+    else:
+        return [
+            configuracao_marca,
+            configuracao_preco_medio,
+            configuracao_num_produtos_periodo,
+        ]
 
 
 def tabela(
@@ -121,7 +144,7 @@ def tabela(
     conteudo = AgGrid(
         rowData=dados,
         id=f"pagina_4_tabela_{sufixo_coluna}_{sufixo_informacao}",
-        columnDefs=configuracoes_colunas_tabela(),
+        columnDefs=configuracoes_colunas_tabela(sufixo_coluna),
         defaultColDef={
             "resizable": False,
             "filter": True,
@@ -222,6 +245,12 @@ def linha_colunas() -> Row:
 
     periodo_historico = gerenciador.retorna_periodo_historico()
 
+    lista_dados_hoje = gerenciador.pagina_4_inicializa_dados_hoje()
+
+    lista_dados_escolhido = gerenciador.pagina_4_inicializa_dados_escolhido()
+
+    lista_dados_historico = gerenciador.pagina_4_inicializa_dados_historico()
+
     conteudo = Row(
         [
             Col(
@@ -229,9 +258,9 @@ def linha_colunas() -> Row:
                     titulo="Hoje",
                     periodo=periodo_hoje,
                     sufixo_coluna="hoje",
-                    dados_abaixo_de_200=[],
-                    dados_entre_200_e_400=[],
-                    dados_acima_de_400=[],
+                    dados_abaixo_de_200=lista_dados_hoje[0],
+                    dados_entre_200_e_400=lista_dados_hoje[1],
+                    dados_acima_de_400=lista_dados_hoje[2],
                 ),
                 width=4,
                 class_name="coluna_hoje",
@@ -241,9 +270,9 @@ def linha_colunas() -> Row:
                     titulo="Período Escolhido",
                     periodo=periodo_escolhido,
                     sufixo_coluna="escolhido",
-                    dados_abaixo_de_200=[],
-                    dados_entre_200_e_400=[],
-                    dados_acima_de_400=[],
+                    dados_abaixo_de_200=lista_dados_escolhido[0],
+                    dados_entre_200_e_400=lista_dados_escolhido[1],
+                    dados_acima_de_400=lista_dados_escolhido[2],
                 ),
                 width=4,
                 class_name="coluna_escolhido",
@@ -253,9 +282,9 @@ def linha_colunas() -> Row:
                     titulo="Histórico",
                     periodo=periodo_historico,
                     sufixo_coluna="historico",
-                    dados_abaixo_de_200=[],
-                    dados_entre_200_e_400=[],
-                    dados_acima_de_400=[],
+                    dados_abaixo_de_200=lista_dados_historico[0],
+                    dados_entre_200_e_400=lista_dados_historico[1],
+                    dados_acima_de_400=lista_dados_historico[2],
                 ),
                 width=4,
                 class_name="coluna_historico",
@@ -298,3 +327,37 @@ clientside_callback(
     Input("pagina_4_modal_erro_titulo", "children"),
     prevent_initial_call=True,
 )
+
+
+@callback(
+    Output("pagina_4_tabela_escolhido_200", "rowData"),
+    Output("pagina_4_tabela_escolhido_200_400", "rowData"),
+    Output("pagina_4_tabela_escolhido_400", "rowData"),
+    Output("pagina_4_seletor_datas", "start_date"),
+    Output("pagina_4_seletor_datas", "end_date"),
+    Output("pagina_4_periodo_escolhido", "children"),
+    Input("pagina_4_modal_erro_titulo", "children"),
+    State("pagina_4_seletor_datas", "start_date"),
+    State("pagina_4_seletor_datas", "end_date"),
+    prevent_initial_call=True,
+)
+def pagina_4_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
+    if titulo != "":
+        raise PreventUpdate
+
+    periodo_novo = processamento_pagina_4.retorna_periodo_novo(
+        data_inicio, data_fim
+    )
+
+    lista_dados = gerenciador.pagina_4_atualiza_dados_escolhido(
+        data_inicio, data_fim
+    )
+
+    return (
+        lista_dados[0],
+        lista_dados[1],
+        lista_dados[2],
+        None,
+        None,
+        periodo_novo,
+    )

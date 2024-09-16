@@ -181,8 +181,34 @@ def pagina_3_atualiza_top_10_marcas_periodo(data_inicio: str, data_fim: str):
     )
 
 
-# Pagina 6
-def pagina_6_inicializa_tabela() -> list[dict]:
-    return processamento_pagina_6.inicializa_tabela(
+# Pagina 4
+def pagina_4_inicializa_dados_hoje() -> list[list[dict]]:
+    return processamento_pagina_4.dados_hoje(
         conexao=escopo_aplicacaco.conexao,
+    )
+
+
+def pagina_4_inicializa_dados_escolhido() -> list[list[dict]]:
+    return processamento_pagina_4.dados_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_6_dias_atras,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+    )
+
+
+def pagina_4_inicializa_dados_historico() -> list[list[dict]]:
+    return processamento_pagina_4.dados_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+    )
+
+
+def pagina_4_atualiza_dados_escolhido(
+    data_inicio: str, data_fim: str
+) -> list[list[dict]]:
+    return processamento_pagina_4.dados_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=data_inicio,
+        data_fim=data_fim,
     )

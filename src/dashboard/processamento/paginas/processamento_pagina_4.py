@@ -55,20 +55,48 @@ def formatar_data_pt_br(data: str) -> str:
     return f"{dia}/{mes}/{ano}"
 
 
+def calcular_df_hoje(conexao: DuckDBPyConnection) -> pd_DataFrame:
+    query = pagina_4_queries.query_preco_medio_hoje()
+
+    return conexao.sql(query).df()
+
+
+def calcular_df_periodo(
+    conexao: DuckDBPyConnection, data_inicio: str, data_fim: str
+) -> pd_DataFrame:
+    query = pagina_4_queries.query_preco_medio_periodo()
+
+    parametros = {
+        "data_inicio": data_inicio,
+        "data_fim": data_fim,
+    }
+
+    return conexao.execute(query, parametros).df()
+
+
 def dados_abaixo_de_200(df: pd_DataFrame) -> pd_DataFrame:
-    return pd_DataFrame()
+    return df[df["preco_medio"] < 200].sort_values(
+        by=["num_produtos", "preco_medio", "marca"],
+        ascending=[False, True, True],
+    )
 
 
 def dados_entre_200_e_400_(df: pd_DataFrame) -> pd_DataFrame:
-    return pd_DataFrame()
+    return df[df["preco_medio"].between(200, 400)].sort_values(
+        by=["num_produtos", "preco_medio", "marca"],
+        ascending=[False, True, True],
+    )
 
 
 def dados_acima_de_400_(df: pd_DataFrame) -> pd_DataFrame:
-    return pd_DataFrame()
+    return df[df["preco_medio"] > 400].sort_values(
+        by=["num_produtos", "preco_medio", "marca"],
+        ascending=[False, True, True],
+    )
 
 
 def dados_hoje(conexao: DuckDBPyConnection) -> list[list[dict]]:
-    df_hoje = pd_DataFrame()
+    df_hoje = calcular_df_hoje(conexao)
 
     df_abaixo_de_200 = dados_abaixo_de_200(df_hoje)
 
@@ -86,7 +114,7 @@ def dados_hoje(conexao: DuckDBPyConnection) -> list[list[dict]]:
 def dados_periodo(
     conexao: DuckDBPyConnection, data_inicio: str, data_fim: str
 ) -> list[list[dict]]:
-    df_periodo = pd_DataFrame()
+    df_periodo = calcular_df_periodo(conexao, data_inicio, data_fim)
 
     df_abaixo_de_200 = dados_abaixo_de_200(df_periodo)
 
@@ -99,3 +127,10 @@ def dados_periodo(
         df_entre_200_e_400.to_dict("records"),
         df_acima_de_400.to_dict("records"),
     ]
+
+
+def retorna_periodo_novo(data_inicio: str, data_fim: str):
+    data_inicio_formatada = formatar_data_pt_br(data_inicio)
+    data_fim_formatada = formatar_data_pt_br(data_fim)
+
+    return f"{data_inicio_formatada} - {data_fim_formatada}"
