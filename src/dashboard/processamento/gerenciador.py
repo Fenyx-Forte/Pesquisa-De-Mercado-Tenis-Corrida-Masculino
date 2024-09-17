@@ -24,6 +24,7 @@ def inicializar_escopo_global() -> None:
     inicializacao_dados.inicializar_macro_top_10_marcas_periodo(conexao)
     inicializacao_dados.inicializar_macro_preco_medio_periodo(conexao)
     inicializacao_dados.inicializar_macro_faixa_preco_periodo(conexao)
+    inicializacao_dados.inicializar_macro_media_avaliacoes_periodo(conexao)
 
     cabecalho_data_coleta = (
         inicializacao_dados.inicializar_cabecalho_data_coleta(conexao)
