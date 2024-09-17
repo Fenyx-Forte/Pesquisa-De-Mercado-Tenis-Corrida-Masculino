@@ -16,7 +16,7 @@ def tabela_dados_completos() -> str:
         , pagina
         , ordem
     FROM
-        db.view_dados_completos;
+        db.view_mercado_livre;
 
     DETACH db;
     """
