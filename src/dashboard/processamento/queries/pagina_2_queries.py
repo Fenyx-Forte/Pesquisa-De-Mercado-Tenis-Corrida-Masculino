@@ -8,15 +8,15 @@ def query_top_10_marcas_periodo() -> str:
     ),
     tabela_principal AS (
         SELECT
-            marca
-            , porcentagem
-            , periodo
+            t.marca
+            , t.porcentagem
+            , t.periodo
         FROM
-            top_10_marcas_periodo($periodo, $data_inicio, $data_fim)
+            top_10_marcas_periodo($periodo, $data_inicio, $data_fim) AS t
         WHERE
-            marca IN (SELECT UNNEST ($lista_marcas))
+            t.marca IN (SELECT UNNEST ($lista_marcas))
         ORDER BY
-            porcentagem DESC
+            t.porcentagem DESC
     )
     SELECT
         COALESCE(t1.marca, t2.marca) AS Marca

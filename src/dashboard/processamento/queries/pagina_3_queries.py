@@ -1,14 +1,14 @@
 def query_top_10_marcas_periodo() -> str:
     query = """
     SELECT
-        marca AS Marca
-        , porcentagem AS Porcentagem
+        t.marca AS Marca
+        , t.porcentagem AS Porcentagem
     FROM
-        top_10_marcas_periodo('', $data_inicio, $data_fim)
+        top_10_marcas_periodo('', $data_inicio, $data_fim) AS t
     WHERE
-        Marca <> 'GENERICA'
+        t.marca <> 'GENERICA'
     ORDER BY
-        Porcentagem DESC
+        t.porcentagem DESC
     LIMIT
         10;
     """
