@@ -71,3 +71,36 @@ def macro_preco_medio_periodo() -> str:
     """
 
     return query
+
+
+def macro_faixa_preco_periodo() -> str:
+    query = """
+    CREATE OR REPLACE MACRO faixa_preco_periodo(data_inicio, data_fim) AS TABLE
+        WITH faixa_preco_por_dia AS (
+            SELECT
+                marca AS marca
+                , CASE
+                    WHEN preco_atual < 200 THEN '200'
+                    WHEN preco_atual BETWEEN 200 AND 400 THEN '200_400'
+                    ELSE '400'
+                  END AS faixa_preco
+                , COUNT(*) AS num_produtos
+            FROM
+                dados_completos_por_periodo(data_inicio, data_fim)
+            GROUP BY
+                data_coleta
+                , marca
+                , faixa_preco
+        )
+        SELECT
+            marca
+            , faixa_preco
+            , AVG(num_produtos) AS num_produtos
+        FROM
+            faixa_preco_por_dia
+        GROUP BY
+            marca
+            , faixa_preco;
+    """
+
+    return query
