@@ -2,34 +2,38 @@ def query_satisfacao_hoje() -> str:
     query = """
     WITH tabela_resultado AS (
         SELECT
-            marca
-            , AVG(avaliacao) AS avaliacao
-            , AVG(num_avaliacoes) AS num_avaliacoes
+            dmr.marca
+            , AVG(dmr.nota_avaliacao) AS nota_avaliacao
+            , AVG(dmr.num_avaliacoes) AS num_avaliacoes
         FROM
-            dados_mais_recentes
+            dados_mais_recentes AS dmr
+        WHERE
+            dmr.num_avaliacoes > 0
+        GROUP BY
+            dmr.marca
     )
 
     SELECT
-        marca
-        , avaliacao
-        , num_avaliacoes
+        tr.marca
+        , tr.nota_avaliacao
+        , tr.num_avaliacoes
         , 'num_avaliacoes' AS tipo_linha
     FROM
-        tabela_resultado
+        tabela_resultado AS tr
     WHERE
-        num_avaliacoes > 20
+        tr.num_avaliacoes > 20
 
     UNION ALL
 
     SELECT
-        marca
-        , avaliacao
-        , num_avaliacoes
+        tr.marca
+        , tr.nota_avaliacao
+        , tr.num_avaliacoes
         , 'avaliacao' AS tipo_linha
     FROM
-        tabela_resultado
+        tabela_resultado AS tr
     WHERE
-        avaliacao > 4;
+        tr.nota_avaliacao > 4;
     """
 
     return query
@@ -39,33 +43,33 @@ def query_satisfacao_periodo() -> str:
     query = """
     WITH tabela_resultado AS (
         SELECT
-            marca
-            , avaliacao
-            , num_avaliacoes
+            map.marca
+            , map.nota_avaliacao
+            , map.num_avaliacoes
         FROM
-            media_avaliacoes_periodo($data_inicio, $data_fim)
+            media_avaliacoes_periodo($data_inicio, $data_fim) AS map
     )
     SELECT
-        marca
-        , avaliacao
-        , num_avaliacoes
+        tr.marca
+        , tr.nota_avaliacao
+        , tr.num_avaliacoes
         , 'num_avaliacoes' AS tipo_linha
     FROM
-        tabela_resultado
+        tabela_resultado AS tr
     WHERE
-        num_avaliacoes > 20
+        tr.num_avaliacoes > 20
 
     UNION ALL
 
     SELECT
-        marca
-        , avaliacao
-        , num_avaliacoes
+        tr.marca
+        , tr.nota_avaliacao
+        , tr.num_avaliacoes
         , 'avaliacao' AS tipo_linha
     FROM
-        tabela_resultado
+        tabela_resultado AS tr
     WHERE
-        avaliacao > 4;
+        tr.nota_avaliacao > 4;
     """
 
     return query
