@@ -156,6 +156,12 @@ def inicializar_macro_preco_medio_periodo(conexao: DuckDBPyConnection) -> None:
     conexao.sql(query)
 
 
+def inicializar_macro_faixa_preco_periodo(conexao: DuckDBPyConnection) -> None:
+    query = macros_sql.macro_faixa_preco_periodo()
+
+    conexao.sql(query)
+
+
 def inicializar_cabecalho_data_coleta(conexao: DuckDBPyConnection) -> str:
     query = query_cabecalho_data_coleta()
 

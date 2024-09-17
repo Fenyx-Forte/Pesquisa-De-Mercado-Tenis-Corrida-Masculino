@@ -23,6 +23,7 @@ def inicializar_escopo_global() -> None:
     inicializacao_dados.inicializar_macro_dados_completos_por_periodo(conexao)
     inicializacao_dados.inicializar_macro_top_10_marcas_periodo(conexao)
     inicializacao_dados.inicializar_macro_preco_medio_periodo(conexao)
+    inicializacao_dados.inicializar_macro_faixa_preco_periodo(conexao)
 
     cabecalho_data_coleta = (
         inicializacao_dados.inicializar_cabecalho_data_coleta(conexao)
@@ -208,6 +209,39 @@ def pagina_4_atualiza_dados_escolhido(
     data_inicio: str, data_fim: str
 ) -> list[list[dict]]:
     return processamento_pagina_4.dados_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=data_inicio,
+        data_fim=data_fim,
+    )
+
+
+# Pagina 5
+def pagina_5_inicializa_dados_hoje() -> list[list[dict]]:
+    return processamento_pagina_5.dados_hoje(
+        conexao=escopo_aplicacaco.conexao,
+    )
+
+
+def pagina_5_inicializa_dados_escolhido() -> list[list[dict]]:
+    return processamento_pagina_5.dados_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_6_dias_atras,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+    )
+
+
+def pagina_5_inicializa_dados_historico() -> list[list[dict]]:
+    return processamento_pagina_5.dados_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+    )
+
+
+def pagina_5_atualiza_dados_escolhido(
+    data_inicio: str, data_fim: str
+) -> list[list[dict]]:
+    return processamento_pagina_5.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=data_inicio,
         data_fim=data_fim,
