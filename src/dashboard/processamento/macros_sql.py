@@ -104,3 +104,30 @@ def macro_faixa_preco_periodo() -> str:
     """
 
     return query
+
+
+def macro_media_avaliacoes_periodo() -> str:
+    query = """
+    CREATE OR REPLACE MACRO media_avaliacoes_periodo(data_inicio, data_fim) AS TABLE
+        WITH media_avaliacoes_por_dia AS (
+            SELECT
+                marca AS marca
+                , AVG(nota_avaliacao) AS media_avaliacao
+                , AVG(num_avaliacoes) AS media_num_avaliacoes
+            FROM
+                dados_completos_por_periodo(data_inicio, data_fim)
+            GROUP BY
+                data_coleta
+                , marca
+        )
+        SELECT
+            marca
+            , AVG(media_avaliacao) AS avaliacao
+            , AVG(media_num_avaliacoes) AS num_avaliacoes
+        FROM
+            media_avaliacoes_por_dia
+        GROUP BY
+            marca;
+    """
+
+    return query
