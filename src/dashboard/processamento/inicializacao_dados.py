@@ -170,6 +170,14 @@ def inicializar_macro_media_avaliacoes_periodo(
     conexao.sql(query)
 
 
+def inicializar_macro_media_promocoes_periodo(
+    conexao: DuckDBPyConnection,
+) -> None:
+    query = macros_sql.macro_media_promocoes_periodo()
+
+    conexao.sql(query)
+
+
 def inicializar_cabecalho_data_coleta(conexao: DuckDBPyConnection) -> str:
     query = query_cabecalho_data_coleta()
 

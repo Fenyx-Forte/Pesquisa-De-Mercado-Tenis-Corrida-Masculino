@@ -133,3 +133,32 @@ def macro_media_avaliacoes_periodo() -> str:
     """
 
     return query
+
+
+def macro_media_promocoes_periodo() -> str:
+    query = """
+    CREATE OR REPLACE MACRO media_promocoes_periodo(data_inicio, data_fim) AS TABLE
+        WITH media_promocoes_por_dia AS (
+            SELECT
+                dcr.marca AS marca
+                , COUNT(*) as numero_produtos_em_promocao
+                , AVG(dcr.percentual_promocao) AS percentual_medio_desconto
+            FROM
+                dados_completos_por_periodo(data_inicio, data_fim) AS dcr
+            WHERE
+                dcr.promocao = true
+            GROUP BY
+                dcr.data_coleta
+                , dcr.marca
+        )
+        SELECT
+            m.marca
+            , AVG(m.numero_produtos_em_promocao) AS produtos
+            , AVG(m.percentual_medio_desconto * 100) AS desconto
+        FROM
+            media_promocoes_por_dia AS m
+        GROUP BY
+            m.marca;
+    """
+
+    return query
