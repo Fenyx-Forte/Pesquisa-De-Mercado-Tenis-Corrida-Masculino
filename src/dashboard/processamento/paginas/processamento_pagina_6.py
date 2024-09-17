@@ -77,9 +77,9 @@ def calcular_df_periodo(
 def dados_num_avaliacoes(df: pd_DataFrame) -> pd_DataFrame:
     return df.loc[
         df["tipo_linha"] == "num_avaliacoes",
-        ["marca", "avaliacao", "num_avaliacoes"],
+        ["marca", "nota_avaliacao", "num_avaliacoes"],
     ].sort_values(
-        by=["num_avaliacoes", "avaliacao", "marca"],
+        by=["num_avaliacoes", "nota_avaliacao", "marca"],
         ascending=[False, False, True],
     )
 
@@ -87,9 +87,9 @@ def dados_num_avaliacoes(df: pd_DataFrame) -> pd_DataFrame:
 def dados_avaliacao(df: pd_DataFrame) -> pd_DataFrame:
     return df.loc[
         df["tipo_linha"] == "avaliacao",
-        ["marca", "avaliacao", "num_avaliacoes"],
+        ["marca", "nota_avaliacao", "num_avaliacoes"],
     ].sort_values(
-        by=["avaliacao", "num_avaliacoes", "marca"],
+        by=["nota_avaliacao", "num_avaliacoes", "marca"],
         ascending=[False, False, True],
     )
 

@@ -247,3 +247,36 @@ def pagina_5_atualiza_dados_escolhido(
         data_inicio=data_inicio,
         data_fim=data_fim,
     )
+
+
+# Pagina 6
+def pagina_6_inicializa_dados_hoje() -> list[list[dict]]:
+    return processamento_pagina_6.dados_hoje(
+        conexao=escopo_aplicacaco.conexao,
+    )
+
+
+def pagina_6_inicializa_dados_escolhido() -> list[list[dict]]:
+    return processamento_pagina_6.dados_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_6_dias_atras,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+    )
+
+
+def pagina_6_inicializa_dados_historico() -> list[list[dict]]:
+    return processamento_pagina_6.dados_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
+        data_fim=escopo_aplicacaco.data_coleta_mais_recente,
+    )
+
+
+def pagina_6_atualiza_dados_escolhido(
+    data_inicio: str, data_fim: str
+) -> list[list[dict]]:
+    return processamento_pagina_6.dados_periodo(
+        conexao=escopo_aplicacaco.conexao,
+        data_inicio=data_inicio,
+        data_fim=data_fim,
+    )
