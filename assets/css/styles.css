@@ -375,3 +375,74 @@
         display: none;
     }
 }
+
+
+#pagina_5{
+    .div_seletor_datas_e_botao{
+        text-align: center;
+        align-items: center;
+
+        br{
+            display: inline;
+        }
+
+        .botao{
+            margin-top: 1rem;
+        }
+    }
+
+    .linha_colunas{
+        text-align: center;
+        margin-top: 2rem;
+
+        .titulo_coluna{
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .periodo_coluna{
+            font-size: 16px;
+            color:#158cba;
+        }
+
+        .coluna_escolhido{
+            border-left: #158cba solid 2px;
+            border-right: #158cba solid 2px;
+        }
+
+        .div_informacao{
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+
+            .subtitulo_coluna{
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .div_tabela{
+            display: flex;
+            justify-content: center;
+
+            .tabela-dag{
+                width: auto;
+                max-width: 90%;
+            }
+
+            /* Centralizar colunas e valores de tabelas dags */
+            .center-aligned-header .ag-header-cell-label {
+                justify-content: center;
+           }
+
+           .center-aligned-cell {
+               text-align: center;
+           }
+        }
+    }
+
+    br{
+        display: none;
+    }
+}
