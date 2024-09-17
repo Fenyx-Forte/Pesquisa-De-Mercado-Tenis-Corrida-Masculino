@@ -35,8 +35,11 @@ register_page(
 )
 
 
-def titulo() -> html.H1:
-    conteudo = html.H1("Top 10 Marcas Atuais")
+def div_titulo() -> html.Div:
+    conteudo = html.Div(
+        html.H1("Top 10 Marcas Atuais", className="titulo-pagina"),
+        className="div_titulo_pagina",
+    )
 
     return conteudo
 
@@ -158,12 +161,21 @@ def grafico_top_10_marcas() -> dcc.Graph:
     return conteudo
 
 
-def div_periodo(titulo: str, periodo: str, sufixo: str) -> html.Div:
+def div_grafico_top_10_marcas() -> html.Div:
+    conteudo = html.Div(
+        grafico_top_10_marcas(),
+        className="div_grafico_top_10_marcas",
+    )
+
+    return conteudo
+
+
+def cabecalho_coluna(titulo: str, periodo: str, sufixo: str) -> html.Div:
     conteudo = html.Div(
         [
             html.H4(titulo, className="titulo_coluna"),
             html.Br(),
-            html.Div(
+            html.H5(
                 periodo,
                 className="periodo_coluna",
                 id=f"pagina_2_periodo_{sufixo}",
@@ -173,7 +185,8 @@ def div_periodo(titulo: str, periodo: str, sufixo: str) -> html.Div:
                 html.I(className="fa-solid fa-square"),
                 className=f"legenda_{sufixo}",
             ),
-        ]
+        ],
+        className="cabecalho_coluna",
     )
 
     return conteudo
@@ -185,24 +198,24 @@ def colunas(
     conteudo = Row(
         [
             Col(
-                div_periodo("Hoje", periodo_hoje, "hoje"),
+                cabecalho_coluna("Hoje", periodo_hoje, "hoje"),
                 width=4,
                 class_name="coluna_hoje",
             ),
             Col(
-                div_periodo(
+                cabecalho_coluna(
                     "Período Escolhido", periodo_escolhido, "escolhido"
                 ),
                 width=4,
                 class_name="coluna_escolhido",
             ),
             Col(
-                div_periodo("Histórico", periodo_historico, "historico"),
+                cabecalho_coluna("Histórico", periodo_historico, "historico"),
                 width=4,
                 class_name="coluna_historico",
             ),
         ],
-        class_name="linha_colunas_periodos",
+        class_name="linha_colunas",
     )
 
     return conteudo
@@ -210,7 +223,7 @@ def colunas(
 
 layout = html.Div(
     [
-        # titulo(),
+        # div_titulo(),
         div_seletor_datas_e_botao(),
         modal_erro(),
         colunas(
@@ -218,7 +231,7 @@ layout = html.Div(
             periodo_escolhido=gerenciador.retorna_periodo_ultima_semana(),
             periodo_historico=gerenciador.retorna_periodo_historico(),
         ),
-        grafico_top_10_marcas(),
+        div_grafico_top_10_marcas(),
     ],
     className="pagina",
     id="pagina_2",

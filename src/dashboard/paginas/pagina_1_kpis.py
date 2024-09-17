@@ -32,10 +32,10 @@ register_page(
 )
 
 
-def titulo() -> html.H1:
-    conteudo = html.H1(
-        "KPI's Principais",
-        className="titulo-pagina",
+def div_titulo() -> html.Div:
+    conteudo = html.Div(
+        html.H1("KPI's Principais", className="titulo-pagina"),
+        className="div_titulo_pagina",
     )
 
     return conteudo
@@ -59,7 +59,7 @@ def seletor_datas() -> dcc.DatePickerRange:
 
 def botao_selecionar_periodo() -> Button:
     conteudo = Button(
-        "Atualizar",
+        "Selecionar Período",
         outline=True,
         color="primary",
         className="me-1",
@@ -98,7 +98,7 @@ def modal_erro() -> Modal:
 
 layout = html.Div(
     [
-        # titulo(),
+        # div_titulo(),
         div_seletor_datas_e_botao(),
         modal_erro(),
         Row(
@@ -106,7 +106,7 @@ layout = html.Div(
                 Col(
                     gerenciador.pagina_1_inicializa_coluna_hoje(),
                     width=4,
-                    class_name="coluna_atual",
+                    class_name="coluna_hoje",
                 ),
                 Col(
                     gerenciador.pagina_1_inicializa_coluna_escolhido(),
@@ -119,7 +119,7 @@ layout = html.Div(
                     class_name="coluna_historico",
                 ),
             ],
-            class_name="linha_colunas_kpis",
+            class_name="linha_colunas",
         ),
     ],
     className="pagina",

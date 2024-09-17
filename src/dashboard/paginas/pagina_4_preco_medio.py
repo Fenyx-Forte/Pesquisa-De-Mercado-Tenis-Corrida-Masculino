@@ -34,6 +34,15 @@ register_page(
 )
 
 
+def div_titulo() -> html.Div:
+    conteudo = html.Div(
+        html.H1("Preço Médio", className="titulo-pagina"),
+        className="div_titulo_pagina",
+    )
+
+    return conteudo
+
+
 def seletor_datas() -> dcc.DatePickerRange:
     conteudo = dcc.DatePickerRange(
         id="pagina_4_seletor_datas",
@@ -167,7 +176,30 @@ def tabela(
     return conteudo
 
 
-def div_informacao(
+def cabecalho_coluna(
+    titulo: str,
+    periodo: str,
+    sufixo: str,
+) -> html.Div:
+    conteudo = html.Div(
+        [
+            html.H4(
+                titulo,
+                className="titulo_coluna",
+            ),
+            html.Br(),
+            html.H5(
+                periodo,
+                className="periodo_coluna",
+                id=f"pagina_4_periodo_{sufixo}",
+            ),
+        ]
+    )
+
+    return conteudo
+
+
+def conteiner_informacao(
     subtitulo_coluna: str,
     dados: list[dict],
     sufixo_coluna: str,
@@ -177,7 +209,7 @@ def div_informacao(
         [
             html.Div(
                 subtitulo_coluna,
-                className="subtitulo_coluna",
+                className="titulo_informacao",
             ),
             html.Div(
                 tabela(
@@ -185,10 +217,10 @@ def div_informacao(
                     sufixo_coluna=sufixo_coluna,
                     sufixo_informacao=sufixo_informacao,
                 ),
-                className="div_tabela",
+                className="informacao",
             ),
         ],
-        className="div_informacao",
+        className="conteiner_informacao",
     )
 
     return conteudo
@@ -204,28 +236,20 @@ def coluna(
 ) -> html.Div:
     conteudo = html.Div(
         [
-            html.H4(titulo, className="titulo_coluna"),
-            html.Br(),
-            html.Div(
-                periodo,
-                className="periodo_coluna",
-                id=f"pagina_4_periodo_{sufixo_coluna}",
-            ),
-            html.Br(),
-            div_informacao(
+            cabecalho_coluna(titulo, periodo, sufixo_coluna),
+            conteiner_informacao(
                 subtitulo_coluna="Preço Médio Abaixo de R$200",
                 dados=dados_abaixo_de_200,
                 sufixo_coluna=sufixo_coluna,
                 sufixo_informacao="200",
             ),
-            div_informacao(
+            conteiner_informacao(
                 subtitulo_coluna="Preço Médio Entre R$200 e R$400",
                 dados=dados_entre_200_e_400,
                 sufixo_coluna=sufixo_coluna,
                 sufixo_informacao="200_400",
             ),
-            html.Br(),
-            div_informacao(
+            conteiner_informacao(
                 subtitulo_coluna="Preço Médio Acima de R$400",
                 dados=dados_acima_de_400,
                 sufixo_coluna=sufixo_coluna,
@@ -237,7 +261,7 @@ def coluna(
     return conteudo
 
 
-def linha_colunas() -> Row:
+def colunas() -> Row:
     periodo_hoje = gerenciador.retorna_periodo_hoje()
 
     periodo_escolhido = gerenciador.retorna_periodo_ultima_semana()
@@ -297,9 +321,10 @@ def linha_colunas() -> Row:
 
 layout = html.Div(
     [
+        # div_titulo(),
         div_seletor_datas_e_botao(),
         modal_erro(),
-        linha_colunas(),
+        colunas(),
     ],
     className="pagina",
     id="pagina_4",
@@ -353,9 +378,7 @@ def pagina_4_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
     )
 
     return (
-        lista_dados[0],
-        lista_dados[1],
-        lista_dados[2],
+        *lista_dados,
         None,
         None,
         periodo_novo,

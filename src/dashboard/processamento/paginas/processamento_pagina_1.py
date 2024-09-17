@@ -1,5 +1,4 @@
 from dash import html
-from dash_bootstrap_components import Card, CardBody
 from duckdb import DuckDBPyConnection
 
 from dashboard.processamento.queries import pagina_1_queries
@@ -248,41 +247,55 @@ def media_produtos_com_nota_superior_4_periodo(
     return str(conexao.execute(query, parametros).fetchall()[0][0])
 
 
-def cartao(titulo: str, valor: str, id_valor: str, id_ranking: str) -> Card:
-    conteudo = Card(
-        CardBody(
-            [
-                html.Div(
-                    titulo,
-                    className="titulo_cartao",
-                ),
-                html.Div(
-                    valor,
-                    className="valor_cartao",
-                    id=id_valor,
-                ),
-                html.Div(
-                    html.I(className="fa-solid fa-trophy"),
-                    id=id_ranking,
-                ),
-            ]
-        )
+def cabecalho_coluna(titulo: str, periodo: str, id_periodo: str) -> html.Div:
+    conteudo = html.Div(
+        [
+            html.H4(titulo, className="titulo_coluna"),
+            html.Br(),
+            html.H5(periodo, className="periodo_coluna", id=id_periodo),
+        ],
+        className="cabecalho_coluna",
     )
 
     return conteudo
 
 
-def div_cartao(
-    titulo: str, valor: str, id_valor: str, id_ranking: str
+def cartao(valor: str, id_valor: str, id_ranking: str) -> html.Div:
+    conteudo = html.Div(
+        [
+            html.Div(
+                valor,
+                className="valor_cartao",
+                id=id_valor,
+            ),
+            html.Div(
+                html.I(className="fa-solid fa-trophy"),
+                classname="ranking_cartao",
+                id=id_ranking,
+            ),
+        ],
+        className="informacao",
+    )
+
+    return conteudo
+
+
+def conteiner_informacao(
+    titulo_informacao: str,
+    valor: str,
+    id_valor: str,
+    id_ranking: str,
 ) -> html.Div:
     conteudo = html.Div(
-        cartao(
-            titulo,
-            valor,
-            id_valor,
-            id_ranking,
-        ),
-        className="div_card",
+        [
+            html.H4(titulo_informacao, className="titulo_informacao"),
+            cartao(
+                valor=valor,
+                id_valor=id_valor,
+                id_ranking=id_ranking,
+            ),
+        ],
+        className="conteiner_informacao",
     )
 
     return conteudo
@@ -291,7 +304,7 @@ def div_cartao(
 def cartao_num_produtos(valor: str, sufixo: str) -> html.Div:
     titulo = "Número Produtos"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_num_produtos_{sufixo}",
@@ -304,7 +317,7 @@ def cartao_num_produtos(valor: str, sufixo: str) -> html.Div:
 def cartao_num_marcas(valor: str, sufixo: str) -> html.Div:
     titulo = "Número Marcas"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_num_marcas_{sufixo}",
@@ -317,7 +330,7 @@ def cartao_num_marcas(valor: str, sufixo: str) -> html.Div:
 def cartao_num_produtos_promocoes(valor: str, sufixo: str) -> html.Div:
     titulo = "Produtos Em Promocão"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_num_produtos_promocoes_{sufixo}",
@@ -330,7 +343,7 @@ def cartao_num_produtos_promocoes(valor: str, sufixo: str) -> html.Div:
 def cartao_num_marcas_promocoes(valor: str, sufixo: str) -> html.Div:
     titulo = "Marcas Em Promoção"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_num_marcas_promocoes_{sufixo}",
@@ -343,7 +356,7 @@ def cartao_num_marcas_promocoes(valor: str, sufixo: str) -> html.Div:
 def cartao_produtos_abaixo_de_200_reais(valor: str, sufixo: str) -> html.Div:
     titulo = "Produtos Abaixo De R$ 200,00"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_produtos_abaixo_200_{sufixo}",
@@ -356,7 +369,7 @@ def cartao_produtos_abaixo_de_200_reais(valor: str, sufixo: str) -> html.Div:
 def cartao_percentual_medio_desconto(valor: str, sufixo: str) -> html.Div:
     titulo = "Média Desconto (%)"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_percentual_medio_desconto_{sufixo}",
@@ -369,7 +382,7 @@ def cartao_percentual_medio_desconto(valor: str, sufixo: str) -> html.Div:
 def cartao_media_precos(valor: str, sufixo: str) -> html.Div:
     titulo = "Média Preços (R$)"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_media_precos_{sufixo}",
@@ -382,7 +395,7 @@ def cartao_media_precos(valor: str, sufixo: str) -> html.Div:
 def cartao_produtos_com_mais_20_avaliacoes(valor: str, sufixo: str) -> html.Div:
     titulo = "Produtos Com 20 Ou Mais Avaliações"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_num_produtos_20_ou_mais_avaliacoes_{sufixo}",
@@ -395,7 +408,7 @@ def cartao_produtos_com_mais_20_avaliacoes(valor: str, sufixo: str) -> html.Div:
 def cartao_produtos_sem_avaliacao(valor: str, sufixo: str) -> html.Div:
     titulo = "Produtos Sem Avaliações"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_num_produtos_sem_avaliacoes_{sufixo}",
@@ -408,7 +421,7 @@ def cartao_produtos_sem_avaliacao(valor: str, sufixo: str) -> html.Div:
 def cartao_produtos_com_nota_maior_que_4(valor: str, sufixo: str) -> html.Div:
     titulo = "Produtos Com Nota Maior Que 4"
 
-    conteudo = div_cartao(
+    conteudo = conteiner_informacao(
         titulo=titulo,
         valor=valor,
         id_valor=f"pagina_1_valor_num_produtos_nota_maior_4_{sufixo}",
@@ -418,80 +431,34 @@ def cartao_produtos_com_nota_maior_que_4(valor: str, sufixo: str) -> html.Div:
     return conteudo
 
 
-def informacoes_coluna(
-    div_cartao_num_produtos: html.Div,
-    div_cartao_num_marcas: html.Div,
-    div_cartao_media_precos: html.Div,
-    div_cartao_num_produtos_promocoes: html.Div,
-    div_cartao_num_marcas_promocoes: html.Div,
-    div_cartao_percentual_medio_desconto: html.Div,
-    div_cartao_num_produtos_abaixo_200_reais: html.Div,
-    div_cartao_produtos_com_mais_20_avaliacoes: html.Div,
-    div_cartao_produtos_sem_avaliacao: html.Div,
-    div_cartao_produtos_com_nota_maior_que_4: html.Div,
-) -> html.Div:
-    conteudo = html.Div(
-        [
-            div_cartao_num_produtos,
-            html.Br(),
-            div_cartao_num_marcas,
-            html.Br(),
-            div_cartao_num_produtos_abaixo_200_reais,
-            html.Br(),
-            div_cartao_media_precos,
-            html.Br(),
-            div_cartao_produtos_com_mais_20_avaliacoes,
-            html.Br(),
-            div_cartao_produtos_com_nota_maior_que_4,
-            html.Br(),
-            div_cartao_produtos_sem_avaliacao,
-            html.Br(),
-            div_cartao_num_produtos_promocoes,
-            html.Br(),
-            div_cartao_num_marcas_promocoes,
-            html.Br(),
-            div_cartao_percentual_medio_desconto,
-            html.Br(),
-        ],
-        className="informacoes_coluna",
-    )
-
-    return conteudo
-
-
 def inicializa_coluna(
     titulo: str,
     periodo: str,
     id_periodo: str,
-    div_cartao_num_produtos: html.Div,
-    div_cartao_num_marcas: html.Div,
-    div_cartao_media_precos: html.Div,
-    div_cartao_num_produtos_promocoes: html.Div,
-    div_cartao_num_marcas_promocoes: html.Div,
-    div_cartao_percentual_medio_desconto: html.Div,
-    div_cartao_num_produtos_abaixo_200_reais: html.Div,
-    div_cartao_produtos_com_mais_20_avaliacoes: html.Div,
-    div_cartao_produtos_sem_avaliacao: html.Div,
-    div_cartao_produtos_com_nota_maior_que_4: html.Div,
+    div_num_produtos: html.Div,
+    div_num_marcas: html.Div,
+    div_media_precos: html.Div,
+    div_num_produtos_promocoes: html.Div,
+    div_num_marcas_promocoes: html.Div,
+    div_percentual_medio_desconto: html.Div,
+    div_num_produtos_abaixo_200_reais: html.Div,
+    div_produtos_com_mais_20_avaliacoes: html.Div,
+    div_produtos_sem_avaliacao: html.Div,
+    div_produtos_com_nota_maior_que_4: html.Div,
 ) -> html.Div:
     conteudo = html.Div(
         [
-            html.H4(titulo, className="titulo_coluna"),
-            html.Br(),
-            html.Div(periodo, className="periodo_coluna", id=id_periodo),
-            html.Br(),
-            informacoes_coluna(
-                div_cartao_num_produtos=div_cartao_num_produtos,
-                div_cartao_num_marcas=div_cartao_num_marcas,
-                div_cartao_media_precos=div_cartao_media_precos,
-                div_cartao_num_produtos_promocoes=div_cartao_num_produtos_promocoes,
-                div_cartao_num_marcas_promocoes=div_cartao_num_marcas_promocoes,
-                div_cartao_percentual_medio_desconto=div_cartao_percentual_medio_desconto,
-                div_cartao_num_produtos_abaixo_200_reais=div_cartao_num_produtos_abaixo_200_reais,
-                div_cartao_produtos_com_mais_20_avaliacoes=div_cartao_produtos_com_mais_20_avaliacoes,
-                div_cartao_produtos_sem_avaliacao=div_cartao_produtos_sem_avaliacao,
-                div_cartao_produtos_com_nota_maior_que_4=div_cartao_produtos_com_nota_maior_que_4,
-            ),
+            cabecalho_coluna(titulo, periodo, id_periodo),
+            div_num_produtos,
+            div_num_marcas,
+            div_num_produtos_abaixo_200_reais,
+            div_media_precos,
+            div_produtos_com_mais_20_avaliacoes,
+            div_produtos_com_nota_maior_que_4,
+            div_produtos_sem_avaliacao,
+            div_num_produtos_promocoes,
+            div_num_marcas_promocoes,
+            div_percentual_medio_desconto,
         ],
     )
 
@@ -541,69 +508,59 @@ def inicializa_coluna_hoje(
     )
 
     # Inicializando divs
-    div_cartao_num_produtos = cartao_num_produtos(
-        valor=numero_produtos, sufixo="hoje"
-    )
+    div_num_produtos = cartao_num_produtos(valor=numero_produtos, sufixo="hoje")
 
-    div_cartao_num_marcas = cartao_num_marcas(
-        valor=numero_marcas, sufixo="hoje"
-    )
+    div_num_marcas = cartao_num_marcas(valor=numero_marcas, sufixo="hoje")
 
-    div_cartao_media_precos = cartao_media_precos(
-        valor=media_precos, sufixo="hoje"
-    )
+    div_media_precos = cartao_media_precos(valor=media_precos, sufixo="hoje")
 
-    div_cartao_num_produtos_promocoes = cartao_num_produtos_promocoes(
+    div_num_produtos_promocoes = cartao_num_produtos_promocoes(
         valor=numero_produtos_em_promocao, sufixo="hoje"
     )
 
-    div_cartao_num_marcas_promocoes = cartao_num_marcas_promocoes(
+    div_num_marcas_promocoes = cartao_num_marcas_promocoes(
         valor=numero_marcas_em_promocao, sufixo="hoje"
     )
 
-    div_cartao_percentual_medio_desconto = cartao_percentual_medio_desconto(
+    div_percentual_medio_desconto = cartao_percentual_medio_desconto(
         valor=percentual_medio_desconto, sufixo="hoje"
     )
 
-    div_cartao_num_produtos_abaixo_200_reais = (
-        cartao_produtos_abaixo_de_200_reais(
-            valor=numero_produtos_abaixo_de_200_reais,
-            sufixo="hoje",
-        )
+    div_num_produtos_abaixo_200_reais = cartao_produtos_abaixo_de_200_reais(
+        valor=numero_produtos_abaixo_de_200_reais,
+        sufixo="hoje",
     )
 
-    div_cartao_produtos_com_mais_20_avaliacoes = (
+    div_produtos_com_mais_20_avaliacoes = (
         cartao_produtos_com_mais_20_avaliacoes(
             valor=numero_produtos_com_20_ou_mais_avaliacoes,
             sufixo="hoje",
         )
     )
 
-    div_cartao_produtos_sem_avaliacao = cartao_produtos_sem_avaliacao(
+    div_produtos_sem_avaliacao = cartao_produtos_sem_avaliacao(
         valor=numero_produtos_sem_avaliacoes, sufixo="hoje"
     )
 
-    div_cartao_produtos_com_nota_maior_que_4 = (
-        cartao_produtos_com_nota_maior_que_4(
-            valor=numero_produtos_com_nota_superior_4,
-            sufixo="hoje",
-        )
+    div_produtos_com_nota_maior_que_4 = cartao_produtos_com_nota_maior_que_4(
+        valor=numero_produtos_com_nota_superior_4,
+        sufixo="hoje",
     )
 
     return inicializa_coluna(
         titulo="Hoje",
         periodo=periodo,
         id_periodo="pagina_1_periodo_hoje",
-        div_cartao_num_produtos=div_cartao_num_produtos,
-        div_cartao_num_marcas=div_cartao_num_marcas,
-        div_cartao_media_precos=div_cartao_media_precos,
-        div_cartao_num_produtos_promocoes=div_cartao_num_produtos_promocoes,
-        div_cartao_num_marcas_promocoes=div_cartao_num_marcas_promocoes,
-        div_cartao_percentual_medio_desconto=div_cartao_percentual_medio_desconto,
-        div_cartao_num_produtos_abaixo_200_reais=div_cartao_num_produtos_abaixo_200_reais,
-        div_cartao_produtos_com_mais_20_avaliacoes=div_cartao_produtos_com_mais_20_avaliacoes,
-        div_cartao_produtos_sem_avaliacao=div_cartao_produtos_sem_avaliacao,
-        div_cartao_produtos_com_nota_maior_que_4=div_cartao_produtos_com_nota_maior_que_4,
+        div_num_produtos=div_num_produtos,
+        div_num_marcas=div_num_marcas,
+        div_media_precos=div_media_precos,
+        div_num_produtos_promocoes=div_num_produtos_promocoes,
+        div_num_marcas_promocoes=div_num_marcas_promocoes,
+        div_percentual_medio_desconto=div_percentual_medio_desconto,
+        div_num_produtos_abaixo_200_reais=div_num_produtos_abaixo_200_reais,
+        div_produtos_com_mais_20_avaliacoes=div_produtos_com_mais_20_avaliacoes,
+        div_produtos_sem_avaliacao=div_produtos_sem_avaliacao,
+        div_produtos_com_nota_maior_que_4=div_produtos_com_nota_maior_que_4,
     )
 
 
@@ -667,76 +624,72 @@ def inicializa_coluna_periodo(
     )
 
     # Inicializando divs
-    div_cartao_num_produtos = cartao_num_produtos(
+    div_num_produtos = cartao_num_produtos(
         valor=media_produtos,
         sufixo=sufixo,
     )
 
-    div_cartao_num_marcas = cartao_num_marcas(
+    div_num_marcas = cartao_num_marcas(
         valor=media_marcas,
         sufixo=sufixo,
     )
 
-    div_cartao_media_precos = cartao_media_precos(
+    div_media_precos = cartao_media_precos(
         valor=media_precos,
         sufixo=sufixo,
     )
 
-    div_cartao_num_produtos_promocoes = cartao_num_produtos_promocoes(
+    div_num_produtos_promocoes = cartao_num_produtos_promocoes(
         valor=media_produtos_em_promocao,
         sufixo=sufixo,
     )
 
-    div_cartao_num_marcas_promocoes = cartao_num_marcas_promocoes(
+    div_num_marcas_promocoes = cartao_num_marcas_promocoes(
         valor=media_marcas_em_promocao,
         sufixo=sufixo,
     )
 
-    div_cartao_percentual_medio_desconto = cartao_percentual_medio_desconto(
+    div_percentual_medio_desconto = cartao_percentual_medio_desconto(
         valor=percentual_medio_desconto,
         sufixo=sufixo,
     )
 
-    div_cartao_num_produtos_abaixo_200_reais = (
-        cartao_produtos_abaixo_de_200_reais(
-            valor=media_produtos_abaixo_de_200_reais,
-            sufixo=sufixo,
-        )
+    div_num_produtos_abaixo_200_reais = cartao_produtos_abaixo_de_200_reais(
+        valor=media_produtos_abaixo_de_200_reais,
+        sufixo=sufixo,
     )
 
-    div_cartao_produtos_com_mais_20_avaliacoes = (
+    div_produtos_com_mais_20_avaliacoes = (
         cartao_produtos_com_mais_20_avaliacoes(
             valor=media_produtos_com_20_ou_mais_avaliacoes,
             sufixo=sufixo,
         )
     )
 
-    div_cartao_produtos_sem_avaliacao = cartao_produtos_sem_avaliacao(
+    div_produtos_sem_avaliacao = cartao_produtos_sem_avaliacao(
         valor=media_produtos_sem_avaliacoes,
         sufixo=sufixo,
     )
 
-    div_cartao_produtos_com_nota_maior_que_4 = (
-        cartao_produtos_com_nota_maior_que_4(
-            valor=media_produtos_nota_superior_4,
-            sufixo=sufixo,
-        )
+    div_produtos_com_nota_maior_que_4 = cartao_produtos_com_nota_maior_que_4(
+        valor=media_produtos_nota_superior_4,
+        sufixo=sufixo,
     )
 
     return inicializa_coluna(
         titulo=titulo,
         periodo=periodo,
         id_periodo=f"pagina_1_periodo_{sufixo}",
-        div_cartao_num_produtos=div_cartao_num_produtos,
-        div_cartao_num_marcas=div_cartao_num_marcas,
-        div_cartao_media_precos=div_cartao_media_precos,
-        div_cartao_num_produtos_promocoes=div_cartao_num_produtos_promocoes,
-        div_cartao_num_marcas_promocoes=div_cartao_num_marcas_promocoes,
-        div_cartao_percentual_medio_desconto=div_cartao_percentual_medio_desconto,
-        div_cartao_num_produtos_abaixo_200_reais=div_cartao_num_produtos_abaixo_200_reais,
-        div_cartao_produtos_com_mais_20_avaliacoes=div_cartao_produtos_com_mais_20_avaliacoes,
-        div_cartao_produtos_sem_avaliacao=div_cartao_produtos_sem_avaliacao,
-        div_cartao_produtos_com_nota_maior_que_4=div_cartao_produtos_com_nota_maior_que_4,
+        div_num_produtos=div_num_produtos,
+        div_num_marcas=div_num_marcas,
+        div_media_precos=div_media_precos,
+        div_num_produtos_promocoes=div_num_produtos_promocoes,
+        div_num_marcas_promocoes=div_num_marcas_promocoes,
+        div_percentual_medio_desconto=div_percentual_medio_desconto,
+        div_num_produtos_abaixo_200_reais=div_num_produtos_abaixo_200_reais,
+        div_produtos_com_mais_20_avaliacoes=div_produtos_com_mais_20_avaliacoes,
+        div_produtos_sem_avaliacao=div_produtos_sem_avaliacao,
+        div_produtos_com_nota_maior_que_4=div_produtos_com_nota_maior_que_4,
     )
 
 

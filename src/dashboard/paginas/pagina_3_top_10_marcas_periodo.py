@@ -36,8 +36,11 @@ register_page(
 )
 
 
-def titulo() -> html.H1:
-    conteudo = html.H1("Top 10 Marcas Período")
+def div_titulo() -> html.Div:
+    conteudo = html.Div(
+        html.H1("Top 10 Marcas Período", className="titulo-pagina"),
+        className="div_titulo_pagina",
+    )
 
     return conteudo
 
@@ -154,20 +157,46 @@ def grafico_top_10_marcas(df: pd_DataFrame, cor: str, sufixo: str) -> dcc.Graph:
     return conteudo
 
 
-def div_periodo(
-    titulo: str, periodo: str, df: pd_DataFrame, cor: str, sufixo: str
+def div_grafico_top_10_marcas(
+    df: pd_DataFrame, cor: str, sufixo: str
+) -> html.Div:
+    conteudo = html.Div(
+        grafico_top_10_marcas(df, cor, sufixo),
+        className="informacao",
+    )
+
+    return conteudo
+
+
+def conteiner_informacao(df: pd_DataFrame, cor: str, sufixo: str) -> html.Div:
+    conteudo = html.Div(
+        [
+            html.H4("Top 10 Marcas", className="titulo_informacao"),
+            div_grafico_top_10_marcas(df, cor, sufixo),
+        ],
+        className="conteiner_informacao",
+    )
+
+    return conteudo
+
+
+def cabecalho_coluna(
+    titulo: str,
+    periodo: str,
+    sufixo: str,
 ) -> html.Div:
     conteudo = html.Div(
         [
-            html.H4(titulo, className="titulo_coluna"),
+            html.H4(
+                titulo,
+                className="titulo_coluna",
+            ),
             html.Br(),
-            html.Div(
+            html.H5(
                 periodo,
                 className="periodo_coluna",
                 id=f"pagina_3_periodo_{sufixo}",
             ),
-            html.Br(),
-            grafico_top_10_marcas(df, cor, sufixo),
         ]
     )
 
@@ -185,40 +214,55 @@ def colunas(
     conteudo = Row(
         [
             Col(
-                div_periodo(
-                    titulo="Hoje",
-                    periodo=periodo_hoje,
-                    df=df_hoje,
-                    cor="#6495ED",
-                    sufixo="hoje",
-                ),
+                [
+                    cabecalho_coluna(
+                        titulo="Hoje",
+                        periodo=periodo_hoje,
+                        sufixo="hoje",
+                    ),
+                    conteiner_informacao(
+                        df=df_hoje,
+                        cor="#6495ED",
+                        sufixo="hoje",
+                    ),
+                ],
                 width=4,
                 class_name="coluna_hoje",
             ),
             Col(
-                div_periodo(
-                    titulo="Período Escolhido",
-                    periodo=periodo_escolhido,
-                    df=df_escolhido,
-                    cor="#FFA07A",
-                    sufixo="escolhido",
-                ),
+                [
+                    cabecalho_coluna(
+                        titulo="Período Escolhido",
+                        periodo=periodo_escolhido,
+                        sufixo="escolhido",
+                    ),
+                    conteiner_informacao(
+                        df=df_escolhido,
+                        cor="#FFA07A",
+                        sufixo="escolhido",
+                    ),
+                ],
                 width=4,
                 class_name="coluna_escolhido",
             ),
             Col(
-                div_periodo(
-                    titulo="Histórico",
-                    periodo=periodo_historico,
-                    df=df_historico,
-                    cor="#5CB85C",
-                    sufixo="historico",
-                ),
+                [
+                    cabecalho_coluna(
+                        titulo="Histórico",
+                        periodo=periodo_historico,
+                        sufixo="historico",
+                    ),
+                    conteiner_informacao(
+                        df=df_historico,
+                        cor="#5CB85C",
+                        sufixo="historico",
+                    ),
+                ],
                 width=4,
                 class_name="coluna_historico",
             ),
         ],
-        class_name="linha_colunas_periodos",
+        class_name="linha_colunas",
     )
 
     return conteudo
@@ -226,8 +270,7 @@ def colunas(
 
 layout = html.Div(
     [
-        # titulo(),
-        # html.Br(),
+        # div_titulo(),
         div_seletor_datas_e_botao(),
         modal_erro(),
         colunas(
