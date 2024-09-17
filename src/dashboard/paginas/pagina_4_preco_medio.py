@@ -1,7 +1,6 @@
 from dash import (
     Input,
     Output,
-    Patch,
     State,
     callback,
     clientside_callback,
@@ -97,15 +96,6 @@ def configuracoes_colunas_tabela(sufixo: str) -> list[dict]:
         "cellDataType": "text",
     }
 
-    configuracao_preco_medio = {
-        "headerName": "Preço Médio",
-        "field": "preco_medio",
-        "cellDataType": "number",
-        "valueFormatter": {
-            "function": f"{formatacoes.dag_format_pt_br()}.format('$,.2f')(params.value)",
-        },
-    }
-
     configuracao_num_produtos_hoje = {
         "headerName": "Produtos",
         "field": "num_produtos",
@@ -123,18 +113,27 @@ def configuracoes_colunas_tabela(sufixo: str) -> list[dict]:
         },
     }
 
+    configuracao_preco_medio = {
+        "headerName": "Preço Médio",
+        "field": "preco_medio",
+        "cellDataType": "number",
+        "valueFormatter": {
+            "function": f"{formatacoes.dag_format_pt_br()}.format('$,.2f')(params.value)",
+        },
+    }
+
     if sufixo == "hoje":
         return [
             configuracao_marca,
-            configuracao_preco_medio,
             configuracao_num_produtos_hoje,
+            configuracao_preco_medio,
         ]
 
     else:
         return [
             configuracao_marca,
-            configuracao_preco_medio,
             configuracao_num_produtos_periodo,
+            configuracao_preco_medio,
         ]
 
 
