@@ -3,7 +3,6 @@ from dash import (
     Output,
     clientside_callback,
     html,
-    page_registry,
 )
 from dash_bootstrap_components import Nav, NavLink
 
@@ -85,12 +84,40 @@ def links_paginas() -> Nav:
     conteudo = Nav(
         [
             NavLink(
-                html.Div(page["name"]),
-                href=page["path"],
+                html.Div("KPI's"),
+                href="/kpis",
                 active="exact",
-            )
-            for page in page_registry.values()
-            if page["name"] != "Not Found 404"
+            ),
+            NavLink(
+                html.Div("Top 10 Marcas Atuais"),
+                href="/top-10-marcas-atuais",
+                active="exact",
+            ),
+            NavLink(
+                html.Div("Top 10 Marcas Período"),
+                href="/top-10-marcas-periodo",
+                active="exact",
+            ),
+            NavLink(
+                html.Div("Preço Médio"),
+                href="/preco-medio",
+                active="exact",
+            ),
+            NavLink(
+                html.Div("Faixa Preço"),
+                href="/faixa-preco",
+                active="exact",
+            ),
+            NavLink(
+                html.Div("Satisfação"),
+                href="/satisfacao",
+                active="exact",
+            ),
+            NavLink(
+                html.Div("Promoções"),
+                href="/promocoes",
+                active="exact",
+            ),
         ],
         vertical=True,
         pills=True,
