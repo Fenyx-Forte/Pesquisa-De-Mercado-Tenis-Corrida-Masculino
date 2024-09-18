@@ -48,7 +48,7 @@ def macro_top_10_marcas_periodo() -> str:
 
 def macro_preco_medio_periodo() -> str:
     query = """
-    CREATE OR REPLACE MACRO preco_medio_e_num_produtos_periodo(data_inicio, data_fim) AS TABLE
+    CREATE OR REPLACE MACRO preco_medio_periodo(data_inicio, data_fim) AS TABLE
         WITH preco_medio_por_dia AS (
             SELECT
                 dcr.marca AS marca

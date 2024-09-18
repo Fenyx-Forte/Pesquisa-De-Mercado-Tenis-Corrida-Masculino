@@ -20,7 +20,7 @@ def query_preco_medio_periodo() -> str:
         , pm.preco_medio
         , pm.num_produtos
     FROM
-        preco_medio_e_num_produtos_periodo($data_inicio, $data_fim) AS pm;
+        preco_medio_periodo($data_inicio, $data_fim) AS pm;
     """
 
     return query
