@@ -1,4 +1,5 @@
 import scrapy
+
 from modulos.uteis import meu_tempo
 
 
@@ -11,7 +12,7 @@ def seletor_marca() -> str:
 
 
 def seletor_nome_produto() -> str:
-    return "h2.ui-search-item__title::text"
+    return "a.ui-search-link__title-card::text"
 
 
 def seletor_nota_avaliacao() -> str:
