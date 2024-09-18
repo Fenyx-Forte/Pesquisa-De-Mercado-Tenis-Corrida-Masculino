@@ -2,13 +2,13 @@ from pandas import DataFrame as pd_DataFrame
 
 from dashboard.processamento import escopo_global, inicializacao_dados
 from dashboard.processamento.paginas import (
-    processamento_pagina_1,
-    processamento_pagina_2,
-    processamento_pagina_3,
-    processamento_pagina_4,
-    processamento_pagina_5,
-    processamento_pagina_6,
-    processamento_pagina_7,
+    processamento_faixa_preco,
+    processamento_kpis,
+    processamento_preco_medio,
+    processamento_promocoes,
+    processamento_satisfacao,
+    processamento_top_10_marcas_atuais,
+    processamento_top_10_marcas_periodo,
 )
 
 
@@ -102,43 +102,43 @@ def retorna_top_10_marcas_hoje() -> pd_DataFrame:
     return escopo_aplicacaco.df_top_10_marcas_hoje
 
 
-# Pagina 1
-def pagina_1_inicializa_coluna_hoje():
-    return processamento_pagina_1.inicializa_coluna_hoje(
+# Pagina KPIs
+def pagina_kpis_dados_hoje() -> dict[str, str]:
+    return processamento_kpis.dados_hoje(
         conexao=escopo_aplicacaco.conexao,
-        data_coleta_mais_recente=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_1_inicializa_coluna_escolhido():
-    return processamento_pagina_1.inicializa_coluna_periodo(
+def pagina_kpis_dados_ultima_semana() -> dict[str, str]:
+    return processamento_kpis.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_6_dias_atras,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
-        sufixo="escolhido",
     )
 
 
-def pagina_1_inicializa_coluna_historico():
-    return processamento_pagina_1.inicializa_coluna_periodo(
+def pagina_kpis_dados_historico() -> dict[str, str]:
+    return processamento_kpis.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
-        sufixo="historico",
     )
 
 
-def pagina_1_atualiza_coluna_escolhido(data_inicio: str, data_fim: str):
-    return processamento_pagina_1.atualiza_coluna_periodo(
+def pagina_kpis_atualiza_dados_escolhido(
+    data_inicio: str,
+    data_fim: str,
+) -> dict[str, str]:
+    return processamento_kpis.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=data_inicio,
         data_fim=data_fim,
     )
 
 
-# Pagina 2
-def pagina_2_top_10_marcas_atuais():
-    return processamento_pagina_2.inicializa_top_10_marcas_atuais(
+# Pagina Top 10 Marcas Atuais
+def pagina_top_10_marcas_atuais_dados_grafico() -> pd_DataFrame:
+    return processamento_top_10_marcas_atuais.inicializa_top_10_marcas_atuais(
         conexao=escopo_aplicacaco.conexao,
         data_coleta_mais_recente=escopo_aplicacaco.data_coleta_mais_recente,
         data_6_dias_atras=escopo_aplicacaco.data_6_dias_atras,
@@ -147,12 +147,12 @@ def pagina_2_top_10_marcas_atuais():
     )
 
 
-def pagina_2_dados_grafico_atualizado(
-    dados_grafico_atual: list[dict],
+def pagina_top_10_marcas_atuais_atualizar_dados_grafico(
+    dados_grafico_atual: dict[str, list[dict]],
     data_inicio: str,
     data_fim: str,
-):
-    return processamento_pagina_2.dados_grafico_atualizado(
+) -> pd_DataFrame:
+    return processamento_top_10_marcas_atuais.dados_grafico_atualizado(
         conexao=escopo_aplicacaco.conexao,
         dados_grafico_atual=dados_grafico_atual,
         data_inicio=data_inicio,
@@ -160,157 +160,165 @@ def pagina_2_dados_grafico_atualizado(
     )
 
 
-# Pagina 3
-def pagina_3_inicializa_top_10_marcas_escolhido():
-    return processamento_pagina_3.df_top_10_marcas_periodo(
+# Pagina Top 10 Marcas Periodo
+def pagina_top_10_marcas_periodo_dados_hoje():
+    return retorna_top_10_marcas_hoje()
+
+
+def pagina_top_10_marcas_periodo_dados_ultima_semana():
+    return processamento_top_10_marcas_periodo.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_6_dias_atras,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_3_inicializa_top_10_marcas_historico():
-    return processamento_pagina_3.df_top_10_marcas_periodo(
+def pagina_top_10_marcas_periodo_dados_historico():
+    return processamento_top_10_marcas_periodo.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_3_atualiza_top_10_marcas_periodo(data_inicio: str, data_fim: str):
-    return processamento_pagina_3.df_top_10_marcas_periodo(
+def pagina_top_10_marcas_periodo_atualiza_dados_escolhido(
+    data_inicio: str,
+    data_fim: str,
+):
+    return processamento_top_10_marcas_periodo.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=data_inicio,
         data_fim=data_fim,
     )
 
 
-# Pagina 4
-def pagina_4_inicializa_dados_hoje() -> list[list[dict]]:
-    return processamento_pagina_4.dados_hoje(
+# Pagina Preco Medio
+def pagina_preco_medio_dados_hoje() -> dict[str, list[dict]]:
+    return processamento_preco_medio.dados_hoje(
         conexao=escopo_aplicacaco.conexao,
     )
 
 
-def pagina_4_inicializa_dados_escolhido() -> list[list[dict]]:
-    return processamento_pagina_4.dados_periodo(
+def pagina_preco_medio_dados_ultima_semana() -> dict[str, list[dict]]:
+    return processamento_preco_medio.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_6_dias_atras,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_4_inicializa_dados_historico() -> list[list[dict]]:
-    return processamento_pagina_4.dados_periodo(
+def pagina_preco_medio_dados_historico() -> dict[str, list[dict]]:
+    return processamento_preco_medio.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_4_atualiza_dados_escolhido(
-    data_inicio: str, data_fim: str
-) -> list[list[dict]]:
-    return processamento_pagina_4.dados_periodo(
+def pagina_preco_medio_atualiza_dados_escolhido(
+    data_inicio: str,
+    data_fim: str,
+) -> dict[str, list[dict]]:
+    return processamento_preco_medio.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=data_inicio,
         data_fim=data_fim,
     )
 
 
-# Pagina 5
-def pagina_5_inicializa_dados_hoje() -> list[list[dict]]:
-    return processamento_pagina_5.dados_hoje(
+# Pagina Faixa Preco
+def pagina_faixa_preco_dados_hoje() -> dict[str, list[dict]]:
+    return processamento_faixa_preco.dados_hoje(
         conexao=escopo_aplicacaco.conexao,
     )
 
 
-def pagina_5_inicializa_dados_escolhido() -> list[list[dict]]:
-    return processamento_pagina_5.dados_periodo(
+def pagina_faixa_preco_dados_ultima_semana() -> dict[str, list[dict]]:
+    return processamento_faixa_preco.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_6_dias_atras,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_5_inicializa_dados_historico() -> list[list[dict]]:
-    return processamento_pagina_5.dados_periodo(
+def pagina_faixa_preco_dados_historico() -> dict[str, list[dict]]:
+    return processamento_faixa_preco.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_5_atualiza_dados_escolhido(
+def pagina_faixa_preco_atualiza_dados_escolhido(
     data_inicio: str, data_fim: str
-) -> list[list[dict]]:
-    return processamento_pagina_5.dados_periodo(
+) -> dict[str, list[dict]]:
+    return processamento_faixa_preco.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=data_inicio,
         data_fim=data_fim,
     )
 
 
-# Pagina 6
-def pagina_6_inicializa_dados_hoje() -> list[list[dict]]:
-    return processamento_pagina_6.dados_hoje(
+# Pagina Satisfacao
+def pagina_satisfacao_dados_hoje() -> dict[str, list[dict]]:
+    return processamento_satisfacao.dados_hoje(
         conexao=escopo_aplicacaco.conexao,
     )
 
 
-def pagina_6_inicializa_dados_escolhido() -> list[list[dict]]:
-    return processamento_pagina_6.dados_periodo(
+def pagina_satisfacao_dados_ultima_semana() -> dict[str, list[dict]]:
+    return processamento_satisfacao.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_6_dias_atras,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_6_inicializa_dados_historico() -> list[list[dict]]:
-    return processamento_pagina_6.dados_periodo(
+def pagina_satisfacao_dados_historico() -> dict[str, list[dict]]:
+    return processamento_satisfacao.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_6_atualiza_dados_escolhido(
+def pagina_satisfacao_atualiza_dados_escolhido(
     data_inicio: str, data_fim: str
-) -> list[list[dict]]:
-    return processamento_pagina_6.dados_periodo(
+) -> dict[str, list[dict]]:
+    return processamento_satisfacao.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=data_inicio,
         data_fim=data_fim,
     )
 
 
-# Pagina 7
-def pagina_7_inicializa_dados_hoje() -> list[list[dict]]:
-    return processamento_pagina_7.dados_hoje(
+# Pagina Promocoes
+def pagina_promocoes_dados_hoje() -> list[dict]:
+    return processamento_promocoes.dados_hoje(
         conexao=escopo_aplicacaco.conexao,
     )
 
 
-def pagina_7_inicializa_dados_escolhido() -> list[list[dict]]:
-    return processamento_pagina_7.dados_periodo(
+def pagina_promocoes_dados_ultima_semana() -> list[dict]:
+    return processamento_promocoes.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_6_dias_atras,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_7_inicializa_dados_historico() -> list[list[dict]]:
-    return processamento_pagina_7.dados_periodo(
+def pagina_promocoes_dados_historico() -> list[dict]:
+    return processamento_promocoes.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=escopo_aplicacaco.data_coleta_mais_antiga,
         data_fim=escopo_aplicacaco.data_coleta_mais_recente,
     )
 
 
-def pagina_7_atualiza_dados_escolhido(
+def pagina_promocoes_atualiza_dados_escolhido(
     data_inicio: str, data_fim: str
-) -> list[list[dict]]:
-    return processamento_pagina_7.dados_periodo(
+) -> list[dict]:
+    return processamento_promocoes.dados_periodo(
         conexao=escopo_aplicacaco.conexao,
         data_inicio=data_inicio,
         data_fim=data_fim,

@@ -1,7 +1,6 @@
 /* Cabecalho */
 #cabecalho{
     padding-top: 1rem;
-    padding-bottom: 1rem;
 
     #titulo-aplicacao{
         font-size: 30px;
@@ -12,6 +11,7 @@
     }
 }
 
+/* Sidebar */
 #meu-toggle-navbar{
     position: absolute;
     z-index: 1001;
@@ -29,8 +29,6 @@
     visibility: visible;
 }
 
-
-/* Sidebar */
 .minha-sidebar{
     top: 0px;
     margin-top: 0px;
@@ -103,16 +101,19 @@
 /* Conteudo Pagina */
 .pagina{
     padding-bottom: 1rem;
-}
 
-#pagina_1{
+    br{
+        display: none;
+    }
+
     .titulo-pagina{
         text-align: center;
-        font-size: 30px;
+        font-size: 26px;
         font-weight: bold;
+        margin-bottom: 2rem;
     }
 
-    .div_seletor_datas_e_botao{
+    .seletor_datas_e_botao{
         text-align: center;
         align-items: center;
 
@@ -125,465 +126,137 @@
         }
     }
 
-    .linha_colunas_kpis{
+    .linha_colunas{
         text-align: center;
         margin-top: 2rem;
-    }
 
-    br{
-        display: none;
-    }
-
-    .titulo_coluna{
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .periodo_coluna{
-        font-size: 16px;
-        color:#158cba;
-    }
-
-    .informacoes_coluna{
-        margin-top: 2rem;
-
-        br{
-            display: inline;
-            line-height: 10px;
+        .coluna_escolhido{
+            border-left: #158cba solid 2px;
+            border-right: #158cba solid 2px;
         }
-    }
 
-    .div_card{
-        display: flex;
-        justify-content: center;
+        .cabecalho_coluna{
+            .titulo_coluna{
+                font-size: 22px;
+                font-weight: bold;
+            }
 
-        .card{
-            display: flex;
-            text-wrap: nowrap;
-            min-width: fit-content;
-            width: 60%;
-            max-width: 60%;
+            .periodo_coluna{
+                font-size: 16px;
+                color:#158cba;
+            }
+        }
+
+        .conteiner_informacao{
+            margin: 0 auto;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
             border: #5BBFD8 solid 2px;
 
-            .card-body{
-                padding: 5px;
-            }
+            text-wrap: nowrap;
+            min-width: fit-content;
+            max-width: 60%;
 
-            .titulo_cartao{
+            .titulo_informacao{
                 color: #333333;
-                font-size: 14px;
+                font-size: 16px;
                 font-weight: 600;
-            }
-
-            .valor_cartao{
-                color: #2ecc71;
-                font-size: 24px;
-                font-weight: 600;
-                margin-bottom: 15px;
-                margin-top: 15px;
-                font-family: Georgia, 'Times New Roman', Times, serif;
-            }
-
-            i{
-                font-size: 20px;
-            }
-
-            .ranking_top_1{
-                color: #FFD700;
-            }
-
-            .ranking_top_2{
-                color: #C0C0C0;
-            }
-
-            .ranking_top_3{
-                color: #CD7F32;
+                margin-top: 1.5rem;
             }
         }
-    }
-
-    .coluna_escolhido{
-        border-left: #158cba solid 2px;
-        border-right: #158cba solid 2px;
     }
 }
 
-#pagina_2{
-    .div_seletor_datas_e_botao{
-        text-align: center;
+/* Pagina KPIs */
+#kpis{
+    .conteiner_informacao{
+        display: flex;
+        flex-direction: column;
         align-items: center;
 
-        br{
-            display: inline;
-        }
-
-        .botao{
-            margin-top: 1rem;
-        }
-    }
-
-    .linha_colunas_periodos{
-        text-align: center;
-        margin-top: 2rem;
-
-        .titulo_coluna{
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .periodo_coluna{
-            font-size: 16px;
-            color:#158cba;
-        }
-
-        .coluna_escolhido{
-            border-left: #158cba solid 2px;
-            border-right: #158cba solid 2px;
-        }
-
-
-        I{
+        .titulo_informacao{
             margin-top: 10px;
+        }
+
+        .valor_cartao{
+            color: #2ecc71;
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            margin-top: 15px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        i{
             font-size: 20px;
-        }
-
-        .legenda_hoje{
-            color: #6495ED;
-        }
-
-        .legenda_escolhido{
-            color: #FFA07A;
-        }
-
-        .legenda_historico{
-            color: #5CB85C;
-        }
-    }
-
-    br{
-        display: none;
-    }
-}
-
-#pagina_3{
-    .div_seletor_datas_e_botao{
-        text-align: center;
-        align-items: center;
-
-        br{
-            display: inline;
-        }
-
-        .botao{
-            margin-top: 1rem;
-        }
-    }
-
-    .linha_colunas_periodos{
-        text-align: center;
-        margin-top: 2rem;
-
-        .titulo_coluna{
-            font-size: 22px;
-            font-weight: bold;
             margin-bottom: 10px;
         }
 
-        .periodo_coluna{
-            font-size: 16px;
-            color:#158cba;
+        .ranking_top_1{
+            color: #FFD700;
         }
 
-        .coluna_escolhido{
-            border-left: #158cba solid 2px;
-            border-right: #158cba solid 2px;
+        .ranking_top_2{
+            color: #C0C0C0;
         }
-    }
 
-    br{
-        display: none;
+        .ranking_top_3{
+            color: #CD7F32;
+        }
     }
 }
 
-#pagina_4{
-    .div_seletor_datas_e_botao{
-        text-align: center;
-        align-items: center;
+#top_10_marcas_atuais{
+    I{
+        margin-top: 10px;
+        font-size: 20px;
+    }
 
-        br{
-            display: inline;
-        }
+    .legenda_hoje{
+        color: #6495ED;
+    }
 
-        .botao{
-            margin-top: 1rem;
+    .legenda_escolhido{
+        color: #FFA07A;
+    }
+
+    .legenda_historico{
+        color: #5CB85C;
+    }
+}
+
+#top_10_marcas_periodo{
+    .conteiner_informacao{
+        max-width: 95%;
+    }
+}
+
+#preco_medio, #faixa_preco, #satisfacao, #promocoes{
+    .conteiner_informacao{
+        max-width: 95%;
+
+        .titulo_informacao{
+            margin-bottom: 2rem;
         }
     }
 
-    .linha_colunas{
-        text-align: center;
-        margin-top: 2rem;
+    .tabela{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
 
-        .titulo_coluna{
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .tabela-ag-grid{
+            width: auto;
+            max-width: 90%;
         }
 
-        .periodo_coluna{
-            font-size: 16px;
-            color:#158cba;
-        }
-
-        .coluna_escolhido{
-            border-left: #158cba solid 2px;
-            border-right: #158cba solid 2px;
-        }
-
-        .div_informacao{
-            margin-top: 2rem;
-            margin-bottom: 3rem;
-
-            .subtitulo_coluna{
-                font-size: 14px;
-                font-weight: bold;
-                margin-bottom: 1rem;
-            }
-        }
-
-        .div_tabela{
-            display: flex;
+        /* Centralizar colunas e valores de tabelas dags */
+        .center-aligned-header .ag-header-cell-label {
             justify-content: center;
+       }
 
-            .tabela-dag{
-                width: auto;
-                max-width: 90%;
-            }
-
-            /* Centralizar colunas e valores de tabelas dags */
-            .center-aligned-header .ag-header-cell-label {
-                justify-content: center;
-           }
-
-           .center-aligned-cell {
-               text-align: center;
-           }
-        }
-    }
-
-    br{
-        display: none;
-    }
-}
-
-
-#pagina_5{
-    .div_seletor_datas_e_botao{
-        text-align: center;
-        align-items: center;
-
-        br{
-            display: inline;
-        }
-
-        .botao{
-            margin-top: 1rem;
-        }
-    }
-
-    .linha_colunas{
-        text-align: center;
-        margin-top: 2rem;
-
-        .titulo_coluna{
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .periodo_coluna{
-            font-size: 16px;
-            color:#158cba;
-        }
-
-        .coluna_escolhido{
-            border-left: #158cba solid 2px;
-            border-right: #158cba solid 2px;
-        }
-
-        .div_informacao{
-            margin-top: 2rem;
-            margin-bottom: 3rem;
-
-            .subtitulo_coluna{
-                font-size: 14px;
-                font-weight: bold;
-                margin-bottom: 1rem;
-            }
-        }
-
-        .div_tabela{
-            display: flex;
-            justify-content: center;
-
-            .tabela-dag{
-                width: auto;
-                max-width: 90%;
-            }
-
-            /* Centralizar colunas e valores de tabelas dags */
-            .center-aligned-header .ag-header-cell-label {
-                justify-content: center;
-           }
-
-           .center-aligned-cell {
-               text-align: center;
-           }
-        }
-    }
-
-    br{
-        display: none;
-    }
-}
-
-#pagina_6{
-    .div_seletor_datas_e_botao{
-        text-align: center;
-        align-items: center;
-
-        br{
-            display: inline;
-        }
-
-        .botao{
-            margin-top: 1rem;
-        }
-    }
-
-    .linha_colunas{
-        text-align: center;
-        margin-top: 2rem;
-
-        .titulo_coluna{
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .periodo_coluna{
-            font-size: 16px;
-            color:#158cba;
-        }
-
-        .coluna_escolhido{
-            border-left: #158cba solid 2px;
-            border-right: #158cba solid 2px;
-        }
-
-        .div_informacao{
-            margin-top: 2rem;
-            margin-bottom: 3rem;
-
-            .subtitulo_coluna{
-                font-size: 14px;
-                font-weight: bold;
-                margin-bottom: 1rem;
-            }
-        }
-
-        .div_tabela{
-            display: flex;
-            justify-content: center;
-
-            .tabela-dag{
-                width: auto;
-                max-width: 90%;
-            }
-
-            /* Centralizar colunas e valores de tabelas dags */
-            .center-aligned-header .ag-header-cell-label {
-                justify-content: center;
-           }
-
-           .center-aligned-cell {
-               text-align: center;
-           }
-        }
-    }
-
-    br{
-        display: none;
-    }
-}
-
-
-#pagina_7{
-    .div_seletor_datas_e_botao{
-        text-align: center;
-        align-items: center;
-
-        br{
-            display: inline;
-        }
-
-        .botao{
-            margin-top: 1rem;
-        }
-    }
-
-    .linha_colunas{
-        text-align: center;
-        margin-top: 2rem;
-
-        .titulo_coluna{
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .periodo_coluna{
-            font-size: 16px;
-            color:#158cba;
-        }
-
-        .coluna_escolhido{
-            border-left: #158cba solid 2px;
-            border-right: #158cba solid 2px;
-        }
-
-        .div_informacao{
-            margin-top: 2rem;
-            margin-bottom: 3rem;
-
-            .subtitulo_coluna{
-                font-size: 14px;
-                font-weight: bold;
-                margin-bottom: 1rem;
-            }
-        }
-
-        .div_tabela{
-            display: flex;
-            justify-content: center;
-
-            .tabela-dag{
-                width: auto;
-                max-width: 90%;
-            }
-
-            /* Centralizar colunas e valores de tabelas dags */
-            .center-aligned-header .ag-header-cell-label {
-                justify-content: center;
-           }
-
-           .center-aligned-cell {
-               text-align: center;
-           }
-        }
-    }
-
-    br{
-        display: none;
+       .center-aligned-cell {
+           text-align: center;
+       }
     }
 }

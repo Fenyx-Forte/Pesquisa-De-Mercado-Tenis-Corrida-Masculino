@@ -84,6 +84,11 @@ def links_paginas() -> Nav:
     conteudo = Nav(
         [
             NavLink(
+                html.Div("Home"),
+                href="/",
+                active="exact",
+            ),
+            NavLink(
                 html.Div("KPI's"),
                 href="/kpis",
                 active="exact",

@@ -1,9 +1,3 @@
-from duckdb import DuckDBPyConnection
-from pandas import DataFrame as pd_DataFrame
-
-from dashboard.processamento.queries import pagina_3_queries
-
-
 def callback_verificar_datas() -> str:
     funcao = """
     function verificar_datas(n_clicks, data_inicio, data_fim, periodo_hoje, periodo_ja_escolhido, periodo_historico) {
@@ -45,6 +39,34 @@ def callback_abrir_modal() -> str:
     return funcao
 
 
+def callback_ranking_direto_valores() -> str:
+    funcao = """
+    function ranking_direto(str1, str2, str3) {
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
+
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """
+
+    return funcao
+
+
+def callback_ranking_inverso_valores() -> str:
+    funcao = """
+    function ranking_inverso(str1, str2, str3) {
+        let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+
+        let sortedUnique = [...new Set(numbers.slice().sort((a, b) => a - b))];
+
+        return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+    }
+    """
+
+    return funcao
+
+
 def formatar_data_pt_br(data: str) -> str:
     # "data" esta no formato YYYY-MM-DD
     componentes = data.split("-")
@@ -55,22 +77,7 @@ def formatar_data_pt_br(data: str) -> str:
     return f"{dia}/{mes}/{ano}"
 
 
-def df_top_10_marcas_periodo(
-    conexao: DuckDBPyConnection,
-    data_inicio: str,
-    data_fim: str,
-) -> pd_DataFrame:
-    query = pagina_3_queries.query_top_10_marcas_periodo()
-
-    parametros = {
-        "data_inicio": data_inicio,
-        "data_fim": data_fim,
-    }
-
-    return conexao.execute(query, parametros).df()
-
-
-def retorna_periodo_novo(data_inicio: str, data_fim: str):
+def retorna_periodo(data_inicio: str, data_fim: str) -> str:
     data_inicio_formatada = formatar_data_pt_br(data_inicio)
     data_fim_formatada = formatar_data_pt_br(data_fim)
 
