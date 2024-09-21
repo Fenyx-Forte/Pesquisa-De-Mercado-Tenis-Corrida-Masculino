@@ -6,6 +6,8 @@ from dash import (
 )
 from dash_bootstrap_components import Nav, NavLink
 
+from dashboard.uteis import uteis_processamento
+
 
 def botao_toggle() -> html.Div:
     conteudo = html.Div(
@@ -184,16 +186,7 @@ def sidebar() -> html.Div:
 
 
 clientside_callback(
-    """
-    function(n_clicks) {
-        if (n_clicks % 2 == 1) {
-            return "minha-sidebar-escondida"
-        }
-        else {
-            return "minha-sidebar"
-        }
-    }
-    """,
+    uteis_processamento.callback_abrir_e_fechar_sidebar(),
     Output("minha-sidebar", "className"),
     Input("meu-toggle-navbar", "n_clicks"),
     prevent_initial_call=True,
