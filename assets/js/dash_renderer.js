@@ -1,0 +1,1 @@
+var renderer = new DashRenderer();
