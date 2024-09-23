@@ -8,51 +8,8 @@
     <meta name="application-name" content="Pesquisa de Mercado: Tênis de Corrida no Mercado Livre">
     <meta name="keywords" content="webscraping dashboard dados">
     <meta name="google" content="notranslate">
-    <meta http-equiv="refresh" content="50">
-    <link rel="icon" type="image/png" href="/assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
     <title>Carregando...</title>
-
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .spinner {
-            border: 8px solid #d3d3d3;
-            border-top: 8px solid #3498db;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 20px 0;
-        }
-        .loading-message {
-            font-size: 20px;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 20px;
-        }
-        .loading-submessage {
-            font-size: 16px;
-            color: #777;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
 </head>
 <body>
     <div id="minha-pagina-carregamento" class="container">
@@ -64,20 +21,6 @@
         <div class="loading-submessage">Obrigado pela paciência!</div>
     </div>
 
-    <script>
-        let seconds = 50;
-        const countdownElement = document.getElementById("seconds");
-        const timeUnitElement = document.getElementById("time-unit");
-
-        function updateCountdown() {
-            if (seconds > 0) {
-                seconds--;
-                countdownElement.textContent = seconds;
-                timeUnitElement.textContent = seconds === 1 ? "segundo" : "segundos";
-            }
-        }
-
-        setInterval(updateCountdown, 1000);
-    </script>
+    <script src="/assets/js/carregamento.js"></script>
 </body>
 </html>
