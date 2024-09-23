@@ -38,7 +38,6 @@ def titulo_pagina() -> str:
 
 def configuracoes_figura(
     cor: str,
-    sufixo_coluna: str,
 ) -> dict:
     coluna_x = "Marca"
 
@@ -116,19 +115,19 @@ def colunas() -> Row:
     grafico_hoje = componentes_pagina.grafico_de_barras_simples(
         df=df_hoje,
         id_grafico=f"{id_pagina()}_grafico_hoje",
-        **configuracoes_figura("#6495ED", "hoje"),
+        **configuracoes_figura("#6495ED"),
     )
 
     grafico_escolhido = componentes_pagina.grafico_de_barras_simples(
         df=df_escolhido,
         id_grafico=f"{id_pagina()}_grafico_escolhido",
-        **configuracoes_figura("#FFA07A", "escolhido"),
+        **configuracoes_figura("#FFA07A"),
     )
 
     grafico_historico = componentes_pagina.grafico_de_barras_simples(
         df=df_historico,
         id_grafico=f"{id_pagina()}_grafico_historico",
-        **configuracoes_figura("#5CB85C", "historico"),
+        **configuracoes_figura("#5CB85C"),
     )
 
     conteudo = Row(
