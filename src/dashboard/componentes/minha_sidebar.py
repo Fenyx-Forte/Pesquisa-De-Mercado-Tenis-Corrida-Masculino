@@ -4,6 +4,7 @@ from dash import (
     clientside_callback,
     html,
 )
+from dash.dcc import Location
 from dash_bootstrap_components import Nav, NavLink
 
 from dashboard.uteis import uteis_processamento
@@ -168,6 +169,7 @@ def sidebar() -> html.Div:
     conteudo = html.Div(
         [
             botao_toggle(),
+            Location(id="url-atual", refresh=False),
             html.Div(
                 [
                     minhas_informacoes(),
@@ -190,4 +192,10 @@ clientside_callback(
     Output("minha-sidebar", "className"),
     Input("meu-toggle-navbar", "n_clicks"),
     prevent_initial_call=True,
+)
+
+
+clientside_callback(
+    uteis_processamento.callback_atualizar_titulo_pagina(),
+    Input("url-atual", "pathname"),
 )

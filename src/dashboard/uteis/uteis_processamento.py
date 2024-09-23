@@ -1,6 +1,13 @@
 from dash import ClientsideFunction
 
 
+def callback_atualizar_titulo_pagina() -> ClientsideFunction:
+    return ClientsideFunction(
+        namespace="clientside",
+        function_name="atualizar_titulo_pagina",
+    )
+
+
 def callback_abrir_e_fechar_sidebar() -> ClientsideFunction:
     return ClientsideFunction(
         namespace="clientside",

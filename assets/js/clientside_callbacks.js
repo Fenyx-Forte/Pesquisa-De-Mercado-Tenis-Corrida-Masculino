@@ -1,11 +1,28 @@
 window.dash_clientside = Object.assign({}, window.dash_clientside, {
     clientside: {
+        atualizar_titulo_pagina: function(url_atual) {
+            const titulos = {
+                "/": "Home",
+                "/kpis": "KPI's",
+                "/top-10-marcas-atuais": "Top 10 Marcas Atuais",
+                "/top-10-marcas-periodo": "Top 10 Marcas Período",
+                "/preco-medio": "Preço Médio",
+                "/faixa-preco": "Faixa Preço",
+                "/satisfacao": "Satisfação",
+                "/promocoes": "Promoções"
+            };
+
+            console.log(url_atual);
+
+            document.title = titulos[url_atual] || "Not Found 404";
+        },
+
         abrir_e_fechar_sidebar: function(n_clicks) {
             if (n_clicks % 2 === 1) {
-                return "minha-sidebar-escondida"
+                return "minha-sidebar-escondida";
             }
 
-            return "minha-sidebar"
+            return "minha-sidebar";
         },
 
         verificar_datas: function(n_clicks, data_inicio, data_fim, periodo_hoje, periodo_ja_escolhido, periodo_historico) {
