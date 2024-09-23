@@ -19,9 +19,9 @@ def template_html_padrao() -> str:
                 <footer>
                     {%config%}
                     {%scripts%}
-                    <script src="/assets/dash_js/plotly-basic-2.35.2.min.js" async=""></script>
                     <script id="_dash-renderer" src="/assets/dash_js/dash_renderer.js"></script>
                 </footer>
+                <script src="/assets/dash_js/plotly-basic-2.35.2.min.js" async=""></script>
             </body>
         </html>
     """
