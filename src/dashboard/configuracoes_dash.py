@@ -7,7 +7,7 @@ from dashboard.componentes import cabecalho, minha_sidebar
 def template_html_padrao() -> str:
     template = """
     <!DOCTYPE html>
-        <html>
+        <html lang="pt-BR">
             <head>
                 {%metas%}
                 <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
@@ -29,23 +29,7 @@ def template_html_padrao() -> str:
     return template
 
 
-def meta_tags_og():
-    pass
-
-
-def meta_tags_twitter():
-    pass
-
-
-def meta_tags_robots():
-    pass
-
-
-def meta_tags_aplicacao():
-    pass
-
-
-def minhas_meta_tags() -> list[dict[str, str]]:
+def meta_tags_basicas() -> list[dict[str, str]]:
     meta_tags = [
         {
             "charset": "UTF-8",
@@ -55,9 +39,70 @@ def minhas_meta_tags() -> list[dict[str, str]]:
             "content": "width=device-width, initial-scale=1.0",
         },
         {
-            "http-equiv": "Content-Language",
-            "content": "pt-BR",
+            "rel": "canonical",
+            "href": "https://analise-de-dados-mercadolivre.onrender.com/",
         },
+        {
+            "name": "google",
+            "content": "notranslate",
+        },
+    ]
+
+    return meta_tags
+
+
+def meta_tags_og() -> list[dict[str, str]]:
+    meta_tags = [
+        {
+            "property": "og:title",
+            "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
+        },
+        {
+            "property": "og:description",
+            "content": "Descricao Site",
+        },
+        {
+            "property": "og:image",
+            "content": "https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
+        },
+        {
+            "property": "og:url",
+            "content": "https://analise-de-dados-mercadolivre.onrender.com/",
+        },
+        {
+            "property": "og:type",
+            "content": "website",
+        },
+    ]
+
+    return meta_tags
+
+
+def meta_tags_twitter() -> list[dict[str, str]]:
+    meta_tags = [
+        {
+            "name": "twitter:card",
+            "content": "summary_large_image",
+        },
+        {
+            "name": "twitter:title",
+            "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
+        },
+        {
+            "name": "twitter:description",
+            "content": "Descricao Site",
+        },
+        {
+            "name": "twitter:image",
+            "content": "https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
+        },
+    ]
+
+    return meta_tags
+
+
+def meta_tags_aplicacao() -> list[dict[str, str]]:
+    meta_tags = [
         {
             "name": "author",
             "content": "Fenyx Forte",
@@ -67,70 +112,28 @@ def minhas_meta_tags() -> list[dict[str, str]]:
             "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
         },
         {
-            "name": "description",
-            "content": "Descricao Site",
-        },
-        {
             "name": "keywords",
             "content": "webscraping, dashboard, dados",
         },
+    ]
+
+    return meta_tags
+
+
+def minhas_meta_tags() -> list[dict[str, str]]:
+    meta_tags = [
         {
-            "property": "og:title",
-            "content": "Titulo",
+            "property": "og:locale",
+            "content": "pt_BR",
         },
         {
-            "property": "og:description",
-            "content": "Descricao",
+            "property": "og:site_name",
+            "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
         },
-        {
-            "property": "og:image",
-            "content": "Link imagem",
-        },
-        {
-            "property": "og:url",
-            "content": "Link canonical",
-        },
-        {
-            "property": "og:type",
-            "content": "website",
-        },
-        {
-            "name": "twitter:card",
-            "content": "summary_large_image",
-        },
-        {
-            "name": "twitter:title",
-            "content": "Site",
-        },
-        {
-            "name": "twitter:description",
-            "content": "descricao",
-        },
-        {
-            "name": "twitter:image",
-            "content": "Link imagem",
-        },
-        {
-            "rel": "icon",
-            "type": "image/x-icon",
-            "href": "link",
-        },
-        {
-            "rel": "canonical",
-            "href": "link",
-        },
-        {
-            "name": "google",
-            "content": "notranslate",
-        },
-        {
-            "name": "robots",
-            "content": "index, follow",
-        },
-        {
-            "name": "googlebot",
-            "content": "index, follow",
-        },
+        *meta_tags_basicas(),
+        *meta_tags_aplicacao(),
+        # *meta_tags_og(),
+        # *meta_tags_twitter(),
     ]
 
     return meta_tags
@@ -150,7 +153,7 @@ def configuracoes_app() -> dict:
         "assets_url_path": "/assets",
         "use_pages": True,
         "pages_folder": "./dashboard/paginas",
-        "include_pages_meta": False,
+        "include_pages_meta": True,
         "serve_locally": True,
         "compress": False,
         "suppress_callback_exceptions": True,
