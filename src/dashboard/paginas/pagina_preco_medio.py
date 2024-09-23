@@ -27,7 +27,7 @@ register_page(
     name="Preço Médio",
     title="Preço Médio",
     description="Página Preço Médio",
-    image_url="/assets/images/imagem_link.jpg",
+    image_url="https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
 )
 
 

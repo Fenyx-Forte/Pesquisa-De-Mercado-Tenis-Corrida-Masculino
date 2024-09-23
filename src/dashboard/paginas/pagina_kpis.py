@@ -22,7 +22,7 @@ register_page(
     name="KPI's",
     title="KPI's",
     description="Página KPI's",
-    image_url="/assets/images/imagem_link.jpg",
+    image_url="https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
 )
 
 

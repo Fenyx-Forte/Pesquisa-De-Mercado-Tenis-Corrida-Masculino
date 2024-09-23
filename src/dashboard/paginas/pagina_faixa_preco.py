@@ -27,7 +27,7 @@ register_page(
     name="Faixas Preço",
     title="Faixas Preço",
     description="Página Faixas de Preço",
-    image_url="/assets/images/imagem_link.jpg",
+    image_url="https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
 )
 
 

@@ -22,7 +22,7 @@ register_page(
     name="Top 10 Marcas Atuais",
     title="Top 10 Marcas Atuais",
     description="Top 10 Marcas Atuais",
-    image_url="/assets/images/imagem_link.jpg",
+    image_url="https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
 )
 
 
