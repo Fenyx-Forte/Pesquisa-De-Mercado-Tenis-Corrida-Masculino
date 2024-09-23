@@ -25,7 +25,7 @@ def links_minhas_informacoes() -> html.Div:
             html.A(
                 [
                     html.Img(
-                        src="/assets/images/portfolio.ico",
+                        src="/assets/images/portfolio.png",
                         className="meu-icone",
                     ),
                     html.Label("Portfólio"),
