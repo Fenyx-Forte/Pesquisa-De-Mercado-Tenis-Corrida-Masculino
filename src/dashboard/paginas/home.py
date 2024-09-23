@@ -20,6 +20,7 @@ layout = html.Div(
     [
         titulo(),
         html.Div("Conteúdo Página Home"),
+        html.Script(type="speculationrules", src="/assets/js/pre_render.js"),
     ],
     className="pagina",
     id="home",
