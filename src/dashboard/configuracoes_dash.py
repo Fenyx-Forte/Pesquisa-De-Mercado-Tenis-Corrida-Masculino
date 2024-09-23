@@ -155,7 +155,7 @@ def configuracoes_app() -> dict:
         "compress": False,
         "suppress_callback_exceptions": True,
         "show_undo_redo": False,
-        # "update_title": "",
+        "update_title": "",
         "index_string": template_html_padrao(),
         "meta_tags": minhas_meta_tags(),
     }
