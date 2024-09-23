@@ -229,6 +229,10 @@
     .conteiner_informacao{
         max-width: 95%;
     }
+
+    .informacao{
+        min-height: 450px;
+    }
 }
 
 #preco_medio, #faixa_preco, #satisfacao, #promocoes{
