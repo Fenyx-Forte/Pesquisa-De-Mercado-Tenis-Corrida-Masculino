@@ -10,17 +10,17 @@ def template_html_padrao() -> str:
         <html>
             <head>
                 {%metas%}
-                <link rel="icon" type="image/png" href="/assets/favicon.ico">
+                <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
                 <title>{%title%}</title>
                 {%css%}
-                <link rel="stylesheet" href="/assets/css/styles.css">
             </head>
             <body>
                 {%app_entry%}
                 <footer>
                     {%config%}
                     {%scripts%}
-                    {%renderer%}
+                    <script src="/assets/dash_js/plotly-basic-2.35.2.min.js" async=""></script>
+                    <script id="_dash-renderer" src="/assets/dash_js/dash_renderer.js"></script>
                 </footer>
             </body>
         </html>
@@ -29,8 +29,27 @@ def template_html_padrao() -> str:
     return template
 
 
+def meta_tags_og():
+    pass
+
+
+def meta_tags_twitter():
+    pass
+
+
+def meta_tags_robots():
+    pass
+
+
+def meta_tags_aplicacao():
+    pass
+
+
 def minhas_meta_tags() -> list[dict[str, str]]:
     meta_tags = [
+        {
+            "charset": "UTF-8",
+        },
         {
             "name": "viewport",
             "content": "width=device-width, initial-scale=1.0",
@@ -48,8 +67,57 @@ def minhas_meta_tags() -> list[dict[str, str]]:
             "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
         },
         {
+            "name": "description",
+            "content": "Descricao Site",
+        },
+        {
             "name": "keywords",
-            "content": "webscraping dashboard dados",
+            "content": "webscraping, dashboard, dados",
+        },
+        {
+            "property": "og:title",
+            "content": "Titulo",
+        },
+        {
+            "property": "og:description",
+            "content": "Descricao",
+        },
+        {
+            "property": "og:image",
+            "content": "Link imagem",
+        },
+        {
+            "property": "og:url",
+            "content": "Link canonical",
+        },
+        {
+            "property": "og:type",
+            "content": "website",
+        },
+        {
+            "name": "twitter:card",
+            "content": "summary_large_image",
+        },
+        {
+            "name": "twitter:title",
+            "content": "Site",
+        },
+        {
+            "name": "twitter:description",
+            "content": "descricao",
+        },
+        {
+            "name": "twitter:image",
+            "content": "Link imagem",
+        },
+        {
+            "rel": "icon",
+            "type": "image/x-icon",
+            "href": "link",
+        },
+        {
+            "rel": "canonical",
+            "href": "link",
         },
         {
             "name": "google",
@@ -73,13 +141,21 @@ def configuracoes_app() -> dict:
         "external_stylesheets": [
             themes.LUMEN,
             icons.FONT_AWESOME,
+            "/assets/css/styles.css",
         ],
-        "update_title": None,
+        "external_scripts": [
+            "/assets/js/clientside_callbacks.js",
+        ],
         "assets_folder": "../assets",
         "assets_url_path": "/assets",
         "use_pages": True,
         "pages_folder": "./dashboard/paginas",
+        "include_pages_meta": False,
+        "serve_locally": True,
+        "compress": False,
         "suppress_callback_exceptions": True,
+        "show_undo_redo": False,
+        # "update_title": "",
         "index_string": template_html_padrao(),
         "meta_tags": minhas_meta_tags(),
     }
