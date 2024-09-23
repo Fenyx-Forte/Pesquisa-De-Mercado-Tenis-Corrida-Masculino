@@ -1,0 +1,10 @@
+{
+    "url_base_pathname": null,
+    "requests_pathname_prefix": "\u002f",
+    "ui": false,
+    "props_check": false,
+    "show_undo_redo": false,
+    "suppress_callback_exceptions": true,
+    "update_title": null,
+    "serve_locally": true
+}
