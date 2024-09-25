@@ -1,7 +1,9 @@
-from dash import Dash
+from dash import Dash, _dash_renderer
 
 from dashboard import configuracoes_dash
 from dashboard.processamento import gerenciador
+
+_dash_renderer._set_react_version("18.2.0")
 
 
 def aplicacao():
