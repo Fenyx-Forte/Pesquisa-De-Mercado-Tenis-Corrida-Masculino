@@ -212,6 +212,10 @@
         font-size: 20px;
     }
 
+    .grafico{
+        min-height: 450px;
+    }
+
     .legenda_hoje{
         color: #6495ED;
     }
