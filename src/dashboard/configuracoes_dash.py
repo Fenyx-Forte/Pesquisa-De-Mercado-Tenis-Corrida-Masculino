@@ -148,7 +148,6 @@ def configuracoes_app() -> dict:
         ],
         "external_scripts": [
             "/assets/js/clientside_callbacks.js",
-            "https://cdn.jsdelivr.net/npm/core-js-bundle@latest/minified.min.js",
         ],
         "assets_folder": "../assets",
         "assets_url_path": "/assets",
