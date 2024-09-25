@@ -12,8 +12,6 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
                 "/promocoes": "Promoções"
             };
 
-            console.log(url_atual);
-
             document.title = titulos[url_atual] || "Not Found 404";
         },
 
