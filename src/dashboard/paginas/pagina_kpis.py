@@ -273,6 +273,7 @@ clientside_callback(
     State(f"{id_pagina()}_seletor_datas", "start_date"),
     State(f"{id_pagina()}_seletor_datas", "end_date"),
     prevent_initial_call=True,
+    running=[(Output(f"{id_pagina()}_botao", "disabled"), True, False)],
 )
 def kpis_atualizar_dados_escolhido(titulo, data_inicio, data_fim):
     if titulo != "":

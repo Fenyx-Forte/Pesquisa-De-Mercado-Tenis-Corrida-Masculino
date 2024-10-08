@@ -218,6 +218,7 @@ clientside_callback(
     State(f"{id_pagina()}_seletor_datas", "end_date"),
     State(f"{id_pagina()}_grafico", "figure"),
     prevent_initial_call=True,
+    running=[(Output(f"{id_pagina()}_botao", "disabled"), True, False)],
 )
 def top_10_marcas_atuais_atualizar_comparacao(
     titulo, data_inicio, data_fim, dados_grafico_atual
