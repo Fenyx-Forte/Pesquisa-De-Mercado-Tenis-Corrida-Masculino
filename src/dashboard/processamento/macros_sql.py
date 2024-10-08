@@ -86,27 +86,40 @@ def macro_faixa_preco_periodo() -> str:
 def macro_media_avaliacoes_periodo() -> str:
     query = """
     CREATE OR REPLACE MACRO media_avaliacoes_periodo(data_inicio, data_fim) AS TABLE
-        WITH media_avaliacoes_por_dia AS (
+        WITH tabela_resultado AS (
             SELECT
                 dcp.marca AS marca
-                , AVG(dcp.nota_avaliacao) AS media_avaliacao
-                , AVG(dcp.num_avaliacoes) AS media_num_avaliacoes
+                , AVG(dcp.nota_avaliacao) AS nota_avaliacao
+                , AVG(dcp.num_avaliacoes) AS num_avaliacoes
             FROM
                 dados_completos_por_periodo(data_inicio, data_fim) AS dcp
             WHERE
                 dcp.num_avaliacoes > 0
             GROUP BY
-                dcp.data_coleta
-                , dcp.marca
+                dcp.marca
         )
+
         SELECT
-            mad.marca
-            , AVG(mad.media_avaliacao) AS nota_avaliacao
-            , AVG(mad.media_num_avaliacoes) AS num_avaliacoes
+            tr.marca
+            , tr.nota_avaliacao
+            , tr.num_avaliacoes
+            , 'num_avaliacoes' AS tipo_linha
         FROM
-            media_avaliacoes_por_dia AS mad
-        GROUP BY
-            mad.marca;
+            tabela_resultado AS tr
+        WHERE
+            tr.num_avaliacoes > 20
+
+        UNION ALL
+
+        SELECT
+            tr.marca
+            , tr.nota_avaliacao
+            , tr.num_avaliacoes
+            , 'avaliacao' AS tipo_linha
+        FROM
+            tabela_resultado AS tr
+        WHERE
+            tr.nota_avaliacao > 4;
     """
 
     return query
