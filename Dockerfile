@@ -2,11 +2,6 @@
 FROM nginx:latest AS stage_nginx
 
 
-# supervisord
-FROM alpine:latest AS stage_supervisord
-RUN apk add --no-cache supervisor
-
-
 # The builder image, used to build the virtual environment
 FROM python:3.12.5-bookworm AS stage_builder
 
@@ -42,23 +37,12 @@ COPY --from=stage_nginx /var/log/nginx /var/log/nginx
 COPY --from=stage_nginx /var/cache/nginx /var/cache/nginx
 COPY --from=stage_nginx /usr/share/nginx /usr/share/nginx
 
-# Copia os binários e configurações necessários do supervisord
-COPY --from=stage_supervisord /usr/bin/supervisord /usr/bin/supervisord
-COPY --from=stage_supervisord /etc/supervisord.conf /etc/supervisord.conf
-
 # nginx
 RUN mkdir -p /var/run/nginx && \
     chown -R www-data:www-data /var/run/nginx /var/log/nginx /var/cache/nginx /usr/lib/nginx /usr/share/nginx && \
     chmod 750 /usr/sbin/nginx && \
     chmod -R 750 /var/run/nginx /var/log/nginx /var/cache/nginx && \
     chmod -R 640 /etc/nginx
-
-# supervisord
-RUN mkdir -p /var/log/supervisor && \
-    chown -R root:root /var/log/supervisor && \
-    chmod 750 /usr/bin/supervisord && \
-    chmod 640 /etc/supervisord.conf && \
-    chmod -R 640 /var/log/supervisor
 
 # gunicorn
 RUN mkdir -p /var/log/gunicorn && \
