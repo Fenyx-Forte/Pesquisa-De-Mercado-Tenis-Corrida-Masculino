@@ -18,6 +18,126 @@ def macro_dados_completos_por_periodo() -> str:
     return query
 
 
+def macro_kpis_periodo() -> str:
+    query = """
+    CREATE OR REPLACE MACRO kpis_periodo(data_inicio, data_fim) AS TABLE
+        WITH numero_marcas_distintas_por_dia AS (
+            SELECT
+                COUNT(
+                    DISTINCT
+                        CASE
+                            WHEN dcp.marca <> 'GENERICA'
+                                THEN dcp.marca
+                        END
+                ) AS numero_marcas
+                , COUNT(
+                    DISTINCT
+                        CASE
+                            WHEN dcp.marca <> 'GENERICA' AND dcp.promocao = True
+                                THEN dcp.marca
+                        END
+                ) AS numero_marcas_em_promocao
+            FROM
+                dados_completos_por_periodo(data_inicio, data_fim) AS dcp
+            GROUP BY
+                dcp.data_coleta
+        )
+        , kpis_numero_marcas AS (
+            SELECT
+                FORMAT(
+                    '{:.2f}'
+                    , AVG(n.numero_marcas)
+                ) AS numero_marcas
+                , FORMAT(
+                    '{:.2f}'
+                    , AVG(n.numero_marcas_em_promocao)
+                ) AS numero_marcas_em_promocao
+            FROM
+                numero_marcas_distintas_por_dia AS n
+        )
+
+        SELECT
+            FORMAT(
+                '{:.2f}'
+                , COUNT(*) / COUNT(DISTINCT dcp.data_coleta)
+            ) AS numero_produtos
+            , FORMAT(
+                '{:.2f}'
+                , AVG(dcp.preco_atual)
+            ) AS media_precos
+            , (
+                SELECT
+                    numero_marcas
+                FROM
+                    kpis_numero_marcas
+            ) AS numero_marcas
+            , FORMAT(
+                '{:.2f}'
+                , COUNT(
+                    CASE
+                        WHEN dcp.promocao = true
+                            THEN 1
+                    END
+                ) / COUNT(DISTINCT dcp.data_coleta)
+            ) AS numero_produtos_em_promocao
+            , FORMAT(
+                '{:.2f}'
+                , AVG(
+                    CASE
+                        WHEN dcp.promocao = true
+                            THEN dcp.percentual_promocao
+                    END
+                ) * 100
+            ) AS percentual_medio_desconto
+            , (
+                SELECT
+                    numero_marcas_em_promocao
+                FROM
+                    kpis_numero_marcas
+            ) AS numero_marcas_em_promocao
+            , FORMAT(
+                '{:.2f}'
+                , COUNT(
+                    CASE
+                        WHEN dcp.preco_atual < 200
+                            THEN 1
+                    END
+                ) / COUNT(DISTINCT dcp.data_coleta)
+            ) AS numero_produtos_abaixo_de_200_reais
+            , FORMAT(
+                '{:.2f}'
+                , COUNT(
+                    CASE
+                        WHEN dcp.num_avaliacoes >= 20
+                            THEN 1
+                    END
+                ) / COUNT(DISTINCT dcp.data_coleta)
+            ) AS numero_produtos_com_20_ou_mais_avaliacoes
+            , FORMAT(
+                '{:.2f}'
+                , COUNT(
+                    CASE
+                        WHEN dcp.num_avaliacoes = 0
+                            THEN 1
+                    END
+                ) / COUNT(DISTINCT dcp.data_coleta)
+            ) AS numero_produtos_sem_avaliacoes
+            , FORMAT(
+                '{:.2f}'
+                , COUNT(
+                    CASE
+                        WHEN dcp.num_avaliacoes > 0 AND dcp.nota_avaliacao > 4
+                            THEN 1
+                    END
+                ) / COUNT(DISTINCT dcp.data_coleta)
+            ) AS numero_produtos_com_nota_superior_4
+        FROM
+            dados_completos_por_periodo(data_inicio, data_fim) AS dcp;
+    """
+
+    return query
+
+
 def macro_top_10_marcas_periodo() -> str:
     query = """
     CREATE OR REPLACE MACRO top_10_marcas_periodo(periodo, data_inicio, data_fim) AS TABLE

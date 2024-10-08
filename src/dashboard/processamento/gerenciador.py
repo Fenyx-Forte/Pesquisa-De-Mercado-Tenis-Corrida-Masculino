@@ -22,6 +22,7 @@ def inicializar_escopo_global() -> None:
     inicializacao_dados.inicializar_tabela_dados_completos(conexao)
     inicializacao_dados.inicializar_tabela_dados_mais_recentes(conexao)
     inicializacao_dados.inicializar_macro_dados_completos_por_periodo(conexao)
+    inicializacao_dados.inicializar_macro_kpis_periodo(conexao)
     inicializacao_dados.inicializar_macro_top_10_marcas_periodo(conexao)
     inicializacao_dados.inicializar_macro_preco_medio_periodo(conexao)
     inicializacao_dados.inicializar_macro_faixa_preco_periodo(conexao)

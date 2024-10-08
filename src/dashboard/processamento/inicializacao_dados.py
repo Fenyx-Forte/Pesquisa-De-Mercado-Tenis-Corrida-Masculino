@@ -142,6 +142,14 @@ def inicializar_macro_dados_completos_por_periodo(
     conexao.sql(query)
 
 
+def inicializar_macro_kpis_periodo(
+    conexao: DuckDBPyConnection,
+) -> None:
+    query = macros_sql.macro_kpis_periodo()
+
+    conexao.sql(query)
+
+
 def inicializar_macro_top_10_marcas_periodo(
     conexao: DuckDBPyConnection,
 ) -> None:
