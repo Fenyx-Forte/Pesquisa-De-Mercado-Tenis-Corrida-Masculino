@@ -21,26 +21,25 @@ def macro_dados_completos_por_periodo() -> str:
 def macro_top_10_marcas_periodo() -> str:
     query = """
     CREATE OR REPLACE MACRO top_10_marcas_periodo(periodo, data_inicio, data_fim) AS TABLE
-        WITH porcentagem_por_dia AS (
+        WITH marcas_agrupadas AS (
             SELECT
                 dcp.marca AS marca
                 , (
-                    COUNT(*) * 100.0 / (SUM(COUNT(*)) OVER(PARTITION BY dcp.data_coleta))
-                ) AS porcentagem
+                    COUNT(dcp.marca) * 100 / (SUM(COUNT(*)) OVER())
+                  ) AS porcentagem
             FROM
                 dados_completos_por_periodo(data_inicio, data_fim) AS dcp
             GROUP BY
-                dcp.data_coleta
-                , dcp.marca
+                dcp.marca
         )
         SELECT
-            ppd.marca AS marca
-            , AVG(ppd.porcentagem) AS porcentagem
+            ma.marca
+            , ma.porcentagem
             , periodo AS periodo
         FROM
-            porcentagem_por_dia AS ppd
-        GROUP BY
-            ppd.marca;
+            marcas_agrupadas AS ma
+        WHERE
+            ma.marca <> 'GENERICA';
     """
 
     return query

@@ -79,23 +79,23 @@ def query_top_10_marcas_hoje() -> str:
         SELECT
             dmr.marca AS marca
             , (
-                COUNT(marca) * 100.0 / (SUM(COUNT(*)) OVER())
-            ) AS porcentagem
+                COUNT(dmr.marca) * 100 / (SUM(COUNT(*)) OVER())
+              ) AS porcentagem
         FROM
             dados_mais_recentes AS dmr
         GROUP BY
             dmr.marca
     )
     SELECT
-        marca AS Marca
-        , porcentagem AS Porcentagem
+        ma.marca AS Marca
+        , ma.porcentagem AS Porcentagem
         , $periodo AS Periodo
     FROM
-        marcas_agrupadas
+        marcas_agrupadas AS ma
     WHERE
-        Marca <> 'GENERICA'
+        ma.marca <> 'GENERICA'
     ORDER BY
-        porcentagem DESC
+        ma.porcentagem DESC
     LIMIT
         10;
     """
