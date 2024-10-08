@@ -49,25 +49,14 @@ def macro_top_10_marcas_periodo() -> str:
 def macro_preco_medio_periodo() -> str:
     query = """
     CREATE OR REPLACE MACRO preco_medio_periodo(data_inicio, data_fim) AS TABLE
-        WITH preco_medio_por_dia AS (
-            SELECT
-                dcp.marca AS marca
-                , AVG(dcp.preco_atual) AS preco_medio
-                , COUNT(*) AS num_produtos
-            FROM
-                dados_completos_por_periodo(data_inicio, data_fim) AS dcp
-            GROUP BY
-                dcp.data_coleta
-                , dcp.marca
-        )
         SELECT
-            pmd.marca
-            , AVG(pmd.preco_medio) AS preco_medio
-            , AVG(pmd.num_produtos) AS num_produtos
+            dcp.marca AS marca
+            , AVG(dcp.preco_atual) AS preco_medio
+            , COUNT(*) / COUNT(DISTINCT dcp.data_coleta) AS num_produtos
         FROM
-            preco_medio_por_dia AS pmd
+            dados_completos_por_periodo(data_inicio, data_fim) AS dcp
         GROUP BY
-            pmd.marca;
+            dcp.marca;
     """
 
     return query
@@ -88,7 +77,7 @@ def macro_faixa_preco_periodo() -> str:
             dados_completos_por_periodo(data_inicio, data_fim) AS dcp
         GROUP BY
             dcp.marca
-            , faixa_preco
+            , faixa_preco;
     """
 
     return query
