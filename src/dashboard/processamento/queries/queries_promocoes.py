@@ -26,11 +26,7 @@ def query_promocao_periodo() -> str:
         , m.produtos
         , m.desconto
     FROM
-        media_promocoes_periodo($data_inicio, $data_fim) AS M
-    ORDER BY
-        m.produtos DESC
-        , m.desconto DESC
-        , m.marca ASC;
+        media_promocoes_periodo($data_inicio, $data_fim) AS m;
     """
 
     return query
