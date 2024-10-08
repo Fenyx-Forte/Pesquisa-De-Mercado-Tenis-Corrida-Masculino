@@ -21,7 +21,7 @@ def aplicacao():
 def desenvolvimento():
     gerenciador.inicializar_escopo_global()
 
-    app = Dash(__name__, **configuracoes_dash.configuracoes_app())
+    app = Dash(__name__, **configuracoes_dash.configuracoes_app_teste())
 
     app.layout = configuracoes_dash.layout_app()
 

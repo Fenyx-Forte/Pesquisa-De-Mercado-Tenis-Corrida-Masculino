@@ -29,6 +29,30 @@ def template_html_padrao() -> str:
     return template
 
 
+def template_html_teste() -> str:
+    template = """
+    <!DOCTYPE html>
+        <html lang="pt-BR">
+            <head>
+                {%metas%}
+                <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+                <title>{%title%}</title>
+                {%css%}
+            </head>
+            <body>
+                {%app_entry%}
+                <footer>
+                    {%config%}
+                    {%scripts%}
+                    {%renderer%}
+                </footer>
+            </body>
+        </html>
+    """
+
+    return template
+
+
 def meta_tags_basicas() -> list[dict[str, str]]:
     meta_tags = [
         {
@@ -160,6 +184,28 @@ def configuracoes_app() -> dict:
         "show_undo_redo": False,
         "update_title": "",
         "index_string": template_html_padrao(),
+        "meta_tags": minhas_meta_tags(),
+    }
+
+    return configuracoes
+
+
+def configuracoes_app_teste() -> dict:
+    configuracoes = {
+        "external_stylesheets": [
+            themes.LUMEN,
+            icons.FONT_AWESOME,
+        ],
+        "assets_folder": "../assets",
+        "assets_url_path": "/assets",
+        "use_pages": True,
+        "pages_folder": "./dashboard/paginas",
+        "include_pages_meta": True,
+        "serve_locally": True,
+        "compress": False,
+        "suppress_callback_exceptions": True,
+        "show_undo_redo": False,
+        "update_title": "",
         "meta_tags": minhas_meta_tags(),
     }
 
