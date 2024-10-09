@@ -220,7 +220,8 @@ def layout_app() -> Container:
                     cabecalho.cabecalho(),
                     width=True,
                     class_name="conteiner-cabecalho",
-                )
+                ),
+                class_name="g-0",
             ),
             Row(
                 [

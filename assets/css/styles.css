@@ -1,10 +1,12 @@
 #conteiner-geral{
     padding-left: 0;
     padding-right: 0;
+    max-width: 100%;
 }
 
 /* Cabecalho */
 #cabecalho{
+    max-width: 100%;
     padding-top: 1rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid #158cba;
@@ -45,21 +47,21 @@
 
 /* Sidebar */
 .minha-sidebar{
-    top: 0px;
-    margin-top: 0px;
-    left: 0px;
-    margin-left: 0px;
-    bottom: 0px;
-    margin-bottom: 0px;
     width: auto;
     min-height: 100vh;
     height: 100%;
+
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 1rem;
     padding-bottom: 2rem;
-    background-color: #f8f9fa;
-    box-shadow: 3px 3px 3px 3px lightgrey;
+
+    background-color: #f8f4e3;
+    box-shadow: 3px 3px 3px 3px #c4bebe;
 
     H1{
         font-size: 22px;
@@ -68,10 +70,12 @@
 
     label{
         padding-left: 5px;
+        margin-bottom: 5px;
     }
 
     .label-documentacao{
         padding-left: 11px;
+        margin-bottom: 10px;
     }
 
     .meu-icone{
@@ -88,10 +92,12 @@
 /* Conteudo Pagina */
 .linha-conteiner-pagina{
     margin-top: 1rem;
+    max-width: 100%;
 }
 
 .pagina{
     padding-bottom: 1rem;
+    max-width: 100%;
 
     br{
         display: none;
@@ -121,6 +127,14 @@
     .linha_colunas{
         text-align: center;
         margin-top: 2rem;
+        max-width: 100%;
+
+        .coluna_hoje,
+        .coluna_escolhido,
+        .coluna_historico{
+            padding-left: 0;
+            padding-right: 0;
+        }
 
         .coluna_escolhido{
             border-left: #158cba solid 2px;
