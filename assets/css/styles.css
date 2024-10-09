@@ -96,7 +96,9 @@
 }
 
 .pagina{
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     max-width: 100%;
 
     br{
@@ -127,18 +129,17 @@
     .linha_colunas{
         text-align: center;
         margin-top: 2rem;
+        margin-right: 0;
+        margin-left: 0;
         max-width: 100%;
 
         .coluna_hoje,
         .coluna_escolhido,
         .coluna_historico{
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .coluna_escolhido{
-            border-left: #158cba solid 2px;
-            border-right: #158cba solid 2px;
+            padding-left: 5px;
+            padding-right: 5px;
+            margin-left: 0;
+            margin-right: 0;
         }
 
         .cabecalho_coluna{
@@ -219,6 +220,11 @@
 }
 
 #top_10_marcas_atuais{
+    .coluna_escolhido{
+        border-left: #158cba solid 2px;
+        border-right: #158cba solid 2px;
+    }
+
     I{
         margin-top: 10px;
         font-size: 20px;
