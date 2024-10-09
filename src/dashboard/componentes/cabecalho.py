@@ -3,6 +3,16 @@ from dash import html
 from dashboard.processamento import gerenciador
 
 
+def botao_toggle() -> html.Div:
+    conteudo = html.Div(
+        html.I(className="fas fa-bars"),
+        className="meu-toggle-navbar",
+        id="meu-toggle-navbar",
+    )
+
+    return conteudo
+
+
 def titulo() -> html.H1:
     conteudo = html.H1(
         "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
@@ -26,9 +36,9 @@ def informacao_data_coleta() -> html.H4:
 def cabecalho() -> html.Div:
     conteudo = html.Div(
         [
+            botao_toggle(),
             titulo(),
             informacao_data_coleta(),
-            html.Hr(),
         ],
         id="cabecalho",
     )

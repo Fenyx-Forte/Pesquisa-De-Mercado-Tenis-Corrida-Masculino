@@ -10,16 +10,6 @@ from dash_bootstrap_components import Nav, NavLink
 from dashboard.uteis import uteis_processamento
 
 
-def botao_toggle() -> html.Div:
-    conteudo = html.Div(
-        html.I(className="fas fa-bars"),
-        className="meu-toggle-navbar",
-        id="meu-toggle-navbar",
-    )
-
-    return conteudo
-
-
 def links_minhas_informacoes() -> html.Div:
     conteudo = html.Div(
         [
@@ -168,7 +158,6 @@ def links_documentacao() -> html.Div:
 def sidebar() -> html.Div:
     conteudo = html.Div(
         [
-            botao_toggle(),
             Location(id="url-atual", refresh=False),
             html.Div(
                 [
@@ -189,7 +178,7 @@ def sidebar() -> html.Div:
 
 clientside_callback(
     uteis_processamento.callback_abrir_e_fechar_sidebar(),
-    Output("minha-sidebar", "className"),
+    Output("coluna-sidebar", "class_name"),
     Input("meu-toggle-navbar", "n_clicks"),
     prevent_initial_call=True,
 )

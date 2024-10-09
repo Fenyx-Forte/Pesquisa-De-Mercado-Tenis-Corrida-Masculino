@@ -17,10 +17,10 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
 
         abrir_e_fechar_sidebar: function(n_clicks) {
             if (n_clicks % 2 === 1) {
-                return "minha-sidebar-escondida";
+                return "coluna-sidebar-ativada";
             }
 
-            return "minha-sidebar";
+            return "coluna-sidebar-desativada";
         },
 
         verificar_datas: function(n_clicks, data_inicio, data_fim, periodo_hoje, periodo_ja_escolhido, periodo_historico) {

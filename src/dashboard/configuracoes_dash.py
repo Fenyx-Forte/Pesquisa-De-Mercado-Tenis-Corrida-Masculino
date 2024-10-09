@@ -214,26 +214,33 @@ def configuracoes_app_teste() -> dict:
 
 def layout_app() -> Container:
     layout = Container(
-        Row(
-            [
+        [
+            Row(
                 Col(
-                    minha_sidebar.sidebar(),
-                    width="auto",
-                ),
-                Col(
-                    Stack(
-                        [
-                            cabecalho.cabecalho(),
-                            page_container,
-                        ],
-                    ),
+                    cabecalho.cabecalho(),
                     width=True,
-                    class_name="conteiner-pagina",
-                ),
-            ],
-        ),
+                    class_name="conteiner-cabecalho",
+                )
+            ),
+            Row(
+                [
+                    Col(
+                        minha_sidebar.sidebar(),
+                        width="auto",
+                        id="coluna-sidebar",
+                        class_name="coluna-sidebar-desativada",
+                    ),
+                    Col(
+                        page_container,
+                        width=True,
+                        class_name="conteiner-pagina",
+                    ),
+                ],
+                class_name="g-0 linha-conteiner-pagina",
+            ),
+        ],
         fluid=True,
-        id="meu-conteiner",
+        id="conteiner-geral",
     )
 
     return layout
