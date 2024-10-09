@@ -155,17 +155,17 @@ def figura_grafico_barras_simples(
         )
         .update_traces(
             textfont_size=12,
-            textangle=0,
+            # textangle=0,
             textfont_color="#000000",
             textposition="outside",
-            cliponaxis=False,
             # textposition="auto",
+            cliponaxis=False,
         )
         .update_layout(
             dragmode=False,
             hoverlabel=dict(font_size=12, font_color="#FFFFFF"),
             uniformtext_minsize=10,
-            uniformtext_mode="show",
+            uniformtext_mode="hide",
             showlegend=False,
         )
     )
@@ -201,17 +201,17 @@ def figura_grafico_de_barras_agrupadas(
         )
         .update_traces(
             textfont_size=12,
-            textangle=0,
+            # textangle=0,
             textfont_color="#000000",
             textposition="outside",
-            cliponaxis=False,
             # textposition="auto",
+            cliponaxis=False,
         )
         .update_layout(
             dragmode=False,
             hoverlabel=dict(font_size=12, font_color="#FFFFFF"),
             uniformtext_minsize=10,
-            uniformtext_mode="show",
+            uniformtext_mode="hide",
             showlegend=False,
         )
     )
