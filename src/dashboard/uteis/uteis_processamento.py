@@ -15,6 +15,13 @@ def callback_abrir_e_fechar_sidebar() -> ClientsideFunction:
     )
 
 
+def callback_fechar_sidebar() -> ClientsideFunction:
+    return ClientsideFunction(
+        namespace="clientside",
+        function_name="fechar_sidebar",
+    )
+
+
 def callback_verificar_datas() -> ClientsideFunction:
     return ClientsideFunction(
         namespace="clientside",

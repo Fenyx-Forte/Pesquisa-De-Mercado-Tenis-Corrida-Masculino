@@ -23,6 +23,10 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
             return "coluna-sidebar-desativada";
         },
 
+        fechar_sidebar: function(url_atual) {
+            return "coluna-sidebar-desativada";
+        },
+
         verificar_datas: function(n_clicks, data_inicio, data_fim, periodo_hoje, periodo_ja_escolhido, periodo_historico) {
             if (!data_inicio || !data_fim) {
                 return ["Período Inválido", "Selecione as datas usando o calendário ou escreva as datas no formato DD/MM/YYYY."];

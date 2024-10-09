@@ -177,14 +177,20 @@ def sidebar() -> html.Div:
 
 
 clientside_callback(
-    uteis_processamento.callback_abrir_e_fechar_sidebar(),
-    Output("coluna-sidebar", "class_name"),
-    Input("meu-toggle-navbar", "n_clicks"),
+    uteis_processamento.callback_atualizar_titulo_pagina(),
+    Input("url-atual", "pathname"),
+)
+
+clientside_callback(
+    uteis_processamento.callback_fechar_sidebar(),
+    Output("coluna-sidebar", "class_name", allow_duplicate=True),
+    Input("url-atual", "pathname"),
     prevent_initial_call=True,
 )
 
-
 clientside_callback(
-    uteis_processamento.callback_atualizar_titulo_pagina(),
-    Input("url-atual", "pathname"),
+    uteis_processamento.callback_abrir_e_fechar_sidebar(),
+    Output("coluna-sidebar", "class_name", allow_duplicate=True),
+    Input("meu-toggle-navbar", "n_clicks"),
+    prevent_initial_call=True,
 )
