@@ -191,7 +191,7 @@ def colunas() -> Row:
                 ),
                 xs=12,
                 sm=6,
-                lg=4,
+                md=4,
                 class_name="coluna_hoje",
             ),
             Col(
@@ -203,7 +203,7 @@ def colunas() -> Row:
                 ),
                 xs=12,
                 sm=6,
-                lg=4,
+                md=4,
                 class_name="coluna_escolhido",
             ),
             Col(
@@ -215,7 +215,7 @@ def colunas() -> Row:
                 ),
                 xs=12,
                 sm=6,
-                lg=4,
+                md=4,
                 class_name="coluna_historico",
             ),
         ],
