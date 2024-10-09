@@ -1,4 +1,4 @@
-#body-pagina-carregamento {
+.body-pagina-carregamento {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,14 +8,20 @@
     font-family: Arial, sans-serif;
 }
 
-#minha-pagina-carregamento{
-    .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+.div-pagina-carregamento{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .loading-message {
+        font-size: 20px;
+        font-weight: bold;
+        color: #555;
+        margin-bottom: 20px;
     }
+
     .spinner {
         border: 8px solid #d3d3d3;
         border-top: 8px solid #3498db;
@@ -25,19 +31,14 @@
         animation: spin 1s linear infinite;
         margin: 20px 0;
     }
-    .loading-message {
-        font-size: 20px;
-        font-weight: bold;
-        color: #555;
-        margin-bottom: 20px;
-    }
+
     .loading-submessage {
         font-size: 16px;
         color: #777;
     }
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+}
 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
