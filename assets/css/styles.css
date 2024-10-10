@@ -258,6 +258,29 @@
 }
 
 #preco_medio, #faixa_preco, #satisfacao, #promocoes{
+    .ag-cell{
+        padding: 0;
+        margin: 0;
+    }
+
+    .ag-cell-wrapper{
+        min-height: 100%;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    .ag-cell-value{
+        min-height: 100%;
+        padding: 5px;
+        text-wrap: balance;
+        overflow-wrap: break-word;
+        overflow: scroll;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .conteiner_informacao{
         max-width: 95%;
 
