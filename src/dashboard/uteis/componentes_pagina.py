@@ -298,6 +298,7 @@ def tabela_ag_grid(
         rowData=dados,
         id=id_completo,
         columnDefs=definicoes_colunas,
+        columnSize="responsiveSizeToFit",
         defaultColDef={
             "resizable": False,
             "filter": True,
@@ -305,17 +306,24 @@ def tabela_ag_grid(
             "cellClass": "center-aligned-cell",
             "wrapHeaderText": True,
             "autoHeaderHeight": True,
+            "wrapText": True,
+            "autoHeight": True,
+            "cellStyle": {
+                "wordBreak": "normal",
+                "lineHeight": "unset",
+            },
+            "suppressMovable": True,
         },
         dashGridOptions={
             "animateRows": False,
             "suppressColumnMoveAnimation": True,
+            "suppressDragLeaveHidesColumns": True,
             "pagination": False,
             "tooltipShowDelay": 500,
             "alwaysMultiSort": True,
             "localeText": traducoes.dag_locale_pt_br(),
         },
-        columnSize="responsiveSizeToFit",
-        className="ag-theme-quartz tabela-ag-grid",
+        className="ag-theme-balham tabela-ag-grid",
     )
 
     return conteudo

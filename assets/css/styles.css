@@ -272,8 +272,8 @@
         margin-bottom: 2rem;
 
         .tabela-ag-grid{
-            width: auto;
-            max-width: 90%;
+            min-width: 95%;
+            max-width: 95%;
         }
 
         /* Centralizar colunas e valores de tabelas dags */
