@@ -322,6 +322,7 @@ def tabela_ag_grid(
             "pagination": False,
             "tooltipShowDelay": 500,
             "alwaysMultiSort": True,
+            "enableBrowserTooltips": True,
             "localeText": traducoes.dag_locale_pt_br(),
         },
         className="ag-theme-quartz tabela-ag-grid",
