@@ -106,7 +106,7 @@ def coluna(
                 ),
             ),
             componentes_pagina.conteiner_informacao(
-                titulo_informacao="Média Preços (R$)",
+                titulo_informacao="Média Preços",
                 informacao=informacao(
                     valor=media_precos,
                     sufixo_coluna=sufixo_coluna,
@@ -154,7 +154,7 @@ def coluna(
                 ),
             ),
             componentes_pagina.conteiner_informacao(
-                titulo_informacao="Média Desconto (%)",
+                titulo_informacao="Média Desconto",
                 informacao=informacao(
                     valor=percentual_medio_desconto,
                     sufixo_coluna=sufixo_coluna,

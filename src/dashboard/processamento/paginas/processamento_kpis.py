@@ -10,10 +10,10 @@ def dados_hoje(conexao: DuckDBPyConnection) -> dict[str, str]:
 
     return {
         "num_produtos": str(dados[0]),
-        "media_precos": str(dados[1]),
+        "media_precos": f"R$ {str(dados[1])}",
         "num_marcas": str(dados[2]),
         "produtos_promocoes": str(dados[3]),
-        "percentual_medio_desconto": str(dados[4]),
+        "percentual_medio_desconto": f"{str(dados[4])}%",
         "marcas_promocoes": str(dados[5]),
         "produtos_abaixo_200": str(dados[6]),
         "produtos_20_avaliacoes": str(dados[7]),
@@ -38,10 +38,10 @@ def dados_periodo(
 
     return {
         "num_produtos": str(dados[0]),
-        "media_precos": str(dados[1]),
+        "media_precos": f"R$ {str(dados[1])}",
         "num_marcas": str(dados[2]),
         "produtos_promocoes": str(dados[3]),
-        "percentual_medio_desconto": str(dados[4]),
+        "percentual_medio_desconto": f"{str(dados[4])}%",
         "marcas_promocoes": str(dados[5]),
         "produtos_abaixo_200": str(dados[6]),
         "produtos_20_avaliacoes": str(dados[7]),

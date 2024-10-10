@@ -57,7 +57,11 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
         },
 
         ranking_direto: function(str1, str2, str3) {
-            let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+            let valor1 = str1.replace("R$ ", "").replace("%", "");
+            let valor2 = str2.replace("R$ ", "").replace("%", "");
+            let valor3 = str3.replace("R$ ", "").replace("%", "");
+
+            let numbers = [parseFloat(valor1), parseFloat(valor2), parseFloat(valor3)];
 
             let sortedUnique = [...new Set(numbers.slice().sort((a, b) => b - a))];
 
@@ -65,7 +69,11 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
         },
 
         ranking_inverso: function(str1, str2, str3) {
-            let numbers = [parseFloat(str1), parseFloat(str2), parseFloat(str3)];
+            let valor1 = str1.replace("R$ ", "").replace("%", "");
+            let valor2 = str2.replace("R$ ", "").replace("%", "");
+            let valor3 = str3.replace("R$ ", "").replace("%", "");
+
+            let numbers = [parseFloat(valor1), parseFloat(valor2), parseFloat(valor3)];
 
             let sortedUnique = [...new Set(numbers.slice().sort((a, b) => a - b))];
 
