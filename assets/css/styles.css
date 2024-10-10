@@ -337,6 +337,21 @@
         color: #000000;
     }
 
+    .ag-floating-bottom-container .ag-cell{
+        border: 0;
+    }
+
+    .ag-row-pinned{
+        border: 0;
+    }
+
+    .ag-floating-bottom-container .ag-cell-value{
+        background-color: #158cba;
+        color: #ffffff;
+        font-weight: 600;
+        border-right: 2px #ffffff solid;
+    }
+
     .conteiner_informacao{
         max-width: 95%;
 

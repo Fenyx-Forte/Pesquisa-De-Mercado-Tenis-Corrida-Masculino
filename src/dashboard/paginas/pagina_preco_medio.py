@@ -1,6 +1,7 @@
 from dash import (
     Input,
     Output,
+    Patch,
     State,
     callback,
     clientside_callback,
@@ -15,6 +16,7 @@ from dash_bootstrap_components import (
 )
 
 from dashboard.processamento import gerenciador
+from dashboard.processamento.paginas import processamento_preco_medio
 from dashboard.uteis import (
     componentes_pagina,
     formatacoes,
@@ -276,3 +278,17 @@ def preco_medio_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
         None,
         periodo_novo,
     )
+
+
+@callback(
+    Output(f"{id_pagina()}_tabela_escolhido_200", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_escolhido_200", "virtualRowData"),
+    prevent_initial_call=True,
+)
+def linha_totais_escolhido_200(dados):
+    resultado = processamento_preco_medio.calcula_linha_totais(dados)
+
+    grid_option_patch = Patch()
+    grid_option_patch["pinnedBottomRowData"] = [resultado]
+
+    return grid_option_patch
