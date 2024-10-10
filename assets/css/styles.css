@@ -332,6 +332,11 @@
         justify-content: center;
     }
 
+    .ag-menu{
+        background-color: #5BBFD8;
+        color: #000000;
+    }
+
     .conteiner_informacao{
         max-width: 95%;
 
