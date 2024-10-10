@@ -318,12 +318,13 @@ def tabela_ag_grid(
             "animateRows": False,
             "suppressColumnMoveAnimation": True,
             "suppressDragLeaveHidesColumns": True,
+            "suppressMenuHide": True,
             "pagination": False,
             "tooltipShowDelay": 500,
             "alwaysMultiSort": True,
             "localeText": traducoes.dag_locale_pt_br(),
         },
-        className="ag-theme-balham tabela-ag-grid",
+        className="ag-theme-quartz tabela-ag-grid",
     )
 
     return conteudo
