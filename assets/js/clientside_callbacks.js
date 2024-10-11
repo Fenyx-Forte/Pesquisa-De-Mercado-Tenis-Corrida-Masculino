@@ -175,6 +175,41 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
                     nota_avaliacao: media_nota_avaliacao
                 }]
             };
+        },
+
+        linha_totais_promocoes: function(lista_dados, dash_grid_options) {
+            let num_marcas = lista_dados.length;
+            let soma_produtos = 0;
+            let media_desconto = 0;
+
+            if (num_marcas === 0) {
+                return {
+                    ...dash_grid_options,
+                    pinnedBottomRowData: [{
+                        marca: num_marcas,
+                        produtos: soma_produtos,
+                        desconto: media_desconto
+                    }]
+                }
+            }
+
+            let total_desconto = 0;
+
+            lista_dados.forEach(dado => {
+                soma_produtos += dado["produtos"];
+                total_desconto += dado["desconto"] * dado["produtos"];
+            });
+
+            media_desconto = total_desconto / soma_produtos;
+
+            return {
+                ...dash_grid_options,
+                pinnedBottomRowData: [{
+                    marca: num_marcas,
+                    produtos: soma_produtos,
+                    desconto: media_desconto
+                }]
+            };
         }
     }
 }

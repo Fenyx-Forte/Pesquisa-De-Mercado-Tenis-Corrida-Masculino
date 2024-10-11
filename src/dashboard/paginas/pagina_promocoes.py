@@ -250,3 +250,29 @@ def promocoes_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
         None,
         periodo_novo,
     )
+
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_promocoes(),
+    Output(f"{id_pagina()}_tabela_hoje", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_hoje", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_hoje", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_promocoes(),
+    Output(f"{id_pagina()}_tabela_escolhido", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_escolhido", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_escolhido", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_promocoes(),
+    Output(f"{id_pagina()}_tabela_historico", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_historico", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_historico", "dashGridOptions"),
+    prevent_initial_call=True,
+)

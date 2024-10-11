@@ -71,6 +71,13 @@ def callback_linha_totais_satisfacao() -> ClientsideFunction:
     )
 
 
+def callback_linha_totais_promocoes() -> ClientsideFunction:
+    return ClientsideFunction(
+        namespace="clientside",
+        function_name="linha_totais_promocoes",
+    )
+
+
 def formatar_data_pt_br(data: str) -> str:
     # "data" esta no formato YYYY-MM-DD
     componentes = data.split("-")
