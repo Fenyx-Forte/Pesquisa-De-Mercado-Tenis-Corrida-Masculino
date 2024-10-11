@@ -140,6 +140,41 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
                     num_produtos: soma_num_produtos
                 }]
             };
+        },
+
+        linha_totais_satisfacao: function(lista_dados, dash_grid_options) {
+            let num_marcas = lista_dados.length;
+            let soma_num_avaliacoes = 0;
+            let media_nota_avaliacao = 0;
+
+            if (num_marcas === 0) {
+                return {
+                    ...dash_grid_options,
+                    pinnedBottomRowData: [{
+                        marca: num_marcas,
+                        num_avaliacoes: soma_num_avaliacoes,
+                        nota_avaliacao: media_nota_avaliacao
+                    }]
+                }
+            }
+
+            let total_nota_avaliacao = 0;
+
+            lista_dados.forEach(dado => {
+                soma_num_avaliacoes += dado["num_avaliacoes"];
+                total_nota_avaliacao += dado["nota_avaliacao"] * dado["num_avaliacoes"];
+            });
+
+            media_nota_avaliacao = total_nota_avaliacao / soma_num_avaliacoes;
+
+            return {
+                ...dash_grid_options,
+                pinnedBottomRowData: [{
+                    marca: num_marcas,
+                    num_avaliacoes: soma_num_avaliacoes,
+                    nota_avaliacao: media_nota_avaliacao
+                }]
+            };
         }
     }
 }

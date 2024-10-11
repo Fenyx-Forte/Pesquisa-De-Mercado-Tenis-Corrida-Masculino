@@ -257,3 +257,52 @@ def satisfacao_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
         None,
         periodo_novo,
     ]
+
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_satisfacao(),
+    Output(f"{id_pagina()}_tabela_hoje_num_avaliacao", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_hoje_num_avaliacao", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_hoje_num_avaliacao", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_satisfacao(),
+    Output(f"{id_pagina()}_tabela_escolhido_num_avaliacao", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_escolhido_num_avaliacao", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_escolhido_num_avaliacao", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_satisfacao(),
+    Output(f"{id_pagina()}_tabela_historico_num_avaliacao", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_historico_num_avaliacao", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_historico_num_avaliacao", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_satisfacao(),
+    Output(f"{id_pagina()}_tabela_hoje_nota_avaliacao", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_hoje_nota_avaliacao", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_hoje_nota_avaliacao", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_satisfacao(),
+    Output(f"{id_pagina()}_tabela_escolhido_nota_avaliacao", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_escolhido_nota_avaliacao", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_escolhido_nota_avaliacao", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_satisfacao(),
+    Output(f"{id_pagina()}_tabela_historico_nota_avaliacao", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_historico_nota_avaliacao", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_historico_nota_avaliacao", "dashGridOptions"),
+    prevent_initial_call=True,
+)
