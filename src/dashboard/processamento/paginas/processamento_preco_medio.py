@@ -76,28 +76,3 @@ def dados_periodo(
         "dados_entre_200_e_400": df_entre_200_e_400.to_dict("records"),
         "dados_acima_de_400": df_acima_de_400.to_dict("records"),
     }
-
-
-def calcula_linha_totais(dados: list[dict]) -> dict:
-    soma_num_produtos = 0
-    media_preco_medio = 0
-
-    if len(dados) == 0:
-        return {
-            "marca": "TOTAL",
-            "num_produtos": soma_num_produtos,
-            "preco_medio": media_preco_medio,
-        }
-
-    df = pd_DataFrame(dados)
-
-    soma_num_produtos = df["num_produtos"].sum()
-    media_preco_medio = (
-        df["preco_medio"] * df["num_produtos"]
-    ).sum() / soma_num_produtos
-
-    return {
-        "marca": "TOTAL",
-        "num_produtos": soma_num_produtos,
-        "preco_medio": media_preco_medio,
-    }

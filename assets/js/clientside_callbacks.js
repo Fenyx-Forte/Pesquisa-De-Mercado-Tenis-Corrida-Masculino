@@ -78,6 +78,41 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
             let sortedUnique = [...new Set(numbers.slice().sort((a, b) => a - b))];
 
             return numbers.map(num => `ranking_top_${sortedUnique.indexOf(num) + 1}`);
+        },
+
+        linha_totais_preco_medio: function(lista_dados, dash_grid_options) {
+            let num_marcas = lista_dados.length;
+            let soma_num_produtos = 0;
+            let media_preco_medio = 0;
+
+            if (num_marcas === 0) {
+                return {
+                    ...dash_grid_options,
+                    pinnedBottomRowData: [{
+                        marca: num_marcas,
+                        num_produtos: soma_num_produtos,
+                        preco_medio: media_preco_medio
+                    }]
+                }
+            }
+
+            let total_preco_medio = 0;
+
+            lista_dados.forEach(dado => {
+                soma_num_produtos += dado["num_produtos"];
+                total_preco_medio += dado["preco_medio"] * dado["num_produtos"];
+            });
+
+            media_preco_medio = total_preco_medio / soma_num_produtos;
+
+            return {
+                ...dash_grid_options,
+                pinnedBottomRowData: [{
+                    marca: num_marcas,
+                    num_produtos: soma_num_produtos,
+                    preco_medio: media_preco_medio
+                }]
+            };
         }
     }
 }

@@ -1,7 +1,6 @@
 from dash import (
     Input,
     Output,
-    Patch,
     State,
     callback,
     clientside_callback,
@@ -280,15 +279,10 @@ def preco_medio_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
     )
 
 
-@callback(
+clientside_callback(
+    uteis_processamento.callback_linha_totais_preco_medio(),
     Output(f"{id_pagina()}_tabela_escolhido_200", "dashGridOptions"),
     Input(f"{id_pagina()}_tabela_escolhido_200", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_escolhido_200", "dashGridOptions"),
     prevent_initial_call=True,
 )
-def linha_totais_escolhido_200(dados):
-    resultado = processamento_preco_medio.calcula_linha_totais(dados)
-
-    grid_option_patch = Patch()
-    grid_option_patch["pinnedBottomRowData"] = [resultado]
-
-    return grid_option_patch
