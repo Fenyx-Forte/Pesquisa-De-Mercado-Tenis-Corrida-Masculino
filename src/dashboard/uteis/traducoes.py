@@ -1,6 +1,7 @@
 def dag_locale_pt_br() -> dict[str, str]:
     return {
         # Number Filter & Text Filter
+        "filterOoo": "Filtrar...",
         "equals": "Igual a",
         "notEqual": "Diferente de",
         "blank": "Vazio",
