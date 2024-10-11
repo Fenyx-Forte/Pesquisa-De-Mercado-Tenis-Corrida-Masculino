@@ -113,6 +113,33 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
                     preco_medio: media_preco_medio
                 }]
             };
+        },
+
+        linha_totais_faixa_preco: function(lista_dados, dash_grid_options) {
+            let num_marcas = lista_dados.length;
+            let soma_num_produtos = 0;
+
+            if (num_marcas === 0) {
+                return {
+                    ...dash_grid_options,
+                    pinnedBottomRowData: [{
+                        marca: num_marcas,
+                        num_produtos: soma_num_produtos
+                    }]
+                }
+            }
+
+            lista_dados.forEach(dado => {
+                soma_num_produtos += dado["num_produtos"];
+            });
+
+            return {
+                ...dash_grid_options,
+                pinnedBottomRowData: [{
+                    marca: num_marcas,
+                    num_produtos: soma_num_produtos
+                }]
+            };
         }
     }
 }

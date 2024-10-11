@@ -57,6 +57,13 @@ def callback_linha_totais_preco_medio() -> ClientsideFunction:
     )
 
 
+def callback_linha_totais_faixa_preco() -> ClientsideFunction:
+    return ClientsideFunction(
+        namespace="clientside",
+        function_name="linha_totais_faixa_preco",
+    )
+
+
 def formatar_data_pt_br(data: str) -> str:
     # "data" esta no formato YYYY-MM-DD
     componentes = data.split("-")

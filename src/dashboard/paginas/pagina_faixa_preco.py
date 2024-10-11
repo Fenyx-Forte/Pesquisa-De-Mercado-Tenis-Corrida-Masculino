@@ -266,3 +266,81 @@ def faixa_preco_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
         None,
         periodo_novo,
     ]
+
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_faixa_preco(),
+    Output(f"{id_pagina()}_tabela_hoje_200", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_hoje_200", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_hoje_200", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_faixa_preco(),
+    Output(f"{id_pagina()}_tabela_escolhido_200", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_escolhido_200", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_escolhido_200", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_faixa_preco(),
+    Output(f"{id_pagina()}_tabela_historico_200", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_historico_200", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_historico_200", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_faixa_preco(),
+    Output(f"{id_pagina()}_tabela_hoje_200_400", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_hoje_200_400", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_hoje_200_400", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_faixa_preco(),
+    Output(f"{id_pagina()}_tabela_escolhido_200_400", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_escolhido_200_400", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_escolhido_200_400", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_faixa_preco(),
+    Output(f"{id_pagina()}_tabela_historico_200_400", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_historico_200_400", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_historico_200_400", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_faixa_preco(),
+    Output(f"{id_pagina()}_tabela_hoje_400", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_hoje_400", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_hoje_400", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_faixa_preco(),
+    Output(f"{id_pagina()}_tabela_escolhido_400", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_escolhido_400", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_escolhido_400", "dashGridOptions"),
+    prevent_initial_call=True,
+)
+
+clientside_callback(
+    uteis_processamento.callback_linha_totais_faixa_preco(),
+    Output(f"{id_pagina()}_tabela_historico_400", "dashGridOptions"),
+    Input(f"{id_pagina()}_tabela_historico_400", "virtualRowData"),
+    State(f"{id_pagina()}_tabela_historico_400", "dashGridOptions"),
+    prevent_initial_call=True,
+)
