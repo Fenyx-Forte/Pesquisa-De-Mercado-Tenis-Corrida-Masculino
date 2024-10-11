@@ -64,11 +64,11 @@ def definicoes_colunas_tabela(sufixo_coluna: str) -> list[dict]:
     }
 
     configuracao_desconto = {
-        "headerName": "Desconto Médio (%)",
+        "headerName": "Desconto Médio",
         "field": "desconto",
         "cellDataType": "number",
         "valueFormatter": {
-            "function": f"{formatacoes.dag_format_pt_br()}.format('.2f')(params.value)",
+            "function": f"{formatacoes.dag_format_pt_br()}.format('.2f')(params.value) + '%'",
         },
     }
 
