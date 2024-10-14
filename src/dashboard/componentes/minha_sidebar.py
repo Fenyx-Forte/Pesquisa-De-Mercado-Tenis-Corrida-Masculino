@@ -155,6 +155,40 @@ def links_documentacao() -> html.Div:
     return conteudo
 
 
+def creditos_imagens_e_icones() -> html.Div:
+    conteudo = html.Div(
+        [
+            html.Div(
+                html.Label(
+                    "Imagens e Ícones:",
+                    className="label-creditos-titulo",
+                ),
+            ),
+            html.A(
+                html.Label(
+                    "Freepik",
+                    className="label-creditos",
+                ),
+                href="https://www.freepik.com/",
+                target="_blank",
+                rel="noreferrer",
+            ),
+            html.Br(),
+            html.A(
+                html.Label(
+                    "Font Awesome Icons",
+                    className="label-creditos",
+                ),
+                href="https://fontawesome.com/icons",
+                target="_blank",
+                rel="noreferrer",
+            ),
+        ],
+    )
+
+    return conteudo
+
+
 def sidebar() -> html.Div:
     conteudo = html.Div(
         [
@@ -166,6 +200,8 @@ def sidebar() -> html.Div:
                     links_paginas(),
                     html.Hr(),
                     links_documentacao(),
+                    html.Hr(),
+                    creditos_imagens_e_icones(),
                 ],
             ),
         ],
