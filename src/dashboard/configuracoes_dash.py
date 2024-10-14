@@ -227,13 +227,15 @@ def layout_app() -> Container:
                 [
                     Col(
                         minha_sidebar.sidebar(),
-                        width="auto",
+                        xs="auto",
+                        sm="auto",
                         id="coluna-sidebar",
                         class_name="coluna-sidebar-desativada",
                     ),
                     Col(
                         page_container,
-                        width=True,
+                        xs=12,
+                        sm=True,
                         class_name="conteiner-pagina",
                     ),
                 ],
