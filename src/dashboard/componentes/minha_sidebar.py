@@ -64,7 +64,7 @@ def links_minhas_informacoes() -> html.Div:
 def minhas_informacoes() -> html.Div:
     conteudo = html.Div(
         [
-            html.H1("Fenyx Forte", className="text-primary"),
+            html.H1("Fenyx Forte", className="meu-nome"),
             html.Hr(),
             links_minhas_informacoes(),
         ]

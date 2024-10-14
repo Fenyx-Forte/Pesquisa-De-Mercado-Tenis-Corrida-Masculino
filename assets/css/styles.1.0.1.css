@@ -58,10 +58,42 @@
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 1rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 
-    background-color: #ffffff;
-    border: 2px solid #158cba;
+    background-color: #158cba;
+
+    .meu-nome {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    a {
+        color: #ffffff;
+        opacity: 1;
+    }
+
+    a:hover {
+        color: #2ecc71;
+    }
+
+    hr {
+        color: #ffffff;
+        opacity: 1;
+    }
+
+    .nav-link {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .nav-link:hover {
+        color: #2ecc71;
+    }
+
+    .nav-link.active {
+        color: #158cba;
+        background-color: #ffffff;
+    }
 
     H1{
         font-size: 22px;
@@ -76,6 +108,19 @@
     .label-documentacao{
         padding-left: 11px;
         margin-bottom: 10px;
+    }
+
+    .label-creditos-titulo{
+        padding-left: 5px;
+        margin-bottom: 5px;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .label-creditos{
+        padding-left: 5px;
+        margin-bottom: 5px;
+        text-decoration: underline solid #ffffff auto;
     }
 
     .meu-icone{
