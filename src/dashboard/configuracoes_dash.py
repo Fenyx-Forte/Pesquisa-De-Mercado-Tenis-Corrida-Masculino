@@ -19,7 +19,7 @@ def template_html_padrao() -> str:
                 <footer>
                     {%config%}
                     {%scripts%}
-                    <script id="_dash-renderer" src="/assets/dash_js/dash_renderer.js"></script>
+                    <script id="_dash-renderer" src="/assets/dash_js/dash_renderer.1.0.0.js"></script>
                 </footer>
                 <script src="/assets/dash_js/plotly-basic-2.35.2.min.js" async=""></script>
             </body>
@@ -168,10 +168,10 @@ def configuracoes_app() -> dict:
         "external_stylesheets": [
             themes.LUMEN,
             icons.FONT_AWESOME,
-            "/assets/css/styles.css",
+            "/assets/css/styles.1.0.0.css",
         ],
         "external_scripts": [
-            "/assets/js/clientside_callbacks.js",
+            "/assets/js/clientside_callbacks.1.0.0.js",
         ],
         "assets_folder": "../assets",
         "assets_url_path": "/assets",
