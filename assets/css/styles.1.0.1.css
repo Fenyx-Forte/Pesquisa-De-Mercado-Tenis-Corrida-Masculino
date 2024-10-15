@@ -275,11 +275,6 @@
 }
 
 #top_10_marcas_atuais{
-    .coluna_escolhido{
-        border-left: #158cba solid 2px;
-        border-right: #158cba solid 2px;
-    }
-
     I{
         margin-top: 10px;
         font-size: 20px;

@@ -167,6 +167,33 @@ def figura_grafico_barras_simples(
             uniformtext_minsize=10,
             uniformtext_mode="hide",
             showlegend=False,
+            plot_bgcolor="#ffffff",
+        )
+        .update_xaxes(
+            showline=True,
+            linecolor="#000000",
+            showgrid=False,
+            tickfont=dict(
+                family="'Roboto', sans-serif", color="#000000", size=14
+            ),
+            title_font=dict(
+                size=20, family="'Roboto', sans-serif", color="#158cba"
+            ),
+            title_standoff=30,
+        )
+        .update_yaxes(
+            showline=True,
+            linecolor="#000000",
+            showgrid=True,
+            gridwidth=1,
+            gridcolor="lightgrey",
+            tickfont=dict(
+                family="'Roboto', sans-serif", color="#000000", size=14
+            ),
+            title_font=dict(
+                size=20, family="'Roboto', sans-serif", color="#158cba"
+            ),
+            title_standoff=30,
         )
     )
 
@@ -209,10 +236,37 @@ def figura_grafico_de_barras_agrupadas(
         )
         .update_layout(
             dragmode=False,
-            hoverlabel=dict(font_size=12, font_color="#FFFFFF"),
+            hoverlabel=dict(font_size=16, font_color="#FFFFFF"),
             uniformtext_minsize=10,
             uniformtext_mode="hide",
             showlegend=False,
+            plot_bgcolor="#ffffff",
+        )
+        .update_xaxes(
+            showline=True,
+            linecolor="#000000",
+            showgrid=False,
+            tickfont=dict(
+                family="'Roboto', sans-serif", color="#000000", size=14
+            ),
+            title_font=dict(
+                size=20, family="'Roboto', sans-serif", color="#158cba"
+            ),
+            title_standoff=30,
+        )
+        .update_yaxes(
+            showline=True,
+            linecolor="#000000",
+            showgrid=True,
+            gridwidth=1,
+            gridcolor="lightgrey",
+            tickfont=dict(
+                family="'Roboto', sans-serif", color="#000000", size=14
+            ),
+            title_font=dict(
+                size=20, family="'Roboto', sans-serif", color="#158cba"
+            ),
+            title_standoff=30,
         )
     )
 
