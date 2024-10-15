@@ -48,12 +48,13 @@
 /* Sidebar */
 .minha-sidebar{
     width: auto;
-    min-height: 100vh;
-    height: 100%;
+    min-height: 99vh;
+    height: 99%;
 
     margin-top: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
+    margin-bottom: 1rem;
 
     padding-left: 1rem;
     padding-right: 1rem;
@@ -61,9 +62,11 @@
     padding-bottom: 1rem;
 
     background-color: #158cba;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 
     .meu-nome {
-        color: #ffffff;
+        color: #3DFFB8;
         font-weight: 600;
     }
 
