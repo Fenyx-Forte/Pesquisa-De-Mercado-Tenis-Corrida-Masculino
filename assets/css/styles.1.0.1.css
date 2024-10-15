@@ -228,24 +228,30 @@
         min-width: 65%;
         max-width: 65%;
 
+        background-color: #158cba;
+
         .titulo_informacao{
             margin-top: 10px;
             text-wrap: balance;
             padding-left: 5px;
             padding-right: 5px;
+            color: #3DFFB8;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
         }
 
         .valor_cartao{
-            color: #2ecc71;
-            font-size: 30px;
+            color: #ffffff;
+            font-size: 23px;
             font-weight: 600;
+            font-family: 'Poppins', sans-serif;
             margin-bottom: 15px;
             margin-top: 15px;
-            font-family: Georgia, 'Times New Roman', Times, serif;
         }
 
         i{
             font-size: 20px;
+            margin-top: 10px;
             margin-bottom: 10px;
         }
 
@@ -254,11 +260,11 @@
         }
 
         .ranking_top_2{
-            color: #C0C0C0;
+            color: #F5F5F5;
         }
 
         .ranking_top_3{
-            color: #CD7F32;
+            color: #D27F43;
         }
     }
 }
