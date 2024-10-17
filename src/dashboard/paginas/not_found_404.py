@@ -9,7 +9,7 @@ register_page(
 
 
 def titulo() -> html.H1:
-    conteudo = html.H1("Page not found! Error 404", className="pagina")
+    conteudo = html.H1("Essa página não existe!", className="pagina")
 
     return conteudo
 
