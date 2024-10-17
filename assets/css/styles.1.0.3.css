@@ -14,23 +14,23 @@
     #titulo-aplicacao{
         font-size: 30px;
         text-wrap: balance;
-        margin-left: 63px;
-        margin-right: 63px;
+        margin-left: 80px;
+        margin-right: 80px;
         margin-bottom: 1rem;
     }
 
     #data-coleta{
         font-size: 16px;
         text-wrap: balance;
-        margin-left: 63px;
-        margin-right: 63px;
+        margin-left: 80px;
+        margin-right: 80px;
     }
 
     #meu-toggle-navbar{
         position: absolute;
         z-index: 1001;
         color: #158cba;
-        font-size: 24px;
+        font-size: 36px;
 
         top: 0;
         left: 0;
@@ -155,7 +155,7 @@
 
     .titulo-pagina{
         text-align: center;
-        font-size: 26px;
+        font-size: 30px;
         font-weight: bold;
         margin-top: 1rem;
         margin-bottom: 2rem;
@@ -217,6 +217,61 @@
                 font-weight: 600;
                 margin-top: 1.5rem;
             }
+        }
+    }
+}
+
+/* Pagina Home  */
+#home{
+    max-width: 98%;
+
+    .coluna_home{
+        margin-left: 1rem;
+    }
+
+    .secao{
+        margin-bottom: 2rem;
+        max-width: 98%;
+
+        .titulo_um{
+            margin-top: 0rem;
+        }
+
+        h4{
+            margin-top: 2rem;
+            color: #158cba;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        div{
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .perguntas{
+            margin-left: 2rem;
+        }
+
+        .subsecao_links{
+            color:#000000;
+            font-weight: 600;
+        }
+
+        .links_na_sidebar{
+            color: #158cba;
+            text-decoration: none;
+            margin-left: 2rem;
+        }
+
+        .links_na_sidebar:hover{
+            color:#5CB85C;
+            font-weight: 600;
+        }
+
+        .resumo_link{
+            margin-left: 4rem;
+            margin-bottom: 2rem;
         }
     }
 }
