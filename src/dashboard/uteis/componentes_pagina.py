@@ -378,6 +378,9 @@ def tabela_ag_grid(
             "alwaysMultiSort": True,
             "enableBrowserTooltips": True,
             "localeText": traducoes.dag_locale_pt_br(),
+            "alwaysShowVerticalScroll": False,
+            "alwaysShowHorizontalScroll": False,
+            "suppressHorizontalScroll": True,
         },
         className="ag-theme-quartz tabela-ag-grid",
     )

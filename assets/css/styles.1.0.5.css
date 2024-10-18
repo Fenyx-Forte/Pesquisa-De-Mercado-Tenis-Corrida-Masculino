@@ -447,6 +447,10 @@
         color: #000000;
     }
 
+    .ag-floating-bottom{
+        overflow: hidden !important;
+    }
+
     .ag-floating-bottom-container .ag-cell{
         border: 0;
     }
