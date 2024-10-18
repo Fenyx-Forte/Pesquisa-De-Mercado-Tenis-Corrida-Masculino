@@ -399,7 +399,7 @@
         padding: 5px;
         text-wrap: balance;
         overflow-wrap: break-word;
-        overflow: scroll;
+        overflow: hidden;
 
         font-size: 14px;
         display: flex;
@@ -417,7 +417,7 @@
         padding: 5px;
         text-wrap: balance;
         overflow-wrap: break-word;
-        overflow: scroll;
+        overflow: hidden;
 
         font-size: 14px;
 

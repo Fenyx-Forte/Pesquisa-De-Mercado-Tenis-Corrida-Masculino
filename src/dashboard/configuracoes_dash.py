@@ -168,7 +168,7 @@ def configuracoes_app() -> dict:
         "external_stylesheets": [
             themes.LUMEN,
             icons.FONT_AWESOME,
-            "/assets/css/styles.1.0.3.css",
+            "/assets/css/styles.1.0.4.css",
         ],
         "external_scripts": [
             "/assets/js/clientside_callbacks.1.0.0.js",
