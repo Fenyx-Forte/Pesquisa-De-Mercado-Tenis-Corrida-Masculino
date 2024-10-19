@@ -138,7 +138,7 @@ def coluna(
                 ),
             ),
             componentes_pagina.conteiner_informacao(
-                titulo_informacao="Produtos Em Promocão",
+                titulo_informacao="Produtos Em Promoção",
                 informacao=informacao(
                     valor=produtos_promocoes,
                     sufixo_coluna=sufixo_coluna,
