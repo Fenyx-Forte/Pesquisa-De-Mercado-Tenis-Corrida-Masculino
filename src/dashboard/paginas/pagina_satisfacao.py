@@ -47,9 +47,9 @@ def definicoes_colunas_tabela(sufixo_informacao: str) -> list[dict]:
     }
 
     configuracao_nota = {
-        "headerName": "Nota",
+        "headerName": "Nota (Média)",
         "field": "nota_avaliacao",
-        "headerTooltip": "Nota da Avaliação",
+        "headerTooltip": "Nota Média Da Avaliação",
         "cellDataType": "number",
         "valueFormatter": {
             "function": f"{formatacoes.dag_format_pt_br()}.format('.2f')(params.value)",
@@ -57,9 +57,9 @@ def definicoes_colunas_tabela(sufixo_informacao: str) -> list[dict]:
     }
 
     configuracao_num_avaliacoes = {
-        "headerName": "Avaliações",
+        "headerName": "Avaliações (Média)",
         "field": "num_avaliacoes",
-        "headerTooltip": "Número de Avaliações",
+        "headerTooltip": "Número Médio De Avaliações",
         "cellDataType": "number",
         "valueFormatter": {
             "function": f"{formatacoes.dag_format_pt_br()}.format(',.2f')(params.value)",
