@@ -171,7 +171,7 @@ def configuracoes_app() -> dict:
             "/assets/css/styles.1.0.5.css",
         ],
         "external_scripts": [
-            "/assets/js/clientside_callbacks.1.0.0.js",
+            "/assets/js/clientside_callbacks.1.0.1.js",
         ],
         "assets_folder": "../assets",
         "assets_url_path": "/assets",

@@ -27,23 +27,52 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
             return "coluna-sidebar-desativada";
         },
 
-        verificar_datas: function(n_clicks, data_inicio, data_fim, periodo_hoje, periodo_ja_escolhido, periodo_historico) {
-            if (!data_inicio || !data_fim) {
+        verificar_datas: function (n_clicks, data_inicio, data_fim, periodo_hoje, periodo_ja_escolhido, periodo_historico) {
+            // 1. Verificar se as entradas são strings
+            if (typeof data_inicio !== 'string' || typeof data_fim !== 'string') {
                 return ["Período Inválido", "Selecione as datas usando o calendário ou escreva as datas no formato DD/MM/YYYY."];
             }
 
-            function formatar_data(data) {
-                const [ano, mes, dia] = data.split('-');
-                return `${dia}/${mes}/${ano}`;
+            // 2. Validação do formato "YYYY-MM-DD"
+            const formatoValido = /^\d{4}-\d{2}-\d{2}$/;
+            if (!formatoValido.test(data_inicio) || !formatoValido.test(data_fim)) {
+                return ["Período Inválido", "Selecione as datas usando o calendário ou escreva as datas no formato DD/MM/YYYY."];
             }
 
-            const data_inicio_formatada = formatar_data(data_inicio);
-            const data_fim_formatada = formatar_data(data_fim);
+            // 3. Converter as datas para objetos Date
+            const inicio = new Date(data_inicio + "T00:00:00");
+            const fim = new Date(data_fim + "T00:00:00");
 
+            if (isNaN(inicio) || isNaN(fim)) {
+                return ["Período Inválido", "Selecione as datas usando o calendário ou escreva as datas no formato DD/MM/YYYY."];
+            }
+
+            if (inicio > fim) {
+                return ["Período Inválido", "A data de início deve ser anterior ou igual à data de fim."];
+            }
+
+            // Função para formatar a data em "DD/MM/YYYY"
+            function formatar_data(data) {
+                return data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            }
+
+            const data_inicio_formatada = formatar_data(inicio);
+            const data_fim_formatada = formatar_data(fim);
             const periodo = `${data_inicio_formatada} - ${data_fim_formatada}`;
 
+            // 4. Verificar se o período já foi adicionado
             if (periodo === periodo_hoje || periodo === periodo_ja_escolhido || periodo === periodo_historico) {
                 return ["Período Já Adicionado", "Esse período já foi adicionado. Adicione um período diferente."];
+            }
+
+            // 5. Verificar se o período está contido em "periodo_historico"
+            const [historicoInicio, historicoFim] = periodo_historico.split(" - ").map(data => {
+                const [dia, mes, ano] = data.split("/");
+                return new Date(`${ano}-${mes}-${dia}T00:00:00`);
+            });
+
+            if (inicio < historicoInicio || fim > historicoFim) {
+                return ["Período Inválido", "O período deve estar dentro do intervalo histórico permitido."];
             }
 
             return ["", ""];
