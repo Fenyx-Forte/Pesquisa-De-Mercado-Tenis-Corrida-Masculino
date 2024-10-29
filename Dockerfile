@@ -60,7 +60,7 @@ COPY gunicorn_prod.py /app
 # COPY .env /app
 COPY src /app/src
 COPY assets /usr/share/nginx/html/assets
-COPY duckdb_database.db /app/dados/duckdb_database.db
+COPY /dados/duckdb_database.db /app/dados/duckdb_database.db
 
 # Permissões para o nginx acessar assets
 RUN chown -R www-data:www-data /usr/share/nginx/html/assets && \

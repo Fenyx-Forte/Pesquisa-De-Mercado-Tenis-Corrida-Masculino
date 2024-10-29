@@ -7,9 +7,6 @@ dash_app.conf
 gunicorn_prod.py
 nginx.conf
 
-dados/duckdb_database.db
-duckdb_database.db
-
 # Docs
 site/
 .tbls.yml
