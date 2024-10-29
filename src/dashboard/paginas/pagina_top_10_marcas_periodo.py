@@ -228,6 +228,9 @@ def top_10_marcas_periodo_atualizar_comparacao(titulo, data_inicio, data_fim):
     if titulo != "":
         raise PreventUpdate
 
+    if not gerenciador.valida_entrada_datas(data_inicio, data_fim):
+        raise PreventUpdate
+
     df_novo = gerenciador.pagina_top_10_marcas_periodo_atualiza_dados_escolhido(
         data_inicio, data_fim
     )

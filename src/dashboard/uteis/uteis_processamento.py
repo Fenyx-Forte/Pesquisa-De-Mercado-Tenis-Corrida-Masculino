@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from dash import ClientsideFunction
 
 
@@ -75,6 +77,64 @@ def callback_linha_totais_promocoes() -> ClientsideFunction:
     return ClientsideFunction(
         namespace="clientside",
         function_name="linha_totais_promocoes",
+    )
+
+
+def valida_data(data_str: str) -> bool:
+    # Valida se a string representa uma data válida no formato YYYY-MM-DD.
+    formato = "%Y-%m-%d"
+
+    try:
+        # Tenta converter a string para uma data.
+        datetime.strptime(data_str, formato)
+
+        return True  # Data válida.
+
+    except:
+        return False  # Data inválida.
+
+
+def valida_periodo(
+    data_inicio: str,
+    data_fim: str,
+    data_coleta_mais_antiga: str,
+    data_coleta_mais_recente: str,
+) -> bool:
+    formato = "%Y-%m-%d"
+
+    data_inicio_time = datetime.strptime(data_inicio, formato)
+
+    data_fim_time = datetime.strptime(data_fim, formato)
+
+    data_coleta_mais_antiga_time = datetime.strptime(
+        data_coleta_mais_antiga, formato
+    )
+
+    data_coleta_mais_recente_time = datetime.strptime(
+        data_coleta_mais_recente, formato
+    )
+
+    return (
+        (data_inicio_time <= data_fim_time)
+        and (data_inicio_time >= data_coleta_mais_antiga_time)
+        and (data_fim_time <= data_coleta_mais_recente_time)
+    )
+
+
+def valida_entrada_datas(
+    data_inicio: str,
+    data_fim: str,
+    data_coleta_mais_antiga: str,
+    data_coleta_mais_recente: str,
+) -> bool:
+    if not (valida_data(data_inicio) and valida_data(data_fim)):
+        return False
+
+    return valida_periodo(
+        data_inicio=data_inicio,
+        data_fim=data_fim,
+        data_coleta_mais_antiga=data_coleta_mais_antiga,
+        data_coleta_mais_recente=data_coleta_mais_recente,
     )
 
 

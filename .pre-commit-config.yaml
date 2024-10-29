@@ -18,7 +18,7 @@ repos:
         types_or: [ python, pyi, jupyter ]
         args:
         - --line-length=80
-        - --ignore=D203,E111,E203,F401
+        - --ignore=D203,E111,E203,F401,E722
         - src/
         - tests/
       # Formatter

@@ -238,6 +238,9 @@ def promocoes_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
     if titulo != "":
         raise PreventUpdate
 
+    if not gerenciador.valida_entrada_datas(data_inicio, data_fim):
+        raise PreventUpdate
+
     periodo_novo = uteis_processamento.retorna_periodo(data_inicio, data_fim)
 
     dados = gerenciador.pagina_promocoes_atualiza_dados_escolhido(

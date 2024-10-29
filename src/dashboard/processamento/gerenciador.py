@@ -10,7 +10,7 @@ from dashboard.processamento.paginas import (
     processamento_top_10_marcas_atuais,
     processamento_top_10_marcas_periodo,
 )
-from dashboard.uteis import duckdb_local
+from dashboard.uteis import duckdb_local, uteis_processamento
 
 
 def inicializar_escopo_global() -> None:
@@ -103,6 +103,18 @@ def retorna_periodo_historico() -> str:
 
 def retorna_top_10_marcas_hoje() -> pd_DataFrame:
     return escopo_aplicacaco.df_top_10_marcas_hoje
+
+
+def valida_entrada_datas(
+    data_inicio: str,
+    data_fim: str,
+) -> bool:
+    return uteis_processamento.valida_entrada_datas(
+        data_inicio=data_inicio,
+        data_fim=data_fim,
+        data_coleta_mais_antiga=retorna_data_coleta_mais_antiga(),
+        data_coleta_mais_recente=retorna_data_coleta_mais_recente(),
+    )
 
 
 # Pagina KPIs

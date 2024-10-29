@@ -226,6 +226,9 @@ def top_10_marcas_atuais_atualizar_comparacao(
     if titulo != "":
         raise PreventUpdate
 
+    if not gerenciador.valida_entrada_datas(data_inicio, data_fim):
+        raise PreventUpdate
+
     df_atualizado = (
         gerenciador.pagina_top_10_marcas_atuais_atualizar_dados_grafico(
             dados_grafico_atual=dados_grafico_atual,
