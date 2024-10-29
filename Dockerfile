@@ -57,9 +57,10 @@ RUN mkdir -p /var/log/gunicorn && \
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY dash_app.conf /etc/nginx/conf.d/
 COPY gunicorn_prod.py /app
-COPY .env /app
+# COPY .env /app
 COPY src /app/src
 COPY assets /usr/share/nginx/html/assets
+COPY duckdb_database.db /app/dados/duckdb_database.db
 
 # Permissões para o nginx acessar assets
 RUN chown -R www-data:www-data /usr/share/nginx/html/assets && \
@@ -70,7 +71,7 @@ RUN chown -R www-data:www-data /usr/share/nginx/html/assets && \
 RUN chmod +x /app/src/script_docker.sh
 
 # Instalacao extensao postgresql
-COPY extensao_postgresql.py /app
-RUN python /app/extensao_postgresql.py
+# COPY extensao_postgresql.py /app
+# RUN python /app/extensao_postgresql.py
 
 ENTRYPOINT ["/app/src/script_docker.sh"]
