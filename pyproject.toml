@@ -78,7 +78,7 @@ target-version = "py312"
 include = ["pyproject.toml", "src/**/*.py", "tests/**/*.py", "src/*.py", "tests/*.py"]
 
 [tool.ruff.lint]
-ignore = ["D203", "E111", "E203", "F401"]
+ignore = ["D203", "E111", "E203", "F401", "E722"]
 
 [tool.bandit]
 skips = ["B101", "B108", "B113", "B311"]
