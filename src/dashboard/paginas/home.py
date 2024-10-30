@@ -325,7 +325,7 @@ def secao_links() -> html.Div:
                 [
                     html.A(
                         "Documentação",
-                        href="https://github.com/Fenyx-Forte/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre",
+                        href="https://fenyx-forte.github.io/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre/",
                         target="_blank",
                         rel="noreferrer",
                         className="links_na_sidebar",

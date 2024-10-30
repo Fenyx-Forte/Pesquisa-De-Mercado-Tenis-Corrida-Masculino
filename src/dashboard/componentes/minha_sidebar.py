@@ -145,7 +145,7 @@ def links_documentacao() -> html.Div:
                         className="label-documentacao",
                     ),
                 ],
-                href="https://github.com/Fenyx-Forte/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre",
+                href="https://fenyx-forte.github.io/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre/",
                 target="_blank",
                 rel="noreferrer",
             ),
