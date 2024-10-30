@@ -1,0 +1,150 @@
+site_name: Documentação Projeto
+site_url: https://fenyx-forte.github.io/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre/
+repo_url: https://github.com/Fenyx-Forte/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre
+repo_name: GitHub Projeto
+
+nav:
+  - Projeto:
+    - Projeto: index.md
+
+  - PostgreSQL:
+    - PostgreSQL: postgresql/index.md
+
+    - Tabelas:
+      - mercado_livre: postgresql/public.mercado_livre.md
+
+    - Views:
+      - view_mercado_livre: postgresql/public.view_mercado_livre.md
+
+  - Web Scraping:
+    - Web Scraping: webscraping/index.md
+
+    - scrapy.cfg: webscraping/scrapy.md
+
+  - ETL:
+    - ETL: etl/index.md
+
+    - etl_main.py: etl/etl_main.md
+
+    - etl_app.py: etl/etl_app.md
+
+  - Dashboard:
+    - Dashboard: dashboard/index.md
+
+    - Dashboard App: dashboard/dashboard_app.md
+
+    - configuracoes_dash.py: dashboard/configuracoes_dash.md
+
+    - script_docker.sh: dashboard/script_docker.md
+
+    - Componentes:
+      - Componentes: dashboard/componentes/index.md
+      - Cabeçalho: dashboard/componentes/cabecalho.md
+      - Sidebar: dashboard/componentes/sidebar.md
+
+    - Páginas:
+      - Páginas: dashboard/paginas/index.md
+      - Home: dashboard/paginas/pagina_home.md
+      - KPIs: dashboard/paginas/pagina_kpis.md
+      - Top 10 Marcas Atuais: dashboard/paginas/pagina_top_10_marcas_atuais.md
+      - Top 10 Marcas Período: dashboard/paginas/pagina_top_10_marcas_periodo.md
+      - Preço Médio: dashboard/paginas/pagina_preco_medio.md
+      - Faixa Preço: dashboard/paginas/pagina_faixa_preco.md
+      - Satisfação: dashboard/paginas/pagina_satisfacao.md
+      - Promoções: dashboard/paginas/pagina_promocoes.md
+      - Not Found 404: dashboard/paginas/pagina_404.md
+
+    - Processamento:
+      - Processamento: dashboard/processamento/index.md
+      - tabelas.sql.py: dashboard/processamento/tabelas_sql.md
+      - macros_sql.py: dashboard/processamento/macros_sql.md
+      - escopo_global.py: dashboard/processamento/escopo_global.md
+      - inicializacao_dados.py: dashboard/processamento/inicializacao_dados.md
+      - gerenciador.py: dashboard/processamento/gerenciador.md
+      - Páginas:
+        - Páginas: dashboard/processamento/paginas/index.md
+        - KPIs: dashboard/processamento/paginas/pagina_kpis.md
+        - Top 10 Marcas Atuais: dashboard/processamento/paginas/pagina_top_10_marcas_atuais.md
+        - Top 10 Marcas Período: dashboard/processamento/paginas/pagina_top_10_marcas_periodo.md
+        - Preço Médio: dashboard/processamento/paginas/pagina_preco_medio.md
+        - Faixa Preço: dashboard/processamento/paginas/pagina_faixa_preco.md
+        - Satisfação: dashboard/processamento/paginas/pagina_satisfacao.md
+        - Promoções: dashboard/processamento/paginas/pagina_promocoes.md
+
+      - Queries:
+        - Queries: dashboard/processamento/queries/index.md
+        - KPIs: dashboard/processamento/queries/pagina_kpis.md
+        - Top 10 Marcas Atuais: dashboard/processamento/queries/pagina_top_10_marcas_atuais.md
+        - Top 10 Marcas Período: dashboard/processamento/queries/pagina_top_10_marcas_periodo.md
+        - Preço Médio: dashboard/processamento/queries/pagina_preco_medio.md
+        - Faixa Preço: dashboard/processamento/queries/pagina_faixa_preco.md
+        - Satisfação: dashboard/processamento/queries/pagina_satisfacao.md
+        - Promoções: dashboard/processamento/queries/pagina_promocoes.md
+
+    - Úteis:
+      - Úteis: dashboard/uteis/index.md
+      - componentes_pagina.py: dashboard/uteis/componentes_pagina.md
+      - duckdb_local.py: dashboard/uteis/duckdb_local.md
+      - formatacoes.py: dashboard/uteis/formatacoes.md
+      - traducoes.py: dashboard/uteis/traducoes.md
+      - uteis_processamento.py: dashboard/uteis/uteis_processamento.md
+
+  - Módulos:
+    - Módulos: modulos/index.md
+
+  - SQL:
+    - SQL: sql/index.md
+
+  - Testes:
+    - Testes: testes/index.md
+
+  - Assets:
+    - Assets: assets/index.md
+
+  - Resto:
+    - Resto: resto/index.md
+
+    # config
+    # dados
+    # .pre-commit-config.yaml
+    # .python-version
+    # Dockerfile
+    # extensao_postgresql.py
+    # pyproject.toml
+
+plugins:
+  - mkdocstrings
+  - search
+
+theme:
+  name: material
+  language: pt-BR
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Alternar para modo escuro
+
+    # Palette toggle for dark mode
+    - media:
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Alternar para modo claro
+
+  icon:
+    repo: fontawesome/brands/github
+
+  features:
+    - navigation.footer
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.instant
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Fenyx-Forte
+      name: GitHub Fenyx Forte

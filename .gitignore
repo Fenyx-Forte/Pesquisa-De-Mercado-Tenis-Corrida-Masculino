@@ -8,7 +8,7 @@ gunicorn_prod.py
 nginx.conf
 
 # Docs
-docs/
+site/
 .tbls.yml
 
 # Environments
