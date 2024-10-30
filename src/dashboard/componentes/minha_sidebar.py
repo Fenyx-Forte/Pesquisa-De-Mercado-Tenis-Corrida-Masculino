@@ -26,15 +26,6 @@ def links_minhas_informacoes() -> html.Div:
                 rel="noreferrer",
             ),
             html.Br(),
-            html.A(
-                [
-                    html.I(className="fa-brands fa-linkedin-in"),
-                    html.Label("Linkedin"),
-                ],
-                href="https://www.linkedin.com/in/fenyxforte/",
-                target="_blank",
-                rel="noreferrer",
-            ),
             html.Br(),
             html.A(
                 [

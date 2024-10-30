@@ -136,21 +136,6 @@ def secao_links() -> html.Div:
             html.Div(
                 [
                     html.A(
-                        "LinkedIn",
-                        href="https://www.linkedin.com/in/fenyxforte/",
-                        target="_blank",
-                        rel="noreferrer",
-                        className="links_na_sidebar",
-                    ),
-                    html.Div(
-                        "Meu LinkedIn.",
-                        className="resumo_link",
-                    ),
-                ]
-            ),
-            html.Div(
-                [
-                    html.A(
                         "GitHub",
                         href="https://github.com/Fenyx-Forte",
                         target="_blank",
