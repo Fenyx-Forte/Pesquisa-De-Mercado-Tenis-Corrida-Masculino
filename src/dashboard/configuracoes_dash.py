@@ -64,7 +64,7 @@ def meta_tags_basicas() -> list[dict[str, str]]:
         },
         {
             "rel": "canonical",
-            "href": "https://analise-de-dados-mercadolivre.onrender.com/",
+            "href": "https://analise-de-dados-tenis-corrida.onrender.com/",
         },
         {
             "name": "google",
@@ -79,7 +79,7 @@ def meta_tags_og() -> list[dict[str, str]]:
     meta_tags = [
         {
             "property": "og:title",
-            "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
+            "content": "Pesquisa de Mercado: Tênis de Corrida Masculino",
         },
         {
             "property": "og:description",
@@ -87,11 +87,11 @@ def meta_tags_og() -> list[dict[str, str]]:
         },
         {
             "property": "og:image",
-            "content": "https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
+            "content": "https://analise-de-dados-tenis-corrida.onrender.com/assets/images/imagem_link.jpg",
         },
         {
             "property": "og:url",
-            "content": "https://analise-de-dados-mercadolivre.onrender.com/",
+            "content": "https://analise-de-dados-tenis-corrida.onrender.com/",
         },
         {
             "property": "og:type",
@@ -110,7 +110,7 @@ def meta_tags_twitter() -> list[dict[str, str]]:
         },
         {
             "name": "twitter:title",
-            "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
+            "content": "Pesquisa de Mercado: Tênis de Corrida Masculino",
         },
         {
             "name": "twitter:description",
@@ -118,7 +118,7 @@ def meta_tags_twitter() -> list[dict[str, str]]:
         },
         {
             "name": "twitter:image",
-            "content": "https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
+            "content": "https://analise-de-dados-tenis-corrida.onrender.com/assets/images/imagem_link.jpg",
         },
     ]
 
@@ -133,7 +133,7 @@ def meta_tags_aplicacao() -> list[dict[str, str]]:
         },
         {
             "name": "application-name",
-            "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
+            "content": "Pesquisa de Mercado: Tênis de Corrida Masculino",
         },
         {
             "name": "keywords",
@@ -152,7 +152,7 @@ def minhas_meta_tags() -> list[dict[str, str]]:
         },
         {
             "property": "og:site_name",
-            "content": "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
+            "content": "Pesquisa de Mercado: Tênis de Corrida Masculino",
         },
         *meta_tags_basicas(),
         *meta_tags_aplicacao(),
