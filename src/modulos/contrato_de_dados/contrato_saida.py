@@ -1,12 +1,10 @@
-import math
-
 import pandera.polars as pa
 import polars as pl
 
-from etl import transformacao
+from etl.legado_polars import transformacao
 
 
-class MercadoLivreSaida(pa.DataFrameModel):
+class TenisCorridaSaida(pa.DataFrameModel):
     marca: pl.String
     produto: pl.String
     preco_velho: pl.Float32 = pa.Field(ge=1)
@@ -16,8 +14,6 @@ class MercadoLivreSaida(pa.DataFrameModel):
     nota_avaliacao: pl.Float32 = pa.Field(ge=0, le=5)
     num_avaliacoes: pl.Int32 = pa.Field(ge=0)
 
-    fonte: pl.String = pa.Field(alias="_fonte")
-    site: pl.String = pa.Field(alias="_site")
     data_coleta: pl.Date = pa.Field(alias="_data_coleta")
     horario_coleta: pl.Time = pa.Field(alias="_horario_coleta")
     pagina: pl.Int8 = pa.Field(ge=1, le=10, alias="_pagina")
@@ -39,17 +35,6 @@ class MercadoLivreSaida(pa.DataFrameModel):
         return data.lazyframe.select(
             pl.col(data.key) == transformacao.tratar_coluna_string(data.key)
         )
-
-    @pa.check("_fonte")
-    def checa_fonte(cls, data: pa.PolarsData) -> pl.LazyFrame:
-        return data.lazyframe.select(
-            pl.col(data.key)
-            == "https://lista.mercadolivre.com.br/tenis-corrida-masculino"
-        )
-
-    @pa.check("_site")
-    def checa_site(cls, data: pa.PolarsData) -> pl.LazyFrame:
-        return data.lazyframe.select(pl.col(data.key) == "MERCADO LIVRE")
 
     @pa.dataframe_check
     def checa_preco_atual_menor_ou_igual_ao_preco_velho(
