@@ -66,8 +66,7 @@ taskipy = "^1.13.0"
 
 
 [tool.taskipy.tasks]
-mercado_livre = "scrapy crawl mercadolivre"
-mercado_livre_interativo = "scrapy shell 'https://lista.mercadolivre.com.br/tenis-corrida-masculino'"
+tenis_corrida = "scrapy crawl tenis_corrida"
 run = "python etl_main.py"
 test = "pytest"
 
