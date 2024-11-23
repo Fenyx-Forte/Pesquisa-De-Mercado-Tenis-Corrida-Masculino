@@ -15,7 +15,7 @@ def botao_toggle() -> html.Div:
 
 def titulo() -> html.H1:
     conteudo = html.H1(
-        "Pesquisa de Mercado: Tênis de Corrida no Mercado Livre",
+        "Pesquisa de Mercado: Tênis de Corrida Masculino",
         className="text-primary text-center fs-3",
         id="titulo-aplicacao",
     )
