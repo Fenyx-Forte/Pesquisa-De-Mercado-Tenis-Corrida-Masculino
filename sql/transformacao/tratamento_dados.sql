@@ -55,8 +55,6 @@ with fase_1 as (
         coalesce(trim(both '()' from df.num_avaliacoes), '0')
         as uinteger
       ) as num_avaliacoes
-    , df._fonte
-    , df._site
     , df._data_coleta::date as data_coleta
     , df._data_coleta::time as horario_coleta
     , cast(df._pagina as utinyint) as _pagina
@@ -104,8 +102,6 @@ select distinct
     ) as percentual_promocao
   , f.nota_avaliacao
   , f.num_avaliacoes
-  , f._fonte
-  , f._site
   , f.data_coleta as _data_coleta
   , f.horario_coleta as _horario_coleta
   , f._pagina

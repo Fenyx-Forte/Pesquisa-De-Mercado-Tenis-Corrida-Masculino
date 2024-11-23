@@ -1,4 +1,4 @@
-insert into db.mercado_livre (
+insert into db.tenis_corrida (
     marca
   , produto
   , preco_velho
@@ -7,8 +7,6 @@ insert into db.mercado_livre (
   , percentual_promocao
   , nota_avaliacao
   , num_avaliacoes
-  , _fonte
-  , _site
   , _data_coleta
   , _horario_coleta
   , _pagina

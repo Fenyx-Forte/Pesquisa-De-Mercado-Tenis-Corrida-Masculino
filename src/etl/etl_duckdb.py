@@ -41,7 +41,7 @@ def pipeline() -> None:
     )
 
     # Transformacao
-    caminho_query = "../sql/transformacao/tratamento_mercado_livre.sql"
+    caminho_query = "../sql/transformacao/tratamento_dados.sql"
 
     query_transfomacao = funcoes_sql.ler_conteudo_query(caminho_query)
 
