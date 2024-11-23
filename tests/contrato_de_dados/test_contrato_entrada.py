@@ -25,19 +25,13 @@ def test_contrato_correto():
             "preco_atual_centavos": ["0", "0", None],
             "nota_avaliacao": [None, "3", "4"],
             "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
         }
     )
 
-    contrato_entrada.MercadoLivreEntrada.validate(df)
+    contrato_entrada.TenisCorridaEntrada.validate(df)
 
 
 def test_produto_null():
@@ -53,12 +47,6 @@ def test_produto_null():
             "preco_atual_centavos": ["0", "0", None],
             "nota_avaliacao": [None, "3", "4"],
             "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
@@ -66,123 +54,7 @@ def test_produto_null():
     )
 
     with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
-
-
-def test_fonte_null():
-    data = meu_tempo.data_agora_string()
-
-    df = pl.DataFrame(
-        {
-            "marca": ["A", None, "C"],
-            "produto": ["TENIS A", "TENIS B", "TENIS C"],
-            "preco_velho_reais": ["100", None, "200"],
-            "preco_velho_centavos": ["50", "40", None],
-            "preco_atual_reais": ["80", "200", "150"],
-            "preco_atual_centavos": ["0", "0", None],
-            "nota_avaliacao": [None, "3", "4"],
-            "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                None,
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
-            "_data_coleta": [data, data, data],
-            "_pagina": [1, 1, 1],
-            "_ordem": [1, 2, 3],
-        }
-    )
-
-    with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
-
-
-def test_fonte_incorreta():
-    data = meu_tempo.data_agora_string()
-
-    df = pl.DataFrame(
-        {
-            "marca": ["A", None, "C"],
-            "produto": ["TENIS A", "TENIS B", "TENIS C"],
-            "preco_velho_reais": ["100", None, "200"],
-            "preco_velho_centavos": ["50", "40", None],
-            "preco_atual_reais": ["80", "200", "150"],
-            "preco_atual_centavos": ["0", "0", None],
-            "nota_avaliacao": [None, "3", "4"],
-            "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/abc",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
-            "_data_coleta": [data, data, data],
-            "_pagina": [1, 1, 1],
-            "_ordem": [1, 2, 3],
-        }
-    )
-
-    with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
-
-
-def test_site_null():
-    data = meu_tempo.data_agora_string()
-
-    df = pl.DataFrame(
-        {
-            "marca": ["A", None, "C"],
-            "produto": ["TENIS A", "TENIS B", "TENIS C"],
-            "preco_velho_reais": ["100", None, "200"],
-            "preco_velho_centavos": ["50", "40", None],
-            "preco_atual_reais": ["80", "200", "150"],
-            "preco_atual_centavos": ["0", "0", None],
-            "nota_avaliacao": [None, "3", "4"],
-            "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": [None, "MERCADO LIVRE", "MERCADO LIVRE"],
-            "_data_coleta": [data, data, data],
-            "_pagina": [1, 1, 1],
-            "_ordem": [1, 2, 3],
-        }
-    )
-
-    with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
-
-
-def test_site_incorreto():
-    data = meu_tempo.data_agora_string()
-
-    df = pl.DataFrame(
-        {
-            "marca": ["A", None, "C"],
-            "produto": ["TENIS A", "TENIS B", "TENIS C"],
-            "preco_velho_reais": ["100", None, "200"],
-            "preco_velho_centavos": ["50", "40", None],
-            "preco_atual_reais": ["80", "200", "150"],
-            "preco_atual_centavos": ["0", "0", None],
-            "nota_avaliacao": [None, "3", "4"],
-            "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["ABC", "MERCADO LIVRE", "MERCADO LIVRE"],
-            "_data_coleta": [data, data, data],
-            "_pagina": [1, 1, 1],
-            "_ordem": [1, 2, 3],
-        }
-    )
-
-    with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
+        contrato_entrada.TenisCorridaEntrada.validate(df)
 
 
 def test_data_coleta_null():
@@ -198,12 +70,6 @@ def test_data_coleta_null():
             "preco_atual_centavos": ["0", "0", None],
             "nota_avaliacao": [None, "3", "4"],
             "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [None, data, data],
             "_pagina": [1, 1, 1],
             "_ordem": [1, 2, 3],
@@ -211,7 +77,7 @@ def test_data_coleta_null():
     )
 
     with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
+        contrato_entrada.TenisCorridaEntrada.validate(df)
 
 
 def test_pagina_null():
@@ -227,12 +93,6 @@ def test_pagina_null():
             "preco_atual_centavos": ["0", "0", None],
             "nota_avaliacao": [None, "3", "4"],
             "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
             "_pagina": [None, 1, 1],
             "_ordem": [1, 2, 3],
@@ -240,7 +100,7 @@ def test_pagina_null():
     )
 
     with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
+        contrato_entrada.TenisCorridaEntrada.validate(df)
 
 
 def test_pagina_incorreta():
@@ -256,12 +116,6 @@ def test_pagina_incorreta():
             "preco_atual_centavos": ["0", "0", None],
             "nota_avaliacao": [None, "3", "4"],
             "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
             "_pagina": [-1, 111, 1],
             "_ordem": [1, 2, 3],
@@ -269,7 +123,7 @@ def test_pagina_incorreta():
     )
 
     with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
+        contrato_entrada.TenisCorridaEntrada.validate(df)
 
 
 def test_ordem_null():
@@ -285,12 +139,6 @@ def test_ordem_null():
             "preco_atual_centavos": ["0", "0", None],
             "nota_avaliacao": [None, "3", "4"],
             "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
             "_pagina": [1, 1, 1],
             "_ordem": [None, 2, 3],
@@ -298,7 +146,7 @@ def test_ordem_null():
     )
 
     with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
+        contrato_entrada.TenisCorridaEntrada.validate(df)
 
 
 def test_ordem_incorreta():
@@ -314,12 +162,6 @@ def test_ordem_incorreta():
             "preco_atual_centavos": ["0", "0", None],
             "nota_avaliacao": [None, "3", "4"],
             "num_avaliacoes": [None, "5", "4"],
-            "_fonte": [
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-                "https://lista.mercadolivre.com.br/tenis-corrida-masculino",
-            ],
-            "_site": ["MERCADO LIVRE", "MERCADO LIVRE", "MERCADO LIVRE"],
             "_data_coleta": [data, data, data],
             "_pagina": [1, 1, 1],
             "_ordem": [-1, 74, 3],
@@ -327,4 +169,4 @@ def test_ordem_incorreta():
     )
 
     with pytest.raises(pa.errors.SchemaError):
-        contrato_entrada.MercadoLivreEntrada.validate(df)
+        contrato_entrada.TenisCorridaEntrada.validate(df)
