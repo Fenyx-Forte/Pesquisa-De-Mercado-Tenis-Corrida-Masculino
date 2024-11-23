@@ -24,7 +24,7 @@ register_page(
     name="Top 10 Marcas Período",
     title="Top 10 Marcas Período",
     description="Top 10 Marcas Período",
-    image_url="https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
+    image_url="https://analise-de-dados-tenis-corrida.onrender.com/assets/images/imagem_link.jpg",
 )
 
 

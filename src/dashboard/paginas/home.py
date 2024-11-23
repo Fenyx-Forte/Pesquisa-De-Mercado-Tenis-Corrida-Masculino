@@ -15,7 +15,7 @@ register_page(
     name="Home",
     title="Home",
     description="Página Home",
-    image_url="https://analise-de-dados-mercadolivre.onrender.com/assets/images/imagem_link.jpg",
+    image_url="https://analise-de-dados-tenis-corrida.onrender.com/assets/images/imagem_link.jpg",
 )
 
 
@@ -295,7 +295,7 @@ def secao_links() -> html.Div:
                 [
                     html.A(
                         "Repositório",
-                        href="https://github.com/Fenyx-Forte/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre",
+                        href="https://github.com/Fenyx-Forte/Pesquisa-De-Mercado-Tenis-Corrida-Masculino",
                         target="_blank",
                         rel="noreferrer",
                         className="links_na_sidebar",
@@ -310,7 +310,7 @@ def secao_links() -> html.Div:
                 [
                     html.A(
                         "Documentação",
-                        href="https://fenyx-forte.github.io/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre/",
+                        href="https://fenyx-forte.github.io/Pesquisa-De-Mercado-Tenis-Corrida-Masculino/",
                         target="_blank",
                         rel="noreferrer",
                         className="links_na_sidebar",
