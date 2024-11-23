@@ -32,7 +32,7 @@ def secao_contexto() -> html.Div:
 
     texto_contexto = """
         Os dados do dashboard são refentes ao resultado de pesquisar por
-        "tenis-corrida-masculino" no site do Mercado Livre. Mais precisamente,
+        "tenis-corrida-masculino" em uma grande plataforma de E-commerce. Mais precisamente,
         são os dados relativos às 10 primeiras páginas dessa pesquisa.
     """
 
