@@ -1,5 +1,7 @@
-from etl import etl_duckdb, pipeline_mercado_livre
 from loguru import logger
+
+from etl import etl_duckdb
+from etl.legado_polars import pipeline_polars
 from modulos.uteis import carregar_env, configuracao_loguru, configuracao_polars
 
 
@@ -11,7 +13,7 @@ def ativar_configuracoes():
 
 def pipeline() -> None:
     logger.info("Inicio pipeline")
-    pipeline_mercado_livre.pipeline()
+    pipeline_polars.pipeline()
     logger.info("Fim pipeline")
 
 
