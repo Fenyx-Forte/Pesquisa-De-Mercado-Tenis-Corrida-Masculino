@@ -1,6 +1,13 @@
 import polars as pl
-from etl import extracao, filtros, salvar, transformacao, validar_dados
 from loguru import logger
+
+from etl import validar_dados
+from etl.legado_polars import (
+    extracao,
+    filtros,
+    salvar,
+    transformacao,
+)
 from modulos.uteis import meu_tempo
 
 
@@ -62,9 +69,9 @@ def adicionar_promocao_e_tratar_preco_velho(
 def pipeline() -> None:
     logger.info("Inicio pipeline")
 
-    caminho_json = f"../dados/nao_processados/mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}.json"
+    caminho_json = f"../dados/nao_processados/tenis_corrida_{meu_tempo.data_agora_simplificada_com_underline()}.json"
 
-    caminho_parquet = f"../dados/processados/mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}.parquet"
+    caminho_parquet = f"../dados/processados/tenis_corrida_{meu_tempo.data_agora_simplificada_com_underline()}.parquet"
 
     df = extracao.extrair_dados_json(caminho_json)
 

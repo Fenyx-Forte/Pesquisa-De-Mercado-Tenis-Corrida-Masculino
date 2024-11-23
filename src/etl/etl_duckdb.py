@@ -15,7 +15,7 @@ def pipeline() -> None:
     horario = meu_tempo.data_agora_string()
 
     nome_arquivo = (
-        f"mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}"
+        f"tenis_corrida_{meu_tempo.data_agora_simplificada_com_underline()}"
     )
 
     caminho_json = f"../dados/nao_processados/{nome_arquivo}.json"
