@@ -1,4 +1,5 @@
 import polars as pl
+
 from modulos.uteis import meu_tempo
 
 
@@ -63,18 +64,6 @@ def tratar_num_avaliacoes() -> pl.Expr:
         .fill_null(0)
         .cast(pl.Int32)
     )
-
-    return coluna_tratada
-
-
-def tratar_fonte() -> pl.Expr:
-    coluna_tratada = pl.col("_fonte").cast(pl.Categorical)
-
-    return coluna_tratada
-
-
-def tratar_site() -> pl.Expr:
-    coluna_tratada = pl.col("_site").cast(pl.Categorical)
 
     return coluna_tratada
 
