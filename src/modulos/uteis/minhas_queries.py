@@ -99,8 +99,6 @@ def cast_polars_entrada() -> str:
         , preco_atual_centavos
         , nota_avaliacao
         , num_avaliacoes
-        , _fonte
-        , _site
         , STRFTIME(_data_coleta, '%Y-%m-%d %H:%M:%S') as _data_coleta
         , _pagina
         , _ordem
@@ -122,8 +120,6 @@ def cast_polars_saida() -> str:
         , percentual_promocao::FLOAT4 AS percentual_promocao
         , nota_avaliacao::FLOAT4 AS nota_avaliacao
         , num_avaliacoes::INT4 AS num_avaliacoes
-        , _fonte
-        , _site
         , _data_coleta
         , _horario_coleta
         , _pagina::INT1 AS _pagina
