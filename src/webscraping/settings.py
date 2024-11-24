@@ -45,7 +45,7 @@ EXTENSIONS = {
 }
 
 FEEDS = {
-    f"../dados/nao_processados/mercado_livre_{meu_tempo.data_agora_simplificada_com_underline()}.json": {
+    f"../dados/nao_processados/tenis_corrida_{meu_tempo.data_agora_simplificada_com_underline()}.json": {
         "format": "json",
         "overwrite": True,
         "encoding": "utf8",

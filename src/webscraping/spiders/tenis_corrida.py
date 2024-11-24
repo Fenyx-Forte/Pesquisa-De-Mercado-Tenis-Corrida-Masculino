@@ -1,6 +1,10 @@
+from os import getenv
+
 import scrapy
 
-from modulos.uteis import meu_tempo
+from modulos.uteis import carregar_env, meu_tempo
+
+carregar_env.carregar_env()
 
 
 def seletor_caixa_produtos() -> str:
@@ -117,13 +121,11 @@ def retorna_proxima_pagina(response) -> str:
     return proxima_pagina
 
 
-class MercadoLivreSpider(scrapy.Spider):
-    name = "mercadolivre"
-    sops_job_name = "JOB_MERCADO_LIVRE"
-    allowed_domains = ["lista.mercadolivre.com.br", "proxy.scrapeops.io"]
-    start_urls = ["https://lista.mercadolivre.com.br/tenis-corrida-masculino"]
-    fonte = "https://lista.mercadolivre.com.br/tenis-corrida-masculino"
-    site = "MERCADO LIVRE"
+class TenisCorridaSpider(scrapy.Spider):
+    name = "teniscorrida"
+    sops_job_name = "JOB_TENIS_CORRIDA"
+    allowed_domains = [str(getenv("DOMAIN")), "proxy.scrapeops.io"]
+    start_urls = [str(getenv("START_URL"))]
     cont_pagina = 1
     max_pagina = 10
     ordem_produto = 0
@@ -145,8 +147,6 @@ class MercadoLivreSpider(scrapy.Spider):
                 "preco_atual_centavos": retorna_preco_atual_centavos(produto),
                 "nota_avaliacao": retorna_nota_avaliacao(produto),
                 "num_avaliacoes": retorna_num_avaliacoes(produto),
-                "_fonte": self.fonte,
-                "_site": self.site,
                 "_data_coleta": data_coleta,
                 "_pagina": self.cont_pagina,
                 "_ordem": self.ordem_produto,
