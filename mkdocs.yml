@@ -1,6 +1,6 @@
 site_name: Documentação Projeto
-site_url: https://fenyx-forte.github.io/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre/
-repo_url: https://github.com/Fenyx-Forte/Pesquisa-De-Mercado-Tenis-Corrida-Mercado-Livre
+site_url: https://fenyx-forte.github.io/Pesquisa-De-Mercado-Tenis-Corrida-Masculino/
+repo_url: https://github.com/Fenyx-Forte/Pesquisa-De-Mercado-Tenis-Corrida-Masculino
 repo_name: GitHub Projeto
 
 nav:
@@ -11,10 +11,10 @@ nav:
     - PostgreSQL: postgresql/index.md
 
     - Tabelas:
-      - mercado_livre: postgresql/public.mercado_livre.md
+      - tenis_corrida: postgresql/public.tenis_corrida.md
 
     - Views:
-      - view_mercado_livre: postgresql/public.view_mercado_livre.md
+      - view_tenis_corrida: postgresql/public.view_tenis_corrida.md
 
   - Web Scraping:
     - Web Scraping: webscraping/index.md
