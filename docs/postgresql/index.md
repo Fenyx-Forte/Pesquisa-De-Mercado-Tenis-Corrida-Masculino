@@ -1,11 +1,11 @@
-# db_dashboard_ptgb
+# bd_projeto
 
 ## Tables
 
 | Name | Columns | Comment | Type |
 | ---- | ------- | ------- | ---- |
-| [public.mercado_livre](public.mercado_livre.md) | 14 |  | BASE TABLE |
-| [public.view_mercado_livre](public.view_mercado_livre.md) | 12 |  | VIEW |
+| [public.tenis_corrida](public.tenis_corrida.md) | 12 |  | BASE TABLE |
+| [public.view_tenis_corrida](public.view_tenis_corrida.md) | 12 |  | VIEW |
 
 ## Relations
 

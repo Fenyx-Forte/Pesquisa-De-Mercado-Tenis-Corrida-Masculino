@@ -1,4 +1,4 @@
-# public.view_mercado_livre
+# public.view_tenis_corrida
 
 ## Description
 
@@ -6,7 +6,7 @@
 <summary><strong>Table Definition</strong></summary>
 
 ```sql
-CREATE VIEW view_mercado_livre AS (
+CREATE VIEW view_tenis_corrida AS (
  SELECT marca,
     produto,
     (preco_velho)::real AS preco_velho,
@@ -19,7 +19,7 @@ CREATE VIEW view_mercado_livre AS (
     _horario_coleta AS horario_coleta,
     _pagina AS pagina,
     _ordem AS ordem
-   FROM mercado_livre ml
+   FROM tenis_corrida
 )
 ```
 
@@ -46,11 +46,11 @@ CREATE VIEW view_mercado_livre AS (
 
 | Name | Columns | Comment | Type |
 | ---- | ------- | ------- | ---- |
-| [public.mercado_livre](public.mercado_livre.md) | 14 |  | BASE TABLE |
+| [public.tenis_corrida](public.tenis_corrida.md) | 12 |  | BASE TABLE |
 
 ## Relations
 
-![er](public.view_mercado_livre.svg)
+![er](public.view_tenis_corrida.svg)
 
 ---
 

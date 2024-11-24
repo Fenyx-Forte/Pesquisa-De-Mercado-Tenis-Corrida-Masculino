@@ -1,4 +1,4 @@
-# public.mercado_livre
+# public.tenis_corrida
 
 ## Description
 
@@ -14,8 +14,6 @@
 | percentual_promocao | numeric(5,2) |  | false |  |  |  |
 | nota_avaliacao | numeric(3,2) |  | false |  |  |  |
 | num_avaliacoes | integer |  | false |  |  |  |
-| _fonte | varchar(255) |  | false |  |  |  |
-| _site | varchar(255) |  | false |  |  |  |
 | _data_coleta | date |  | false |  |  |  |
 | _horario_coleta | time without time zone |  | false |  |  |  |
 | _pagina | smallint |  | false |  |  |  |
@@ -23,7 +21,7 @@
 
 ## Relations
 
-![er](public.mercado_livre.svg)
+![er](public.tenis_corrida.svg)
 
 ---
 
