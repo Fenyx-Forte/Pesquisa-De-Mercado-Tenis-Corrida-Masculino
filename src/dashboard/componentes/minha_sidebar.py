@@ -26,7 +26,6 @@ def links_minhas_informacoes() -> html.Div:
                 rel="noreferrer",
             ),
             html.Br(),
-            html.Br(),
             html.A(
                 [
                     html.I(className="fa-brands fa-github"),
