@@ -1,12 +1,7 @@
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/items.html
+"""Arquivo default do scrapy. Não modifiquei ele no projeto."""
 
-import scrapy
+from scrapy import Item
 
 
-class AppWebscrapingItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class AppWebscrapingItem(Item):
+    """Classe base para os itens utilizados no scrapy."""
