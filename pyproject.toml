@@ -10,17 +10,17 @@ python = "^3.11"
 
 
 [tool.poetry.group.etl.dependencies]
-pandera = {version = ">=0.20.3", extras = ["polars"]}
+pandera = { version = ">=0.20.3", extras = ["polars"] }
 
 
 [tool.poetry.group.processamento.dependencies]
-polars = {version = ">=1.4.0", extras = ["pyarrow"]}
+polars = { version = ">=1.4.0", extras = ["pyarrow"] }
 duckdb = ">=1.0.0"
 
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = ">=1.6.0"
-mkdocstrings = {version = ">=0.25.2", extras = ["python"]}
+mkdocstrings = { version = ">=0.25.2", extras = ["python"] }
 mkdocs-material = ">=9.5.30"
 
 
@@ -36,6 +36,7 @@ python-dotenv = "^1.0.1"
 pre-commit = ">=3.8.0"
 ruff = ">=0.5.5"
 bandit = ">=1.7.9"
+pyright = "^1.1.391"
 
 
 [tool.poetry.group.testes.dependencies]
@@ -73,18 +74,67 @@ test = "pytest"
 
 [tool.ruff]
 line-length = 80
-target-version = "py312"
-include = ["pyproject.toml", "src/**/*.py", "tests/**/*.py", "src/*.py", "tests/*.py"]
+indent-width = 4
+target-version = "py313"
+include = [
+    "pyproject.toml",
+    "src/*.py",
+    "src/**/*.py",
+    "tests/*.py",
+    "tests/**/*.py",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+docstring-code-line-length = 80
 
 [tool.ruff.lint]
-ignore = ["D203", "E111", "E203", "F401", "E722"]
+select = ["ALL"]
+
+ignore = [
+    #### modules
+    # "ANN", # flake8-annotations
+    # "COM", # flake8-commas
+    "DJ",  # django
+    "EXE", # flake8-executable
+    "T10", # debugger
+    # "TID", # flake8-tidy-imports
+
+    #### specific rules
+    "E501",    # line too long
+    "S101",    # assert
+    "PLR2004", # hardcoded numbers
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google" # Accepts: "google", "numpy", or "pep257".
 
 [tool.bandit]
 skips = ["B101", "B108", "B113", "B311"]
 
 [tool.pytest.ini_options]
-addopts = "-v"
+minversion = "8.0"
 testpaths = ["tests"]
+addopts = "-v -ra -q"
+log_cli = true
+log_cli_level = "INFO"
+log_format = "%(asctime)s %(levelname)s %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+filterwarnings = "ignore"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+pythonVersion = "3.13"
+pythonPlatform = "Linux"
+
+typeCheckingMode = "strict"
+
+include = ["src", "tests"]
+exclude = ["**/node_modules", "**/__pycache__"]
 
 [build-system]
 requires = ["poetry-core"]
