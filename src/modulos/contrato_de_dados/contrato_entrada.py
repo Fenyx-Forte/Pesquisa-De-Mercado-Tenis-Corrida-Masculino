@@ -1,3 +1,5 @@
+"""Contrato de dados para os dados de entrada do webscraping."""
+
 from functools import partial
 
 import pandera.polars as pa
@@ -7,6 +9,8 @@ campo_string_padrao = partial(pa.Field, nullable=True)
 
 
 class TenisCorridaEntrada(pa.DataFrameModel):
+    """Contrato de dados para os dados de entrada do webscraping referentes a tênis de corrida."""
+
     marca: pl.String = campo_string_padrao()
     produto: pl.String
     preco_velho_reais: pl.String = campo_string_padrao()
@@ -20,6 +24,6 @@ class TenisCorridaEntrada(pa.DataFrameModel):
     ordem: pl.Int64 = pa.Field(ge=1, le=72, alias="_ordem")
 
     class Config:
+        """Configuração do contrato de dados."""
+
         strict = True
-        # coerce = True
-        # drop_invalid_rows = True
