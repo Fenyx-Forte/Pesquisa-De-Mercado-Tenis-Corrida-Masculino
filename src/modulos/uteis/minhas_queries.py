@@ -1,95 +1,13 @@
-def kpi_num_total_itens() -> str:
-    query = """
-    SELECT
-        count(*) AS "Número Total de Produtos"
-    FROM
-        dados_mais_recentes;
-    """
+"""Módulo de queries para dataframes do Polars na entrada e saída do ETL do webscraping utilizando o Polars.
 
-    return query
-
-
-def kpi_num_marcas_unicas() -> str:
-    query = """
-    SELECT
-        COUNT(DISTINCT marca) AS "Número de Marcas"
-    FROM
-        dados_mais_recentes
-    WHERE
-        marca <> 'GENERICA';
-    """
-
-    return query
-
-
-def kpi_preco_atual_medio() -> str:
-    query = """
-    SELECT
-        AVG(preco_atual) AS "Média Preço"
-    FROM
-        dados_mais_recentes;
-    """
-
-    return query
-
-
-def marcas_mais_encontradas() -> str:
-    query = """
-    SELECT
-        marca AS "Marca"
-        , COUNT(marca) AS "Qtd Produtos"
-    FROM
-        dados_mais_recentes
-    GROUP BY
-        marca
-    ORDER BY
-        "Qtd Produtos" DESC
-        , marca ASC
-    LIMIT
-        10;
-    """
-
-    return query
-
-
-def preco_medio_por_marca() -> str:
-    query = """
-    SELECT
-        marcas as "Marca"
-        , AVG(preco_atual) AS "Preço Médio"
-    FROM
-        dados_mais_recentes
-    GROUP BY
-        marca
-    ORDER BY
-        "Preço Médio" DESC
-        , marca ASC;
-    """
-
-    return query
-
-
-def satisfacao_media_por_marca() -> str:
-    query = """
-    SELECT
-        marca as "Marca"
-        , AVG(nota_avalicao) as "Satisfação Média"
-    FROM
-        dados_mais_recentes
-    WHERE
-        num_avaliacoes >= 20
-    GROUP BY
-        marca
-    ORDER BY
-        "Satisfação Média" DESC
-        , marca ASC;
-    """
-
-    return query
+Essas queries são utilizadas para transformar os dataframes do DuckDB em dataframes do Polars, para que o contrato de dados
+possa ser aplicado a fim de verificar se o ETL foi bem sucedido.
+"""
 
 
 def cast_polars_entrada() -> str:
-    query = """
+    """Transforma o dataframe do DuckDB para Polars no início do ETL."""
+    return """
     SELECT
         marca
         , produto
@@ -106,11 +24,10 @@ def cast_polars_entrada() -> str:
         df;
     """
 
-    return query
-
 
 def cast_polars_saida() -> str:
-    query = """
+    """Transforma o dataframe do DuckDB para Polars no fim do ETL."""
+    return """
     SELECT
         marca
         , produto
@@ -127,5 +44,3 @@ def cast_polars_saida() -> str:
     FROM
         df;
     """
-
-    return query
