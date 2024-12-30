@@ -1,3 +1,5 @@
+"""Configurações do scrapy."""
+
 import os
 
 from modulos.uteis import carregar_env, meu_tempo
@@ -16,14 +18,13 @@ ROBOTSTXT_OBEY = False
 REDIRECT_ENABLED = False
 COOKIES_ENABLED = False
 
-SCRAPEOPS_API_KEY = os.getenv("SCRAPEOPS_API_KEY")
+SCRAPEOPS_API_KEY: str | None = os.getenv("SCRAPEOPS_API_KEY")
 
 # HTTP Headers
 SCRAPEOPS_FAKE_HEADERS_ENABLED = True
 SCRAPEOPS_FAKE_HEADERS_ENDPOINT = (
     "http://headers.scrapeops.io/v1/browser-headers?"
 )
-SCRAPEOPS_FAKE_HEADERS_ENABLED = True
 SCRAPEOPS_NUM_RESULTS = 100
 
 # Proxy
