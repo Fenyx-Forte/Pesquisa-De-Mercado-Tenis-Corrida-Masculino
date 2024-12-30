@@ -132,6 +132,7 @@ pythonVersion = "3.13"
 pythonPlatform = "Linux"
 
 typeCheckingMode = "strict"
+"reportMissingTypeStubs" = false
 
 include = ["src", "tests"]
 exclude = ["**/node_modules", "**/__pycache__"]
@@ -139,3 +140,13 @@ exclude = ["**/node_modules", "**/__pycache__"]
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.sqlfluff.core]
+dialect = "duckdb"
+exclude_rules = "RF05, LT05"
+ignore = "templating"
+
+[tool.sqlfluff.indentation]
+indented_joins = true
+indented_using_on = true
+tab_space_size = 2

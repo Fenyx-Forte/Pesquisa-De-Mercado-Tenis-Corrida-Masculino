@@ -49,9 +49,9 @@ repos:
     rev: 3.2.5
     hooks:
       - id: sqlfluff-lint
-        args: ["--dialect", "duckdb"]
+        args: [--config, "./pyproject.toml"]
       - id: sqlfluff-fix
-        args: ["--dialect", "duckdb"]
+        args: [--config, "./pyproject.toml"]
 
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.4
