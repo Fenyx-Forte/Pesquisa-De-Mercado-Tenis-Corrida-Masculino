@@ -57,3 +57,13 @@ repos:
     rev: v1.7.4
     hooks:
       - id: actionlint
+
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: npx
+        language: system
+        pass_filenames: false
+        always_run: true
+        args: ["prettier", "assets/*.html", "--check"]
