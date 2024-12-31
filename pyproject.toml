@@ -37,6 +37,7 @@ pre-commit = ">=3.8.0"
 ruff = ">=0.5.5"
 bandit = ">=1.7.9"
 pyright = "^1.1.391"
+sqlfluff = "^3.3.0"
 
 
 [tool.poetry.group.testes.dependencies]
