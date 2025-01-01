@@ -107,6 +107,7 @@ ignore = [
     "E501",    # line too long
     "S101",    # assert
     "PLR2004", # hardcoded numbers
+    "ARG001",  # Unused function argument
 ]
 
 [tool.ruff.lint.pydocstyle]
