@@ -6,7 +6,11 @@ possa ser aplicado a fim de verificar se o ETL foi bem sucedido.
 
 
 def cast_polars_entrada() -> str:
-    """Transforma o dataframe do DuckDB para Polars no início do ETL."""
+    """Transforma o dataframe do DuckDB para Polars no início do ETL.
+
+    Returns:
+        str: Query SQL do DuckDB para transformar o dataframe do DuckDB para Polars.
+    """
     return """
     SELECT
         marca
@@ -26,7 +30,11 @@ def cast_polars_entrada() -> str:
 
 
 def cast_polars_saida() -> str:
-    """Transforma o dataframe do DuckDB para Polars no fim do ETL."""
+    """Transforma o dataframe do DuckDB para Polars no fim do ETL.
+
+    Returns:
+        str: Query SQL do DuckDB para transformar o dataframe do DuckDB para Polars.
+    """
     return """
     SELECT
         marca
