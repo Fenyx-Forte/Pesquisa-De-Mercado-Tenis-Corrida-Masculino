@@ -107,7 +107,8 @@ ignore = [
     "E501",    # line too long
     "S101",    # assert
     "PLR2004", # hardcoded numbers
-    "ARG001",  # Unused function argument
+    "ARG001",  # unused function argument
+    "BLE001",  # blind exception
 ]
 
 [tool.ruff.lint.pydocstyle]
