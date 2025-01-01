@@ -21,7 +21,7 @@ def salvar_dados(
     Args:
         query_insercao (str): Consulta SQL para inserir os dados no banco de dados na nuvem.
         df (DuckDBPyRelation): Dados tratados, resultados do ETL.
-        conexao (DuckDBPyConnection): Conexão com o banco de dados na nuvem.
+        conexao (DuckDBPyConnection): Conexão local com o DuckDB.
         nome_arquivo (str): Nome do arquivo que será salvo no banco de dados local.
         horario (str): Horário em que o arquivo será salvo no banco de dados local.
     """
