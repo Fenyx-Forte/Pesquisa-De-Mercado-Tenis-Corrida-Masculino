@@ -1,13 +1,19 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+"""Pipelines para o scrapy. Utilizei a configuração default."""
 
-
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+from scrapy import Item, Spider
 
 
 class AppWebscrapingPipeline:
-    def process_item(self, item, spider):
+    """Pipeline default para o scrapy."""
+
+    def process_item(self, item: Item, spider: Spider) -> Item:
+        """Processa o item. Utilizei o processamento default.
+
+        Args:
+            item (Item): Dicionário contendo os dados do item.
+            spider (Spider): Objeto que realiza a extração dos itens.
+
+        Returns:
+            Item: O dicionário processado.
+        """
         return item

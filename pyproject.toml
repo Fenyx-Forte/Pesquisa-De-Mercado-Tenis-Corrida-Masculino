@@ -108,6 +108,7 @@ ignore = [
     "S101",    # assert
     "PLR2004", # hardcoded numbers
     "ARG001",  # unused function argument
+    "ARG002",  # unused method argument
     "BLE001",  # blind exception
 ]
 
