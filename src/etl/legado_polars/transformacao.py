@@ -1,10 +1,20 @@
+"""Módulo que contém funções para tratar os dados do Webscraping."""
+
 import polars as pl
 
 from modulos.uteis import meu_tempo
 
 
 def tratar_coluna_string(nome_coluna: str) -> pl.Expr:
-    coluna_tratada = (
+    """Tratamento de colunas do tipo string.
+
+    Args:
+        nome_coluna (str): Nome da coluna a ser tratada.
+
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return (
         pl.col(nome_coluna)
         .str.to_uppercase()
         .str.replace_all(r"[ÁÀÂÃÄÅ]", "A")
@@ -18,139 +28,197 @@ def tratar_coluna_string(nome_coluna: str) -> pl.Expr:
         .str.strip_chars()
     )
 
-    return coluna_tratada
-
 
 def tratar_marca() -> pl.Expr:
-    coluna_tratada = tratar_coluna_string("marca").fill_null("GENERICA")
+    """Tratamento da coluna "marca".
 
-    return coluna_tratada
+    Preenchimento de valores nulos com "GENERICA".
+
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return tratar_coluna_string("marca").fill_null("GENERICA")
 
 
 def tratar_produto() -> pl.Expr:
-    coluna_tratada = tratar_coluna_string("produto").fill_null(
-        "PRODUTO SEM NOME"
-    )
+    """Tratamento da coluna "produto".
 
-    return coluna_tratada
+    Preenchimento de valores nulos com "PRODUTO SEM NOME".
+
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return tratar_coluna_string("produto").fill_null(
+        "PRODUTO SEM NOME",
+    )
 
 
 def tratar_preco_velho_reais() -> pl.Expr:
-    coluna_tratada = pl.col("preco_velho_reais").str.replace(
-        ".", "", literal=True
-    )
+    """Tratamento da coluna "preco_velho_reais".
 
-    return coluna_tratada
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return pl.col("preco_velho_reais").str.replace(
+        ".",
+        "",
+        literal=True,
+    )
 
 
 def tratar_preco_atual_reais() -> pl.Expr:
-    coluna_tratada = pl.col("preco_atual_reais").str.replace(
-        ".", "", literal=True
-    )
+    """Tratamento da coluna "preco_atual_reais".
 
-    return coluna_tratada
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return pl.col("preco_atual_reais").str.replace(
+        ".",
+        "",
+        literal=True,
+    )
 
 
 def tratar_nota_avaliacao() -> pl.Expr:
-    coluna_tratada = pl.col("nota_avaliacao").fill_null(0).cast(pl.Float32)
+    """Tratamento da coluna "nota_avaliacao".
 
-    return coluna_tratada
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return pl.col("nota_avaliacao").fill_null(0).cast(pl.Float32)
 
 
 def tratar_num_avaliacoes() -> pl.Expr:
-    coluna_tratada = (
+    """Tratamento da coluna "num_avaliacoes".
+
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return (
         pl.col("num_avaliacoes")
         .str.strip_chars("()")
         .fill_null(0)
         .cast(pl.Int32)
     )
 
-    return coluna_tratada
-
 
 def tratar_data_coleta() -> pl.Expr:
-    coluna_tratada = pl.col("_data_coleta").str.to_datetime(
-        format=meu_tempo.formatacao_tempo_completo()
-    )
+    """Tratamento da coluna "_data_coleta".
 
-    return coluna_tratada
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return pl.col("_data_coleta").str.to_datetime(
+        format=meu_tempo.formatacao_tempo_completo(),
+    )
 
 
 def tratar_pagina() -> pl.Expr:
-    coluna_tratada = pl.col("_pagina").cast(pl.Int8)
+    """Tratamento da coluna "_pagina".
 
-    return coluna_tratada
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return pl.col("_pagina").cast(pl.Int8)
 
 
 def tratar_ordem() -> pl.Expr:
-    coluna_tratada = pl.col("_ordem").cast(pl.Int8)
+    """Tratamento da coluna "_ordem".
 
-    return coluna_tratada
+    Returns:
+        pl.Expr: Expressão que trata a coluna.
+    """
+    return pl.col("_ordem").cast(pl.Int8)
 
 
 def adiciona_preco_completo(
-    col_preco_reais: str, col_preco_centavos: str, nome_coluna_nova: str
+    col_preco_reais: str,
+    col_preco_centavos: str,
+    nome_coluna_nova: str,
 ) -> pl.Expr:
-    coluna_nova = (
+    """Adição de um novo campo com o preço completo.
+
+    Args:
+        col_preco_reais (str): Nome da coluna com o preço em reais.
+        col_preco_centavos (str): Nome da coluna com o preço em centavos.
+        nome_coluna_nova (str): Nome da coluna que será criada.
+
+    Returns:
+        pl.Expr: Expressão que adiciona a nova coluna.
+    """
+    return (
         pl.when(
             pl.col(col_preco_reais).is_not_null()
-            & pl.col(col_preco_centavos).is_not_null()
+            & pl.col(col_preco_centavos).is_not_null(),
         )
         .then(pl.col(col_preco_reais) + "." + pl.col(col_preco_centavos))
         .otherwise(
             pl.when(pl.col(col_preco_centavos).is_null())
             .then(pl.col(col_preco_reais))
-            .otherwise(None)
+            .otherwise(None),
         )
         .cast(pl.Float32)
         .alias(nome_coluna_nova)
     )
 
-    return coluna_nova
-
 
 def adicionar_preco_velho_completo() -> pl.Expr:
-    coluna_nova = adiciona_preco_completo(
+    """Adição da coluna "preco_velho".
+
+    Returns:
+        pl.Expr: Expressão que adiciona a coluna.
+    """
+    return adiciona_preco_completo(
         col_preco_reais="preco_velho_reais",
         col_preco_centavos="preco_velho_centavos",
         nome_coluna_nova="preco_velho",
     )
 
-    return coluna_nova
-
 
 def adicionar_preco_atual_completo() -> pl.Expr:
-    coluna_nova = adiciona_preco_completo(
+    """Adição da coluna "preco_atual".
+
+    Returns:
+        pl.Expr: Expressão que adiciona a coluna.
+    """
+    return adiciona_preco_completo(
         col_preco_reais="preco_atual_reais",
         col_preco_centavos="preco_atual_centavos",
         nome_coluna_nova="preco_atual",
     )
 
-    return coluna_nova
-
 
 def tratar_preco_velho() -> pl.Expr:
-    coluna_tradada = pl.col("preco_velho").fill_null(pl.col("preco_atual"))
+    """Tratamento da coluna "preco_velho".
 
-    return coluna_tradada
+    Returns:
+        pl.Expr: Expressão que adiciona a coluna.
+    """
+    return pl.col("preco_velho").fill_null(pl.col("preco_atual"))
 
 
 def adicionar_promocao() -> pl.Expr:
-    coluna_nova = pl.col("preco_velho").is_not_null().alias("promocao")
+    """Adição da coluna "promocao".
 
-    return coluna_nova
+    Returns:
+        pl.Expr: Expressão que adiciona a coluna.
+    """
+    return pl.col("preco_velho").is_not_null().alias("promocao")
 
 
 def adicionar_percentual_promocao() -> pl.Expr:
-    coluna_nova = (
+    """Adição da coluna "percentual_promocao".
+
+    Returns:
+        pl.Expr: Expressão que adiciona a coluna.
+    """
+    return (
         pl.when(pl.col("preco_velho").is_not_null())
         .then(
             100
             * (pl.col("preco_velho") - pl.col("preco_atual"))
-            / pl.col("preco_velho")
+            / pl.col("preco_velho"),
         )
         .otherwise(0)
         .alias("percentual_promocao")
     )
-
-    return coluna_nova
