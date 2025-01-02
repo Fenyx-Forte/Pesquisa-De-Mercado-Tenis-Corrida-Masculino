@@ -7,7 +7,7 @@ class AppWebscrapingPipeline:
     """Pipeline default para o scrapy."""
 
     def process_item(self, item: Item, spider: Spider) -> Item:
-        """Processa o item. Utilizei o processamento default.
+        """Processa o item.
 
         Args:
             item (Item): Dicionário contendo os dados do item.
