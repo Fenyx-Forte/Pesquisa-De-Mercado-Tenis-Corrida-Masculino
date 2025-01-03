@@ -1,11 +1,18 @@
+"""Configurações para o dashboard."""
+
 from dash import page_container
-from dash_bootstrap_components import Col, Container, Row, Stack, icons, themes
+from dash_bootstrap_components import Col, Container, Row, icons, themes
 
 from dashboard.componentes import cabecalho, minha_sidebar
 
 
 def template_html_padrao() -> str:
-    template = """
+    """Gera um template HTML comum para todas as páginas da aplicação.
+
+    Returns:
+        str: String contendo o HTML padrão de todas as páginas.
+    """
+    return """
     <!DOCTYPE html>
         <html lang="pt-BR">
             <head>
@@ -26,11 +33,17 @@ def template_html_padrao() -> str:
         </html>
     """
 
-    return template
-
 
 def template_html_teste() -> str:
-    template = """
+    """Gera um template HTML comum para todas as páginas da aplicação.
+
+    ### NOTA ###
+    Só deve ser usado em ambiente de dev.
+
+    Returns:
+        str: String contendo o HTML padrão de todas as páginas.
+    """
+    return """
     <!DOCTYPE html>
         <html lang="pt-BR">
             <head>
@@ -50,11 +63,14 @@ def template_html_teste() -> str:
         </html>
     """
 
-    return template
-
 
 def meta_tags_basicas() -> list[dict[str, str]]:
-    meta_tags = [
+    """Gera uma lista de dicionários contendo as metatags básicas para a página.
+
+    Returns:
+        list[dict[str, str]]: Lista com dicionários que representam as metatags básicas.
+    """
+    return [
         {
             "charset": "UTF-8",
         },
@@ -72,11 +88,14 @@ def meta_tags_basicas() -> list[dict[str, str]]:
         },
     ]
 
-    return meta_tags
-
 
 def meta_tags_og() -> list[dict[str, str]]:
-    meta_tags = [
+    """Gera uma lista de dicionários contendo as meta tags Open Graph para a página.
+
+    Returns:
+        list[dict[str, str]]: Lista com dicionários que representam as meta tags Open Graph.
+    """
+    return [
         {
             "property": "og:title",
             "content": "Pesquisa de Mercado: Tênis de Corrida Masculino",
@@ -99,11 +118,14 @@ def meta_tags_og() -> list[dict[str, str]]:
         },
     ]
 
-    return meta_tags
-
 
 def meta_tags_twitter() -> list[dict[str, str]]:
-    meta_tags = [
+    """Gera uma lista de dicionários contendo as meta tags Twitter para a página.
+
+    Returns:
+        list[dict[str, str]]: Lista com dicionários que representam as meta tags Twitter.
+    """
+    return [
         {
             "name": "twitter:card",
             "content": "summary_large_image",
@@ -122,11 +144,14 @@ def meta_tags_twitter() -> list[dict[str, str]]:
         },
     ]
 
-    return meta_tags
-
 
 def meta_tags_aplicacao() -> list[dict[str, str]]:
-    meta_tags = [
+    """Gera uma lista de dicionários contendo as meta tags do aplicativo.
+
+    Returns:
+        list[dict[str, str]]: Lista com dicionários que representam as meta tags do aplicativo.
+    """
+    return [
         {
             "name": "author",
             "content": "Fenyx Forte",
@@ -141,11 +166,14 @@ def meta_tags_aplicacao() -> list[dict[str, str]]:
         },
     ]
 
-    return meta_tags
-
 
 def minhas_meta_tags() -> list[dict[str, str]]:
-    meta_tags = [
+    """Gera uma lista de dicionários contendo todas as meta tags do dashboard.
+
+    Returns:
+        list[dict[str, str]]: Lista com dicionários que representam as meta tags do dashboard.
+    """
+    return [
         {
             "property": "og:locale",
             "content": "pt_BR",
@@ -156,15 +184,18 @@ def minhas_meta_tags() -> list[dict[str, str]]:
         },
         *meta_tags_basicas(),
         *meta_tags_aplicacao(),
-        # *meta_tags_og(),
-        # *meta_tags_twitter(),
     ]
 
-    return meta_tags
 
+def configuracoes_app() -> (
+    dict[str, str | list[str] | bool | list[dict[str, str]]]
+):
+    """Gera um dicionário contendo as configurações do aplicativo.
 
-def configuracoes_app() -> dict:
-    configuracoes = {
+    Returns:
+        dict[str, str | list[str] | bool | list[dict[str, str]]]: Dicionário com configurações do aplicativo.
+    """
+    return {
         "external_stylesheets": [
             themes.LUMEN,
             icons.FONT_AWESOME,
@@ -187,11 +218,19 @@ def configuracoes_app() -> dict:
         "meta_tags": minhas_meta_tags(),
     }
 
-    return configuracoes
 
+def configuracoes_app_teste() -> (
+    dict[str, str | list[str] | bool | list[dict[str, str]]]
+):
+    """Gera um dicionário contendo as configurações do aplicativo.
 
-def configuracoes_app_teste() -> dict:
-    configuracoes = {
+    ### NOTA ###
+    Configurações a serem usadas em ambiente DEV.
+
+    Returns:
+        dict[str, str | list[str] | bool | list[dict[str, str]]]: Dicionário com configurações do aplicativo.
+    """
+    return {
         "external_stylesheets": [
             themes.LUMEN,
             icons.FONT_AWESOME,
@@ -209,11 +248,14 @@ def configuracoes_app_teste() -> dict:
         "meta_tags": minhas_meta_tags(),
     }
 
-    return configuracoes
-
 
 def layout_app() -> Container:
-    layout = Container(
+    """Gera uma estrutura de layout para o aplicativo.
+
+    Returns:
+        Container: Elemento Container que define a estrutura do aplicativo.
+    """
+    return Container(
         [
             Row(
                 Col(
@@ -245,5 +287,3 @@ def layout_app() -> Container:
         fluid=True,
         id="conteiner-geral",
     )
-
-    return layout
