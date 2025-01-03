@@ -1,4 +1,12 @@
+"""Traduções usadas no dashboard."""
+
+
 def dag_locale_pt_br() -> dict[str, str]:
+    """Gera um dicionário com as configurações de localização para o português (Brasil).
+
+    Returns:
+        dict[str, str]: Dicionário contendo as configurações de localização.
+    """
     return {
         # Number Filter & Text Filter
         "filterOoo": "Filtrar...",
