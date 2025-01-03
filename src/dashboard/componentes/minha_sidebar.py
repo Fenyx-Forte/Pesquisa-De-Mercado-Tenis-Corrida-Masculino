@@ -1,3 +1,5 @@
+"""Sidebar usada em todas as páginas do dashboard."""
+
 from dash import (
     Input,
     Output,
@@ -11,7 +13,12 @@ from dashboard.uteis import uteis_processamento
 
 
 def links_minhas_informacoes() -> html.Div:
-    conteudo = html.Div(
+    """Div para exibir os links para acessar as minhas informações específicas.
+
+    Returns:
+    html.Div: Div que contém os links de acesso a informações.
+    """
+    return html.Div(
         [
             html.A(
                 [
@@ -48,23 +55,29 @@ def links_minhas_informacoes() -> html.Div:
         ],
     )
 
-    return conteudo
-
 
 def minhas_informacoes() -> html.Div:
-    conteudo = html.Div(
+    """Div para exibir as informações do usuário.
+
+    Returns:
+        html.Div: Div contendo o nome e os links de acesso a informações.
+    """
+    return html.Div(
         [
             html.H1("Fenyx Forte", className="meu-nome"),
             html.Hr(),
             links_minhas_informacoes(),
-        ]
+        ],
     )
-
-    return conteudo
 
 
 def links_paginas() -> Nav:
-    conteudo = Nav(
+    """Gera uma lista com links para diferentes páginas.
+
+    Returns:
+    Nav: Elemento HTML que contém a lista de links.
+    """
+    return Nav(
         [
             NavLink(
                 html.Div("Home"),
@@ -111,11 +124,14 @@ def links_paginas() -> Nav:
         pills=True,
     )
 
-    return conteudo
-
 
 def links_documentacao() -> html.Div:
-    conteudo = html.Div(
+    """Div para exibir os links de documentação da aplicação.
+
+    Returns:
+        html.Div: Div contendo os links para a documentação.
+    """
+    return html.Div(
         [
             html.A(
                 [
@@ -142,11 +158,14 @@ def links_documentacao() -> html.Div:
         ],
     )
 
-    return conteudo
-
 
 def creditos_imagens_e_icones() -> html.Div:
-    conteudo = html.Div(
+    """Div para exibir informações sobre os créditos das imagens e ícones utilizados no dashboard.
+
+    Returns:
+        html.Div: Div contendo as informações sobre créditos.
+    """
+    return html.Div(
         [
             html.Div(
                 html.Label(
@@ -176,11 +195,14 @@ def creditos_imagens_e_icones() -> html.Div:
         ],
     )
 
-    return conteudo
-
 
 def sidebar() -> html.Div:
-    conteudo = html.Div(
+    """Barra lateral para navegar pelo dashboard e para exibir informações e links importantes.
+
+    Returns:
+        html.Div: Div representando a sidebar.
+    """
+    return html.Div(
         [
             Location(id="url-atual", refresh=False),
             html.Div(
@@ -198,8 +220,6 @@ def sidebar() -> html.Div:
         id="minha-sidebar",
         className="minha-sidebar",
     )
-
-    return conteudo
 
 
 clientside_callback(
