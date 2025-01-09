@@ -1,5 +1,13 @@
+"""Queries usadas na página Top 10 Marcas Atuais."""
+
+
 def query_top_10_marcas_periodo() -> str:
-    query = """
+    """Query para calcular os dados de um determinado período.
+
+    Returns:
+        str: Query com os dados de um determinado período.
+    """
+    return """
     WITH tabela_reserva AS (
         SELECT
             unnest($lista_marcas) AS marca,
@@ -32,5 +40,3 @@ def query_top_10_marcas_periodo() -> str:
     LIMIT
         10;
     """
-
-    return query
