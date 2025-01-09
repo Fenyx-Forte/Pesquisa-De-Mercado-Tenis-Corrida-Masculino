@@ -1,4 +1,4 @@
-from operator import ge
+"""Página Home."""
 
 from dash import html, register_page
 from dash_bootstrap_components import (
@@ -20,14 +20,29 @@ register_page(
 
 
 def id_pagina() -> str:
+    """Id da página.
+
+    Returns:
+        str: id da página.
+    """
     return "home"
 
 
 def titulo_pagina() -> str:
+    """Título da página.
+
+    Returns:
+        str: Título da página.
+    """
     return "Home"
 
 
 def secao_contexto() -> html.Div:
+    """Contexto do dashboard.
+
+    Returns:
+        html.Div: Contexto do dashboard.
+    """
     periodo_coleta = gerenciador.retorna_periodo_historico()
 
     texto_contexto = """
@@ -36,29 +51,32 @@ def secao_contexto() -> html.Div:
         são os dados relativos às 10 primeiras páginas dessa pesquisa.
     """
 
-    conteudo = html.Div(
+    return html.Div(
         [
             html.H4("Contexto", className="titulo_um"),
             html.Div(texto_contexto),
             html.Div(
-                f"Os dados foram coletados no período de {periodo_coleta}."
+                f"Os dados foram coletados no período de {periodo_coleta}.",
             ),
             html.Div(
-                "Os dados foram coletados diariamente por volta de 01:00 ou 02:30 da madrugada."
+                "Os dados foram coletados diariamente por volta de 01:00 ou 02:30 da madrugada.",
             ),
         ],
         className="secao",
     )
 
-    return conteudo
-
 
 def secao_foco() -> html.Div:
-    conteudo = html.Div(
+    """Detalha o foco do dashboard.
+
+    Returns:
+        html.Div: Foco do dashboard.
+    """
+    return html.Div(
         [
             html.H4("Foco"),
             html.Div(
-                "O foco do dashboard é auxiliar a responder as seguintes perguntas:"
+                "O foco do dashboard é auxiliar a responder as seguintes perguntas:",
             ),
             html.Div(
                 "1) Hoje é um dia bom para comprar?",
@@ -104,18 +122,21 @@ def secao_foco() -> html.Div:
         className="secao",
     )
 
-    return conteudo
-
 
 def secao_links() -> html.Div:
-    conteudo = html.Div(
+    """Todos os links relativos ao dashboard.
+
+    Returns:
+        html.Div: Seção de links.
+    """
+    return html.Div(
         [
             html.H4("Links"),
             html.Div(
-                "(Para abrir o menu lateral, vá para o topo da página. Depois, clique no botão que está do lado esquerdo.)"
+                "(Para abrir o menu lateral, vá para o topo da página. Depois, clique no botão que está do lado esquerdo.)",
             ),
             html.Div(
-                "Todos os links do dashboard se encontram no menu lateral."
+                "Todos os links do dashboard se encontram no menu lateral.",
             ),
             html.Div("Minhas informações:", className="subsecao_links"),
             html.Div(
@@ -131,7 +152,7 @@ def secao_links() -> html.Div:
                         "Meu portfólio.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -146,7 +167,7 @@ def secao_links() -> html.Div:
                         "Meu GitHub.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -161,7 +182,7 @@ def secao_links() -> html.Div:
                         "Meu email.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 "Páginas do dashboard:",
@@ -180,7 +201,7 @@ def secao_links() -> html.Div:
                         "Página inicial.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -195,7 +216,7 @@ def secao_links() -> html.Div:
                         'Principais indicadores para a pergunta "Hoje é um dia bom para comprar?".',
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -210,7 +231,7 @@ def secao_links() -> html.Div:
                         "Como as 10 marcas mais procuradas de hoje estavam em outros períodos?",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -225,7 +246,7 @@ def secao_links() -> html.Div:
                         "Quais são as 10 marcas mais procuradas de cada período?",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -240,7 +261,7 @@ def secao_links() -> html.Div:
                         "Preço médio por marca.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -255,7 +276,7 @@ def secao_links() -> html.Div:
                         "Faixa de preço por marca.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -270,7 +291,7 @@ def secao_links() -> html.Div:
                         "Satisfação por marca.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -285,7 +306,7 @@ def secao_links() -> html.Div:
                         "Promoções por marca.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 "Documentação:",
@@ -304,7 +325,7 @@ def secao_links() -> html.Div:
                         "Repositório do projeto.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
             html.Div(
                 [
@@ -319,29 +340,35 @@ def secao_links() -> html.Div:
                         "Documentação do projeto.",
                         className="resumo_link",
                     ),
-                ]
+                ],
             ),
         ],
         className="secao",
     )
 
-    return conteudo
-
 
 def coluna() -> html.Div:
-    conteudo = html.Div(
+    """Conteúdo de uma coluna.
+
+    Returns:
+        html.Div: Coluna.
+    """
+    return html.Div(
         [
             secao_contexto(),
             secao_foco(),
             secao_links(),
-        ]
+        ],
     )
-
-    return conteudo
 
 
 def colunas() -> Row:
-    conteudo = Row(
+    """Colunas que compoem o conteúdo da página.
+
+    Returns:
+        Row: Conjunto de colunas.
+    """
+    return Row(
         [
             Col(
                 coluna(),
@@ -350,8 +377,6 @@ def colunas() -> Row:
             ),
         ],
     )
-
-    return conteudo
 
 
 layout = html.Div(
