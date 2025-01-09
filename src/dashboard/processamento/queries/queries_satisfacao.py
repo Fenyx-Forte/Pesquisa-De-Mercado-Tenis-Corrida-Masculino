@@ -1,5 +1,13 @@
+"""Queries usadas na página Satisfação."""
+
+
 def query_satisfacao_hoje() -> str:
-    query = """
+    """Query para calcular os dados da coluna 'hoje'.
+
+    Returns:
+        str: Query com os dados de 'hoje'.
+    """
+    return """
     WITH tabela_resultado AS (
         SELECT
             dmr.marca
@@ -36,11 +44,14 @@ def query_satisfacao_hoje() -> str:
         tr.nota_avaliacao > 4;
     """
 
-    return query
-
 
 def query_satisfacao_periodo() -> str:
-    query = """
+    """Query para calcular os dados de um determinado período.
+
+    Returns:
+        str: Query com os dados de um determinado período.
+    """
+    return """
     SELECT
         map.marca
         , map.nota_avaliacao
@@ -49,5 +60,3 @@ def query_satisfacao_periodo() -> str:
     FROM
         media_avaliacoes_periodo($data_inicio, $data_fim) AS map;
     """
-
-    return query
