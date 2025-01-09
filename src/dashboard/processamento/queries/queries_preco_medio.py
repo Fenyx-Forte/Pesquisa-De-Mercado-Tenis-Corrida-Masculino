@@ -1,5 +1,13 @@
+"""Queries usadas na página Preço Médio."""
+
+
 def query_preco_medio_hoje() -> str:
-    query = """
+    """Query para calcular os dados da coluna 'hoje'.
+
+    Returns:
+        str: Query com os dados de 'hoje'.
+    """
+    return """
     SELECT
         dmr.marca
         , AVG(dmr.preco_atual) AS preco_medio
@@ -10,11 +18,14 @@ def query_preco_medio_hoje() -> str:
         dmr.marca;
     """
 
-    return query
-
 
 def query_preco_medio_periodo() -> str:
-    query = """
+    """Query para calcular os dados de um determinado período.
+
+    Returns:
+        str: Query com os dados de um determinado período.
+    """
+    return """
     SELECT
         pm.marca
         , pm.preco_medio
@@ -22,5 +33,3 @@ def query_preco_medio_periodo() -> str:
     FROM
         preco_medio_periodo($data_inicio, $data_fim) AS pm;
     """
-
-    return query
