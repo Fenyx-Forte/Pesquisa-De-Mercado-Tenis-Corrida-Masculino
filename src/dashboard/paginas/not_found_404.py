@@ -1,3 +1,5 @@
+"""Página Erro 404."""
+
 from dash import html, register_page
 
 register_page(
@@ -9,9 +11,12 @@ register_page(
 
 
 def titulo() -> html.H1:
-    conteudo = html.H1("Essa página não existe!", className="pagina")
+    """Conteúdo da página.
 
-    return conteudo
+    Returns:
+        H1: Conteúdo.
+    """
+    return html.H1("Essa página não existe!", className="pagina")
 
 
 layout = titulo()
