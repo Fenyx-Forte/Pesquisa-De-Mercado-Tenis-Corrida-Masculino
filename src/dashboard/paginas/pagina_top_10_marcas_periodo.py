@@ -1,3 +1,5 @@
+"""Página Top 10 Marcas Período."""
+
 from dash import (
     Input,
     Output,
@@ -29,16 +31,34 @@ register_page(
 
 
 def id_pagina() -> str:
+    """Id da página.
+
+    Returns:
+        str: id da página.
+    """
     return "top_10_marcas_periodo"
 
 
 def titulo_pagina() -> str:
+    """Título da página.
+
+    Returns:
+        str: Título da página.
+    """
     return "Top 10 Marcas Período"
 
 
 def configuracoes_figura(
     cor: str,
 ) -> dict:
+    """Título da página.
+
+    Args:
+        cor (str): Cor usada na figura para colorir a barra.
+
+    Returns:
+        dict: Configurações da figura usada para construir o gráfico.
+    """
     coluna_x = "Marca"
 
     coluna_y = "Porcentagem"
@@ -62,15 +82,21 @@ def configuracoes_figura(
 
 
 def informacao(grafico: dcc.Graph) -> html.Div:
-    conteudo = html.Div(
+    """Retorna uma Div contendo o gráfico.
+
+    Args:
+        grafico (dcc.Graph): Gráfico com as informações.
+
+    Returns:
+        html.Div: Div contendo o gráfico.
+    """
+    return html.Div(
         html.Div(
             grafico,
             className="grafico",
         ),
         className="informacao",
     )
-
-    return conteudo
 
 
 def coluna(
@@ -79,7 +105,18 @@ def coluna(
     periodo: str,
     grafico: dcc.Graph,
 ) -> html.Div:
-    conteudo = html.Div(
+    """Retorna uma das 3 colunas usadas no corpo da página.
+
+    Args:
+        sufixo_coluna (str): Sufixo que será adicionado ao nome das colunas para criar as definições das colunas.
+        titulo_cabecalho (str): Título do cabeçalho da coluna.
+        periodo (str): Período utilizado para filtrar os dados.
+        grafico (dcc.Graph): Gráfico utilizado na coluna.
+
+    Returns:
+        html.Div: Coluna que será usada no corpo da página.
+    """
+    return html.Div(
         [
             componentes_pagina.cabecalho_coluna(
                 id_pagina=id_pagina(),
@@ -94,10 +131,13 @@ def coluna(
         ],
     )
 
-    return conteudo
-
 
 def colunas() -> Row:
+    """Retorna um conjunto de colunas.
+
+    Returns:
+        Row: Linha que contém todas as colunas do corpo da página.
+    """
     periodo_hoje = gerenciador.retorna_periodo_hoje()
 
     periodo_escolhido = gerenciador.retorna_periodo_ultima_semana()
@@ -130,7 +170,7 @@ def colunas() -> Row:
         **configuracoes_figura("#5CB85C"),
     )
 
-    conteudo = Row(
+    return Row(
         [
             Col(
                 coluna(
@@ -171,8 +211,6 @@ def colunas() -> Row:
         ],
         class_name="linha_colunas",
     )
-
-    return conteudo
 
 
 layout = html.Div(
@@ -224,7 +262,21 @@ clientside_callback(
     prevent_initial_call=True,
     running=[(Output(f"{id_pagina()}_botao", "disabled"), True, False)],
 )
-def top_10_marcas_periodo_atualizar_comparacao(titulo, data_inicio, data_fim):
+def top_10_marcas_periodo_atualizar_comparacao(
+    titulo: str,
+    data_inicio: str,
+    data_fim: str,
+) -> list[Patch | None | str]:
+    """Retorna os dados atualizados da coluna "escolhido" para um período especificado.
+
+    Args:
+        titulo (str): Título atual do modal_erro. Se não for igual a "", então houve algum erro detectado pelo modal_erro.
+        data_inicio (str): Data de início do período a ser considerado.
+        data_fim (str): Data de fim do período a ser considerado.
+
+    Returns:
+        list[Patch | None | str]: Lista com os dados necessários para atualizar a coluna.
+    """
     if titulo != "":
         raise PreventUpdate
 
@@ -232,11 +284,13 @@ def top_10_marcas_periodo_atualizar_comparacao(titulo, data_inicio, data_fim):
         raise PreventUpdate
 
     df_novo = gerenciador.pagina_top_10_marcas_periodo_atualiza_dados_escolhido(
-        data_inicio, data_fim
+        data_inicio,
+        data_fim,
     )
 
     periodo_novo = uteis_processamento.retorna_periodo(
-        data_inicio=data_inicio, data_fim=data_fim
+        data_inicio=data_inicio,
+        data_fim=data_fim,
     )
 
     patch_figura = Patch()
@@ -244,4 +298,4 @@ def top_10_marcas_periodo_atualizar_comparacao(titulo, data_inicio, data_fim):
     patch_figura["data"][0]["x"] = df_novo["Marca"].values
     patch_figura["data"][0]["y"] = df_novo["Porcentagem"].values
 
-    return patch_figura, None, None, periodo_novo
+    return [patch_figura, None, None, periodo_novo]
