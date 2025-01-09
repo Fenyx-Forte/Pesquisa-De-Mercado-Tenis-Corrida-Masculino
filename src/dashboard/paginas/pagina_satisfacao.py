@@ -1,3 +1,5 @@
+"""Página Satisfação."""
+
 from dash import (
     Input,
     Output,
@@ -32,14 +34,32 @@ register_page(
 
 
 def id_pagina() -> str:
+    """Id da página.
+
+    Returns:
+        str: id da página.
+    """
     return "satisfacao"
 
 
 def titulo_pagina() -> str:
+    """Título da página.
+
+    Returns:
+        str: Título da página.
+    """
     return "Satisfação"
 
 
 def definicoes_colunas_tabela(sufixo_informacao: str) -> list[dict]:
+    """Retorna uma lista de dicionários que representam as definições das colunas da tabela.
+
+    Args:
+        sufixo_informacao (str): Sufixo que define qual configuração será usada.
+
+    Returns:
+        list[dict]: Configuração a ser usada pela tabela a depender de sufixo_coluna.
+    """
     configuracao_marca = {
         "headerName": "Marca",
         "field": "marca",
@@ -81,15 +101,21 @@ def definicoes_colunas_tabela(sufixo_informacao: str) -> list[dict]:
 
 
 def informacao(tabela: AgGrid) -> html.Div:
-    conteudo = html.Div(
+    """Retorna uma Div contendo a tabela.
+
+    Args:
+        tabela (AgGrid): Tabela com as informações.
+
+    Returns:
+        html.Div: Div contendo a tabela.
+    """
+    return html.Div(
         html.Div(
             tabela,
             className="tabela",
         ),
         className="informacao",
     )
-
-    return conteudo
 
 
 def coluna(
@@ -99,6 +125,18 @@ def coluna(
     dados_mais_20_avaliacoes: list[dict],
     dados_nota_superior_4: list[dict],
 ) -> html.Div:
+    """Retorna uma das 3 colunas usadas no corpo da página.
+
+    Args:
+        titulo_cabecalho (str): Título do cabeçalho da coluna.
+        periodo (str): Período utilizado para filtrar os dados.
+        sufixo_coluna (str): Sufixo que será adicionado ao nome das colunas para criar as definições das colunas.
+        dados_mais_20_avaliacoes (list[dict]): Dados com mais de 20 avaliações.
+        dados_nota_superior_4 (list[dict]): Dados com nota de avaliação superior a 4.
+
+    Returns:
+        html.Div: Coluna que será usada no corpo da página.
+    """
     tabela_avaliacao = componentes_pagina.tabela_ag_grid(
         dados=dados_nota_superior_4,
         id_completo=f"{id_pagina()}_tabela_{sufixo_coluna}_nota_avaliacao",
@@ -111,7 +149,7 @@ def coluna(
         definicoes_colunas=definicoes_colunas_tabela("num_avaliacao"),
     )
 
-    conteudo = html.Div(
+    return html.Div(
         [
             componentes_pagina.cabecalho_coluna(
                 id_pagina=id_pagina(),
@@ -130,10 +168,13 @@ def coluna(
         ],
     )
 
-    return conteudo
-
 
 def colunas() -> Row:
+    """Retorna um conjunto de colunas.
+
+    Returns:
+        Row: Linha que contém todas as colunas do corpo da página.
+    """
     periodo_hoje = gerenciador.retorna_periodo_hoje()
 
     periodo_escolhido = gerenciador.retorna_periodo_ultima_semana()
@@ -146,7 +187,7 @@ def colunas() -> Row:
 
     dados_historico = gerenciador.pagina_satisfacao_dados_historico()
 
-    conteudo = Row(
+    return Row(
         [
             Col(
                 coluna(
@@ -187,8 +228,6 @@ def colunas() -> Row:
         ],
         class_name="linha_colunas",
     )
-
-    return conteudo
 
 
 layout = html.Div(
@@ -240,7 +279,21 @@ clientside_callback(
     prevent_initial_call=True,
     running=[(Output(f"{id_pagina()}_botao", "disabled"), True, False)],
 )
-def satisfacao_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
+def satisfacao_atualiza_dados_periodo_escolhido(
+    titulo: str,
+    data_inicio: str,
+    data_fim: str,
+) -> list[dict | None | str]:
+    """Retorna os dados atualizados da coluna "escolhido" para um período especificado.
+
+    Args:
+        titulo (str): Título atual do modal_erro. Se não for igual a "", então houve algum erro detectado pelo modal_erro.
+        data_inicio (str): Data de início do período a ser considerado.
+        data_fim (str): Data de fim do período a ser considerado.
+
+    Returns:
+        list[dict | None | str]: Lista com os dados necessários para atualizar a coluna.
+    """
     if titulo != "":
         raise PreventUpdate
 
@@ -250,7 +303,8 @@ def satisfacao_atualiza_dados_periodo_escolhido(titulo, data_inicio, data_fim):
     periodo_novo = uteis_processamento.retorna_periodo(data_inicio, data_fim)
 
     dados_escolhido = gerenciador.pagina_satisfacao_atualiza_dados_escolhido(
-        data_inicio, data_fim
+        data_inicio,
+        data_fim,
     )
 
     return [
