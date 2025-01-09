@@ -1,5 +1,13 @@
+"""Queries usadas na página KPI's."""
+
+
 def query_kpis_hoje() -> str:
-    query = """
+    """Query para calcular os dados da coluna 'hoje'.
+
+    Returns:
+        str: Query com os dados de 'hoje'.
+    """
+    return """
     SELECT
         COUNT(*) AS numero_produtos
         , FORMAT(
@@ -63,11 +71,14 @@ def query_kpis_hoje() -> str:
         dados_mais_recentes AS dmr;
     """
 
-    return query
-
 
 def query_kpis_periodo() -> str:
-    query = """
+    """Query para calcular os dados de um determinado período.
+
+    Returns:
+        str: Query com os dados de um determinado período.
+    """
+    return """
     SELECT
         kp.numero_produtos
         , kp.media_precos
@@ -82,5 +93,3 @@ def query_kpis_periodo() -> str:
     FROM
         kpis_periodo($data_inicio, $data_fim) AS kp;
     """
-
-    return query
