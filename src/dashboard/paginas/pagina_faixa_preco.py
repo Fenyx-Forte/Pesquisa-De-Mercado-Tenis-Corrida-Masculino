@@ -293,7 +293,7 @@ def faixa_preco_atualiza_dados_periodo_escolhido(
     data_inicio: str,
     data_fim: str,
 ) -> list[dict | None | str]:
-    """Retorna os dados atualizados da tabela para um período especificado.
+    """Retorna os dados atualizados da coluna "escolhido" para um período especificado.
 
     Args:
         titulo (str): Título atual do modal_erro. Se não for igual a "", então houve algum erro detectado pelo modal_erro.
@@ -301,7 +301,7 @@ def faixa_preco_atualiza_dados_periodo_escolhido(
         data_fim (str): Data de fim do período a ser considerado.
 
     Returns:
-        list[dict | None | str]: Lista contendo as atualizações necessárias.
+        list[dict | None | str]: Lista com os dados necessários para atualizar a coluna.
     """
     if titulo != "":
         raise PreventUpdate
