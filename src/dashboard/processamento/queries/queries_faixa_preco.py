@@ -1,5 +1,13 @@
+"""Queries usadas na página Faixa Preço."""
+
+
 def query_faixas_preco_hoje() -> str:
-    query = """
+    """Query para calcular os dados da coluna 'hoje'.
+
+    Returns:
+        str: Query com os dados de 'hoje'.
+    """
+    return """
     SELECT
         dmr.marca
         , CASE
@@ -15,11 +23,14 @@ def query_faixas_preco_hoje() -> str:
         , faixa_preco;
     """
 
-    return query
-
 
 def query_faixas_preco_periodo() -> str:
-    query = """
+    """Query para calcular os dados de um determinado período.
+
+    Returns:
+        str: Query com os dados de um determinado período.
+    """
+    return """
     SELECT
         fpp.marca
         , fpp.faixa_preco
@@ -27,5 +38,3 @@ def query_faixas_preco_periodo() -> str:
     FROM
         faixa_preco_periodo($data_inicio, $data_fim) AS fpp;
     """
-
-    return query
