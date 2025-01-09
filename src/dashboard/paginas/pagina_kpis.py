@@ -1,3 +1,5 @@
+"""Página KPI's."""
+
 from dash import (
     Input,
     Output,
@@ -27,10 +29,20 @@ register_page(
 
 
 def id_pagina() -> str:
+    """Id da página.
+
+    Returns:
+        str: id da página.
+    """
     return "kpis"
 
 
 def titulo_pagina() -> str:
+    """Título da página.
+
+    Returns:
+        str: Título da página.
+    """
     return "KPI's Principais"
 
 
@@ -39,7 +51,17 @@ def informacao(
     id_informacao: str,
     sufixo_coluna: str,
 ) -> html.Div:
-    conteudo = html.Div(
+    """Div que representa 1 KPI.
+
+    Args:
+        valor (str): Valor a ser exibido na div.
+        id_informacao (str): ID da div para identificar e manipular o conteúdo.
+        sufixo_coluna (str): Sufixo que será adicionado ao id de cada Div.
+
+    Returns:
+        html.Div: Div representando 1 KPI.
+    """
+    return html.Div(
         [
             html.Div(
                 valor,
@@ -54,8 +76,6 @@ def informacao(
         ],
         className="informacao",
     )
-
-    return conteudo
 
 
 def coluna(
@@ -73,7 +93,27 @@ def coluna(
     produtos_sem_avaliacoes: str,
     produtos_nota_maior_4: str,
 ) -> html.Div:
-    conteudo = html.Div(
+    """Retorna uma das 3 colunas usadas no corpo da página.
+
+    Args:
+        sufixo_coluna (str): Sufixo de cada coluna.
+        titulo_cabecalho (str): Título do cabeçalho da coluna.
+        periodo (str): Período utilizado para filtrar os dados.
+        num_produtos (str): Número total de produtos.
+        num_marcas (str): Número total de marcas.
+        produtos_promocoes (str): Quantidade de produtos em promoção.
+        marcas_promocoes (str): Quantidade de marcas com produtos em promoção.
+        produtos_abaixo_200 (str): Número de produtos abaixo de 200 reais.
+        percentual_medio_desconto (str): Percentual médio de desconto aplicado.
+        media_precos (str): Média dos preços dos produtos.
+        produtos_20_avaliacoes (str): Número de produtos com mais de 20 avaliações.
+        produtos_sem_avaliacoes (str): Número de produtos sem avaliações.
+        produtos_nota_maior_4 (str): Número de produtos com nota superior a 4.
+
+    Returns:
+        html.Div: Coluna.
+    """
+    return html.Div(
         [
             componentes_pagina.cabecalho_coluna(
                 id_pagina=id_pagina(),
@@ -164,10 +204,13 @@ def coluna(
         ],
     )
 
-    return conteudo
-
 
 def colunas() -> Row:
+    """Retorna um conjunto de colunas.
+
+    Returns:
+        Row: Linha que contém todas as colunas do corpo da página.
+    """
     periodo_hoje = gerenciador.retorna_periodo_hoje()
 
     periodo_escolhido = gerenciador.retorna_periodo_ultima_semana()
@@ -180,7 +223,7 @@ def colunas() -> Row:
 
     dados_historico = gerenciador.pagina_kpis_dados_historico()
 
-    conteudo = Row(
+    return Row(
         [
             Col(
                 coluna(
@@ -222,8 +265,6 @@ def colunas() -> Row:
         class_name="linha_colunas",
     )
 
-    return conteudo
-
 
 layout = html.Div(
     [
@@ -262,7 +303,8 @@ clientside_callback(
     Output(f"{id_pagina()}_valor_produtos_20_avaliacoes_escolhido", "children"),
     Output(f"{id_pagina()}_valor_produtos_nota_maior_4_escolhido", "children"),
     Output(
-        f"{id_pagina()}_valor_produtos_sem_avaliacoes_escolhido", "children"
+        f"{id_pagina()}_valor_produtos_sem_avaliacoes_escolhido",
+        "children",
     ),
     Output(f"{id_pagina()}_valor_produtos_promocoes_escolhido", "children"),
     Output(
@@ -270,7 +312,8 @@ clientside_callback(
         "children",
     ),
     Output(
-        f"{id_pagina()}_valor_percentual_medio_desconto_escolhido", "children"
+        f"{id_pagina()}_valor_percentual_medio_desconto_escolhido",
+        "children",
     ),
     Output(f"{id_pagina()}_seletor_datas", "start_date"),
     Output(f"{id_pagina()}_seletor_datas", "end_date"),
@@ -281,7 +324,21 @@ clientside_callback(
     prevent_initial_call=True,
     running=[(Output(f"{id_pagina()}_botao", "disabled"), True, False)],
 )
-def kpis_atualizar_dados_escolhido(titulo, data_inicio, data_fim):
+def kpis_atualizar_dados_escolhido(
+    titulo: str,
+    data_inicio: str,
+    data_fim: str,
+) -> list[str | None]:
+    """Retorna os dados atualizados da coluna "escolhido" para um período especificado.
+
+    Args:
+        titulo (str): Título atual do modal_erro. Se não for igual a "", então houve algum erro detectado pelo modal_erro.
+        data_inicio (str): Data de início do período a ser considerado.
+        data_fim (str): Data de fim do período a ser considerado.
+
+    Returns:
+        list[str | None]: Lista com os dados necessários para atualizar a coluna.
+    """
     if titulo != "":
         raise PreventUpdate
 
@@ -346,11 +403,13 @@ id_produtos_promocoes = "produtos_promocoes"
 clientside_callback(
     uteis_processamento.callback_ranking_direto_valores(),
     Output(
-        f"{id_pagina()}_ranking_{id_produtos_promocoes}_escolhido", "className"
+        f"{id_pagina()}_ranking_{id_produtos_promocoes}_escolhido",
+        "className",
     ),
     Output(f"{id_pagina()}_ranking_{id_produtos_promocoes}_hoje", "className"),
     Output(
-        f"{id_pagina()}_ranking_{id_produtos_promocoes}_historico", "className"
+        f"{id_pagina()}_ranking_{id_produtos_promocoes}_historico",
+        "className",
     ),
     Input(f"{id_pagina()}_valor_{id_produtos_promocoes}_escolhido", "children"),
     State(f"{id_pagina()}_valor_{id_produtos_promocoes}_hoje", "children"),
@@ -361,11 +420,13 @@ id_marcas_promocoes = "marcas_promocoes"
 clientside_callback(
     uteis_processamento.callback_ranking_direto_valores(),
     Output(
-        f"{id_pagina()}_ranking_{id_marcas_promocoes}_escolhido", "className"
+        f"{id_pagina()}_ranking_{id_marcas_promocoes}_escolhido",
+        "className",
     ),
     Output(f"{id_pagina()}_ranking_{id_marcas_promocoes}_hoje", "className"),
     Output(
-        f"{id_pagina()}_ranking_{id_marcas_promocoes}_historico", "className"
+        f"{id_pagina()}_ranking_{id_marcas_promocoes}_historico",
+        "className",
     ),
     Input(f"{id_pagina()}_valor_{id_marcas_promocoes}_escolhido", "children"),
     State(f"{id_pagina()}_valor_{id_marcas_promocoes}_hoje", "children"),
@@ -376,18 +437,22 @@ id_produtos_abaixo_200 = "produtos_abaixo_200"
 clientside_callback(
     uteis_processamento.callback_ranking_direto_valores(),
     Output(
-        f"{id_pagina()}_ranking_{id_produtos_abaixo_200}_escolhido", "className"
+        f"{id_pagina()}_ranking_{id_produtos_abaixo_200}_escolhido",
+        "className",
     ),
     Output(f"{id_pagina()}_ranking_{id_produtos_abaixo_200}_hoje", "className"),
     Output(
-        f"{id_pagina()}_ranking_{id_produtos_abaixo_200}_historico", "className"
+        f"{id_pagina()}_ranking_{id_produtos_abaixo_200}_historico",
+        "className",
     ),
     Input(
-        f"{id_pagina()}_valor_{id_produtos_abaixo_200}_escolhido", "children"
+        f"{id_pagina()}_valor_{id_produtos_abaixo_200}_escolhido",
+        "children",
     ),
     State(f"{id_pagina()}_valor_{id_produtos_abaixo_200}_hoje", "children"),
     State(
-        f"{id_pagina()}_valor_{id_produtos_abaixo_200}_historico", "children"
+        f"{id_pagina()}_valor_{id_produtos_abaixo_200}_historico",
+        "children",
     ),
 )
 
@@ -412,7 +477,8 @@ clientside_callback(
         "children",
     ),
     State(
-        f"{id_pagina()}_valor_{id_percentual_medio_desconto}_hoje", "children"
+        f"{id_pagina()}_valor_{id_percentual_medio_desconto}_hoje",
+        "children",
     ),
     State(
         f"{id_pagina()}_valor_{id_percentual_medio_desconto}_historico",
@@ -468,7 +534,8 @@ clientside_callback(
         "className",
     ),
     Output(
-        f"{id_pagina()}_ranking_{id_produtos_sem_avaliacoes}_hoje", "className"
+        f"{id_pagina()}_ranking_{id_produtos_sem_avaliacoes}_hoje",
+        "className",
     ),
     Output(
         f"{id_pagina()}_ranking_{id_produtos_sem_avaliacoes}_historico",
@@ -493,17 +560,20 @@ clientside_callback(
         "className",
     ),
     Output(
-        f"{id_pagina()}_ranking_{id_produtos_nota_maior_4}_hoje", "className"
+        f"{id_pagina()}_ranking_{id_produtos_nota_maior_4}_hoje",
+        "className",
     ),
     Output(
         f"{id_pagina()}_ranking_{id_produtos_nota_maior_4}_historico",
         "className",
     ),
     Input(
-        f"{id_pagina()}_valor_{id_produtos_nota_maior_4}_escolhido", "children"
+        f"{id_pagina()}_valor_{id_produtos_nota_maior_4}_escolhido",
+        "children",
     ),
     State(f"{id_pagina()}_valor_{id_produtos_nota_maior_4}_hoje", "children"),
     State(
-        f"{id_pagina()}_valor_{id_produtos_nota_maior_4}_historico", "children"
+        f"{id_pagina()}_valor_{id_produtos_nota_maior_4}_historico",
+        "children",
     ),
 )
