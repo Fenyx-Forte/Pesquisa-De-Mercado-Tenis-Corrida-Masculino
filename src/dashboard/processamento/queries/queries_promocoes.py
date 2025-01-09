@@ -1,5 +1,13 @@
+"""Queries usadas na página Promoções."""
+
+
 def query_promocao_hoje() -> str:
-    query = """
+    """Query para calcular os dados da coluna 'hoje'.
+
+    Returns:
+        str: Query com os dados de 'hoje'.
+    """
+    return """
     SELECT
         dmr.marca
         , COUNT(*) AS produtos
@@ -16,11 +24,14 @@ def query_promocao_hoje() -> str:
         , dmr.marca ASC;
     """
 
-    return query
-
 
 def query_promocao_periodo() -> str:
-    query = """
+    """Query para calcular os dados de um determinado período.
+
+    Returns:
+        str: Query com os dados de um determinado período.
+    """
+    return """
     SELECT
         m.marca
         , m.produtos
@@ -28,5 +39,3 @@ def query_promocao_periodo() -> str:
     FROM
         media_promocoes_periodo($data_inicio, $data_fim) AS m;
     """
-
-    return query
