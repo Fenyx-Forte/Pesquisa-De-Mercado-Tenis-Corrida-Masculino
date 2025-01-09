@@ -1,3 +1,5 @@
+"""Página Top 10 Marcas Atuais."""
+
 from dash import (
     Input,
     Output,
@@ -12,6 +14,7 @@ from dash_bootstrap_components import (
     Col,
     Row,
 )
+from plotly.graph_objs import Figure
 
 from dashboard.processamento import gerenciador
 from dashboard.uteis import componentes_pagina, uteis_processamento
@@ -27,10 +30,20 @@ register_page(
 
 
 def id_pagina() -> str:
+    """Id da página.
+
+    Returns:
+        str: id da página.
+    """
     return "top_10_marcas_atuais"
 
 
 def titulo_pagina() -> str:
+    """Título da página.
+
+    Returns:
+        str: Título da página.
+    """
     return "Top 10 Marcas Atuais"
 
 
@@ -39,7 +52,17 @@ def cabecalho_coluna(
     titulo: str,
     periodo: str,
 ) -> html.Div:
-    conteudo = html.Div(
+    """Retorna o cabeçalho de uma coluna.
+
+    Args:
+        sufixo_coluna (str): Sufixo da coluna.
+        titulo (str): Título da coluna.
+        periodo (str): Período da coluna.
+
+    Returns:
+        html.Div: Cabeçalho da coluna.
+    """
+    return html.Div(
         [
             html.H4(
                 titulo,
@@ -60,10 +83,13 @@ def cabecalho_coluna(
         className="cabecalho_coluna",
     )
 
-    return conteudo
-
 
 def configuracoes_figura() -> dict:
+    """Título da página.
+
+    Returns:
+        dict: configurações da figura usada para construir o gráfico.
+    """
     coluna_x = "Marca"
 
     coluna_y = "Porcentagem"
@@ -94,6 +120,11 @@ def configuracoes_figura() -> dict:
 
 
 def div_grafico_top_10_marcas() -> html.Div:
+    """Div usada pelo gráfico.
+
+    Returns:
+        html.Div: Div que terá o gráfico.
+    """
     df_grafico = gerenciador.pagina_top_10_marcas_atuais_dados_grafico()
 
     grafico = componentes_pagina.grafico_de_barras_agrupadas(
@@ -102,12 +133,10 @@ def div_grafico_top_10_marcas() -> html.Div:
         **configuracoes_figura(),
     )
 
-    conteudo = html.Div(
+    return html.Div(
         grafico,
         className="grafico",
     )
-
-    return conteudo
 
 
 def coluna(
@@ -115,25 +144,38 @@ def coluna(
     periodo: str,
     sufixo_coluna: str,
 ) -> html.Div:
-    conteudo = html.Div(
+    """Retorna uma das 3 colunas usadas no corpo da página.
+
+    Args:
+        titulo_cabecalho (str): Título do cabeçalho da coluna.
+        periodo (str): Período utilizado para filtrar os dados.
+        sufixo_coluna (str): Sufixo que será adicionado ao nome das colunas para criar as definições das colunas.
+
+    Returns:
+        html.Div: Coluna que será usada no corpo da página.
+    """
+    return html.Div(
         cabecalho_coluna(
             titulo=titulo_cabecalho,
             sufixo_coluna=sufixo_coluna,
             periodo=periodo,
-        )
+        ),
     )
-
-    return conteudo
 
 
 def colunas() -> Row:
+    """Retorna um conjunto de colunas.
+
+    Returns:
+        Row: Linha que contém todas as colunas do corpo da página.
+    """
     periodo_hoje = gerenciador.retorna_periodo_hoje()
 
     periodo_escolhido = gerenciador.retorna_periodo_ultima_semana()
 
     periodo_historico = gerenciador.retorna_periodo_historico()
 
-    conteudo = Row(
+    return Row(
         [
             Col(
                 coluna(
@@ -165,8 +207,6 @@ def colunas() -> Row:
         ],
         class_name="linha_colunas",
     )
-
-    return conteudo
 
 
 layout = html.Div(
@@ -221,8 +261,22 @@ clientside_callback(
     running=[(Output(f"{id_pagina()}_botao", "disabled"), True, False)],
 )
 def top_10_marcas_atuais_atualizar_comparacao(
-    titulo, data_inicio, data_fim, dados_grafico_atual
-):
+    titulo: str,
+    data_inicio: str,
+    data_fim: str,
+    dados_grafico_atual: dict[str, list[dict]],
+) -> list[Figure | None | str]:
+    """Retorna os dados atualizados da coluna "escolhido" para um período especificado.
+
+    Args:
+        titulo (str): Título atual do modal_erro. Se não for igual a "", então houve algum erro detectado pelo modal_erro.
+        data_inicio (str): Data de início do período a ser considerado.
+        data_fim (str): Data de fim do período a ser considerado.
+        dados_grafico_atual (dict[str, list[dict]]): Dados do gráfico atual.
+
+    Returns:
+        list[Figure | None | str]: Lista com os dados necessários para atualizar a coluna.
+    """
     if titulo != "":
         raise PreventUpdate
 
@@ -238,11 +292,13 @@ def top_10_marcas_atuais_atualizar_comparacao(
     )
 
     figura_nova = componentes_pagina.figura_grafico_de_barras_agrupadas(
-        df=df_atualizado, **configuracoes_figura()
+        df=df_atualizado,
+        **configuracoes_figura(),
     )
 
     periodo_novo = uteis_processamento.retorna_periodo(
-        data_inicio=data_inicio, data_fim=data_fim
+        data_inicio=data_inicio,
+        data_fim=data_fim,
     )
 
-    return figura_nova, None, None, periodo_novo
+    return [figura_nova, None, None, periodo_novo]
