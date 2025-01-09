@@ -110,6 +110,7 @@ ignore = [
     "ARG001",  # unused function argument
     "ARG002",  # unused method argument
     "BLE001",  # blind exception
+    "PLR0913", # mais de 5 argumentos na definição de uma função
 ]
 
 [tool.ruff.lint.pydocstyle]
