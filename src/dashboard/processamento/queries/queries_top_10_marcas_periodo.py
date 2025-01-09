@@ -1,5 +1,13 @@
+"""Queries usadas na página Top 10 Marcas Período."""
+
+
 def query_top_10_marcas_periodo() -> str:
-    query = """
+    """Query para calcular os dados de um determinado período.
+
+    Returns:
+        str: Query com os dados de um determinado período.
+    """
+    return """
     SELECT
         t.marca AS Marca
         , t.porcentagem AS Porcentagem
@@ -10,5 +18,3 @@ def query_top_10_marcas_periodo() -> str:
     LIMIT
         10;
     """
-
-    return query
